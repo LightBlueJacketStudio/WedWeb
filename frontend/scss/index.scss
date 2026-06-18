@@ -1,3 +1,17 @@
-header{
-    background-color: lightblue;
+@mixin Flex ($direction:row, $justify: flex-start, $align: stretch){
+    display: flex;
+    flex-direction: $direction;
+    justify-content: $justify;
+    align-items: $align;
+}
+
+
+.Navbar {
+ @include Flex(row, space-between, center);
+
+ .navbar-links {
+    @include Flex(row, flex-start, center);
+    list-style: none;  // Remove bullet points
+    gap: 2rem;         // Add spacing between items
+ }
 }

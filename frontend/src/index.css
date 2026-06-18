@@ -1,5 +1,16 @@
-header {
-  background-color: lightblue;
+.Navbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.Navbar .navbar-links {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  list-style: none;
+  gap: 2rem;
 }
 
 /*# sourceMappingURL=index.css.map */
