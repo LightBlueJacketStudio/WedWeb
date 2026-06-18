@@ -1,3 +1,7 @@
+# Important Notes
+
+1. **Don't edit the index.css directly, edit the scss file instead**
+
 # set up
 
 Do these before starting your development
