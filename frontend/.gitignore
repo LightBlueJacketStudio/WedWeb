@@ -1,3 +1,6 @@
+# SCSS to CSS Mapping files
+*.css.map
+
 # Logs
 logs
 *.log
