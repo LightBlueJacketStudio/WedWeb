@@ -17,7 +17,7 @@ import TravelnStay from './TravelnStay'
 import Wedding from './Wedding'
 
 // component imports
-import Navbar from './Navbar'
+import Navbar from './Navibar'
 
 //helper component to make sure the Navbar is always visible
 function Layout({ Page }) {
