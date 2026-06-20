@@ -1,10 +1,10 @@
-.Navbar {
+.Navibar {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
 }
-.Navbar .navbar-links {
+.Navibar .navibar-links {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;

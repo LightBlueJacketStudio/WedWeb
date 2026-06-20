@@ -6,10 +6,10 @@
 }
 
 
-.Navbar {
+.Navibar {
  @include Flex(row, space-between, center);
 
- .navbar-links {
+ .navibar-links {
     @include Flex(row, flex-start, center);
     list-style: none;  // Remove bullet points
     gap: 2rem;         // Add spacing between items
