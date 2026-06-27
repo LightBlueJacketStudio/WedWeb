@@ -10,7 +10,7 @@ function Rsvp (){
         {
             firstName: '',
             lastName:'',
-            attending: 'yes', 
+            isAttending: true, 
             guest: 1,
             meal: '', //meal preference
             otherMeal:'',
@@ -22,7 +22,8 @@ function Rsvp (){
         const {name, value} = event.target;
         setFormData(
             {...formData,
-            [name]: value,    
+            [name]: (name === "isAttending") ? value === "true": value,
+            //convert string boolean to boolean    
         })
     }
 
@@ -31,7 +32,9 @@ function Rsvp (){
         //sanitize
         const submissionData = {
             ...formData,
-            otherMeal: formData.meal === "other" ? formData.otherMeal : '',
+            guest: formData.isAttending ? formData.guest : 0,
+            meal: formData.isAttending ? formData.meal : "NA",
+            otherMeal: formData.isAttending && formData.meal === "other" ? formData.otherMeal : '',
         }
 
         setFormData(submissionData);
@@ -71,17 +74,18 @@ function Rsvp (){
                     Are you attending?
                     <select
                         required
-                        name="attending"
-                        value={formData.attending}
+                        name="isAttending"
+                        value={formData.isAttending}
                         onChange={handleChange}
                     >
-                        <option value="Yes">Yes, I will attend.</option>
-                        <option value="No">No, I can't attend.</option>
+                        <option value="true">Yes, I will attend.</option>
+                        <option value="false">No, I can't attend.</option>
                     </select>
                 </label>
                 
                 <label>
                     Total Guest Count
+                    {formData.isAttending ?
                     <input 
                         required
                         type="number"
@@ -90,10 +94,17 @@ function Rsvp (){
                         min={MIN_GUEST}
                         max={MAX_GUEST}
                         value={formData.guest} />
+                    :
+                    <input
+                        disabled
+                        value="Not Attending" />                    
+                    }
+
                 </label>
 
                 <label>
                     Diet Preference
+                    { (formData.isAttending) ?
                     <select
                         required
                         name="meal"
@@ -105,9 +116,14 @@ function Rsvp (){
                         <option value="vegetarian">Vegetarian</option>
                         <option value="other">Other</option>
                     </select>
+                    :
+                    <input
+                        disabled
+                        value="Not Attending" />                    
+                    }
                 </label>    
                 {/* conditionally renders the input field for other meal*/}
-                {formData.meal === "other" && (
+                {(formData.meal === "other" && formData.isAttending) && (
                     <label>
                     Please Specify
                         <input // pops out when user select other
