@@ -4,6 +4,7 @@ import { useState } from "react";
 const MIN_GUEST = 1;
 const MAX_GUEST = 10;
 const MAX_NAME_LENGTH = 20;
+const MAX_MESSAGE_LENGTH = 500;
 
 function Rsvp (){ 
     const [formData, setFormData] = useState(
@@ -125,7 +126,7 @@ function Rsvp (){
                 {/* conditionally renders the input field for other meal*/}
                 {(formData.meal === "other" && formData.isAttending) && (
                     <label>
-                    Please Specify
+                        Please Specify
                         <input // pops out when user select other
                             name="otherMeal"
                             value={formData.otherMeal}
@@ -133,7 +134,16 @@ function Rsvp (){
                     </label>
                 )}
                 
-                
+                <label>
+                    Leave a Message For us !!
+                    <textarea // pops out when user select other
+                        name="message"
+                        value={formData.message}
+                        onChange={handleChange}
+                        maxLength={MAX_MESSAGE_LENGTH}
+                        placeholder="Congrats :)"
+                    />
+                </label>
 
                 <button type="submit">Submit</button>
                 
