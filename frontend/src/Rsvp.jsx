@@ -40,11 +40,11 @@ function Rsvp (){
     }
 
     return(
-        <span>
+        <section className="rsvp-card">
             <h1>RSVP</h1>
             <p>Come celebrate with us!</p>
 
-            <form onSubmit={handleSubmit}>
+            <form className="rsvp-form" onSubmit={handleSubmit}>
                 <label>
                     First Name
                     <input
@@ -105,24 +105,24 @@ function Rsvp (){
                         <option value="vegetarian">Vegetarian</option>
                         <option value="other">Other</option>
                     </select>
-                    
-                    {/* conditionally renders the input field for other meal*/}
-                    {formData.meal === "other" && (
-                        <label>
-                        Please Specify
-                            <input // pops out when user select other
-                                name="otherMeal"
-                                value={formData.otherMeal}
-                                onChange={handleChange}/>
-                        </label>
-                    )}
-                </label>
+                </label>    
+                {/* conditionally renders the input field for other meal*/}
+                {formData.meal === "other" && (
+                    <label>
+                    Please Specify
+                        <input // pops out when user select other
+                            name="otherMeal"
+                            value={formData.otherMeal}
+                            onChange={handleChange}/>
+                    </label>
+                )}
+                
                 
 
                 <button type="submit">Submit</button>
                 
             </form>
-        </span>
+        </section>
     );
 }
 
