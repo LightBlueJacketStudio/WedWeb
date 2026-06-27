@@ -1,27 +1,26 @@
-@mixin Flex ($direction:row, $justify: flex-start, $align: stretch){
-    display: flex;
-    flex-direction: $direction;
-    justify-content: $justify;
-    align-items: $align;
+@mixin Flex($direction: row, $justify: flex-start, $align: stretch) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
 }
 
-
 .Navibar {
- @include Flex(row, space-between, center);
+  @include Flex(row, space-between, center);
 
- .navibar-links {
+  .navibar-links {
     @include Flex(row, flex-start, center);
-    list-style: none;  // Remove bullet points
-    gap: 2rem;         // Add spacing between items
- }
+    list-style: none;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
+  }
 }
 
 .rsvp-page {
   min-height: 100vh;
   padding: 4rem 1.5rem;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  @include Flex(row, center, flex-start);
   background: linear-gradient(135deg, #fff7f3, #f8ebe5);
 }
 
@@ -52,13 +51,11 @@
 }
 
 .rsvp-form {
-  display: flex;
-  flex-direction: column;
+  @include Flex(column);
   gap: 1.25rem;
 
   label {
-    display: flex;
-    flex-direction: column;
+    @include Flex(column);
     gap: 0.45rem;
     font-size: 0.95rem;
     font-weight: 600;
@@ -66,8 +63,10 @@
   }
 
   input,
-  select {
+  select,
+  textarea {
     width: 100%;
+    box-sizing: border-box;
     padding: 0.85rem 1rem;
     border: 1px solid #ead5cc;
     border-radius: 14px;
@@ -76,7 +75,10 @@
     font-size: 1rem;
     font-family: inherit;
     outline: none;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+    transition:
+      border-color 0.2s ease,
+      box-shadow 0.2s ease,
+      background-color 0.2s ease;
 
     &:focus {
       border-color: #c98774;
@@ -87,10 +89,24 @@
     &::placeholder {
       color: #b8958a;
     }
+
+    &:disabled {
+      color: #8a6254;
+      background-color: #f3e5df;
+      cursor: not-allowed;
+    }
   }
 
   select {
     cursor: pointer;
+  }
+
+  textarea {
+    min-height: 110px;
+    max-height: 110px;
+    resize: none;
+    overflow-y: auto;
+    line-height: 1.5;
   }
 
   input[type='number'] {
@@ -114,7 +130,10 @@
     font-weight: 700;
     font-family: inherit;
     cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease,
+      background-color 0.2s ease;
 
     &:hover {
       background: #a85f4e;
