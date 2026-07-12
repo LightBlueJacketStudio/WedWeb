@@ -1,36 +1,87 @@
 // ============================================
+// FONT IMPORTS
+// ============================================
+
+@import url('https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:wght@400;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+// ============================================
 // COLOR PALETTE
+// Extracted from uploaded page theme
 // ============================================
 
 // Primary colors
-$color-primary: #b86f5b;
-$color-primary-hover: #a85f4e;
-$color-primary-light: #c98774;
-$color-primary-shadow: rgba(168, 95, 78, 0.25);
-$color-primary-glow: rgba(201, 135, 116, 0.18);
+$color-primary: #6c0c20;
+$color-primary-hover: #8b2635;
+$color-primary-light: #a43946;
+$color-primary-shadow: rgba(108, 12, 32, 0.22);
+$color-primary-glow: rgba(255, 178, 182, 0.28);
+
+// Secondary / travel accent colors
+$color-secondary: #845400;
+$color-secondary-hover: #6c4400;
+$color-secondary-container: #ffae30;
+$color-secondary-soft: rgba(255, 174, 48, 0.14);
+
+// Tertiary warm brown
+$color-tertiary: #631c05;
+$color-tertiary-container: #823219;
 
 // Text colors
-$color-text-dark: #4a2c24;
-$color-text-medium: #3f2a24;
-$color-text-light: #8a6254;
-$color-text-placeholder: #b8958a;
-$color-text-disabled: #8a6254;
+$color-text-dark: #1c1c17;
+$color-text-medium: #564242;
+$color-text-light: #897172;
+$color-text-placeholder: #897172;
+$color-text-disabled: #897172;
+$color-text-on-primary: #ffffff;
 
 // Background colors
-$color-bg-page-start: #fff7f3;
-$color-bg-page-end: #f8ebe5;
-$color-bg-card: rgba(255, 255, 255, 0.85);
-$color-bg-input: #fffaf8;
+$color-bg-page-start: #fdf9f0;
+$color-bg-page-end: #f7f3ea;
+$color-bg-card: #f7f3ea;
+$color-bg-card-bright: #ffffff;
+$color-bg-input: #ffffff;
 $color-bg-input-focus: #ffffff;
-$color-bg-input-disabled: #f3e5df;
+$color-bg-input-disabled: #ece8df;
+
+// Surface colors
+$color-surface: #fdf9f0;
+$color-surface-low: #f7f3ea;
+$color-surface-container: #f1eee5;
+$color-surface-high: #ece8df;
+$color-surface-highest: #e6e2d9;
 
 // Border colors
-$color-border: #ead5cc;
-$color-border-focus: #c98774;
+$color-border: #ddc0c0;
+$color-border-soft: rgba(137, 113, 114, 0.28);
+$color-border-focus: #6c0c20;
+$color-border-dashed: rgba(137, 113, 114, 0.5);
 
 // Shadow colors
-$color-shadow-card: rgba(120, 72, 50, 0.15);
-$color-shadow-button: rgba(168, 95, 78, 0.25);
+$color-shadow-card: rgba(49, 49, 43, 0.16);
+$color-shadow-button: rgba(108, 12, 32, 0.25);
+
+// ============================================
+// TYPOGRAPHY
+// ============================================
+
+$font-heading: 'Libre Caslon Text', Georgia, serif;
+$font-body: 'Plus Jakarta Sans', system-ui, sans-serif;
+
+@mixin LabelCaps {
+  font-family: $font-body;
+  font-size: 0.75rem;
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+@mixin HeadingSerif {
+  font-family: $font-heading;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
 
 // ============================================
 // MIXINS
@@ -43,25 +94,102 @@ $color-shadow-button: rgba(168, 95, 78, 0.25);
   align-items: $align;
 }
 
+@mixin PassportTexture {
+  background:
+    radial-gradient(circle at 20% 20%, rgba(108, 12, 32, 0.045), transparent 28%),
+    radial-gradient(circle at 80% 10%, rgba(132, 84, 0, 0.045), transparent 24%),
+    linear-gradient(135deg, $color-surface, $color-surface-low);
+}
+
+@mixin PaperCard {
+  border: 1px solid rgba(255, 174, 48, 0.2);
+  border-radius: 1.5rem;
+  background:
+    radial-gradient(
+      circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+      rgba(255, 174, 48, 0.16),
+      transparent 34%
+    ),
+    $color-bg-card-bright;
+  box-shadow: 0 20px 50px $color-shadow-card;
+}
+
+// ============================================
+// BASE
+// ============================================
+
+body {
+  margin: 0;
+  background: $color-surface;
+  color: $color-text-dark;
+  font-family: $font-body;
+  overflow-x: hidden;
+}
+
 // ============================================
 // NAVIBAR
 // ============================================
 
 .Navibar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+
   @include Flex(row, space-between, center);
-  
+
+  width: 100%;
+  box-sizing: border-box;
+  padding: 1rem clamp(1.25rem, 4vw, 1.5rem);
+
+  background: rgba(253, 249, 240, 0.8);
+  border-bottom: 1px solid rgba(221, 192, 192, 0.3);
+  backdrop-filter: blur(8px);
+
   img {
-    height: 3em;
+    height: 2rem;
     width: auto;
     display: block;
   }
-  
+
   .navibar-links {
     @include Flex(row, flex-start, center);
+
     list-style: none;
     gap: 2rem;
     margin: 0;
     padding: 0;
+
+    li:first-child {
+      margin-right: 0.5rem;
+    }
+
+    a {
+      @include LabelCaps;
+
+      color: $color-text-medium;
+      text-decoration: none;
+      font-weight: 600;
+      transition:
+        color 0.25s ease,
+        opacity 0.25s ease,
+        border-color 0.25s ease;
+
+      &:hover {
+        color: $color-primary;
+      }
+    }
+
+    li:not(:first-child):last-child a {
+      padding: 0.6rem 1.5rem;
+      border-radius: 1rem;
+      background: $color-primary;
+      color: $color-text-on-primary;
+
+      &:hover {
+        opacity: 0.82;
+        color: $color-text-on-primary;
+      }
+    }
   }
 }
 
@@ -71,9 +199,35 @@ $color-shadow-button: rgba(168, 95, 78, 0.25);
 
 .rsvp-page {
   min-height: 100vh;
-  padding: 4rem 1.5rem;
+  padding: clamp(2rem, 6vw, 4rem) 1.25rem;
+
   @include Flex(row, center, flex-start);
-  background: linear-gradient(135deg, $color-bg-page-start, $color-bg-page-end);
+  @include PassportTexture;
+
+  position: relative;
+
+  &::before {
+    content: 'flight_takeoff';
+    position: absolute;
+    top: 5.5rem;
+    left: clamp(1.5rem, 6vw, 5rem);
+
+    font-family: 'Material Symbols Outlined';
+    font-size: clamp(2rem, 5vw, 4rem);
+    color: rgba(108, 12, 32, 0.12);
+    pointer-events: none;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(108, 12, 32, 0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(108, 12, 32, 0.025) 1px, transparent 1px);
+    background-size: 28px 28px;
+    pointer-events: none;
+  }
 }
 
 // ============================================
@@ -81,28 +235,69 @@ $color-shadow-button: rgba(168, 95, 78, 0.25);
 // ============================================
 
 .rsvp-card {
+  position: relative;
+  z-index: 1;
+
   width: 100%;
   max-width: 640px;
-  padding: 2.5rem;
-  border-radius: 24px;
-  background: $color-bg-card;
-  box-shadow: 0 20px 60px $color-shadow-card;
-  backdrop-filter: blur(12px);
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+
+  border-radius: 1.5rem;
+  border: 4px solid rgba(108, 12, 32, 0.16);
+
+  @include PassportTexture;
+
+  box-shadow: 0 24px 64px $color-shadow-card;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+
+    width: 4.25rem;
+    height: 4.25rem;
+
+    border: 2px dashed rgba(132, 84, 0, 0.45);
+    border-radius: 999px;
+    opacity: 0.35;
+    pointer-events: none;
+  }
+
+  &::after {
+    content: 'RSVP';
+    position: absolute;
+    right: 1.25rem;
+    bottom: 1.25rem;
+
+    @include LabelCaps;
+
+    color: rgba(108, 12, 32, 0.13);
+    font-size: 2.5rem;
+    transform: rotate(-10deg);
+    pointer-events: none;
+  }
 
   h1 {
+    @include HeadingSerif;
+
     margin: 0;
-    font-size: clamp(2rem, 5vw, 3.25rem);
-    font-weight: 700;
+    font-size: clamp(2.25rem, 6vw, 3.75rem);
     text-align: center;
-    color: $color-text-dark;
-    letter-spacing: -0.04em;
+    color: $color-primary;
   }
 
   > p {
-    margin: 0.75rem 0 2rem;
+    margin: 0.75rem auto 2rem;
+    max-width: 34rem;
+
     text-align: center;
+    font-family: $font-heading;
     font-size: 1.05rem;
-    color: $color-text-light;
+    line-height: 1.6;
+    font-style: italic;
+    color: $color-text-medium;
   }
 }
 
@@ -117,9 +312,10 @@ $color-shadow-button: rgba(168, 95, 78, 0.25);
   label {
     @include Flex(column);
     gap: 0.45rem;
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: $color-text-dark;
+
+    @include LabelCaps;
+
+    color: $color-secondary;
   }
 
   input,
@@ -127,23 +323,32 @@ $color-shadow-button: rgba(168, 95, 78, 0.25);
   textarea {
     width: 100%;
     box-sizing: border-box;
-    padding: 0.85rem 1rem;
+
+    padding: 0.9rem 1rem;
+
     border: 1px solid $color-border;
-    border-radius: 14px;
-    background-color: $color-bg-input;
-    color: $color-text-medium;
+    border-radius: 1rem;
+
+    background-color: rgba(255, 255, 255, 0.72);
+    color: $color-text-dark;
+
     font-size: 1rem;
-    font-family: inherit;
+    line-height: 1.5;
+    font-family: $font-body;
+
     outline: none;
+
     transition:
       border-color 0.2s ease,
       box-shadow 0.2s ease,
-      background-color 0.2s ease;
+      background-color 0.2s ease,
+      transform 0.2s ease;
 
     &:focus {
       border-color: $color-border-focus;
       background-color: $color-bg-input-focus;
       box-shadow: 0 0 0 4px $color-primary-glow;
+      transform: translateY(-1px);
     }
 
     &::placeholder {
@@ -166,7 +371,6 @@ $color-shadow-button: rgba(168, 95, 78, 0.25);
     max-height: 110px;
     resize: none;
     overflow-y: auto;
-    line-height: 1.5;
   }
 
   input[type='number'] {
@@ -181,29 +385,508 @@ $color-shadow-button: rgba(168, 95, 78, 0.25);
 
   button {
     margin-top: 1rem;
-    padding: 0.95rem 1.25rem;
+    align-self: center;
+
+    min-width: 12rem;
+    padding: 0.85rem 1.75rem;
+
     border: none;
-    border-radius: 999px;
+    border-radius: 1rem;
+
     background: $color-primary;
-    color: white;
-    font-size: 1rem;
-    font-weight: 700;
-    font-family: inherit;
+    color: $color-text-on-primary;
+
+    @include LabelCaps;
+
+    font-family: $font-body;
     cursor: pointer;
+
+    box-shadow: 0 12px 28px $color-shadow-button;
+
     transition:
       transform 0.2s ease,
       box-shadow 0.2s ease,
-      background-color 0.2s ease;
+      background-color 0.2s ease,
+      opacity 0.2s ease;
 
     &:hover {
       background: $color-primary-hover;
       transform: translateY(-2px);
-      box-shadow: 0 12px 24px $color-shadow-button;
+      box-shadow: 0 16px 32px $color-shadow-button;
     }
 
     &:active {
       transform: translateY(0);
       box-shadow: none;
+    }
+  }
+}
+
+// ============================================
+// OPTIONAL CARD STYLE
+// Use this if you add small RSVP info cards later
+// ============================================
+
+.paper-card {
+  @include PaperCard;
+
+  padding: 1rem;
+  transition:
+    border-color 0.25s ease,
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+
+  &:hover {
+    border-color: rgba(108, 12, 32, 0.4);
+    transform: translateY(-2px);
+  }
+
+  h3 {
+    margin: 0 0 0.35rem;
+    font-family: $font-heading;
+    color: $color-primary;
+  }
+
+  p {
+    margin: 0;
+    color: $color-text-medium;
+    line-height: 1.5;
+  }
+}
+
+.page-container {
+  width: 100%;
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+.navibar-inner {
+  width: 100%;
+  max-width: 1140px;
+  margin: 0 auto;
+
+  @include Flex(row, space-between, center);
+}
+
+.navibar-logo,
+.footer-logo {
+  font-family: $font-heading;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: $color-primary;
+}
+
+.navibar-menu {
+  display: none;
+  border: none;
+  background: none;
+  color: $color-primary;
+  cursor: pointer;
+}
+
+.hero-passport {
+  min-height: 50vh;
+  padding: 2rem 0;
+
+  @include Flex(column, center, center);
+
+  text-align: center;
+}
+
+.passport-card {
+  position: relative;
+  width: 100%;
+  max-width: 48rem;
+  padding: 2rem;
+
+  border-radius: 1.5rem;
+  border: 4px solid rgba(108, 12, 32, 0.2);
+
+  @include PassportTexture;
+
+  box-shadow: 0 20px 45px rgba(49, 49, 43, 0.18);
+
+  h1 {
+    @include HeadingSerif;
+
+    margin: 0 0 0.5rem;
+    color: $color-primary;
+    font-size: clamp(2rem, 5vw, 3rem);
+  }
+}
+
+.passport-icon {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  opacity: 0.3;
+
+  span {
+    font-size: 2rem;
+  }
+}
+
+.seal-wrapper {
+  @include Flex(row, center, center);
+
+  margin-bottom: 1rem;
+}
+
+.seal-frame {
+  width: 9rem;
+  height: 9rem;
+  padding: 0.375rem;
+
+  border-radius: 999px;
+  border: 4px dashed $color-secondary;
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(4px);
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 999px;
+    display: block;
+  }
+}
+
+.hero-route {
+  margin: 0 0 1rem;
+
+  font-family: $font-heading;
+  font-size: 1.125rem;
+  color: $color-secondary;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+}
+
+.hero-subtitle {
+  @include Flex(row, center, center);
+
+  gap: 1rem;
+
+  p {
+    margin: 0;
+    color: $color-text-medium;
+    font-style: italic;
+  }
+}
+
+.subtitle-line {
+  width: 3rem;
+  height: 2px;
+  background: $color-border;
+}
+
+.flight-path-section {
+  padding: 2rem 0;
+
+  @include Flex(column, flex-start, center);
+
+  gap: 1rem;
+}
+
+.section-heading {
+  text-align: center;
+
+  h2 {
+    @include HeadingSerif;
+
+    margin: 0 0 0.25rem;
+    color: $color-primary;
+    font-size: 1.5rem;
+  }
+
+  p {
+    margin: 0;
+    color: $color-text-medium;
+  }
+}
+
+.flight-card {
+  width: 100%;
+  max-width: 56rem;
+
+  display: flex;
+
+  overflow: hidden;
+  border-radius: 1.5rem;
+  border: 2px solid rgba(255, 174, 48, 0.3);
+  background: $color-surface-low;
+  box-shadow: 0 24px 56px rgba(49, 49, 43, 0.2);
+}
+
+.flight-image {
+  width: 50%;
+  border-right: 1px dashed rgba(137, 113, 114, 0.5);
+
+  img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+  }
+}
+
+.flight-details {
+  width: 50%;
+  padding: 1.5rem;
+
+  @include Flex(column, center, stretch);
+  @include PassportTexture;
+
+  gap: 1rem;
+}
+
+.detail-group {
+  p {
+    margin: 0;
+  }
+}
+
+.detail-label {
+  @include LabelCaps;
+
+  font-size: 0.625rem;
+  color: $color-secondary;
+}
+
+.detail-value {
+  color: $color-text-dark;
+}
+
+.detail-value.highlight {
+  font-family: $font-heading;
+  color: $color-primary;
+}
+
+.detail-value.strong {
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+
+.detail-muted {
+  color: $color-text-medium;
+}
+
+.quote-block {
+  padding-top: 0.5rem;
+  border-top: 1px solid rgba(221, 192, 192, 0.3);
+
+  p {
+    margin: 0;
+    color: $color-text-medium;
+    line-height: 1.6;
+    font-style: italic;
+  }
+}
+
+.notice-box {
+  padding: 0.75rem;
+
+  border: 1px dashed rgba(108, 12, 32, 0.2);
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.4);
+
+  p {
+    margin: 0;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: $color-primary;
+  }
+}
+
+.planning-section {
+  padding: 2rem 0 4rem;
+}
+
+.planning-header {
+  @include Flex(row, space-between, flex-end);
+
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+
+  border-bottom: 2px solid rgba(132, 84, 0, 0.2);
+
+  h2 {
+    @include HeadingSerif;
+
+    margin: 0;
+    color: $color-primary;
+    font-size: 1.5rem;
+  }
+
+  p {
+    margin: 0.25rem 0 0;
+    color: $color-text-medium;
+  }
+}
+
+.planning-pets {
+  color: rgba(132, 84, 0, 0.2);
+  transform: rotate(12deg);
+
+  span {
+    font-size: 2.5rem;
+  }
+}
+
+.planning-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.paper-card-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  margin-bottom: 0.5rem;
+
+  @include Flex(row, center, center);
+
+  border-radius: 999px;
+  background: rgba(255, 174, 48, 0.1);
+
+  span {
+    color: $color-secondary;
+    font-size: 1.25rem;
+  }
+}
+
+.status-pill {
+  display: inline-block;
+  margin-top: 0.75rem;
+  padding: 0.35rem 0.75rem;
+
+  border-radius: 999px;
+  background: $color-surface-high;
+
+  @include LabelCaps;
+
+  font-size: 0.625rem;
+  color: $color-text-medium;
+}
+
+.Footer {
+  margin-top: 2rem;
+  border-top: 1px solid rgba(255, 174, 48, 0.2);
+  background: $color-surface-low;
+}
+
+.footer-inner {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 1rem 1.25rem;
+
+  @include Flex(column, center, center);
+
+  gap: 0.5rem;
+  text-align: center;
+
+  p {
+    margin: 0.5rem 0 0;
+
+    @include LabelCaps;
+
+    color: $color-secondary;
+  }
+}
+
+.footer-pets {
+  @include Flex(row, center, center);
+
+  gap: 1rem;
+  opacity: 0.6;
+}
+
+.footer-links {
+  @include Flex(row, center, center);
+
+  gap: 1.5rem;
+
+  a {
+    @include LabelCaps;
+
+    font-size: 0.625rem;
+    color: $color-text-medium;
+    text-decoration: none;
+
+    &:hover {
+      color: $color-secondary-container;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .navibar-links {
+    display: none;
+  }
+
+  .navibar-menu {
+    display: block;
+  }
+
+  .flight-card {
+    flex-direction: column;
+  }
+
+  .flight-image,
+  .flight-details {
+    width: 100%;
+  }
+
+  .flight-image {
+    border-right: none;
+    border-bottom: 1px dashed rgba(137, 113, 114, 0.5);
+  }
+
+  .planning-header {
+    align-items: flex-start;
+  }
+
+  .planning-pets {
+    display: none;
+  }
+
+  .planning-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-subtitle {
+    gap: 0.75rem;
+  }
+
+  .subtitle-line {
+    width: 2rem;
+  }
+}
+
+// ============================================
+// RESPONSIVE
+// ============================================
+
+@media (max-width: 768px) {
+  .Navibar {
+    .navibar-links {
+      gap: 1rem;
+
+      a {
+        font-size: 0.65rem;
+      }
+
+      li:not(:first-child):last-child a {
+        padding: 0.5rem 1rem;
+      }
+    }
+  }
+
+  .rsvp-card {
+    border-width: 3px;
+
+    &::after {
+      font-size: 1.75rem;
     }
   }
 }
