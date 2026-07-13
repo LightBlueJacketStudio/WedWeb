@@ -155,14 +155,57 @@ body {
     display: block;
     border: none;
     background: none;
-    font-size: 1.75rem;
-    color: $color-primary;
     cursor: pointer;
-    padding: 0.25rem 0.5rem;
-    line-height: 1;
+    padding: 0.5rem;
+    width: 48px;
+    height: 48px;
+    position: relative;
+    z-index: 60;
 
-    &:active {
-      transform: scale(0.9);
+    // The hamburger lines
+    span {
+      display: block;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 28px;
+      height: 3px;
+      border-radius: 999px;
+      background: $color-primary;
+      transition: all 0.25s ease-in-out;
+    }
+
+    // Top line
+    span:nth-child(1) {
+      top: 14px;
+    }
+
+    // Middle line
+    span:nth-child(2) {
+      top: 22px;
+    }
+
+    // Bottom line
+    span:nth-child(3) {
+      top: 30px;
+    }
+
+    // When menu is open → morph into X
+    &.is-open {
+      span:nth-child(1) {
+        top: 22px;
+        transform: translateX(-50%) rotate(45deg);
+      }
+
+      span:nth-child(2) {
+        opacity: 0;
+        transform: translateX(-50%) scaleX(0);
+      }
+
+      span:nth-child(3) {
+        top: 22px;
+        transform: translateX(-50%) rotate(-45deg);
+      }
     }
   }
 

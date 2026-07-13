@@ -31,14 +31,44 @@ body {
   display: block;
   border: none;
   background: none;
-  font-size: 1.75rem;
-  color: #6c0c20;
   cursor: pointer;
-  padding: 0.25rem 0.5rem;
-  line-height: 1;
+  padding: 0.5rem;
+  width: 48px;
+  height: 48px;
+  position: relative;
+  z-index: 60;
 }
-.Navibar .navibar-menu-toggle:active {
-  transform: scale(0.9);
+.Navibar .navibar-menu-toggle span {
+  display: block;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 28px;
+  height: 3px;
+  border-radius: 999px;
+  background: #6c0c20;
+  transition: all 0.25s ease-in-out;
+}
+.Navibar .navibar-menu-toggle span:nth-child(1) {
+  top: 14px;
+}
+.Navibar .navibar-menu-toggle span:nth-child(2) {
+  top: 22px;
+}
+.Navibar .navibar-menu-toggle span:nth-child(3) {
+  top: 30px;
+}
+.Navibar .navibar-menu-toggle.is-open span:nth-child(1) {
+  top: 22px;
+  transform: translateX(-50%) rotate(45deg);
+}
+.Navibar .navibar-menu-toggle.is-open span:nth-child(2) {
+  opacity: 0;
+  transform: translateX(-50%) scaleX(0);
+}
+.Navibar .navibar-menu-toggle.is-open span:nth-child(3) {
+  top: 22px;
+  transform: translateX(-50%) rotate(-45deg);
 }
 .Navibar .navibar-links {
   display: flex;
