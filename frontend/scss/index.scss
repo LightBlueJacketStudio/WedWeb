@@ -6,7 +6,6 @@
 
 // ============================================
 // COLOR PALETTE
-// Extracted from uploaded page theme
 // ============================================
 
 // Primary colors
@@ -127,7 +126,7 @@ body {
 }
 
 // ============================================
-// NAVIBAR
+// NAVIBAR (MOBILE-FIRST)
 // ============================================
 
 .Navibar {
@@ -139,31 +138,72 @@ body {
 
   width: 100%;
   box-sizing: border-box;
-  padding: 1rem clamp(1.25rem, 4vw, 1.5rem);
+  padding: 0.75rem 1rem;
 
-  background: rgba(253, 249, 240, 0.8);
+  background: rgba(253, 249, 240, 0.92);
   border-bottom: 1px solid rgba(221, 192, 192, 0.3);
   backdrop-filter: blur(8px);
 
   img {
-    height: 2rem;
+    height: 1.75rem;
     width: auto;
     display: block;
   }
 
+  // Hamburger menu button (visible on mobile)
+  .navibar-menu-toggle {
+    display: block;
+    border: none;
+    background: none;
+    font-size: 1.75rem;
+    color: $color-primary;
+    cursor: pointer;
+    padding: 0.25rem 0.5rem;
+    line-height: 1;
+
+    &:active {
+      transform: scale(0.9);
+    }
+  }
+
   .navibar-links {
-    @include Flex(row, flex-start, center);
+    @include Flex(column, flex-start, flex-start);
+
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
 
     list-style: none;
-    gap: 2rem;
+    gap: 0.5rem;
     margin: 0;
-    padding: 0;
+    padding: 1rem 1.25rem;
+
+    background: rgba(253, 249, 240, 0.98);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(221, 192, 192, 0.3);
+
+    // Hidden by default on mobile
+    display: none;
+
+    // Open state (add this class via React state)
+    &.is-open {
+      display: flex;
+    }
+
+    li {
+      width: 100%;
+    }
 
     li:first-child {
-      margin-right: 0.5rem;
+      margin-right: 0;
     }
 
     a {
+      display: block;
+      width: 100%;
+      padding: 0.6rem 0;
+
       @include LabelCaps;
 
       color: $color-text-medium;
@@ -171,11 +211,15 @@ body {
       font-weight: 600;
       transition:
         color 0.25s ease,
-        opacity 0.25s ease,
-        border-color 0.25s ease;
+        opacity 0.25s ease;
 
       &:hover {
         color: $color-primary;
+      }
+
+      // Touch feedback for mobile
+      &:active {
+        opacity: 0.6;
       }
     }
 
@@ -184,22 +228,69 @@ body {
       border-radius: 1rem;
       background: $color-primary;
       color: $color-text-on-primary;
+      text-align: center;
+      width: auto;
 
       &:hover {
         opacity: 0.82;
         color: $color-text-on-primary;
+      }
+
+      &:active {
+        transform: scale(0.96);
+      }
+    }
+  }
+}
+
+// Tablet and up (768px+)
+@media (min-width: 768px) {
+  .Navibar {
+    padding: 1rem clamp(1.25rem, 4vw, 1.5rem);
+
+    img {
+      height: 2rem;
+    }
+
+    .navibar-menu-toggle {
+      display: none; // Hide hamburger on tablet+
+    }
+
+    .navibar-links {
+      @include Flex(row, flex-start, center);
+
+      position: static;
+      display: flex !important; // Always visible on tablet+
+      background: none;
+      backdrop-filter: none;
+      border-bottom: none;
+      padding: 0;
+      gap: 2rem;
+
+      li {
+        width: auto;
+      }
+
+      a {
+        padding: 0;
+        width: auto;
+      }
+
+      li:not(:first-child):last-child a {
+        padding: 0.6rem 1.5rem;
+        width: auto;
       }
     }
   }
 }
 
 // ============================================
-// RSVP PAGE
+// RSVP PAGE (MOBILE-FIRST)
 // ============================================
 
 .rsvp-page {
   min-height: 100vh;
-  padding: clamp(2rem, 6vw, 4rem) 1.25rem;
+  padding: 1.25rem;
 
   @include Flex(row, center, flex-start);
   @include PassportTexture;
@@ -210,12 +301,17 @@ body {
     content: 'flight_takeoff';
     position: absolute;
     top: 5.5rem;
-    left: clamp(1.5rem, 6vw, 5rem);
+    left: 1.5rem;
 
     font-family: 'Material Symbols Outlined';
-    font-size: clamp(2rem, 5vw, 4rem);
+    font-size: 2rem;
     color: rgba(108, 12, 32, 0.12);
     pointer-events: none;
+
+    // Hide on very small screens
+    @media (max-width: 400px) {
+      display: none;
+    }
   }
 
   &::after {
@@ -230,8 +326,20 @@ body {
   }
 }
 
+// Tablet and up
+@media (min-width: 768px) {
+  .rsvp-page {
+    padding: clamp(2rem, 6vw, 4rem) 1.25rem;
+
+    &::before {
+      left: clamp(1.5rem, 6vw, 5rem);
+      font-size: clamp(2rem, 5vw, 4rem);
+    }
+  }
+}
+
 // ============================================
-// RSVP CARD
+// RSVP CARD (MOBILE-FIRST)
 // ============================================
 
 .rsvp-card {
@@ -240,10 +348,10 @@ body {
 
   width: 100%;
   max-width: 640px;
-  padding: clamp(1.5rem, 4vw, 2.5rem);
+  padding: 1.25rem;
 
-  border-radius: 1.5rem;
-  border: 4px solid rgba(108, 12, 32, 0.16);
+  border-radius: 1.25rem;
+  border: 3px solid rgba(108, 12, 32, 0.16);
 
   @include PassportTexture;
 
@@ -253,69 +361,109 @@ body {
   &::before {
     content: '';
     position: absolute;
-    top: 1rem;
-    left: 1rem;
+    top: 0.75rem;
+    left: 0.75rem;
 
-    width: 4.25rem;
-    height: 4.25rem;
+    width: 3rem;
+    height: 3rem;
 
     border: 2px dashed rgba(132, 84, 0, 0.45);
     border-radius: 999px;
-    opacity: 0.35;
+    opacity: 0.25;
     pointer-events: none;
+
+    // Hide on small screens
+    @media (max-width: 480px) {
+      display: none;
+    }
   }
 
   &::after {
     content: 'RSVP';
     position: absolute;
-    right: 1.25rem;
-    bottom: 1.25rem;
+    right: 0.75rem;
+    bottom: 0.75rem;
 
     @include LabelCaps;
 
-    color: rgba(108, 12, 32, 0.13);
-    font-size: 2.5rem;
+    color: rgba(108, 12, 32, 0.10);
+    font-size: 1.5rem;
     transform: rotate(-10deg);
     pointer-events: none;
+
+    @media (max-width: 480px) {
+      font-size: 1rem;
+      right: 0.5rem;
+      bottom: 0.5rem;
+    }
   }
 
   h1 {
     @include HeadingSerif;
 
     margin: 0;
-    font-size: clamp(2.25rem, 6vw, 3.75rem);
+    font-size: clamp(1.75rem, 6vw, 3.75rem);
     text-align: center;
     color: $color-primary;
   }
 
   > p {
-    margin: 0.75rem auto 2rem;
+    margin: 0.5rem auto 1.5rem;
     max-width: 34rem;
 
     text-align: center;
     font-family: $font-heading;
-    font-size: 1.05rem;
+    font-size: 0.95rem;
     line-height: 1.6;
     font-style: italic;
     color: $color-text-medium;
   }
 }
 
+// Tablet and up
+@media (min-width: 768px) {
+  .rsvp-card {
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+    border-width: 4px;
+    border-radius: 1.5rem;
+
+    &::before {
+      width: 4.25rem;
+      height: 4.25rem;
+      top: 1rem;
+      left: 1rem;
+      display: block;
+    }
+
+    &::after {
+      font-size: 2.5rem;
+      right: 1.25rem;
+      bottom: 1.25rem;
+    }
+
+    > p {
+      font-size: 1.05rem;
+      margin: 0.75rem auto 2rem;
+    }
+  }
+}
+
 // ============================================
-// RSVP FORM
+// RSVP FORM (MOBILE-FIRST)
 // ============================================
 
 .rsvp-form {
   @include Flex(column);
-  gap: 1.25rem;
+  gap: 1rem;
 
   label {
     @include Flex(column);
-    gap: 0.45rem;
+    gap: 0.35rem;
 
     @include LabelCaps;
 
     color: $color-secondary;
+    font-size: 0.7rem;
   }
 
   input,
@@ -324,15 +472,15 @@ body {
     width: 100%;
     box-sizing: border-box;
 
-    padding: 0.9rem 1rem;
+    padding: 0.75rem 0.9rem;
 
     border: 1px solid $color-border;
-    border-radius: 1rem;
+    border-radius: 0.875rem;
 
     background-color: rgba(255, 255, 255, 0.72);
     color: $color-text-dark;
 
-    font-size: 1rem;
+    font-size: 0.95rem;
     line-height: 1.5;
     font-family: $font-body;
 
@@ -341,14 +489,15 @@ body {
     transition:
       border-color 0.2s ease,
       box-shadow 0.2s ease,
-      background-color 0.2s ease,
-      transform 0.2s ease;
+      background-color 0.2s ease;
+
+    // Touch-friendly: bigger tap area
+    min-height: 48px;
 
     &:focus {
       border-color: $color-border-focus;
       background-color: $color-bg-input-focus;
       box-shadow: 0 0 0 4px $color-primary-glow;
-      transform: translateY(-1px);
     }
 
     &::placeholder {
@@ -364,13 +513,14 @@ body {
 
   select {
     cursor: pointer;
+    appearance: auto;
   }
 
   textarea {
-    min-height: 110px;
-    max-height: 110px;
-    resize: none;
-    overflow-y: auto;
+    min-height: 80px;
+    resize: vertical; // Allow users to resize on mobile
+
+    // Remove max-height so it can grow
   }
 
   input[type='number'] {
@@ -384,11 +534,11 @@ body {
   }
 
   button {
-    margin-top: 1rem;
-    align-self: center;
+    margin-top: 0.75rem;
+    align-self: stretch; // Full width on mobile for easy tapping
 
-    min-width: 12rem;
-    padding: 0.85rem 1.75rem;
+    min-height: 52px;
+    padding: 0.75rem 1.5rem;
 
     border: none;
     border-radius: 1rem;
@@ -399,15 +549,22 @@ body {
     @include LabelCaps;
 
     font-family: $font-body;
+    font-size: 0.8rem;
     cursor: pointer;
 
     box-shadow: 0 12px 28px $color-shadow-button;
 
     transition:
-      transform 0.2s ease,
+      transform 0.15s ease,
       box-shadow 0.2s ease,
       background-color 0.2s ease,
       opacity 0.2s ease;
+
+    // Touch feedback
+    &:active {
+      transform: scale(0.96);
+      box-shadow: 0 4px 12px $color-shadow-button;
+    }
 
     &:hover {
       background: $color-primary-hover;
@@ -415,16 +572,47 @@ body {
       box-shadow: 0 16px 32px $color-shadow-button;
     }
 
-    &:active {
-      transform: translateY(0);
-      box-shadow: none;
+    &:active:hover {
+      transform: scale(0.96);
+    }
+  }
+}
+
+// Tablet and up
+@media (min-width: 768px) {
+  .rsvp-form {
+    gap: 1.25rem;
+
+    label {
+      gap: 0.45rem;
+      font-size: 0.75rem;
+    }
+
+    input,
+    select,
+    textarea {
+      padding: 0.9rem 1rem;
+      font-size: 1rem;
+      border-radius: 1rem;
+      min-height: auto;
+    }
+
+    textarea {
+      min-height: 110px;
+    }
+
+    button {
+      align-self: center;
+      min-width: 12rem;
+      min-height: auto;
+      padding: 0.85rem 1.75rem;
+      font-size: 0.75rem;
     }
   }
 }
 
 // ============================================
 // OPTIONAL CARD STYLE
-// Use this if you add small RSVP info cards later
 // ============================================
 
 .paper-card {
@@ -441,6 +629,10 @@ body {
     transform: translateY(-2px);
   }
 
+  &:active {
+    transform: scale(0.98);
+  }
+
   h3 {
     margin: 0 0 0.35rem;
     font-family: $font-heading;
@@ -454,11 +646,19 @@ body {
   }
 }
 
+// ============================================
+// PAGE CONTAINER
+// ============================================
+
 .page-container {
   width: 100%;
   max-width: 1140px;
   margin: 0 auto;
-  padding: 0 1.25rem;
+  padding: 0 1rem;
+
+  @media (min-width: 768px) {
+    padding: 0 1.25rem;
+  }
 }
 
 .navibar-inner {
@@ -472,22 +672,22 @@ body {
 .navibar-logo,
 .footer-logo {
   font-family: $font-heading;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: 700;
   color: $color-primary;
+
+  @media (min-width: 768px) {
+    font-size: 1.5rem;
+  }
 }
 
-.navibar-menu {
-  display: none;
-  border: none;
-  background: none;
-  color: $color-primary;
-  cursor: pointer;
-}
+// ============================================
+// HERO / PASSPORT SECTION (MOBILE-FIRST)
+// ============================================
 
 .hero-passport {
-  min-height: 50vh;
-  padding: 2rem 0;
+  min-height: 40vh;
+  padding: 1.5rem 0;
 
   @include Flex(column, center, center);
 
@@ -498,10 +698,10 @@ body {
   position: relative;
   width: 100%;
   max-width: 48rem;
-  padding: 2rem;
+  padding: 1.25rem;
 
-  border-radius: 1.5rem;
-  border: 4px solid rgba(108, 12, 32, 0.2);
+  border-radius: 1.25rem;
+  border: 3px solid rgba(108, 12, 32, 0.2);
 
   @include PassportTexture;
 
@@ -512,34 +712,56 @@ body {
 
     margin: 0 0 0.5rem;
     color: $color-primary;
-    font-size: clamp(2rem, 5vw, 3rem);
+    font-size: clamp(1.5rem, 5vw, 3rem);
+  }
+}
+
+@media (min-width: 768px) {
+  .hero-passport {
+    min-height: 50vh;
+    padding: 2rem 0;
+  }
+
+  .passport-card {
+    padding: 2rem;
+    border-radius: 1.5rem;
+    border-width: 4px;
   }
 }
 
 .passport-icon {
   position: absolute;
-  top: 0.75rem;
-  left: 0.75rem;
-  opacity: 0.3;
+  top: 0.5rem;
+  left: 0.5rem;
+  opacity: 0.25;
 
   span {
-    font-size: 2rem;
+    font-size: 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    top: 0.75rem;
+    left: 0.75rem;
+
+    span {
+      font-size: 2rem;
+    }
   }
 }
 
 .seal-wrapper {
   @include Flex(row, center, center);
 
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
 }
 
 .seal-frame {
-  width: 9rem;
-  height: 9rem;
-  padding: 0.375rem;
+  width: 6rem;
+  height: 6rem;
+  padding: 0.3rem;
 
   border-radius: 999px;
-  border: 4px dashed $color-secondary;
+  border: 3px dashed $color-secondary;
   background: rgba(255, 255, 255, 0.5);
   backdrop-filter: blur(4px);
 
@@ -550,38 +772,67 @@ body {
     border-radius: 999px;
     display: block;
   }
+
+  @media (min-width: 768px) {
+    width: 9rem;
+    height: 9rem;
+    padding: 0.375rem;
+    border-width: 4px;
+  }
 }
 
 .hero-route {
-  margin: 0 0 1rem;
+  margin: 0 0 0.75rem;
 
   font-family: $font-heading;
-  font-size: 1.125rem;
+  font-size: 0.9rem;
   color: $color-secondary;
   text-transform: uppercase;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.15em;
+
+  @media (min-width: 768px) {
+    font-size: 1.125rem;
+    letter-spacing: 0.18em;
+  }
 }
 
 .hero-subtitle {
   @include Flex(row, center, center);
 
-  gap: 1rem;
+  gap: 0.5rem;
 
   p {
     margin: 0;
     color: $color-text-medium;
     font-style: italic;
+    font-size: 0.85rem;
+  }
+
+  @media (min-width: 768px) {
+    gap: 1rem;
+
+    p {
+      font-size: 1rem;
+    }
   }
 }
 
 .subtitle-line {
-  width: 3rem;
+  width: 1.5rem;
   height: 2px;
   background: $color-border;
+
+  @media (min-width: 768px) {
+    width: 3rem;
+  }
 }
 
+// ============================================
+// FLIGHT PATH SECTION (MOBILE-FIRST)
+// ============================================
+
 .flight-path-section {
-  padding: 2rem 0;
+  padding: 1.5rem 0;
 
   @include Flex(column, flex-start, center);
 
@@ -596,12 +847,23 @@ body {
 
     margin: 0 0 0.25rem;
     color: $color-primary;
-    font-size: 1.5rem;
+    font-size: 1.25rem;
   }
 
   p {
     margin: 0;
     color: $color-text-medium;
+    font-size: 0.9rem;
+  }
+
+  @media (min-width: 768px) {
+    h2 {
+      font-size: 1.5rem;
+    }
+
+    p {
+      font-size: 1rem;
+    }
   }
 }
 
@@ -610,34 +872,66 @@ body {
   max-width: 56rem;
 
   display: flex;
+  flex-direction: column; // Mobile: stack vertically
 
   overflow: hidden;
-  border-radius: 1.5rem;
+  border-radius: 1.25rem;
   border: 2px solid rgba(255, 174, 48, 0.3);
   background: $color-surface-low;
   box-shadow: 0 24px 56px rgba(49, 49, 43, 0.2);
 }
 
 .flight-image {
-  width: 50%;
-  border-right: 1px dashed rgba(137, 113, 114, 0.5);
+  width: 100%;
+  max-height: 200px;
 
   img {
     width: 100%;
     height: 100%;
+    max-height: 200px;
     display: block;
     object-fit: cover;
   }
 }
 
 .flight-details {
-  width: 50%;
-  padding: 1.5rem;
+  width: 100%;
+  padding: 1rem;
+  box-sizing: border-box;
 
   @include Flex(column, center, stretch);
   @include PassportTexture;
 
-  gap: 1rem;
+  gap: 0.75rem;
+}
+
+@media (min-width: 768px) {
+  .flight-path-section {
+    padding: 2rem 0;
+    gap: 1.5rem;
+  }
+
+  .flight-card {
+    flex-direction: row; // Tablet+: side by side
+    border-radius: 1.5rem;
+  }
+
+  .flight-image {
+    width: 50%;
+    max-height: none;
+    border-right: 1px dashed rgba(137, 113, 114, 0.5);
+
+    img {
+      max-height: none;
+      height: 100%;
+    }
+  }
+
+  .flight-details {
+    width: 50%;
+    padding: 1.5rem;
+    gap: 1rem;
+  }
 }
 
 .detail-group {
@@ -663,8 +957,12 @@ body {
 }
 
 .detail-value.strong {
-  font-size: 1.125rem;
+  font-size: 1rem;
   font-weight: 700;
+
+  @media (min-width: 768px) {
+    font-size: 1.125rem;
+  }
 }
 
 .detail-muted {
@@ -680,30 +978,49 @@ body {
     color: $color-text-medium;
     line-height: 1.6;
     font-style: italic;
+    font-size: 0.9rem;
+    word-wrap: break-word;        // Force long words to break
+    overflow-wrap: break-word;    // Modern equivalent
+    white-space: normal;          // Explicitly allow wrapping
+    max-width: 100%;              // Prevent overflow
+    box-sizing: border-box;       // Include padding in width
   }
 }
 
 .notice-box {
-  padding: 0.75rem;
+  padding: 0.5rem 0.75rem;
 
   border: 1px dashed rgba(108, 12, 32, 0.2);
-  border-radius: 1rem;
+  border-radius: 0.75rem;
   background: rgba(255, 255, 255, 0.4);
 
   p {
     margin: 0;
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     font-weight: 600;
     color: $color-primary;
   }
+
+  @media (min-width: 768px) {
+    padding: 0.75rem;
+    border-radius: 1rem;
+
+    p {
+      font-size: 0.75rem;
+    }
+  }
 }
 
+// ============================================
+// PLANNING SECTION (MOBILE-FIRST)
+// ============================================
+
 .planning-section {
-  padding: 2rem 0 4rem;
+  padding: 1.5rem 0 2.5rem;
 }
 
 .planning-header {
-  @include Flex(row, space-between, flex-end);
+  @include Flex(column, flex-start, flex-start);
 
   margin-bottom: 1rem;
   padding-bottom: 0.5rem;
@@ -715,33 +1032,68 @@ body {
 
     margin: 0;
     color: $color-primary;
-    font-size: 1.5rem;
+    font-size: 1.25rem;
   }
 
   p {
     margin: 0.25rem 0 0;
     color: $color-text-medium;
+    font-size: 0.9rem;
   }
 }
 
 .planning-pets {
-  color: rgba(132, 84, 0, 0.2);
-  transform: rotate(12deg);
+  display: none;
 
   span {
-    font-size: 2.5rem;
+    font-size: 2rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .planning-section {
+    padding: 2rem 0 4rem;
+  }
+
+  .planning-header {
+    @include Flex(row, space-between, flex-end);
+
+    h2 {
+      font-size: 1.5rem;
+    }
+
+    p {
+      font-size: 1rem;
+    }
+  }
+
+  .planning-pets {
+    display: block;
+    color: rgba(132, 84, 0, 0.2);
+    transform: rotate(12deg);
+
+    span {
+      font-size: 2.5rem;
+    }
   }
 }
 
 .planning-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
+  grid-template-columns: 1fr; // Mobile: single column
+  gap: 0.75rem;
+}
+
+@media (min-width: 768px) {
+  .planning-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
 }
 
 .paper-card-icon {
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 2.25rem;
+  height: 2.25rem;
   margin-bottom: 0.5rem;
 
   @include Flex(row, center, center);
@@ -751,26 +1103,44 @@ body {
 
   span {
     color: $color-secondary;
-    font-size: 1.25rem;
+    font-size: 1.1rem;
+  }
+
+  @media (min-width: 768px) {
+    width: 2.5rem;
+    height: 2.5rem;
+
+    span {
+      font-size: 1.25rem;
+    }
   }
 }
 
 .status-pill {
   display: inline-block;
   margin-top: 0.75rem;
-  padding: 0.35rem 0.75rem;
+  padding: 0.3rem 0.65rem;
 
   border-radius: 999px;
   background: $color-surface-high;
 
   @include LabelCaps;
 
-  font-size: 0.625rem;
+  font-size: 0.6rem;
   color: $color-text-medium;
+
+  @media (min-width: 768px) {
+    padding: 0.35rem 0.75rem;
+    font-size: 0.625rem;
+  }
 }
 
+// ============================================
+// FOOTER (MOBILE-FIRST)
+// ============================================
+
 .Footer {
-  margin-top: 2rem;
+  margin-top: 1.5rem;
   border-top: 1px solid rgba(255, 174, 48, 0.2);
   background: $color-surface-low;
 }
@@ -778,7 +1148,7 @@ body {
 .footer-inner {
   max-width: 1140px;
   margin: 0 auto;
-  padding: 1rem 1.25rem;
+  padding: 1rem;
 
   @include Flex(column, center, center);
 
@@ -791,102 +1161,61 @@ body {
     @include LabelCaps;
 
     color: $color-secondary;
+    font-size: 0.6rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .Footer {
+    margin-top: 2rem;
+  }
+
+  .footer-inner {
+    padding: 1rem 1.25rem;
+
+    p {
+      font-size: 0.75rem;
+    }
   }
 }
 
 .footer-pets {
   @include Flex(row, center, center);
 
-  gap: 1rem;
+  gap: 0.75rem;
   opacity: 0.6;
+
+  @media (min-width: 768px) {
+    gap: 1rem;
+  }
 }
 
 .footer-links {
   @include Flex(row, center, center);
 
-  gap: 1.5rem;
+  gap: 1rem;
 
   a {
     @include LabelCaps;
 
-    font-size: 0.625rem;
+    font-size: 0.6rem;
     color: $color-text-medium;
     text-decoration: none;
 
     &:hover {
       color: $color-secondary-container;
     }
-  }
-}
 
-@media (max-width: 768px) {
-  .navibar-links {
-    display: none;
-  }
-
-  .navibar-menu {
-    display: block;
-  }
-
-  .flight-card {
-    flex-direction: column;
-  }
-
-  .flight-image,
-  .flight-details {
-    width: 100%;
-  }
-
-  .flight-image {
-    border-right: none;
-    border-bottom: 1px dashed rgba(137, 113, 114, 0.5);
-  }
-
-  .planning-header {
-    align-items: flex-start;
-  }
-
-  .planning-pets {
-    display: none;
-  }
-
-  .planning-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .hero-subtitle {
-    gap: 0.75rem;
-  }
-
-  .subtitle-line {
-    width: 2rem;
-  }
-}
-
-// ============================================
-// RESPONSIVE
-// ============================================
-
-@media (max-width: 768px) {
-  .Navibar {
-    .navibar-links {
-      gap: 1rem;
-
-      a {
-        font-size: 0.65rem;
-      }
-
-      li:not(:first-child):last-child a {
-        padding: 0.5rem 1rem;
-      }
+    &:active {
+      opacity: 0.6;
     }
   }
 
-  .rsvp-card {
-    border-width: 3px;
+  @media (min-width: 768px) {
+    gap: 1.5rem;
 
-    &::after {
-      font-size: 1.75rem;
+    a {
+      font-size: 0.625rem;
     }
   }
 }
