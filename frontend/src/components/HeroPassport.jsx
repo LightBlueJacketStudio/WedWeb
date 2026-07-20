@@ -17,11 +17,11 @@ function HeroPassport() {
 
         <h1>Our Journey Begins</h1>
 
-        <p className="hero-route">US to Da Nang, Vietnam</p>
+        <p className="hero-route">U.S. to Da Nang, Vietnam</p>
 
         <div className="hero-subtitle">
           <div className="subtitle-line" />
-          <p>A transatlantic celebration of love</p>
+          <p>A transpacific celebration of love</p>
           <div className="subtitle-line" />
         </div>
       </div>
