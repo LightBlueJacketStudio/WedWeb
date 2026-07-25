@@ -1,9 +1,18 @@
-import React, { useState } from 'react';
-//import './YourStyles.scss'; // Adjust the import path to your SCSS file
+import { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+
+
+const SECTION_LINKS = [
+  { label: 'Our Journey', anchor: 'journey' },
+  { label: 'The Wedding', anchor: 'wedding' },
+  { label: 'Travel Info', anchor: 'travel' },
+];
 
 const Navibar = () => {
   // State to track if the mobile menu is open
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { pathname } = useLocation();
+  const isHome = pathname === '/';
 
   // Toggle the menu
   const toggleMenu = () => {
@@ -19,10 +28,12 @@ const Navibar = () => {
     <nav className="Navibar">
       <div className="navibar-inner">
         {/* Logo */}
-        <span className="navibar-logo">B &amp; M</span>
+        <Link to="/" className="navibar-logo" onClick={closeMenu}>
+          B &amp; M
+        </Link>
 
         {/* Hamburger Button (only visible on mobile) */}
-        <button 
+        <button
           className={`navibar-menu-toggle ${isMenuOpen ? 'is-open' : ''}`}
           onClick={toggleMenu}
           aria-label="Toggle navigation menu"
@@ -34,18 +45,21 @@ const Navibar = () => {
 
         {/* Navigation Links */}
         <div className={`navibar-links ${isMenuOpen ? 'is-open' : ''}`}>
-          <a href="#journey" onClick={closeMenu}>
-            Our Journey
-          </a>
-          <a href="#wedding" onClick={closeMenu}>
-            The Wedding
-          </a>
-          <a href="#travel" onClick={closeMenu}>
-            Travel Info
-          </a>
-          <a className="rsvp-link" href="#rsvp" onClick={closeMenu}>
+          {}
+          {SECTION_LINKS.map(({ label, anchor }) =>
+            isHome ? (
+              <a key={anchor} href={`#${anchor}`} onClick={closeMenu}>
+                {label}
+              </a>
+            ) : (
+              <Link key={anchor} to={`/#${anchor}`} onClick={closeMenu}>
+                {label}
+              </Link>
+            )
+          )}
+          <Link className="rsvp-link" to="/rsvp" onClick={closeMenu}>
             RSVP
-          </a>
+          </Link>
         </div>
       </div>
     </nav>

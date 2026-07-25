@@ -246,29 +246,6 @@ body {
     display: none;
   }
 }
-.rsvp-card::after {
-  content: "RSVP";
-  position: absolute;
-  right: 0.75rem;
-  bottom: 0.75rem;
-  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
-  font-size: 0.75rem;
-  line-height: 1.2;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: rgba(108, 12, 32, 0.1);
-  font-size: 1.5rem;
-  transform: rotate(-10deg);
-  pointer-events: none;
-}
-@media (max-width: 480px) {
-  .rsvp-card::after {
-    font-size: 1rem;
-    right: 0.5rem;
-    bottom: 0.5rem;
-  }
-}
 .rsvp-card h1 {
   font-family: "Libre Caslon Text", Georgia, serif;
   font-weight: 700;
@@ -419,6 +396,18 @@ body {
 .rsvp-form button:active:hover {
   transform: scale(0.96);
 }
+.rsvp-form button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+.rsvp-form .rsvp-error {
+  margin: 0;
+  color: #6c0c20;
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
 
 @media (min-width: 768px) {
   .rsvp-form {
@@ -500,6 +489,7 @@ body {
   font-size: 1.25rem;
   font-weight: 700;
   color: #6c0c20;
+  text-decoration: none;
 }
 @media (min-width: 768px) {
   .navibar-logo,
@@ -661,14 +651,14 @@ body {
 .section-heading {
   text-align: center;
 }
-.section-heading h2 {
+.section-heading h1 {
   font-family: "Libre Caslon Text", Georgia, serif;
   font-weight: 700;
   line-height: 1.1;
   letter-spacing: -0.02em;
   margin: 0 0 0.25rem;
   color: #6c0c20;
-  font-size: 1.25rem;
+  font-size: 1.75rem;
 }
 .section-heading p {
   margin: 0;
@@ -676,8 +666,8 @@ body {
   font-size: 0.9rem;
 }
 @media (min-width: 768px) {
-  .section-heading h2 {
-    font-size: 1.5rem;
+  .section-heading h1 {
+    font-size: 2.25rem;
   }
   .section-heading p {
     font-size: 1rem;
