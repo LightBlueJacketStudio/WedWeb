@@ -36,7 +36,7 @@ function PlanningCards() {
       <div className="planning-header">
         <div>
           <h2>Planning Your Visit</h2>
-          <p>Details coming very soon to your inbox</p>
+          <p>Details coming very soon</p>
         </div>
 
         <div className="planning-pets">

@@ -1,5 +1,4 @@
-const sealImage =
-  'https://lh3.googleusercontent.com/aida-public/AB6AXuCPBiNSkOd14icTvOqow6ONoSVAmv0yPBgYgRhR17wC6oe52ocpaf1A0ZqYf0g0ada7WaeyA4nUYlOUD3wBZv_nAVxJuphXWJicSSdDv8ukFShGBrvulN-VQZt3mSIEJVVPrbV8N7CnWaMLGpHCYbopRJxtvdIt7Twz_zSE8JG8EmjgMIUQMxUoQ45uBMeNLbzeF-doujn-JyTzllLabSNIWFOdxNDdN5YsGXaetopUIy3EH3dbowBSFSIeA_1HwbCE-1Fgy4ZGdRKrBA'
+import sealImage from '../assets/profile.jpg'
 
 function HeroPassport() {
   return (

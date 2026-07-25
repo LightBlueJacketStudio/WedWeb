@@ -1,11 +1,10 @@
-const weddingIllustration =
-  'https://lh3.googleusercontent.com/aida-public/AB6AXuBJ27bBJtZ0yvi5-K49pXwtc7mwIN03TCgvZS727SVHw7vGro8ZyilsMY6yVfBVsh1o_8Okm_TJB_m2NQ6DIW0vFCr8bA8NCUKyqO-tx2Yhf-WBKZTWqW1Wg66bz5pTPgWcr1cJtMYnyjAZYKEEtmRAXiBGyyopJuO6SyR1sDjD_tUj8mywQ2xae8YtSnzK16dbmdDR1ReW7ttniYs00hhWPdmXFVt90xec1XGHtPvNIrboAqHgslcFeXVwUjaYumagWLa9EXz_Bvg'
+import weddingIllustration from '../assets/cat-city-skylight.png'
 
 function FlightPath() {
   return (
     <section id="wedding" className="flight-path-section">
       <div className="section-heading">
-        <h2>The Flight Path</h2>
+        <h1>The Flight Path</h1>
         <p>Your itinerary for our special day</p>
       </div>
 
