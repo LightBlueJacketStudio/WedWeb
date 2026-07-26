@@ -5,7 +5,7 @@ import { Link, useLocation } from 'react-router-dom';
 const SECTION_LINKS = [
   { label: 'Our Journey', anchor: 'journey' },
   { label: 'The Wedding', anchor: 'wedding' },
-  { label: 'Travel Info', anchor: 'travel' },
+  { label: 'Travel Info', path: '/travel_guide' },
 ];
 
 const Navibar = () => {
@@ -46,8 +46,12 @@ const Navibar = () => {
         {/* Navigation Links */}
         <div className={`navibar-links ${isMenuOpen ? 'is-open' : ''}`}>
           {}
-          {SECTION_LINKS.map(({ label, anchor }) =>
-            isHome ? (
+          {SECTION_LINKS.map(({ label, anchor, path }) =>
+            path ? (
+              <Link key={label} to={path} onClick={closeMenu}>
+                {label}
+              </Link>
+            ) : isHome ? (
               <a key={anchor} href={`#${anchor}`} onClick={closeMenu}>
                 {label}
               </a>

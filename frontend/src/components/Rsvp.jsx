@@ -11,16 +11,22 @@ const GOOGLE_FORM_ACTION =
   'https://docs.google.com/forms/d/e/1FAIpQLSfy27Vuyl6gEJM3kzdBLAhViXvCvu3_GKotgHByQWISlI2YVA/formResponse'
 
 const GOOGLE_FORM_ENTRIES = {
-  name: 'entry.2005620554', 
-  attending: 'entry.285375194', 
-  plusOne: 'entry.229129529', 
-  kids: 'entry.582771566', 
-  email: 'entry.1045781291', 
-  phone: 'entry.1166974658', 
-  dietary: 'entry.1739052576', 
-  accommodationHelp: 'entry.839337160', 
-  flyingIntoDAD: 'entry.1378856052', 
+  name: 'entry.2005620554',
+  attending: 'entry.285375194',
+  plusOne: 'entry.229129529',
+  kids: 'entry.582771566',
+  email: 'entry.1045781291',
+  address: 'entry.1190885811',
+  phone: 'entry.1166974658',
+  dietary: 'entry.1739052576',
+  accommodationHelp: 'entry.839337160',
+  flyingIntoDAD: 'entry.1378856052',
 }
+
+// Google Forms sends this fixed string for the option, plus a second
+// field for the typed-in text, when a "Other" choice is answered.
+const OTHER_OPTION_VALUE = '__other_option__'
+const FLYING_OTHER_ENTRY = 'entry.1378856052.other_option_response'
 
 const ATTENDING_OPTIONS = ['Yes, count me in!', "No :(", 'Not sure yet']
 const KID_OPTIONS = ['0', '1', '2', '3?!!! in this economy?']
@@ -29,19 +35,21 @@ const ACCOMMODATION_OPTIONS = [
   "No, I've got it sorted",
   'Not sure yet',
 ]
-const FLYING_OPTIONS = ['Yes', 'No', 'Not sure']
+const FLYING_OPTIONS = ['Yes', 'No', 'Not sure', 'Other']
 
 function Rsvp() {
   const [formData, setFormData] = useState({
-    name: '',
     attending: '',
+    name: '',
     plusOne: '',
     kids: '',
     email: '',
+    address: '',
     phone: '',
     dietary: '',
     accommodationHelp: '',
     flyingIntoDAD: '',
+    flyingIntoDADOther: '',
   })
 
   const [status, setStatus] = useState('idle') // idle | submitting | submitted | error
@@ -56,19 +64,30 @@ function Rsvp() {
   async function handleSubmit(event) {
     event.preventDefault()
 
-    // sanitize: skip the "if you're coming" questions when declining
+    // sanitize: skip the "if you're coming" questions when declining.
+    // Dietary and accommodationHelp are required questions on the Google
+    // Form itself, so they still need a value or Google silently rejects
+    // the whole response (the no-cors POST below can't surface that).
     const submissionData = {
       ...formData,
       plusOne: isNotAttending ? '' : formData.plusOne,
       kids: isNotAttending ? '' : formData.kids,
-      dietary: isNotAttending ? '' : formData.dietary,
-      accommodationHelp: isNotAttending ? '' : formData.accommodationHelp,
+      dietary: isNotAttending ? 'N/A' : formData.dietary,
+      accommodationHelp: isNotAttending
+        ? "No, I've got it sorted"
+        : formData.accommodationHelp,
       flyingIntoDAD: isNotAttending ? '' : formData.flyingIntoDAD,
+      flyingIntoDADOther: isNotAttending ? '' : formData.flyingIntoDADOther,
     }
 
     const body = new URLSearchParams()
     Object.entries(GOOGLE_FORM_ENTRIES).forEach(([field, entryId]) => {
-      body.append(entryId, submissionData[field])
+      if (field === 'flyingIntoDAD' && submissionData.flyingIntoDAD === 'Other') {
+        body.append(entryId, OTHER_OPTION_VALUE)
+        body.append(FLYING_OTHER_ENTRY, submissionData.flyingIntoDADOther)
+      } else {
+        body.append(entryId, submissionData[field])
+      }
     })
 
     setStatus('submitting')
@@ -173,6 +192,17 @@ function Rsvp() {
               </label>
 
               <label>
+                Address (for physical invitation tbd)
+                <input
+                  required
+                  maxLength={MAX_SHORT_LENGTH}
+                  name="address"
+                  value={formData.address}
+                  onChange={handleChange}
+                />
+              </label>
+
+              <label>
                 Phone number
                 <input
                   required
@@ -234,6 +264,18 @@ function Rsvp() {
                       ))}
                     </select>
                   </label>
+
+                  {formData.flyingIntoDAD === 'Other' && (
+                    <label>
+                      Please specify
+                      <input
+                        maxLength={MAX_SHORT_LENGTH}
+                        name="flyingIntoDADOther"
+                        value={formData.flyingIntoDADOther}
+                        onChange={handleChange}
+                      />
+                    </label>
+                  )}
                 </>
               )}
 
