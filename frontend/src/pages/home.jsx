@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
-import Navibar from '../components/Navibar'
+
 import HeroPassport from '../components/HeroPassport'
 import FlightPath from '../components/FlightPath'
 import PlanningCards from '../components/PlanningCards'
@@ -18,8 +18,6 @@ function Home() {
 
   return (
     <>
-      <Navibar />
-
       <main className="page-container">
         <HeroPassport />
         <FlightPath />

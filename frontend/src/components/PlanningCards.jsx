@@ -1,34 +1,47 @@
+import { useNavigate } from "react-router-dom"
+
 const cards = [
   {
-    icon: 'flight',
-    title: 'Travel Guide',
-    text: 'Flights to DAD Airport, visa requirements, and transfers.',
-    status: 'Pending',
+    icon: "flight",
+    title: "Travel Guide",
+    text: "Flights to DAD Airport, visa requirements, and transfers.",
+    status: "Pending",
+    path: "/travel_guide",
   },
   {
-    icon: 'hotel',
-    title: 'Accommodations',
-    text: 'Recommended resorts in Da Nang and booking codes.',
-    status: 'Pending',
+    icon: "hotel",
+    title: "Accommodations",
+    text: "Recommended resorts in Da Nang and booking codes.",
+    status: "Pending",
   },
   {
-    icon: 'mail',
-    title: 'RSVP',
-    text: 'Check back here soon to confirm your attendance.',
-    status: 'Pending',
+    icon: "mail",
+    title: "RSVP",
+    text: "Check back here soon to confirm your attendance.",
+    status: "Pending",
   },
 ]
 
 function PlanningCards() {
+  const navigate = useNavigate()
+
   const handleMouseMove = (event) => {
-    const card = event.currentTarget
-    const rect = card.getBoundingClientRect()
+    const cardElement = event.currentTarget
+    const rect = cardElement.getBoundingClientRect()
 
     const x = event.clientX - rect.left
     const y = event.clientY - rect.top
 
-    card.style.setProperty('--mouse-x', `${x}px`)
-    card.style.setProperty('--mouse-y', `${y}px`)
+    cardElement.style.setProperty("--mouse-x", `${x}px`)
+    cardElement.style.setProperty("--mouse-y", `${y}px`)
+  }
+
+  const handleCardClick = (card) => {
+    console.log("Card clicked:", card)
+
+    if (card.path) {
+      navigate(card.path)
+    }
   }
 
   return (
@@ -47,12 +60,15 @@ function PlanningCards() {
       <div className="planning-grid">
         {cards.map((card) => (
           <div
-            className="paper-card"
+            className={`paper-card ${card.path ? "clickable-card" : ""}`}
             key={card.title}
             onMouseMove={handleMouseMove}
+            onClick={() => handleCardClick(card)}
           >
             <div className="paper-card-icon">
-              <span className="material-symbols-outlined">{card.icon}</span>
+              <span className="material-symbols-outlined">
+                {card.icon}
+              </span>
             </div>
 
             <h3>{card.title}</h3>
