@@ -365,9 +365,7 @@ body {
     content: '';
     position: absolute;
     inset: 0;
-    background-image:
-      linear-gradient(rgba(108, 12, 32, 0.025) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(108, 12, 32, 0.025) 1px, transparent 1px);
+    background-color: $color-bg-page-start;
     background-size: 28px 28px;
     pointer-events: none;
   }
@@ -1281,17 +1279,7 @@ body {
     position: absolute;
     inset: 0;
 
-    background-image:
-      linear-gradient(
-        rgba(108, 12, 32, 0.025) 1px,
-        transparent 1px
-      ),
-      linear-gradient(
-        90deg,
-        rgba(108, 12, 32, 0.025) 1px,
-        transparent 1px
-      );
-
+    background-color: $color-bg-page-start;
     background-size: 28px 28px;
     pointer-events: none;
   }
