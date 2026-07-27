@@ -38,15 +38,15 @@ function TravelGuide() {
       <div className="page-container">
         <section className="travel-guide-hero">
           <div className="travel-hero-art">
-            <span className="material-symbols-outlined">
+            {/* <span className="material-symbols-outlined">
               flight_takeoff
-            </span>
+            </span> */}
           </div>
 
           <div className="travel-hero-content">
-            <p className="travel-guide-label">
+            {/* <p className="travel-guide-label">
               The Adventure Begins
-            </p>
+            </p> */}
 
             <h1>Your Journey to Da Nang</h1>
 
@@ -63,9 +63,9 @@ function TravelGuide() {
           <article className="travel-info-card before-travel-card">
             <div className="travel-card-heading">
               <div className="travel-card-icon">
-                <span className="material-symbols-outlined">
+                {/* <span className="material-symbols-outlined">
                   downloading
-                </span>
+                </span> */}
               </div>
 
               <h2>Before You Travel</h2>
@@ -99,21 +99,21 @@ function TravelGuide() {
             </div>
 
             <div className="paw-decoration">
-              <span className="material-symbols-outlined">
+              {/* <span className="material-symbols-outlined">
                 pets
-              </span>
+              </span> */}
 
-              <span className="material-symbols-outlined">
+              {/* <span className="material-symbols-outlined">
                 pets
-              </span>
+              </span> */}
             </div>
           </article>
 
           <article className="travel-info-card connected-card">
             <div className="travel-card-icon secondary-icon">
-              <span className="material-symbols-outlined">
+              {/* <span className="material-symbols-outlined">
                 signal_cellular_alt
-              </span>
+              </span> */}
             </div>
 
             <h2>Stay Connected</h2>
@@ -131,11 +131,11 @@ function TravelGuide() {
           </article>
 
           <article className="travel-info-card transport-card">
-            <div className="travel-card-icon">
+            {/* <div className="travel-card-icon">
               <span className="material-symbols-outlined">
                 local_taxi
               </span>
-            </div>
+            </div> */}
 
             <h2>Getting Around</h2>
 
@@ -148,19 +148,17 @@ function TravelGuide() {
 
             <ul>
               <li>
-                <span className="material-symbols-outlined">
+                {/* <span className="material-symbols-outlined">
                   fiber_manual_record
-                </span>
-
+                </span> */}
                 Airport to the city typically costs around
-                150,000–200,000 VND.
+                150,000-200,000 VND.
               </li>
 
               <li>
-                <span className="material-symbols-outlined">
+                {/* <span className="material-symbols-outlined">
                   fiber_manual_record
-                </span>
-
+                </span> */}
                 Mai Linh, recognizable by its green vehicles, is a
                 commonly used local taxi company.
               </li>
@@ -175,16 +173,17 @@ function TravelGuide() {
                 While the wedding is at Mikazuki Resort, we have
                 curated alternative stays ranging from beachfront
                 hotels to city-center escapes.
+
               </p>
 
-              <button type="button">
+              {/* <button type="button">
                 View Recommendations
-              </button>
+              </button> */}
             </div>
 
             <div className="accommodation-image-wrapper">
               <img
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCshz4ImFuZ2Ceh9dmnJYzms_lha8XF-7gfcoJKIcLVR4ci6IkrWo51V6ssUFFqxbhzeUFlsLJ2xXXWgiUjFF9RGr_pc_M17lPJJF8yxEULFE4sgkzpKAinX1S_X_uOqoEVAZfV401et0I-at5TjfFm9cibEh2SBr7r6nfPlNxDxCKYVKcfNHYPMml62opAjyfoQ8J-7rtMMkE2oQDEtlYmM9Jr4yIH-A-ghwraoqzUb3qQ7qyX7sMIC599xw4iIBB4fAfwlw95mAs"
+                src="https://www.myoverseaswedding.com/wp-content/gallery/163296-reception/da-nang-mikazuki-japanese-resorts-and-spa-wedding-dinner-reception-17.jpg"
                 alt="A tropical resort in Da Nang"
               />
             </div>
@@ -217,13 +216,13 @@ function TravelGuide() {
           className="passport-stamps"
           aria-hidden="true"
         >
-          <div className="passport-stamp round-stamp">
+          {/* <div className="passport-stamp round-stamp">
             <span>Da Nang Airport</span>
             <strong>DAD</strong>
             <span>13 MAR 2027</span>
-          </div>
+          </div> */}
 
-          <div className="passport-stamp admitted-stamp">
+          {/* <div className="passport-stamp admitted-stamp">
             <span>Vietnam</span>
 
             <span className="material-symbols-outlined">
@@ -237,7 +236,7 @@ function TravelGuide() {
             <span>Wedding Journey</span>
             <strong>M &amp; B</strong>
             <span>Love Always</span>
-          </div>
+          </div> */}
         </section>
       </div>
     </main>

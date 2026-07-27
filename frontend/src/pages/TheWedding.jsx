@@ -44,9 +44,9 @@ function TheWedding() {
         <section className="travel-map-card">
           <div className="travel-map-header">
             <div>
-              <p className="travel-map-label">
+              {/* <p className="travel-map-label">
                 Interactive Map
-              </p>
+              </p> */}
 
               <h2>
                 <span className="material-symbols-outlined">
@@ -174,7 +174,7 @@ function TheWedding() {
             </span>
 
             <p>
-              Pending — please check again later, closer to the date,
+              Pending - please check again later when it comes closer to the date
               for more information.
             </p>
           </div>
