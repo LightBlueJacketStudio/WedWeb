@@ -518,7 +518,7 @@ body {
 .passport-card {
   position: relative;
   width: 100%;
-  max-width: 48rem;
+  max-width: 56rem;
   padding: 1.25rem;
   border-radius: 1.25rem;
   border: 3px solid rgba(108, 12, 32, 0.2);
@@ -576,7 +576,6 @@ body {
 .seal-frame {
   width: 6rem;
   height: 6rem;
-  padding: 0.3rem;
   border-radius: 999px;
   border: 3px dashed #845400;
   background: rgba(255, 255, 255, 0.5);
@@ -585,7 +584,7 @@ body {
 .seal-frame img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
   border-radius: 999px;
   display: block;
 }
@@ -593,7 +592,6 @@ body {
   .seal-frame {
     width: 9rem;
     height: 9rem;
-    padding: 0.375rem;
     border-width: 4px;
   }
 }
@@ -1507,6 +1505,412 @@ body {
     min-width: 14rem;
     min-height: 48px;
     padding: 0.8rem 1.25rem;
+  }
+}
+.registry-page {
+  position: relative;
+  min-height: 100vh;
+  padding: 1.25rem 0 3rem;
+  background: radial-gradient(circle at 20% 20%, rgba(108, 12, 32, 0.045), transparent 28%), radial-gradient(circle at 80% 10%, rgba(132, 84, 0, 0.045), transparent 24%), linear-gradient(135deg, #fdf9f0, #f7f3ea);
+  overflow: hidden;
+}
+.registry-page::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: #fdf9f0;
+  background-size: 28px 28px;
+  pointer-events: none;
+}
+.registry-page .page-container {
+  position: relative;
+  z-index: 1;
+  max-width: 56rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 1.75rem;
+}
+
+.registry-hero {
+  width: 100%;
+  padding: 0.5rem 0.5rem 0;
+  text-align: center;
+}
+.registry-hero h1 {
+  font-family: "Libre Caslon Text", Georgia, serif;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin: 0 0 1.5rem;
+  color: #6c0c20;
+  font-size: clamp(1.5rem, 6vw, 2.25rem);
+}
+
+.registry-intro {
+  max-width: 34rem;
+  margin: 0 auto;
+  color: #564242;
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+.registry-video-box {
+  position: relative;
+  width: 100%;
+  min-height: 16rem;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid rgba(132, 84, 0, 0.18);
+  border-radius: 1.5rem;
+  background: #ece8df;
+  box-shadow: 0 20px 45px rgba(49, 49, 43, 0.12);
+  overflow: hidden;
+}
+
+.registry-video-content {
+  text-align: center;
+}
+.registry-video-content h2 {
+  font-family: "Libre Caslon Text", Georgia, serif;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.35rem;
+  color: #6c0c20;
+  font-size: 1.15rem;
+}
+.registry-video-content p {
+  margin: 0;
+  color: #564242;
+  font-family: "Libre Caslon Text", Georgia, serif;
+  font-size: 0.8rem;
+  font-style: italic;
+}
+
+.registry-play-btn {
+  width: 3.25rem;
+  height: 3.25rem;
+  margin: 0 auto 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  border-radius: 999px;
+  background: #6c0c20;
+  color: #ffffff;
+  cursor: pointer;
+  box-shadow: 0 12px 28px rgba(108, 12, 32, 0.25);
+  transition: transform 0.15s ease, box-shadow 0.2s ease;
+}
+.registry-play-btn span {
+  font-size: 1.5rem;
+}
+.registry-play-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 16px 32px rgba(108, 12, 32, 0.25);
+}
+.registry-play-btn:active {
+  transform: scale(0.96);
+}
+
+.registry-video-paw {
+  position: absolute;
+  right: 1rem;
+  bottom: 0.75rem;
+  color: rgba(132, 84, 0, 0.35);
+  font-size: 1.5rem;
+  transform: rotate(-10deg);
+}
+
+.registry-gift-card {
+  width: 100%;
+  padding: 1.25rem;
+  border: 2px solid rgba(255, 174, 48, 0.3);
+  border-radius: 1.25rem;
+  background: #ffffff;
+  box-shadow: 0 24px 56px rgba(49, 49, 43, 0.18);
+}
+.registry-gift-card h2 {
+  font-family: "Libre Caslon Text", Georgia, serif;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 0 0 0.5rem;
+  color: #6c0c20;
+  font-size: 1.25rem;
+}
+
+.registry-gift-icon {
+  margin-right: 0.4rem;
+  font-size: 1.15em;
+  line-height: 1;
+}
+
+.registry-gift-desc {
+  margin: 0 0 1.25rem;
+  color: #564242;
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+.registry-payment-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+}
+
+.registry-payment-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 1rem 0.75rem;
+  border: 1px solid rgba(132, 84, 0, 0.16);
+  border-radius: 1rem;
+  background: #f7f3ea;
+  text-align: center;
+}
+
+.registry-payment-icon {
+  width: 2.25rem;
+  height: 2.25rem;
+  margin-bottom: 0.6rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border-radius: 999px;
+  background: rgba(255, 174, 48, 0.14);
+  color: #845400;
+}
+.registry-payment-icon span {
+  font-size: 1.1rem;
+}
+
+.registry-payment-label {
+  margin: 0 0 0.3rem;
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  font-size: 0.75rem;
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #845400;
+  font-size: 0.65rem;
+}
+
+.registry-payment-value {
+  margin: 0 0 0.85rem;
+  color: #1c1c17;
+  font-family: "Libre Caslon Text", Georgia, serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.registry-qr-box {
+  width: 100%;
+  max-width: 7rem;
+  aspect-ratio: 1;
+  margin: 0 auto 0.5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border: 1px dashed rgba(137, 113, 114, 0.5);
+  border-radius: 0.6rem;
+  background: #ffffff;
+}
+.registry-qr-box span {
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  font-size: 0.75rem;
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #897172;
+  font-size: 0.55rem;
+}
+
+.registry-qr-caption {
+  margin: 0;
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  font-size: 0.75rem;
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #897172;
+  font-size: 0.6rem;
+}
+
+.registry-donations {
+  width: 100%;
+  text-align: center;
+}
+.registry-donations h2 {
+  font-family: "Libre Caslon Text", Georgia, serif;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.5rem;
+  color: #6c0c20;
+  font-size: 1.25rem;
+}
+.registry-donations > p {
+  max-width: 34rem;
+  margin: 0 auto 1.25rem;
+  color: #564242;
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+.registry-org-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+}
+
+.registry-org-tile {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 7rem;
+  padding: 1.1rem 1rem;
+  border: 1px solid rgba(132, 84, 0, 0.18);
+  border-radius: 1rem;
+  background: #f1eee5;
+  text-align: left;
+  text-decoration: none;
+  transition: border-color 0.2s ease, background-color 0.2s ease, transform 0.15s ease;
+}
+.registry-org-tile:hover {
+  border-color: #6c0c20;
+  background: #ffffff;
+  transform: translateY(-2px);
+}
+.registry-org-tile:active {
+  transform: scale(0.98);
+}
+.registry-org-tile:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(255, 178, 182, 0.28);
+}
+
+.registry-org-tile-name {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-family: "Libre Caslon Text", Georgia, serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+  line-height: 1.35;
+  color: #6c0c20;
+}
+
+.registry-org-tile-category {
+  display: block;
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  font-size: 0.75rem;
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-size: 0.6rem;
+  color: #897172;
+}
+
+@media (min-width: 768px) {
+  .registry-page {
+    padding: 2.5rem 0 5rem;
+  }
+  .registry-page .page-container {
+    max-width: 64rem;
+    gap: 2.25rem;
+  }
+  .registry-hero h1 {
+    font-size: clamp(2rem, 5vw, 2.75rem);
+  }
+  .registry-intro {
+    font-size: 0.95rem;
+  }
+  .registry-video-box {
+    min-height: 22rem;
+    padding: 2rem;
+    border-radius: 1.75rem;
+  }
+  .registry-video-content h2 {
+    font-size: 1.5rem;
+  }
+  .registry-video-content p {
+    font-size: 0.9rem;
+  }
+  .registry-play-btn {
+    width: 3.75rem;
+    height: 3.75rem;
+  }
+  .registry-play-btn span {
+    font-size: 1.75rem;
+  }
+  .registry-gift-card {
+    padding: 2rem;
+    border-radius: 1.5rem;
+  }
+  .registry-gift-card h2 {
+    font-size: 1.5rem;
+  }
+  .registry-gift-desc {
+    font-size: 0.9rem;
+  }
+  .registry-payment-grid {
+    gap: 1.25rem;
+  }
+  .registry-payment-card {
+    padding: 1.5rem 1rem;
+  }
+  .registry-payment-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+  .registry-payment-icon span {
+    font-size: 1.25rem;
+  }
+  .registry-payment-value {
+    font-size: 1.05rem;
+  }
+  .registry-qr-box {
+    max-width: 8rem;
+  }
+  .registry-donations h2 {
+    font-size: 1.5rem;
+  }
+  .registry-donations > p {
+    font-size: 0.95rem;
+  }
+  .registry-org-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
+  }
+  .registry-org-tile {
+    min-height: 9rem;
+    padding: 1.5rem 1.25rem;
+    border-radius: 1.25rem;
+  }
+  .registry-org-tile-name {
+    font-size: 1rem;
+  }
+  .registry-org-tile-category {
+    font-size: 0.65rem;
   }
 }
 
