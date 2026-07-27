@@ -1859,3 +1859,386 @@ body {
     padding: 0.8rem 1.25rem;
   }
 }
+
+// ============================================
+// GIFT REGISTRY PAGE (MOBILE-FIRST)
+// ============================================
+
+.registry-page {
+  position: relative;
+  min-height: 100vh;
+  padding: 1.25rem 0 3rem;
+
+  @include PassportTexture;
+
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+
+    background-color: $color-bg-page-start;
+    background-size: 28px 28px;
+    pointer-events: none;
+  }
+
+  .page-container {
+    position: relative;
+    z-index: 1;
+
+    @include Flex(column, flex-start, stretch);
+
+    gap: 1.25rem;
+  }
+}
+
+.registry-hero {
+  position: relative;
+
+  width: 100%;
+  max-width: 48rem;
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem;
+
+  text-align: center;
+
+  border: 3px solid rgba(108, 12, 32, 0.16);
+  border-radius: 1.25rem;
+
+  @include PassportTexture;
+
+  box-shadow: 0 20px 45px rgba(49, 49, 43, 0.14);
+
+  h1 {
+    @include HeadingSerif;
+
+    margin: 0.35rem 0 0.75rem;
+
+    color: $color-primary;
+    font-size: clamp(1.75rem, 7vw, 3.25rem);
+  }
+}
+
+.registry-label {
+  margin: 0;
+
+  @include LabelCaps;
+
+  color: $color-secondary;
+  font-size: 0.65rem;
+}
+
+.registry-intro {
+  max-width: 38rem;
+  margin: 0 auto;
+
+  color: $color-text-medium;
+  font-family: $font-heading;
+  font-size: 0.9rem;
+  font-style: italic;
+  line-height: 1.65;
+}
+
+.registry-stamp {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+
+  width: 2.75rem;
+  height: 2.75rem;
+
+  @include Flex(row, center, center);
+
+  border: 2px dashed rgba(132, 84, 0, 0.45);
+  border-radius: 999px;
+
+  color: $color-secondary;
+  opacity: 0.45;
+  transform: rotate(-12deg);
+
+  span {
+    font-size: 1.25rem;
+  }
+}
+
+// ============================================
+// REGISTRY ORGANIZATIONS CARD
+// ============================================
+
+.registry-org-card {
+  width: 100%;
+  max-width: 48rem;
+  margin: 0 auto;
+  padding: 1rem;
+
+  border: 2px solid rgba(255, 174, 48, 0.3);
+  border-radius: 1.25rem;
+
+  background: $color-bg-card-bright;
+
+  box-shadow: 0 24px 56px rgba(49, 49, 43, 0.18);
+}
+
+.registry-org-header {
+  @include Flex(column, flex-start, flex-start);
+
+  gap: 0.75rem;
+  padding: 0.25rem 0.25rem 1rem;
+  margin-bottom: 1rem;
+
+  border-bottom: 1px dashed $color-border-dashed;
+
+  h2 {
+    @include HeadingSerif;
+
+    margin: 0.2rem 0 0.35rem;
+
+    color: $color-primary;
+    font-size: 1.4rem;
+  }
+
+  p {
+    margin: 0;
+
+    color: $color-text-medium;
+    font-size: 0.85rem;
+    line-height: 1.6;
+  }
+}
+
+.registry-org-label {
+  @include LabelCaps;
+
+  color: $color-secondary !important;
+  font-size: 0.625rem !important;
+}
+
+.registry-org-icon {
+  width: 2.75rem;
+  height: 2.75rem;
+
+  @include Flex(row, center, center);
+
+  flex-shrink: 0;
+
+  border-radius: 999px;
+  background: $color-secondary-soft;
+
+  color: $color-secondary;
+
+  span {
+    font-size: 1.4rem;
+  }
+}
+
+.registry-org-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.65rem;
+
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  a {
+    @include Flex(row, flex-start, center);
+
+    gap: 0.65rem;
+    min-height: 48px;
+    padding: 0.75rem 0.9rem;
+
+    border: 1px solid rgba(132, 84, 0, 0.2);
+    border-radius: 0.875rem;
+
+    background: $color-surface-low;
+    color: $color-text-dark;
+    text-decoration: none;
+
+    transition:
+      border-color 0.2s ease,
+      background-color 0.2s ease,
+      transform 0.15s ease;
+
+    > .material-symbols-outlined:first-child {
+      flex-shrink: 0;
+
+      color: $color-secondary;
+      font-size: 1.15rem;
+    }
+
+    .external-icon {
+      flex-shrink: 0;
+      margin-left: auto;
+
+      color: $color-text-light;
+      font-size: 1.05rem;
+      opacity: 0.7;
+
+      transition:
+        color 0.2s ease,
+        opacity 0.2s ease;
+    }
+
+    &:hover {
+      border-color: $color-primary;
+      background: $color-bg-card-bright;
+      transform: translateY(-2px);
+
+      .external-icon {
+        color: $color-primary;
+        opacity: 1;
+      }
+    }
+
+    &:active {
+      transform: scale(0.98);
+    }
+
+    &:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 4px $color-primary-glow;
+    }
+  }
+}
+
+.registry-org-name {
+  flex: 1;
+  min-width: 0;
+
+  font-family: $font-body;
+  font-size: 0.85rem;
+  font-weight: 600;
+  line-height: 1.4;
+
+  overflow-wrap: anywhere;
+}
+
+// ============================================
+// REGISTRY NOTICE (GIFTS / RED ENVELOPE)
+// ============================================
+
+.registry-notice {
+  @include Flex(row, flex-start, flex-start);
+
+  gap: 0.75rem;
+
+  width: 100%;
+  max-width: 48rem;
+  margin: 0 auto;
+  padding: 1rem 1.1rem;
+
+  border: 1px dashed rgba(108, 12, 32, 0.3);
+  border-radius: 1.1rem;
+
+  background: rgba(255, 255, 255, 0.55);
+
+  box-shadow: 0 12px 30px rgba(49, 49, 43, 0.1);
+
+  p {
+    margin: 0;
+
+    color: $color-text-medium;
+    font-size: 0.85rem;
+    line-height: 1.6;
+  }
+}
+
+.registry-notice-label {
+  margin-bottom: 0.35rem !important;
+
+  @include LabelCaps;
+
+  color: $color-primary !important;
+  font-size: 0.65rem !important;
+}
+
+.registry-notice-icon {
+  flex-shrink: 0;
+
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+// Tablet and up
+@media (min-width: 768px) {
+  .registry-page {
+    padding: 2.5rem 0 5rem;
+
+    .page-container {
+      gap: 1.75rem;
+    }
+  }
+
+  .registry-hero {
+    padding: 2rem;
+
+    border-width: 4px;
+    border-radius: 1.5rem;
+  }
+
+  .registry-label {
+    font-size: 0.75rem;
+  }
+
+  .registry-intro {
+    font-size: 1rem;
+  }
+
+  .registry-stamp {
+    top: 1rem;
+    left: 1rem;
+
+    width: 3.5rem;
+    height: 3.5rem;
+
+    span {
+      font-size: 1.6rem;
+    }
+  }
+
+  .registry-org-card {
+    padding: 1.5rem;
+    border-radius: 1.5rem;
+  }
+
+  .registry-org-header {
+    @include Flex(row, space-between, center);
+
+    padding: 0.25rem 0.25rem 1.25rem;
+
+    h2 {
+      font-size: 1.75rem;
+    }
+
+    p {
+      font-size: 0.95rem;
+    }
+  }
+
+  .registry-org-icon {
+    width: 3.25rem;
+    height: 3.25rem;
+
+    span {
+      font-size: 1.6rem;
+    }
+  }
+
+  .registry-org-list {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.85rem;
+  }
+
+  .registry-notice {
+    padding: 1.25rem 1.5rem;
+  }
+
+  .registry-notice-icon {
+    font-size: 1.75rem;
+  }
+
+  .registry-notice p {
+    font-size: 0.95rem;
+  }
+}
