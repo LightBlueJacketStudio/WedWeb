@@ -22,7 +22,7 @@ function FlightPath() {
           <div className="detail-group">
             <p className="detail-label">Destination</p>
             <p className="detail-value strong">
-              Mikazuke Da Nang Japanese Resorts &amp; Spa
+              Mikazuki Da Nang Japanese Resorts &amp; Spa
             </p>
             <p className="detail-muted">Da Nang, Vietnam</p>
           </div>

@@ -5,20 +5,20 @@ const cards = [
     icon: "flight",
     title: "Travel Guide",
     text: "Flights to DAD Airport, visa requirements, and transfers.",
-    status: "Pending",
+    // status: "Pending",
     path: "/travel_guide",
   },
   {
     icon: "hotel",
     title: "Accommodations",
     text: "Recommended resorts in Da Nang and booking codes.",
-    status: "Pending",
+    // status: "Pending",
   },
   {
     icon: "mail",
     title: "RSVP",
     text: "Check back here soon to confirm your attendance.",
-    status: "Pending",
+    // status: "Pending",
   },
 ]
 
@@ -74,7 +74,7 @@ function PlanningCards() {
             <h3>{card.title}</h3>
             <p>{card.text}</p>
 
-            <span className="status-pill">{card.status}</span>
+            {/* <span className="status-pill">{card.status}</span> */}
           </div>
         ))}
       </div>
