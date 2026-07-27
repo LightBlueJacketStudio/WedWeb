@@ -4,7 +4,7 @@ import monogramLogo from '../assets/monogram_logo_transparent.png';
 
 
 const SECTION_LINKS = [
-  { label: 'Our Journey', anchor: 'journey' },
+  { label: 'The Wedding', path: '/wedding' },
     { label: 'Travel Info', path: '/travel_guide' },
   { label: 'Gift Registry', path: '/gift_registry' }
 

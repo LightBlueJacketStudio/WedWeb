@@ -37,12 +37,12 @@ function FlightPath() {
             </p>
           </div>
 
-          <div className="notice-box">
+          {/* <div className="notice-box">
             <p>
               More details RSVP, accommodation, and travel tips coming soon. For
               now, just mark your calendars and start looking into flights.
             </p>
-          </div>
+          </div> */}
         </div>
       </div>
     </section>

@@ -7,7 +7,7 @@ function Home() {
   return (
     <>
       <main className="page-container">
-        <HeroPassport />
+        {/* <HeroPassport /> */}
         <FlightPath />
         <PlanningCards />
       </main>
