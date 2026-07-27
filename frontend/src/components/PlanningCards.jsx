@@ -5,20 +5,18 @@ const cards = [
     icon: "flight",
     title: "Travel Guide",
     text: "Flights to DAD Airport, visa requirements, and transfers.",
-    // status: "Pending",
     path: "/travel_guide",
   },
   {
     icon: "hotel",
     title: "Accommodations",
     text: "Recommended resorts in Da Nang and booking codes.",
-    // status: "Pending",
   },
   {
     icon: "mail",
     title: "RSVP",
     text: "Check back here soon to confirm your attendance.",
-    // status: "Pending",
+    path: "/rsvp",
   },
 ]
 

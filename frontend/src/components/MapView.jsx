@@ -20,15 +20,11 @@ L.Icon.Default.mergeOptions({
   shadowUrl: markerShadow,
 })
 
+const VENUE_POSITION = [16.09353025994651, 108.14466603632266]
+
 const locations = [
   {
     id: 1,
-    name: "Da Nang International Airport",
-    description: "Arrival airport for most international and domestic flights.",
-    position: [16.0439, 108.1994],
-  },
-  {
-    id: 2,
     name: "Wedding Venue",
     description: "this upmarket resort on 13-hectare grounds with a Japanese garden is a 3-minute walk from a beach along the South China Sea.",
     position: [16.09353025994651, 108.14466603632266],
@@ -37,33 +33,29 @@ const locations = [
 
 function MapView() {
   return (
-    <div className="travel-map-wrapper">
-      <MapContainer
-        center={[16.0544, 108.2022]}
-        zoom={12}
-        scrollWheelZoom={false}
-        className="travel-map"
-      >
-        <TileLayer
-          attribution="&copy; OpenStreetMap contributors"
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
+    <MapContainer
+      center={VENUE_POSITION}
+      zoom={15}
+      scrollWheelZoom={false}
+      className="travel-map"
+    >
+      <TileLayer
+        attribution="&copy; OpenStreetMap contributors"
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+      />
 
-        {locations.map((location) => (
-          <Marker
-            key={location.id}
-            position={location.position}
-          >
-            <Popup>
-              <div className="map-popup-content">
-                <h3>{location.name}</h3>
-                <p>{location.description}</p>
-              </div>
-            </Popup>
-          </Marker>
-        ))}
-      </MapContainer>
-    </div>
+      <Marker position={VENUE_POSITION}>
+        <Popup>
+          <div className="map-popup-content">
+            <h3>Mikazuki Resort &amp; Spa</h3>
+            <p>
+              Nguyễn Tất Thành, Hải Vân, Đà Nẵng 55000,
+              Vietnam
+            </p>
+          </div>
+        </Popup>
+      </Marker>
+    </MapContainer>
   )
 }
 

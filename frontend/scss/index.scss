@@ -689,9 +689,10 @@ body {
 // ============================================
 
 .page-container {
-  width: 100%;
+  width: min(calc(100% - 2rem), 1140px);
   max-width: 1140px;
   margin: 0 auto;
+  margin-inline: auto;
   padding: 0 1rem;
 
   @media (min-width: 768px) {
@@ -1377,6 +1378,15 @@ body {
   background: $color-bg-card-bright;
 
   box-shadow: 0 24px 56px rgba(49, 49, 43, 0.18);
+  position: relative;
+  z-index: 1;
+}
+
+.travel-info-grid,
+.local-gems-section,
+.passport-stamps {
+  position: relative;
+  z-index: 1;
 }
 
 .travel-map-header {
@@ -1437,9 +1447,11 @@ body {
 
 .travel-map-wrapper {
   position: relative;
+  isolation: isolate;
 
   width: 100%;
   height: 360px;
+  min-height: 360px;
 
   overflow: hidden;
 
@@ -1453,12 +1465,22 @@ body {
     0 12px 30px rgba(49, 49, 43, 0.12);
 }
 
+.travel-map-wrapper > .travel-map,
+.travel-map-wrapper .leaflet-container {
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+
+  z-index: 1;
+}
+
 .travel-map {
   width: 100%;
   height: 100%;
 
   font-family: $font-body;
-  z-index: 1;
 }
 
 // Slightly soften the map colors so it blends with the page.
@@ -1649,6 +1671,7 @@ body {
 
   .travel-map-wrapper {
     height: 520px;
+    min-height: 520px;
     border-radius: 1.25rem;
   }
 }

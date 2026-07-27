@@ -469,9 +469,10 @@ body {
 }
 
 .page-container {
-  width: 100%;
+  width: min(100% - 2rem, 1140px);
   max-width: 1140px;
   margin: 0 auto;
+  margin-inline: auto;
   padding: 0 1rem;
 }
 @media (min-width: 768px) {
@@ -1115,6 +1116,15 @@ body {
   border-radius: 1.25rem;
   background: #ffffff;
   box-shadow: 0 24px 56px rgba(49, 49, 43, 0.18);
+  position: relative;
+  z-index: 1;
+}
+
+.travel-info-grid,
+.local-gems-section,
+.passport-stamps {
+  position: relative;
+  z-index: 1;
 }
 
 .travel-map-header {
@@ -1172,8 +1182,10 @@ body {
 
 .travel-map-wrapper {
   position: relative;
+  isolation: isolate;
   width: 100%;
   height: 360px;
+  min-height: 360px;
   overflow: hidden;
   border: 1px solid rgba(132, 84, 0, 0.25);
   border-radius: 1rem;
@@ -1181,11 +1193,19 @@ body {
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.45), 0 12px 30px rgba(49, 49, 43, 0.12);
 }
 
+.travel-map-wrapper > .travel-map,
+.travel-map-wrapper .leaflet-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  z-index: 1;
+}
+
 .travel-map {
   width: 100%;
   height: 100%;
   font-family: "Plus Jakarta Sans", system-ui, sans-serif;
-  z-index: 1;
 }
 
 .travel-map .leaflet-tile-pane {
@@ -1327,6 +1347,7 @@ body {
   }
   .travel-map-wrapper {
     height: 520px;
+    min-height: 520px;
     border-radius: 1.25rem;
   }
 }
