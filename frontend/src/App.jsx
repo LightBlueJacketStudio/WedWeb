@@ -5,10 +5,12 @@ import RsvpPage from './pages/RsvpPage'
 import TravelGuide from './pages/TravelGuide'
 import GiftRegistry from './pages/GiftRegistry'
 import Navibar from './components/Navibar'
+import ScrollToTop from './components/ScrollToTop'
 
 function App() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Navibar />
       <Routes>
         <Route path="/" element={<Home />} />
