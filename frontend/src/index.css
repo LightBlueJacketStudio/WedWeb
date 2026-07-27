@@ -6,10 +6,10 @@
 body {
   margin: 0;
   width: 100%;
-  overflow-x: hidden;
   background: #fdf9f0;
   color: #1c1c17;
   font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  overflow-x: hidden;
 }
 
 .Navibar {
@@ -21,37 +21,38 @@ body {
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  box-sizing: border-box;
   padding: 0.75rem 1rem;
   background: rgba(253, 249, 240, 0.92);
   border-bottom: 1px solid rgba(221, 192, 192, 0.3);
   backdrop-filter: blur(8px);
 }
 .Navibar img {
-  display: block;
-  width: auto;
   height: 3.75rem;
+  width: auto;
+  display: block;
 }
 .Navibar .navibar-menu-toggle {
-  position: relative;
-  z-index: 60;
   display: block;
-  width: 48px;
-  height: 48px;
-  padding: 0.5rem;
   border: none;
   background: none;
   cursor: pointer;
+  padding: 0.5rem;
+  width: 48px;
+  height: 48px;
+  position: relative;
+  z-index: 60;
 }
 .Navibar .navibar-menu-toggle span {
+  display: block;
   position: absolute;
   left: 50%;
-  display: block;
+  transform: translateX(-50%);
   width: 28px;
   height: 3px;
   border-radius: 999px;
   background: #6c0c20;
-  transform: translateX(-50%);
-  transition: top 0.25s ease-in-out, opacity 0.25s ease-in-out, transform 0.25s ease-in-out;
+  transition: all 0.25s ease-in-out;
 }
 .Navibar .navibar-menu-toggle span:nth-child(1) {
   top: 14px;
@@ -75,21 +76,22 @@ body {
   transform: translateX(-50%) rotate(-45deg);
 }
 .Navibar .navibar-links {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
   position: absolute;
   top: 100%;
-  right: 0;
   left: 0;
-  display: none;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
+  right: 0;
+  list-style: none;
   gap: 0.5rem;
   margin: 0;
   padding: 1rem 1.25rem;
-  list-style: none;
   background: rgba(253, 249, 240, 0.98);
-  border-bottom: 1px solid rgba(221, 192, 192, 0.3);
   backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(221, 192, 192, 0.3);
+  display: none;
 }
 .Navibar .navibar-links.is-open {
   display: flex;
@@ -105,8 +107,8 @@ body {
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: #564242;
-  font-weight: 600;
   text-decoration: none;
+  font-weight: 600;
   transition: color 0.25s ease, opacity 0.25s ease;
 }
 .Navibar .navibar-links .nav-link:hover {
@@ -125,93 +127,61 @@ body {
   display: block;
   width: auto;
   padding: 0.6rem 1.5rem;
+  border-radius: 1rem;
   font-family: "Plus Jakarta Sans", system-ui, sans-serif;
   font-size: 0.75rem;
   line-height: 1.2;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  border-radius: 1rem;
   background: #6c0c20;
   color: #ffffff;
-  font-weight: 600;
   text-align: center;
   text-decoration: none;
+  font-weight: 600;
   transition: opacity 0.25s ease, transform 0.15s ease;
 }
 .Navibar .navibar-links .rsvp-link:hover {
-  color: #ffffff;
   opacity: 0.82;
+  color: #ffffff;
 }
 .Navibar .navibar-links .rsvp-link:active {
   transform: scale(0.96);
-}
-
-.navibar-inner {
-  width: 100%;
-  max-width: 1140px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.navibar-logo,
-.footer-logo {
-  color: #6c0c20;
-  font-family: "Libre Caslon Text", Georgia, serif;
-  font-size: 1.25rem;
-  font-weight: 700;
-  text-decoration: none;
 }
 
 @media (min-width: 768px) {
   .Navibar {
     padding: 1rem clamp(1.25rem, 4vw, 1.5rem);
   }
+  .Navibar img {
+    height: 3.75rem;
+  }
   .Navibar .navibar-menu-toggle {
     display: none;
   }
   .Navibar .navibar-links {
-    position: static;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-    gap: 2rem;
-    padding: 0;
+    position: static;
+    display: flex !important;
     background: none;
-    border-bottom: none;
     backdrop-filter: none;
+    border-bottom: none;
+    padding: 0;
+    gap: 2rem;
   }
   .Navibar .navibar-links .nav-link {
-    width: auto;
     padding: 0;
+    width: auto;
   }
   .Navibar .navibar-links .rsvp-link {
-    width: auto;
     padding: 0.6rem 1.5rem;
-  }
-  .navibar-logo,
-  .footer-logo {
-    font-size: 1.5rem;
-  }
-}
-.page-container {
-  width: 100%;
-  max-width: 1140px;
-  margin: 0 auto;
-  padding: 0 1rem;
-}
-
-@media (min-width: 768px) {
-  .page-container {
-    padding: 0 1.25rem;
+    width: auto;
   }
 }
 .rsvp-page {
-  position: relative;
   min-height: 100vh;
   padding: 1.25rem;
   display: flex;
@@ -219,16 +189,22 @@ body {
   justify-content: center;
   align-items: flex-start;
   background: radial-gradient(circle at 20% 20%, rgba(108, 12, 32, 0.045), transparent 28%), radial-gradient(circle at 80% 10%, rgba(132, 84, 0, 0.045), transparent 24%), linear-gradient(135deg, #fdf9f0, #f7f3ea);
+  position: relative;
 }
 .rsvp-page::before {
   content: "flight_takeoff";
   position: absolute;
   top: 5.5rem;
   left: 1.5rem;
-  color: rgba(108, 12, 32, 0.12);
   font-family: "Material Symbols Outlined";
   font-size: 2rem;
+  color: rgba(108, 12, 32, 0.12);
   pointer-events: none;
+}
+@media (max-width: 400px) {
+  .rsvp-page::before {
+    display: none;
+  }
 }
 .rsvp-page::after {
   content: "";
@@ -239,11 +215,6 @@ body {
   pointer-events: none;
 }
 
-@media (max-width: 400px) {
-  .rsvp-page::before {
-    display: none;
-  }
-}
 @media (min-width: 768px) {
   .rsvp-page {
     padding: clamp(2rem, 6vw, 4rem) 1.25rem;
@@ -259,11 +230,11 @@ body {
   width: 100%;
   max-width: 640px;
   padding: 1.25rem;
-  overflow: hidden;
-  background: radial-gradient(circle at 20% 20%, rgba(108, 12, 32, 0.045), transparent 28%), radial-gradient(circle at 80% 10%, rgba(132, 84, 0, 0.045), transparent 24%), linear-gradient(135deg, #fdf9f0, #f7f3ea);
-  border: 3px solid rgba(108, 12, 32, 0.16);
   border-radius: 1.25rem;
+  border: 3px solid rgba(108, 12, 32, 0.16);
+  background: radial-gradient(circle at 20% 20%, rgba(108, 12, 32, 0.045), transparent 28%), radial-gradient(circle at 80% 10%, rgba(132, 84, 0, 0.045), transparent 24%), linear-gradient(135deg, #fdf9f0, #f7f3ea);
   box-shadow: 0 24px 64px rgba(49, 49, 43, 0.16);
+  overflow: hidden;
 }
 .rsvp-card::before {
   content: "";
@@ -273,36 +244,36 @@ body {
   width: 3rem;
   height: 3rem;
   border: 2px dashed rgba(132, 84, 0, 0.45);
-  border-radius: 50%;
+  border-radius: 999px;
   opacity: 0.25;
   pointer-events: none;
 }
-.rsvp-card h1 {
-  margin: 0;
-  font-family: "Libre Caslon Text", Georgia, serif;
-  font-weight: 700;
-  line-height: 1.1;
-  letter-spacing: -0.02em;
-  color: #6c0c20;
-  font-size: clamp(1.75rem, 6vw, 3.75rem);
-  text-align: center;
-}
-.rsvp-card > p {
-  max-width: 34rem;
-  margin: 0.5rem auto 1.5rem;
-  color: #564242;
-  font-family: "Libre Caslon Text", Georgia, serif;
-  font-size: 0.95rem;
-  font-style: italic;
-  line-height: 1.6;
-  text-align: center;
-}
-
 @media (max-width: 480px) {
   .rsvp-card::before {
     display: none;
   }
 }
+.rsvp-card h1 {
+  font-family: "Libre Caslon Text", Georgia, serif;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin: 0;
+  font-size: clamp(1.75rem, 6vw, 3.75rem);
+  text-align: center;
+  color: #6c0c20;
+}
+.rsvp-card > p {
+  margin: 0.5rem auto 1.5rem;
+  max-width: 34rem;
+  text-align: center;
+  font-family: "Libre Caslon Text", Georgia, serif;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  font-style: italic;
+  color: #564242;
+}
+
 @media (min-width: 768px) {
   .rsvp-card {
     padding: clamp(1.5rem, 4vw, 2.5rem);
@@ -310,15 +281,20 @@ body {
     border-radius: 1.5rem;
   }
   .rsvp-card::before {
+    width: 4.25rem;
+    height: 4.25rem;
     top: 1rem;
     left: 1rem;
     display: block;
-    width: 4.25rem;
-    height: 4.25rem;
+  }
+  .rsvp-card::after {
+    font-size: 2.5rem;
+    right: 1.25rem;
+    bottom: 1.25rem;
   }
   .rsvp-card > p {
-    margin: 0.75rem auto 2rem;
     font-size: 1.05rem;
+    margin: 0.75rem auto 2rem;
   }
 }
 .rsvp-form {
@@ -333,13 +309,13 @@ body {
   flex-direction: column;
   justify-content: flex-start;
   align-items: stretch;
+  gap: 0.35rem;
   font-family: "Plus Jakarta Sans", system-ui, sans-serif;
   font-size: 0.75rem;
   line-height: 1.2;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  gap: 0.35rem;
   color: #845400;
   font-size: 0.7rem;
 }
@@ -347,17 +323,18 @@ body {
 .rsvp-form select,
 .rsvp-form textarea {
   width: 100%;
-  min-height: 48px;
+  box-sizing: border-box;
   padding: 0.75rem 0.9rem;
   border: 1px solid #ddc0c0;
   border-radius: 0.875rem;
-  outline: none;
   background-color: rgba(255, 255, 255, 0.72);
   color: #1c1c17;
-  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
   font-size: 0.95rem;
   line-height: 1.5;
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  outline: none;
   transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+  min-height: 48px;
 }
 .rsvp-form input:focus,
 .rsvp-form select:focus,
@@ -374,13 +351,13 @@ body {
 .rsvp-form input:disabled,
 .rsvp-form select:disabled,
 .rsvp-form textarea:disabled {
-  background-color: #ece8df;
   color: #897172;
+  background-color: #ece8df;
   cursor: not-allowed;
 }
 .rsvp-form select {
-  appearance: auto;
   cursor: pointer;
+  appearance: auto;
 }
 .rsvp-form textarea {
   min-height: 80px;
@@ -390,37 +367,40 @@ body {
   appearance: textfield;
 }
 .rsvp-form input[type=number]::-webkit-outer-spin-button, .rsvp-form input[type=number]::-webkit-inner-spin-button {
-  margin: 0;
   appearance: none;
+  margin: 0;
 }
 .rsvp-form button {
+  margin-top: 0.75rem;
   align-self: stretch;
   min-height: 52px;
-  margin-top: 0.75rem;
   padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 1rem;
+  background: #6c0c20;
+  color: #ffffff;
   font-family: "Plus Jakarta Sans", system-ui, sans-serif;
   font-size: 0.75rem;
   line-height: 1.2;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  border: none;
-  border-radius: 1rem;
-  background: #6c0c20;
-  color: #ffffff;
-  box-shadow: 0 12px 28px rgba(108, 12, 32, 0.25);
   font-family: "Plus Jakarta Sans", system-ui, sans-serif;
   font-size: 0.8rem;
   cursor: pointer;
+  box-shadow: 0 12px 28px rgba(108, 12, 32, 0.25);
   transition: transform 0.15s ease, box-shadow 0.2s ease, background-color 0.2s ease, opacity 0.2s ease;
+}
+.rsvp-form button:active {
+  transform: scale(0.96);
+  box-shadow: 0 4px 12px rgba(108, 12, 32, 0.25);
 }
 .rsvp-form button:hover {
   background: #8b2635;
-  box-shadow: 0 16px 32px rgba(108, 12, 32, 0.25);
   transform: translateY(-2px);
+  box-shadow: 0 16px 32px rgba(108, 12, 32, 0.25);
 }
-.rsvp-form button:active {
-  box-shadow: 0 4px 12px rgba(108, 12, 32, 0.25);
+.rsvp-form button:active:hover {
   transform: scale(0.96);
 }
 .rsvp-form button:disabled {
@@ -447,10 +427,10 @@ body {
   .rsvp-form input,
   .rsvp-form select,
   .rsvp-form textarea {
-    min-height: auto;
     padding: 0.9rem 1rem;
-    border-radius: 1rem;
     font-size: 1rem;
+    border-radius: 1rem;
+    min-height: auto;
   }
   .rsvp-form textarea {
     min-height: 110px;
@@ -479,13 +459,50 @@ body {
 }
 .paper-card h3 {
   margin: 0 0 0.35rem;
-  color: #6c0c20;
   font-family: "Libre Caslon Text", Georgia, serif;
+  color: #6c0c20;
 }
 .paper-card p {
   margin: 0;
   color: #564242;
   line-height: 1.5;
+}
+
+.page-container {
+  width: 100%;
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+@media (min-width: 768px) {
+  .page-container {
+    padding: 0 1.25rem;
+  }
+}
+
+.navibar-inner {
+  width: 100%;
+  max-width: 1140px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navibar-logo,
+.footer-logo {
+  font-family: "Libre Caslon Text", Georgia, serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #6c0c20;
+  text-decoration: none;
+}
+@media (min-width: 768px) {
+  .navibar-logo,
+  .footer-logo {
+    font-size: 1.5rem;
+  }
 }
 
 .hero-passport {
@@ -503,21 +520,32 @@ body {
   width: 100%;
   max-width: 48rem;
   padding: 1.25rem;
-  background: radial-gradient(circle at 20% 20%, rgba(108, 12, 32, 0.045), transparent 28%), radial-gradient(circle at 80% 10%, rgba(132, 84, 0, 0.045), transparent 24%), linear-gradient(135deg, #fdf9f0, #f7f3ea);
-  border: 3px solid rgba(108, 12, 32, 0.2);
   border-radius: 1.25rem;
+  border: 3px solid rgba(108, 12, 32, 0.2);
+  background: radial-gradient(circle at 20% 20%, rgba(108, 12, 32, 0.045), transparent 28%), radial-gradient(circle at 80% 10%, rgba(132, 84, 0, 0.045), transparent 24%), linear-gradient(135deg, #fdf9f0, #f7f3ea);
   box-shadow: 0 20px 45px rgba(49, 49, 43, 0.18);
 }
 .passport-card h1 {
-  margin: 0 0 1rem;
   font-family: "Libre Caslon Text", Georgia, serif;
   font-weight: 700;
   line-height: 1.1;
   letter-spacing: -0.02em;
+  margin: 0 0 1rem;
   color: #6c0c20;
   font-size: clamp(1.5rem, 5vw, 3rem);
 }
 
+@media (min-width: 768px) {
+  .hero-passport {
+    min-height: 40vh;
+    padding: 2rem 0 0.75rem;
+  }
+  .passport-card {
+    padding: 2rem;
+    border-radius: 1.5rem;
+    border-width: 4px;
+  }
+}
 .passport-icon {
   position: absolute;
   top: 0.5rem;
@@ -526,6 +554,15 @@ body {
 }
 .passport-icon span {
   font-size: 1.5rem;
+}
+@media (min-width: 768px) {
+  .passport-icon {
+    top: 0.75rem;
+    left: 0.75rem;
+  }
+  .passport-icon span {
+    font-size: 2rem;
+  }
 }
 
 .seal-wrapper {
@@ -540,26 +577,40 @@ body {
   width: 6rem;
   height: 6rem;
   padding: 0.3rem;
+  border-radius: 999px;
   border: 3px dashed #845400;
-  border-radius: 50%;
   background: rgba(255, 255, 255, 0.5);
   backdrop-filter: blur(4px);
 }
 .seal-frame img {
-  display: block;
   width: 100%;
   height: 100%;
   object-fit: contain;
-  border-radius: 50%;
+  border-radius: 999px;
+  display: block;
+}
+@media (min-width: 768px) {
+  .seal-frame {
+    width: 9rem;
+    height: 9rem;
+    padding: 0.375rem;
+    border-width: 4px;
+  }
 }
 
 .hero-route {
   margin: 0 0 0.75rem;
-  color: #845400;
   font-family: "Libre Caslon Text", Georgia, serif;
   font-size: 0.9rem;
-  letter-spacing: 0.15em;
+  color: #845400;
   text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+@media (min-width: 768px) {
+  .hero-route {
+    font-size: 1.125rem;
+    letter-spacing: 0.18em;
+  }
 }
 
 .hero-subtitle {
@@ -572,8 +623,16 @@ body {
 .hero-subtitle p {
   margin: 0;
   color: #564242;
-  font-size: 0.85rem;
   font-style: italic;
+  font-size: 0.85rem;
+}
+@media (min-width: 768px) {
+  .hero-subtitle {
+    gap: 1rem;
+  }
+  .hero-subtitle p {
+    font-size: 1rem;
+  }
 }
 
 .subtitle-line {
@@ -581,44 +640,12 @@ body {
   height: 2px;
   background: #ddc0c0;
 }
-
 @media (min-width: 768px) {
-  .hero-passport {
-    min-height: 40vh;
-    padding: 2rem 0 0.75rem;
-  }
-  .passport-card {
-    padding: 2rem;
-    border-width: 4px;
-    border-radius: 1.5rem;
-  }
-  .passport-icon {
-    top: 0.75rem;
-    left: 0.75rem;
-  }
-  .passport-icon span {
-    font-size: 2rem;
-  }
-  .seal-frame {
-    width: 9rem;
-    height: 9rem;
-    padding: 0.375rem;
-    border-width: 4px;
-  }
-  .hero-route {
-    font-size: 1.125rem;
-    letter-spacing: 0.18em;
-  }
-  .hero-subtitle {
-    gap: 1rem;
-  }
-  .hero-subtitle p {
-    font-size: 1rem;
-  }
   .subtitle-line {
     width: 3rem;
   }
 }
+
 .flight-path-section {
   padding: 1.5rem 0;
   display: flex;
@@ -632,11 +659,11 @@ body {
   text-align: center;
 }
 .section-heading h1 {
-  margin: 0 0 0.25rem;
   font-family: "Libre Caslon Text", Georgia, serif;
   font-weight: 700;
   line-height: 1.1;
   letter-spacing: -0.02em;
+  margin: 0 0 0.25rem;
   color: #6c0c20;
   font-size: 1.75rem;
 }
@@ -645,34 +672,43 @@ body {
   color: #564242;
   font-size: 0.9rem;
 }
+@media (min-width: 768px) {
+  .section-heading h1 {
+    font-size: 2.25rem;
+  }
+  .section-heading p {
+    font-size: 1rem;
+  }
+}
 
 .flight-card {
-  display: flex;
-  flex-direction: column;
   width: 100%;
   max-width: 56rem;
+  display: flex;
+  flex-direction: column;
   overflow: hidden;
-  border: 2px solid rgba(255, 174, 48, 0.3);
   border-radius: 1.25rem;
+  border: 2px solid rgba(255, 174, 48, 0.3);
   background: #f7f3ea;
   box-shadow: 0 24px 56px rgba(49, 49, 43, 0.2);
 }
 
 .flight-image {
-  flex-shrink: 0;
   width: 100%;
+  flex-shrink: 0;
 }
 .flight-image img {
-  display: block;
   width: 100%;
   height: auto;
+  display: block;
   object-fit: contain;
 }
 
 .flight-details {
-  flex: 1;
   width: 100%;
   padding: 1rem;
+  box-sizing: border-box;
+  flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -681,6 +717,30 @@ body {
   gap: 0.75rem;
 }
 
+@media (min-width: 768px) {
+  .flight-path-section {
+    padding: 2rem 0;
+    gap: 1.5rem;
+  }
+  .flight-card {
+    flex-direction: row;
+    border-radius: 1.5rem;
+  }
+  .flight-image {
+    width: 50%;
+    max-height: none;
+    border-right: 1px dashed rgba(137, 113, 114, 0.5);
+  }
+  .flight-image img {
+    max-height: none;
+    height: 100%;
+  }
+  .flight-details {
+    width: 50%;
+    padding: 1.5rem;
+    gap: 1rem;
+  }
+}
 .detail-group p {
   margin: 0;
 }
@@ -692,20 +752,27 @@ body {
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #845400;
   font-size: 0.625rem;
+  color: #845400;
 }
 
 .detail-value {
   color: #1c1c17;
 }
+
 .detail-value.highlight {
-  color: #6c0c20;
   font-family: "Libre Caslon Text", Georgia, serif;
+  color: #6c0c20;
 }
+
 .detail-value.strong {
   font-size: 1rem;
   font-weight: 700;
+}
+@media (min-width: 768px) {
+  .detail-value.strong {
+    font-size: 1.125rem;
+  }
 }
 
 .detail-muted {
@@ -717,13 +784,16 @@ body {
   border-top: 1px solid rgba(221, 192, 192, 0.3);
 }
 .quote-block p {
-  max-width: 100%;
   margin: 0;
   color: #564242;
-  font-size: 0.9rem;
-  font-style: italic;
   line-height: 1.6;
-  overflow-wrap: anywhere;
+  font-style: italic;
+  font-size: 0.9rem;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .notice-box {
@@ -734,41 +804,11 @@ body {
 }
 .notice-box p {
   margin: 0;
-  color: #6c0c20;
   font-size: 0.7rem;
   font-weight: 600;
+  color: #6c0c20;
 }
-
 @media (min-width: 768px) {
-  .flight-path-section {
-    gap: 1.5rem;
-    padding: 2rem 0;
-  }
-  .section-heading h1 {
-    font-size: 2.25rem;
-  }
-  .section-heading p {
-    font-size: 1rem;
-  }
-  .flight-card {
-    flex-direction: row;
-    border-radius: 1.5rem;
-  }
-  .flight-image {
-    width: 50%;
-    border-right: 1px dashed rgba(137, 113, 114, 0.5);
-  }
-  .flight-image img {
-    height: 100%;
-  }
-  .flight-details {
-    width: 50%;
-    padding: 1.5rem;
-    gap: 1rem;
-  }
-  .detail-value.strong {
-    font-size: 1.125rem;
-  }
   .notice-box {
     padding: 0.75rem;
     border-radius: 1rem;
@@ -777,25 +817,26 @@ body {
     font-size: 0.75rem;
   }
 }
+
 .planning-section {
   padding: 1.5rem 0 2.5rem;
 }
 
 .planning-header {
-  margin-bottom: 1rem;
-  padding-bottom: 0.5rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
   border-bottom: 2px solid rgba(132, 84, 0, 0.2);
 }
 .planning-header h2 {
-  margin: 0;
   font-family: "Libre Caslon Text", Georgia, serif;
   font-weight: 700;
   line-height: 1.1;
   letter-spacing: -0.02em;
+  margin: 0;
   color: #6c0c20;
   font-size: 1.25rem;
 }
@@ -810,44 +851,6 @@ body {
 }
 .planning-pets span {
   font-size: 2rem;
-}
-
-.planning-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 0.75rem;
-}
-
-.paper-card-icon {
-  width: 2.25rem;
-  height: 2.25rem;
-  margin-bottom: 0.5rem;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
-  background: rgba(255, 174, 48, 0.14);
-}
-.paper-card-icon span {
-  color: #845400;
-  font-size: 1.1rem;
-}
-
-.status-pill {
-  display: inline-block;
-  margin-top: 0.75rem;
-  padding: 0.3rem 0.65rem;
-  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
-  font-size: 0.75rem;
-  line-height: 1.2;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  border-radius: 999px;
-  background: #ece8df;
-  color: #564242;
-  font-size: 0.6rem;
 }
 
 @media (min-width: 768px) {
@@ -874,10 +877,35 @@ body {
   .planning-pets span {
     font-size: 2.5rem;
   }
+}
+.planning-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+}
+
+@media (min-width: 768px) {
   .planning-grid {
     grid-template-columns: repeat(3, 1fr);
     gap: 1rem;
   }
+}
+.paper-card-icon {
+  width: 2.25rem;
+  height: 2.25rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border-radius: 999px;
+  background: rgba(255, 174, 48, 0.1);
+}
+.paper-card-icon span {
+  color: #845400;
+  font-size: 1.1rem;
+}
+@media (min-width: 768px) {
   .paper-card-icon {
     width: 2.5rem;
     height: 2.5rem;
@@ -885,11 +913,30 @@ body {
   .paper-card-icon span {
     font-size: 1.25rem;
   }
+}
+
+.status-pill {
+  display: inline-block;
+  margin-top: 0.75rem;
+  padding: 0.3rem 0.65rem;
+  border-radius: 999px;
+  background: #ece8df;
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  font-size: 0.75rem;
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-size: 0.6rem;
+  color: #564242;
+}
+@media (min-width: 768px) {
   .status-pill {
     padding: 0.35rem 0.75rem;
     font-size: 0.625rem;
   }
 }
+
 .Footer {
   margin-top: 1.5rem;
   border-top: 1px solid rgba(255, 174, 48, 0.2);
@@ -919,6 +966,17 @@ body {
   font-size: 0.6rem;
 }
 
+@media (min-width: 768px) {
+  .Footer {
+    margin-top: 2rem;
+  }
+  .footer-inner {
+    padding: 1rem 1.25rem;
+  }
+  .footer-inner p {
+    font-size: 0.75rem;
+  }
+}
 .footer-pets {
   display: flex;
   flex-direction: row;
@@ -926,6 +984,11 @@ body {
   align-items: center;
   gap: 0.75rem;
   opacity: 0.6;
+}
+@media (min-width: 768px) {
+  .footer-pets {
+    gap: 1rem;
+  }
 }
 
 .footer-links {
@@ -942,8 +1005,8 @@ body {
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #564242;
   font-size: 0.6rem;
+  color: #564242;
   text-decoration: none;
 }
 .footer-links a:hover {
@@ -952,25 +1015,498 @@ body {
 .footer-links a:active {
   opacity: 0.6;
 }
-
 @media (min-width: 768px) {
-  .Footer {
-    margin-top: 2rem;
-  }
-  .footer-inner {
-    padding: 1rem 1.25rem;
-  }
-  .footer-inner p {
-    font-size: 0.75rem;
-  }
-  .footer-pets {
-    gap: 1rem;
-  }
   .footer-links {
     gap: 1.5rem;
   }
   .footer-links a {
     font-size: 0.625rem;
+  }
+}
+
+.travel-guide-page {
+  position: relative;
+  min-height: 100vh;
+  padding: 1.25rem 0 3rem;
+  background: radial-gradient(circle at 20% 20%, rgba(108, 12, 32, 0.045), transparent 28%), radial-gradient(circle at 80% 10%, rgba(132, 84, 0, 0.045), transparent 24%), linear-gradient(135deg, #fdf9f0, #f7f3ea);
+  overflow: hidden;
+}
+.travel-guide-page::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(rgba(108, 12, 32, 0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(108, 12, 32, 0.025) 1px, transparent 1px);
+  background-size: 28px 28px;
+  pointer-events: none;
+}
+.travel-guide-page .page-container {
+  position: relative;
+  z-index: 1;
+}
+
+.travel-guide-hero {
+  position: relative;
+  width: 100%;
+  max-width: 48rem;
+  margin: 0 auto 1.25rem;
+  padding: 1.5rem 1.25rem;
+  text-align: center;
+  border: 3px solid rgba(108, 12, 32, 0.16);
+  border-radius: 1.25rem;
+  background: radial-gradient(circle at 20% 20%, rgba(108, 12, 32, 0.045), transparent 28%), radial-gradient(circle at 80% 10%, rgba(132, 84, 0, 0.045), transparent 24%), linear-gradient(135deg, #fdf9f0, #f7f3ea);
+  box-shadow: 0 20px 45px rgba(49, 49, 43, 0.14);
+}
+.travel-guide-hero h1 {
+  font-family: "Libre Caslon Text", Georgia, serif;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin: 0.35rem 0 0.75rem;
+  color: #6c0c20;
+  font-size: clamp(1.75rem, 7vw, 3.5rem);
+}
+
+.travel-guide-label {
+  margin: 0;
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  font-size: 0.75rem;
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #845400;
+  font-size: 0.65rem;
+}
+
+.travel-guide-intro {
+  max-width: 36rem;
+  margin: 0 auto;
+  color: #564242;
+  font-family: "Libre Caslon Text", Georgia, serif;
+  font-size: 0.9rem;
+  font-style: italic;
+  line-height: 1.65;
+}
+
+.travel-guide-stamp {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  width: 2.75rem;
+  height: 2.75rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border: 2px dashed rgba(132, 84, 0, 0.45);
+  border-radius: 999px;
+  color: #845400;
+  opacity: 0.45;
+  transform: rotate(-12deg);
+}
+.travel-guide-stamp span {
+  font-size: 1.25rem;
+}
+
+.travel-map-card {
+  width: 100%;
+  max-width: 64rem;
+  margin: 0 auto;
+  padding: 1rem;
+  border: 2px solid rgba(255, 174, 48, 0.3);
+  border-radius: 1.25rem;
+  background: #ffffff;
+  box-shadow: 0 24px 56px rgba(49, 49, 43, 0.18);
+}
+
+.travel-map-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.25rem 0.25rem 1rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px dashed rgba(137, 113, 114, 0.5);
+}
+.travel-map-header h2 {
+  font-family: "Libre Caslon Text", Georgia, serif;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin: 0.2rem 0 0.35rem;
+  color: #6c0c20;
+  font-size: 1.4rem;
+}
+.travel-map-header p {
+  margin: 0;
+  color: #564242;
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+.travel-map-label {
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  font-size: 0.75rem;
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #845400 !important;
+  font-size: 0.625rem !important;
+}
+
+.travel-map-icon {
+  width: 2.75rem;
+  height: 2.75rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  border-radius: 999px;
+  background: rgba(255, 174, 48, 0.14);
+  color: #845400;
+}
+.travel-map-icon span {
+  font-size: 1.4rem;
+}
+
+.travel-map-wrapper {
+  position: relative;
+  width: 100%;
+  height: 360px;
+  overflow: hidden;
+  border: 1px solid rgba(132, 84, 0, 0.25);
+  border-radius: 1rem;
+  background: #f1eee5;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.45), 0 12px 30px rgba(49, 49, 43, 0.12);
+}
+
+.travel-map {
+  width: 100%;
+  height: 100%;
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  z-index: 1;
+}
+
+.travel-map .leaflet-tile-pane {
+  filter: sepia(0.12) saturate(0.85) contrast(0.96) brightness(1.04);
+}
+
+.travel-map .leaflet-control-zoom {
+  overflow: hidden;
+  border: 1px solid rgba(108, 12, 32, 0.2);
+  border-radius: 0.75rem;
+  box-shadow: 0 8px 20px rgba(49, 49, 43, 0.15);
+}
+
+.travel-map .leaflet-control-zoom a {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 38px;
+  height: 38px;
+  border: none;
+  border-bottom: 1px solid rgba(221, 192, 192, 0.45);
+  background: rgba(253, 249, 240, 0.95);
+  color: #6c0c20;
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  font-weight: 700;
+  line-height: 1;
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+.travel-map .leaflet-control-zoom a:hover {
+  background: #6c0c20;
+  color: #ffffff;
+}
+.travel-map .leaflet-control-zoom a:last-child {
+  border-bottom: none;
+}
+
+.travel-map .leaflet-control-attribution {
+  padding: 0.25rem 0.4rem;
+  border-radius: 0.4rem 0 0 0;
+  background: rgba(253, 249, 240, 0.9);
+  color: #897172;
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  font-size: 0.55rem;
+}
+.travel-map .leaflet-control-attribution a {
+  color: #6c0c20;
+}
+
+.travel-map .leaflet-popup-content-wrapper {
+  border: 1px solid rgba(255, 174, 48, 0.25);
+  border-radius: 1rem;
+  background: #fdf9f0;
+  box-shadow: 0 16px 36px rgba(49, 49, 43, 0.2);
+}
+
+.travel-map .leaflet-popup-content {
+  min-width: 180px;
+  margin: 1rem;
+}
+
+.travel-map .leaflet-popup-tip {
+  background: #fdf9f0;
+}
+
+.map-popup-content h3 {
+  margin: 0 0 0.35rem;
+  font-family: "Libre Caslon Text", Georgia, serif;
+  font-size: 1rem;
+  line-height: 1.3;
+  color: #6c0c20;
+}
+.map-popup-content p {
+  margin: 0;
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: #564242;
+}
+
+.travel-map .leaflet-popup-close-button {
+  top: 0.25rem;
+  right: 0.35rem;
+  color: #6c0c20 !important;
+  font-size: 1.25rem !important;
+}
+.travel-map .leaflet-popup-close-button:hover {
+  color: #8b2635 !important;
+}
+
+@media (min-width: 768px) {
+  .travel-guide-page {
+    padding: 2.5rem 0 5rem;
+  }
+  .travel-guide-hero {
+    margin-bottom: 1.75rem;
+    padding: 2rem;
+    border-width: 4px;
+    border-radius: 1.5rem;
+  }
+  .travel-guide-label {
+    font-size: 0.75rem;
+  }
+  .travel-guide-intro {
+    font-size: 1rem;
+  }
+  .travel-guide-stamp {
+    top: 1rem;
+    left: 1rem;
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+  .travel-guide-stamp span {
+    font-size: 1.6rem;
+  }
+  .travel-map-card {
+    padding: 1.5rem;
+    border-radius: 1.5rem;
+  }
+  .travel-map-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.25rem 0.25rem 1.25rem;
+  }
+  .travel-map-header h2 {
+    font-size: 1.75rem;
+  }
+  .travel-map-header p {
+    font-size: 0.95rem;
+  }
+  .travel-map-icon {
+    width: 3.25rem;
+    height: 3.25rem;
+  }
+  .travel-map-icon span {
+    font-size: 1.6rem;
+  }
+  .travel-map-wrapper {
+    height: 520px;
+    border-radius: 1.25rem;
+  }
+}
+.venue-directions {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 1rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px dashed rgba(137, 113, 114, 0.5);
+}
+
+.venue-address-group {
+  min-width: 0;
+}
+
+.venue-address-label {
+  margin: 0 0 0.4rem;
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  font-size: 0.75rem;
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #845400;
+  font-size: 0.625rem;
+}
+
+.venue-address-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.6rem;
+  min-width: 0;
+  padding: 0.75rem;
+  border: 1px solid rgba(132, 84, 0, 0.2);
+  border-radius: 0.875rem;
+  background: #f7f3ea;
+}
+.venue-address-row > .material-symbols-outlined {
+  flex-shrink: 0;
+  color: #845400;
+  font-size: 1.25rem;
+}
+.venue-address-row p {
+  min-width: 0;
+  flex: 1;
+  margin: 0;
+  color: #1c1c17;
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.copy-address-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 0.35rem;
+  min-height: 40px;
+  padding: 0.5rem 0.7rem;
+  border: 1px solid rgba(108, 12, 32, 0.22);
+  border-radius: 0.75rem;
+  background: #ffffff;
+  color: #6c0c20;
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  font-size: 0.75rem;
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-size: 0.6rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.15s ease, border-color 0.2s ease;
+}
+.copy-address-button .material-symbols-outlined {
+  font-size: 1rem;
+}
+.copy-address-button:hover {
+  border-color: #6c0c20;
+  background: #6c0c20;
+  color: #ffffff;
+}
+.copy-address-button:active {
+  transform: scale(0.96);
+}
+.copy-address-button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(255, 178, 182, 0.28);
+}
+
+.google-maps-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  font-size: 0.75rem;
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  gap: 0.55rem;
+  width: 100%;
+  min-height: 50px;
+  padding: 0.75rem 1rem;
+  border-radius: 1rem;
+  background: #6c0c20;
+  color: #ffffff;
+  font-size: 0.7rem;
+  text-decoration: none;
+  box-shadow: 0 12px 28px rgba(108, 12, 32, 0.25);
+  transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+}
+.google-maps-button .material-symbols-outlined {
+  font-size: 1.2rem;
+}
+.google-maps-button .external-icon {
+  margin-left: 0.15rem;
+  font-size: 0.95rem;
+  opacity: 0.75;
+}
+.google-maps-button:hover {
+  background: #8b2635;
+  transform: translateY(-2px);
+  box-shadow: 0 16px 32px rgba(108, 12, 32, 0.25);
+}
+.google-maps-button:active {
+  transform: scale(0.98);
+}
+.google-maps-button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(255, 178, 182, 0.28), 0 12px 28px rgba(108, 12, 32, 0.25);
+}
+
+@media (max-width: 480px) {
+  .venue-address-row {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+  .venue-address-row p {
+    flex-basis: calc(100% - 2rem);
+  }
+  .copy-address-button {
+    width: 100%;
+    margin-top: 0.25rem;
+  }
+}
+@media (min-width: 768px) {
+  .venue-directions {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 1.25rem;
+    margin-top: 1.25rem;
+    padding-top: 1.25rem;
+  }
+  .venue-address-group {
+    flex: 1;
+  }
+  .venue-address-row {
+    padding: 0.85rem 1rem;
+  }
+  .venue-address-row p {
+    font-size: 0.9rem;
+  }
+  .google-maps-button {
+    width: auto;
+    min-width: 14rem;
+    min-height: 48px;
+    padding: 0.8rem 1.25rem;
   }
 }
 
