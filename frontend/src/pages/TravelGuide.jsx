@@ -41,8 +41,7 @@ function TravelGuide() {
           <h1>Travel to Da Nang</h1>
 
           <p className="travel-guide-intro">
-            Explore the wedding venue, airport, accommodations,
-            and other useful locations for your visit.
+            Everything you need to make your trip to Vietnam smooth and stress-free.
           </p>
         </section>
 

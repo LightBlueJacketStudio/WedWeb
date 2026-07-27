@@ -1,17 +1,19 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import monogramLogo from '../assets/monogram_logo_transparent.png';
 
 
 const SECTION_LINKS = [
   { label: 'Our Journey', anchor: 'journey' },
-  { label: 'The Wedding', anchor: 'wedding' },
-  { label: 'Travel Info', path: '/travel_guide' },
+    { label: 'Travel Info', path: '/travel_guide' },
+  { label: 'Gift Registry', anchor: 'wedding' }
+
 ];
 
 const Navibar = () => {
   // State to track if the mobile menu is open
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
   const isHome = pathname === '/';
 
   // Toggle the menu
@@ -29,7 +31,7 @@ const Navibar = () => {
       <div className="navibar-inner">
         {/* Logo */}
         <Link to="/" className="navibar-logo" onClick={closeMenu}>
-          B &amp; M
+          <img src={monogramLogo} alt="B &amp; M" />
         </Link>
 
         {/* Hamburger Button (only visible on mobile) */}
@@ -46,21 +48,24 @@ const Navibar = () => {
         {/* Navigation Links */}
         <div className={`navibar-links ${isMenuOpen ? 'is-open' : ''}`}>
           {}
-          {SECTION_LINKS.map(({ label, anchor, path }) =>
-            path ? (
-              <Link key={label} to={path} onClick={closeMenu}>
+          {SECTION_LINKS.map(({ label, anchor, path }) => {
+            const isActive = path ? pathname === path : isHome && hash === `#${anchor}`;
+            const linkClassName = `nav-link${isActive ? ' is-active' : ''}`;
+
+            return path ? (
+              <Link key={label} to={path} className={linkClassName} onClick={closeMenu}>
                 {label}
               </Link>
             ) : isHome ? (
-              <a key={anchor} href={`#${anchor}`} onClick={closeMenu}>
+              <a key={anchor} href={`#${anchor}`} className={linkClassName} onClick={closeMenu}>
                 {label}
               </a>
             ) : (
-              <Link key={anchor} to={`/#${anchor}`} onClick={closeMenu}>
+              <Link key={anchor} to={`/#${anchor}`} className={linkClassName} onClick={closeMenu}>
                 {label}
               </Link>
-            )
-          )}
+            );
+          })}
           <Link className="rsvp-link" to="/rsvp" onClick={closeMenu}>
             RSVP
           </Link>
