@@ -2,6 +2,12 @@ import { useNavigate } from "react-router-dom"
 
 const cards = [
   {
+    icon: "mail",
+    title: "RSVP",
+    text: "Check back here soon to confirm your attendance.",
+    path: "/rsvp",
+  },
+  {
     icon: "flight",
     title: "Travel Guide",
     text: "Flights to DAD Airport, visa requirements, and transfers.",
@@ -9,15 +15,10 @@ const cards = [
   },
   {
     icon: "hotel",
-    title: "Accommodations",
+    title: "The Wedding",
     text: "Recommended resorts in Da Nang and booking codes.",
   },
-  {
-    icon: "mail",
-    title: "RSVP",
-    text: "Check back here soon to confirm your attendance.",
-    path: "/rsvp",
-  },
+
 ]
 
 function PlanningCards() {

@@ -1,34 +1,34 @@
 const foodRecommendations = [
   {
-    name: "Bún Chả Cá 109",
+    name: "Option 1",
     description:
-      "The best fish cake noodles in town. A local breakfast staple.",
-    image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuBOfkrF2qCobadRFPLVv9BvLSLzo1Ci6jQ5x-XOnA9y7kd5s3ZgAf3S4KW3pkgOp_0JQZVJJXbL4OKDH8ZKSgDqB3wpvvRJQYfrsKOyyroRBdoklfvWbSspEBADzK_tjAsIXzVJc3CWtlhAwmtlp60KlP8iNypS17AJhUDI7osl92rtUxTRcZRYollZJXz510ERXpJ8y1SJCqzhqlfvTfu_0RH2YTouued55W75oiyPqVSCK0QUwzUgVASeic_LPf7AV78ibANggOc",
+      "Short Descriptiong and Address",
+    // image:
+    //   "https://lh3.googleusercontent.com/aida-public/AB6AXuBOfkrF2qCobadRFPLVv9BvLSLzo1Ci6jQ5x-XOnA9y7kd5s3ZgAf3S4KW3pkgOp_0JQZVJJXbL4OKDH8ZKSgDqB3wpvvRJQYfrsKOyyroRBdoklfvWbSspEBADzK_tjAsIXzVJc3CWtlhAwmtlp60KlP8iNypS17AJhUDI7osl92rtUxTRcZRYollZJXz510ERXpJ8y1SJCqzhqlfvTfu_0RH2YTouued55W75oiyPqVSCK0QUwzUgVASeic_LPf7AV78ibANggOc",
   },
   {
-    name: "Bánh Xèo Bà Dưỡng",
+    name: "Option 2",
     description:
-      "Authentic crispy pancakes hidden in a tiny alleyway.",
-    image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuAGfFekRini4HkInOjmMsKusQ171Dg0UnGxaIST8LYQCUtoAAuhpl2_YwijXOOC1Cmg3qRTMQRRTVCWZ9mZUiR1EneKV8T8FikPQE0DfiHLN3XGN6Lv2hbTTGsZGNDJhQdxYHPbjWX4IWOzNLfGmQRv9jvIGduTN-XzCAer7tQyO2nPez9pa0niQSkizPrpckZbUT1sqXHOCRZWGR7IlEvf1MnscSsAQeohrpP90rf1sNV5QaTPiqVBXaNLaPGDr3DpfmRYzB5cbSc",
+      "Short Description and Address",
+    // image:
+    //   "https://lh3.googleusercontent.com/aida-public/AB6AXuAGfFekRini4HkInOjmMsKusQ171Dg0UnGxaIST8LYQCUtoAAuhpl2_YwijXOOC1Cmg3qRTMQRRTVCWZ9mZUiR1EneKV8T8FikPQE0DfiHLN3XGN6Lv2hbTTGsZGNDJhQdxYHPbjWX4IWOzNLfGmQRv9jvIGduTN-XzCAer7tQyO2nPez9pa0niQSkizPrpckZbUT1sqXHOCRZWGR7IlEvf1MnscSsAQeohrpP90rf1sNV5QaTPiqVBXaNLaPGDr3DpfmRYzB5cbSc",
   },
 ]
 
 const sightseeingRecommendations = [
   {
-    name: "Marble Mountains",
+    name: "Hoi An",
     description:
-      "Ancient limestone caves and hidden Buddhist pagodas with ocean views.",
-    image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuAUq7PUZcBXeS1exeM5hPC9kOnV4peW4PFFARjqXk1ObBCHYydGkJyoWE0Ol-OxW81b8Q8FkTj8D5dtAA1hCCNeNrGrnJp222rSxPOWtKtwz3sidIVjXdZlTWrS4BKGWqq8BjL2MV9ynKFXf2OLYzk_KxepSIF3P6Xox7XvN4It3xVVaPEq0qgPBFcUtNwS41XARObIVR8BwTwwVHi4xeUzyn5c3oak3mw-JbV5yPnDOX1F9lL4oMS4FoUmGu5ABB45-bfrK1wE-r8",
+      "Description about Hoi An, Maybe how to get there. Also add some images",
+    // image:
+    //   "https://lh3.googleusercontent.com/aida-public/AB6AXuAUq7PUZcBXeS1exeM5hPC9kOnV4peW4PFFARjqXk1ObBCHYydGkJyoWE0Ol-OxW81b8Q8FkTj8D5dtAA1hCCNeNrGrnJp222rSxPOWtKtwz3sidIVjXdZlTWrS4BKGWqq8BjL2MV9ynKFXf2OLYzk_KxepSIF3P6Xox7XvN4It3xVVaPEq0qgPBFcUtNwS41XARObIVR8BwTwwVHi4xeUzyn5c3oak3mw-JbV5yPnDOX1F9lL4oMS4FoUmGu5ABB45-bfrK1wE-r8",
   },
   {
-    name: "Sơn Trà Peninsula",
-    description:
-      "Visit the Lady Buddha and spot the rare red-shanked douc monkeys.",
-    image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuBG6TITIxlm5qxKxLSe8e9343VtGjkP0Bz7y2Q-Ca8WoELhHhkTke2Cn7U7IuZng3W8sFQ3918GToI3r_hnEymCZiD9uqjIamg3lDCX5_WpH-3qCHgzScCekLfYqtAb_9JX3XLdL-QlS05FyNRvB0VY469Wz1HCqC4Ey3EhIMlIPtpWk6ZzHxz5l7R5erIqxCKph_UzY7EjF-zoW6KC8uK_EkylJJ-ACDCimCRCdQmU6y0JcbnmMWTHWdDe5OUDLFIwAfWrFJD2y6o",
+    name: "Option 2",
+    // description:
+    //   "Visit the Lady Buddha and spot the rare red-shanked douc monkeys.",
+    // image:
+    //   "https://lh3.googleusercontent.com/aida-public/AB6AXuBG6TITIxlm5qxKxLSe8e9343VtGjkP0Bz7y2Q-Ca8WoELhHhkTke2Cn7U7IuZng3W8sFQ3918GToI3r_hnEymCZiD9uqjIamg3lDCX5_WpH-3qCHgzScCekLfYqtAb_9JX3XLdL-QlS05FyNRvB0VY469Wz1HCqC4Ey3EhIMlIPtpWk6ZzHxz5l7R5erIqxCKph_UzY7EjF-zoW6KC8uK_EkylJJ-ACDCimCRCdQmU6y0JcbnmMWTHWdDe5OUDLFIwAfWrFJD2y6o",
   },
 ]
 
