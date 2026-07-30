@@ -945,7 +945,10 @@ body {
   // doesn't float in a tall, empty box. The collapse is delayed until the flip
   // is past edge-on (~0.45s) so the taller front never spills out mid-turn.
   &.is-flipped {
-    height: var(--lh);
+    // --card-h is measured from the note's real content height in JS (the card
+    // is rotated + absolutely positioned, so its natural height can't feed back
+    // into layout on its own). Falls back to the ratio height until measured.
+    height: var(--card-h, var(--lh));
     transition:
       opacity 0.7s ease,
       transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1),
@@ -1014,7 +1017,11 @@ body {
   top: 50%;
   left: 50%;
   width: var(--lw);
-  height: var(--lh);
+  // Grow to fit the note instead of clipping it: the ratio height becomes a
+  // floor so short notes keep the roomy postcard shape, while a longer note (or
+  // a narrow screen that wraps the text into more lines) makes the card taller.
+  min-height: var(--lh);
+  height: auto;
   transform: translate(-50%, -50%) rotateZ(90deg);
 
   overflow: hidden;

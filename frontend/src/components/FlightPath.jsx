@@ -16,6 +16,7 @@ function FlightPath() {
   const [entered, setEntered] = useState(false)
   const [flipped, setFlipped] = useState(false)
   const cardRef = useRef(null)
+  const pcCardRef = useRef(null)
   const hasAnimated = useRef(false)
 
   useEffect(() => {
@@ -53,6 +54,29 @@ function FlightPath() {
       observer.disconnect()
       timers.forEach(clearTimeout)
     }
+  }, [])
+
+  // Keep the flip container's height in sync with the note's real content
+  // height. The landscape card is rotated + absolutely positioned, so its
+  // natural height can't feed back into the layout on its own — measure it and
+  // hand the container an explicit --card-h. This lets the note grow on narrow
+  // screens (more text wrapping = taller card) instead of being clipped.
+  useEffect(() => {
+    const card = pcCardRef.current
+    const container = cardRef.current
+    if (!card || !container) return
+
+    const sync = () =>
+      container.style.setProperty('--card-h', `${card.offsetHeight}px`)
+    sync()
+
+    const observer = new ResizeObserver(sync)
+    observer.observe(card)
+
+    // Re-measure once the handwritten web fonts load, since the note reflows.
+    if (document.fonts?.ready) document.fonts.ready.then(sync)
+
+    return () => observer.disconnect()
   }, [])
 
   const toggle = () => setFlipped((prev) => !prev)
@@ -100,7 +124,7 @@ function FlightPath() {
 
           {/* BACK — the landscape postcard */}
           <div className="postcard-face postcard-back">
-            <div className="pc-card">
+            <div className="pc-card" ref={pcCardRef}>
               <div className="pc-left">
                 <div className="pc-return">
                   <p className="pc-return-name">
