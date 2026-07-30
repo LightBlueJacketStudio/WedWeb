@@ -20,7 +20,7 @@ const ORGANIZATIONS = [
   {
     name: "San Jose Animal Care Center",
     category: "Community Cats & TNR",
-    url: "https://www.sanjoseca.gov/your-government/departments-offices/animal-care-services/services/community-cats-and-tnr",
+    url: "https://www.sanjoseca.gov/your-government/departments-offices/animal-care-services/services/tnr",
   },
   {
     name: "13th Street Cats",
