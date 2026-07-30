@@ -869,185 +869,381 @@ body {
 // FLIGHT PATH SECTION (MOBILE-FIRST)
 // ============================================
 
-.flight-path-section {
-  padding: 1.5rem 0;
+// ============================================
+// SAVE THE DATE POSTCARD (MOBILE-FIRST)
+// ============================================
+
+.postcard-section {
+  padding: 2rem 1rem 2.5rem;
 
   @include Flex(column, flex-start, center);
-
-  gap: 1rem;
 }
 
-.section-heading {
-  text-align: center;
+// Front is portrait (9:16 art); back is a landscape postcard. The flip layer
+// stays portrait-sized so it centres trivially; the landscape card lives
+// inside the back face, counter-rotated so it reads upright once landed.
+.postcard {
+  --cw: min(62vw, 260px); // portrait width
+  --ch: calc(var(--cw) * 16 / 9); // portrait height
+  --lw: min(94vw, 560px); // landscape width
+  --lh: calc(var(--lw) / 1.5); // landscape height
 
-  h1 {
-    @include HeadingSerif;
+  position: relative;
+  width: max(var(--cw), var(--lw));
+  height: max(var(--ch), var(--lh));
 
-    margin: 0 0 0.25rem;
-    color: $color-primary;
-    font-size: 1.75rem;
+  @include Flex(row, center, center);
+
+  cursor: pointer;
+  perspective: 1800px;
+  -webkit-tap-highlight-color: transparent;
+
+  // Entrance: pop the card in when it scrolls into view
+  opacity: 0;
+  transform: translateY(16px) scale(0.9);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  &.is-entered {
+    opacity: 1;
+    transform: translateY(0) scale(1);
   }
 
-  p {
-    margin: 0;
-    color: $color-text-medium;
-    font-size: 0.9rem;
-  }
-
-  @media (min-width: 768px) {
-    h1 {
-      font-size: 2.25rem;
-    }
-
-    p {
-      font-size: 1rem;
-    }
+  &:focus-visible {
+    outline: 3px solid $color-primary;
+    outline-offset: 8px;
+    border-radius: 1rem;
   }
 }
 
-.flight-card {
-  width: 100%;
-  max-width: 56rem;
+// The flip layer — portrait sized, centred by the flex parent.
+.postcard-inner {
+  position: relative;
+  width: var(--cw);
+  height: var(--ch);
 
-  display: flex;
-  flex-direction: column; // Mobile: stack vertically
+  transform-style: preserve-3d;
+  transition: transform 0.85s cubic-bezier(0.45, 0.05, 0.2, 1);
 
+  // Resting flipped state (used by manual taps): back, landscape.
+  .postcard.is-flipped & {
+    transform: rotateY(180deg) rotateZ(90deg);
+  }
+
+  // Playful multi-spin used for the first auto-reveal.
+  .postcard.is-revealing & {
+    animation: postcard-flip 1.9s cubic-bezier(0.5, 0.05, 0.2, 1) both;
+  }
+}
+
+.postcard-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+// FRONT — portrait Save the Date artwork
+.postcard-front {
   overflow: hidden;
-  border-radius: 1.25rem;
-  border: 2px solid rgba(255, 174, 48, 0.3);
+  border-radius: 1rem;
+  box-shadow:
+    0 22px 50px rgba(49, 49, 43, 0.28),
+    0 2px 6px rgba(49, 49, 43, 0.12);
+  transform: rotateY(0deg);
   background: $color-surface-low;
-  box-shadow: 0 24px 56px rgba(49, 49, 43, 0.2);
-}
-
-.flight-image {
-  width: 100%;
-  // Remove max-height constraint to let image determine its own height
-  // Or keep it if you want a limit, but then adjust the img styles
-  flex-shrink: 0; // Prevents image from shrinking if card is constrained
 
   img {
     width: 100%;
-    height: auto; // Changed from 100% to maintain aspect ratio
+    height: 100%;
     display: block;
-    object-fit: contain; // Ensures entire image is visible
+    object-fit: cover;
   }
 }
 
-.flight-details {
-  width: 100%;
-  padding: 1rem;
-  box-sizing: border-box;
-  flex: 1; // This makes it stretch to fill remaining space
+// BACK — a transparent flip layer; overflow visible so the wider landscape
+// card can extend past this portrait face.
+.postcard-back {
+  overflow: visible;
+  transform: rotateY(180deg);
+}
 
-  @include Flex(column, center, stretch);
+// The visible landscape postcard. Centred in the back face and counter-rotated
+// (+90) so that once the card lands (rotateY 180 + rotateZ 90) it reads upright.
+.pc-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: var(--lw);
+  height: var(--lh);
+  transform: translate(-50%, -50%) rotateZ(90deg);
+
+  overflow: hidden;
+  border-radius: 1rem;
+  box-shadow:
+    0 22px 50px rgba(49, 49, 43, 0.28),
+    0 2px 6px rgba(49, 49, 43, 0.12);
+
+  padding: clamp(0.75rem, 2.4vw, 1.5rem);
+
+  @include Flex(row, flex-start, stretch);
   @include PassportTexture;
 
-  gap: 0.75rem;
+  border: 1px solid rgba(255, 174, 48, 0.35);
+  gap: clamp(0.6rem, 1.8vw, 1.25rem);
 }
 
-@media (min-width: 768px) {
-  .flight-path-section {
-    padding: 2rem 0;
-    gap: 1.5rem;
-  }
+.pc-left {
+  flex: 1.15;
+  min-width: 0;
 
-  .flight-card {
-    flex-direction: row; // Tablet+: side by side
-    border-radius: 1.5rem;
-  }
+  @include Flex(column, flex-start, stretch);
 
-  .flight-image {
-    width: 50%;
-    max-height: none;
-    border-right: 1px dashed rgba(137, 113, 114, 0.5);
-
-    img {
-      max-height: none;
-      height: 100%;
-    }
-  }
-
-  .flight-details {
-    width: 50%;
-    padding: 1.5rem;
-    gap: 1rem;
-  }
+  gap: clamp(0.3rem, 1.2vw, 0.6rem);
 }
 
-.detail-group {
-  p {
+.pc-return {
+  .pc-return-name {
+    @include LabelCaps;
+
     margin: 0;
+    font-size: clamp(0.5rem, 1.6vw, 0.78rem);
+    letter-spacing: 0.1em;
+    line-height: 1.4;
+    color: $color-text-dark;
   }
-}
 
-.detail-label {
-  @include LabelCaps;
-
-  font-size: 0.625rem;
-  color: $color-secondary;
-}
-
-.detail-value {
-  color: $color-text-dark;
-}
-
-.detail-value.highlight {
-  font-family: $font-heading;
-  color: $color-primary;
-}
-
-.detail-value.strong {
-  font-size: 1rem;
-  font-weight: 700;
-
-  @media (min-width: 768px) {
-    font-size: 1.125rem;
-  }
-}
-
-.detail-muted {
-  color: $color-text-medium;
-}
-
-.quote-block {
-  padding-top: 0.5rem;
-  border-top: 1px solid rgba(221, 192, 192, 0.3);
-
-  p {
-    margin: 0;
-    color: $color-text-medium;
+  .pc-return-addr {
+    margin: 0.35rem 0 0;
+    font-family: $font-body;
+    font-size: clamp(0.46rem, 1.35vw, 0.68rem);
     line-height: 1.6;
-    font-style: italic;
-    font-size: 0.9rem;
-    word-wrap: break-word;        // Force long words to break
-    overflow-wrap: break-word;    // Modern equivalent
-    white-space: normal;          // Explicitly allow wrapping
-    max-width: 100%;              // Prevent overflow
-    box-sizing: border-box;       // Include padding in width
+    color: $color-text-medium;
   }
 }
 
-.notice-box {
-  padding: 0.5rem 0.75rem;
-
-  border: 1px dashed rgba(108, 12, 32, 0.2);
-  border-radius: 0.75rem;
-  background: rgba(255, 255, 255, 0.4);
+// Sits under the return address, right-aligned.
+.pc-savedate {
+  margin-top: clamp(0.35rem, 1.6vw, 0.75rem);
+  text-align: right;
 
   p {
+    @include LabelCaps;
+
     margin: 0;
-    font-size: 0.7rem;
-    font-weight: 600;
+    font-size: clamp(0.5rem, 1.5vw, 0.76rem);
+    letter-spacing: 0.14em;
+    line-height: 1.4;
     color: $color-primary;
   }
 
-  @media (min-width: 768px) {
-    padding: 0.75rem;
-    border-radius: 1rem;
+  .pc-savedate-date {
+    font-size: clamp(0.56rem, 1.7vw, 0.86rem);
+  }
+}
 
-    p {
-      font-size: 0.75rem;
+.pc-message {
+  @include Flex(column, flex-start, stretch);
+
+  gap: clamp(0.35rem, 1.5vw, 0.7rem);
+
+  p {
+    margin: 0;
+    font-family: $font-body;
+    color: $color-text-dark;
+    font-size: clamp(0.48rem, 1.45vw, 0.74rem);
+    line-height: 1.6;
+  }
+
+  .pc-signoff {
+    margin-top: 0.25rem;
+    align-self: flex-end;
+    text-align: right;
+    font-family: 'Great Vibes', $font-heading;
+    font-size: clamp(0.85rem, 2.4vw, 1.25rem);
+    line-height: 1;
+    color: $color-primary;
+  }
+}
+
+.pc-divider {
+  width: 1.5px;
+  align-self: stretch;
+  flex-shrink: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(108, 12, 32, 0.35) 0,
+    rgba(108, 12, 32, 0.35) 5px,
+    transparent 5px,
+    transparent 10px
+  );
+}
+
+.pc-right {
+  flex: 1;
+  min-width: 0;
+
+  @include Flex(column, flex-start, stretch);
+
+  gap: clamp(0.4rem, 1.6vw, 0.9rem);
+}
+
+.pc-postage {
+  position: relative;
+  height: clamp(2.8rem, 11vw, 5rem);
+
+  .pc-stamp {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: clamp(2.4rem, 8.5vw, 4.2rem);
+    height: clamp(2.4rem, 8.5vw, 4.2rem);
+    object-fit: contain;
+    transform: rotate(4deg);
+    opacity: 0.92;
+  }
+
+  .pc-postmark {
+    position: absolute;
+    left: 0;
+    top: clamp(1.2rem, 4.5vw, 2.2rem);
+    width: 82%;
+    height: auto;
+    overflow: visible;
+
+    text {
+      font-family: $font-body;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      fill: rgba(108, 12, 32, 0.55);
     }
+
+    path {
+      fill: none;
+      stroke: rgba(108, 12, 32, 0.45);
+      stroke-width: 1.4;
+    }
+  }
+}
+
+.pc-deliver {
+  flex: 1;
+
+  @include Flex(column, flex-end, stretch);
+
+  gap: clamp(0.5rem, 2.2vw, 0.95rem);
+
+  .pc-deliver-label {
+    @include LabelCaps;
+
+    margin: 0;
+    font-size: clamp(0.5rem, 1.6vw, 0.78rem);
+    letter-spacing: 0.14em;
+    color: $color-text-dark;
+  }
+
+  .pc-line {
+    display: block;
+    height: 1px;
+    background: rgba(28, 28, 23, 0.5);
+  }
+}
+
+.postcard-hint {
+  position: absolute;
+  left: 50%;
+  bottom: 0.7rem;
+  transform: translateX(-50%);
+  z-index: 2;
+
+  @include Flex(row, center, center);
+
+  gap: 0.3rem;
+  padding: 0.28rem 0.7rem;
+  border-radius: 999px;
+
+  background: rgba(253, 249, 240, 0.88);
+  backdrop-filter: blur(4px);
+  box-shadow: 0 2px 8px rgba(49, 49, 43, 0.18);
+
+  font-family: $font-body;
+  font-size: clamp(0.55rem, 1.6vw, 0.66rem);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: $color-primary;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.postcard-hint-icon {
+  font-size: 0.85em;
+  line-height: 1;
+}
+
+.postcard-front .postcard-hint {
+  animation: postcard-hint-pulse 2.4s ease-in-out infinite;
+}
+
+// On the back the bottom-centre is taken by the note; tuck the hint into the
+// now-empty bottom-left corner instead.
+.postcard-back .postcard-hint {
+  left: clamp(0.75rem, 2.4vw, 1.5rem);
+  bottom: clamp(0.5rem, 2vw, 1rem);
+  transform: none;
+}
+
+@keyframes postcard-hint-pulse {
+  0%,
+  100% {
+    opacity: 0.78;
+    transform: translateX(-50%) translateY(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-2px);
+  }
+}
+
+// Tumbling flip: a couple of spins around Y while tilting to the landscape
+// (rotateZ 90). 900deg == 2.5 turns, so it lands showing the back.
+@keyframes postcard-flip {
+  0% {
+    transform: rotateY(0deg) rotateZ(0deg);
+  }
+  100% {
+    transform: rotateY(900deg) rotateZ(90deg);
+  }
+}
+
+@media (min-width: 768px) {
+  .postcard-section {
+    padding: 3rem 1rem 3.5rem;
+  }
+
+  .postcard {
+    --cw: min(34vw, 300px);
+    --lw: min(72vw, 700px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .postcard {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .postcard-inner {
+    transition: none;
+
+    .postcard.is-revealing & {
+      animation: none;
+    }
+  }
+
+  .postcard-front .postcard-hint {
+    animation: none;
   }
 }
 
