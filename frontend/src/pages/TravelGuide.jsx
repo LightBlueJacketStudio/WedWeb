@@ -165,7 +165,10 @@ function TravelGuide() {
             </ul>
           </article>
 
-          <article className="travel-info-card accommodation-card">
+          <article
+            id="where-to-stay"
+            className="travel-info-card accommodation-card"
+          >
             <div className="accommodation-content">
               <h2>Where to Stay</h2>
 

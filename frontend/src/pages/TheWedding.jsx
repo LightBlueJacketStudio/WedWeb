@@ -174,7 +174,7 @@ function TheWedding() {
             </span>
 
             <p>
-              Pending - please check again later when it comes closer to the date
+              TBD - please check again later when it comes closer to the date
               for more information.
             </p>
           </div>

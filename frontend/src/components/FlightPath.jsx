@@ -1,11 +1,20 @@
 import { useEffect, useRef, useState } from 'react'
+import { Link } from 'react-router-dom'
 import saveTheDate from '../assets/save-the-date.png'
 import arrivalStamp from '../assets/DAD-arrival-stamp.png'
+
+// Quick links that live on the postcard's right side, in place of the usual
+// address lines. Each keeps the "little stamp / ticket" look of a real postcard.
+const PLAN_LINKS = [
+  { label: 'RSVP', to: '/rsvp', icon: 'edit_calendar' },
+  { label: 'Travel Guide', to: '/travel_guide', icon: 'explore' },
+  { label: 'Where to Stay', to: '/travel_guide#where-to-stay', icon: 'hotel' },
+  { label: 'Gift Registry', to: '/gift_registry', icon: 'redeem' },
+]
 
 function FlightPath() {
   const [entered, setEntered] = useState(false)
   const [flipped, setFlipped] = useState(false)
-  const [revealing, setRevealing] = useState(false)
   const cardRef = useRef(null)
   const hasAnimated = useRef(false)
 
@@ -28,14 +37,10 @@ function FlightPath() {
         entries.forEach((entry) => {
           if (entry.isIntersecting && !hasAnimated.current) {
             hasAnimated.current = true
-            // Pop the postcard in, then let it tumble over to the note.
+            // Pop the postcard in, then flip it over to the note with a single
+            // calm turn (same motion as a manual tap).
             timers.push(setTimeout(() => setEntered(true), 120))
-            timers.push(
-              setTimeout(() => {
-                setRevealing(true)
-                setFlipped(true)
-              }, 1700)
-            )
+            timers.push(setTimeout(() => setFlipped(true), 1700))
             observer.disconnect()
           }
         })
@@ -59,10 +64,6 @@ function FlightPath() {
     }
   }
 
-  // Once the multi-spin reveal finishes, drop back to the plain flipped
-  // state so later taps flip with a simple, calm turn.
-  const handleAnimationEnd = () => setRevealing(false)
-
   return (
     <section id="wedding" className="postcard-section">
       <div
@@ -71,7 +72,6 @@ function FlightPath() {
           'postcard',
           entered ? 'is-entered' : '',
           flipped ? 'is-flipped' : '',
-          revealing ? 'is-revealing' : '',
         ]
           .filter(Boolean)
           .join(' ')}
@@ -86,7 +86,7 @@ function FlightPath() {
         onClick={toggle}
         onKeyDown={handleKeyDown}
       >
-        <div className="postcard-inner" onAnimationEnd={handleAnimationEnd}>
+        <div className="postcard-inner">
           {/* FRONT — the Save the Date illustration */}
           <div className="postcard-face postcard-front">
             <img
@@ -94,7 +94,7 @@ function FlightPath() {
               alt="Save the Date — Hoàng My & Ngọc Bảo, Saturday 13 March 2027, Đà Nẵng, Việt Nam"
             />
             <span className="postcard-hint" aria-hidden="true">
-              <span className="postcard-hint-icon">↻</span> tap to read our note
+              <span className="postcard-hint-icon">↻</span> Flip me
             </span>
           </div>
 
@@ -127,13 +127,12 @@ function FlightPath() {
               <div className="pc-message">
                 <p>Hi families and friends,</p>
                 <p>
-                  Greetings from Da Nang, Viet Nam! We're excited to share that
-                  we're getting married, and we'd love for you to be there with
+                  Greetings from Da Nang, Viet Nam! We're getting married, and we'd love for you to be there with
                   us.
                 </p>
                 <p>
                   It's going to be a beautiful excuse for a trip to our home
-                  country — cool beaches, incredible food, and a celebration you
+                  country where is has cool beaches, incredible food, and a celebration you
                   won't forget.
                 </p>
                 {/* <p>
@@ -154,32 +153,32 @@ function FlightPath() {
                   src={arrivalStamp}
                   alt="Da Nang arrival stamp, 03.13.2027"
                 />
-                <svg
-                  className="pc-postmark"
-                  viewBox="0 0 200 56"
-                  preserveAspectRatio="xMidYMid meet"
-                  aria-hidden="true"
-                >
-                  <path id="pc-wave" d="M2,38 Q40,10 90,30 T198,24" />
-                  <text fontSize="11">
-                    {/* <textPath href="#pc-wave" startOffset="2">
-                      www.weddingwebsitehere.com
-                    </textPath> */}
-                  </text>
-                </svg>
               </div>
 
               <div className="pc-deliver">
-                <p className="pc-deliver-label">Deliver To:</p>
-                <span className="pc-line" aria-hidden="true"></span>
-                <span className="pc-line" aria-hidden="true"></span>
-                <span className="pc-line" aria-hidden="true"></span>
-                <span className="pc-line" aria-hidden="true"></span>
+                <p className="pc-deliver-label">Plan your visit:</p>
+                <div
+                  className="pc-actions"
+                  onClick={(e) => e.stopPropagation()}
+                  onKeyDown={(e) => e.stopPropagation()}
+                >
+                  {PLAN_LINKS.map(({ label, to, icon }) => (
+                    <Link key={label} to={to} className="pc-action">
+                      <span
+                        className="pc-action-icon material-symbols-outlined"
+                        aria-hidden="true"
+                      >
+                        {icon}
+                      </span>
+                      <span className="pc-action-label">{label}</span>
+                    </Link>
+                  ))}
+                </div>
               </div>
             </div>
 
               <span className="postcard-hint" aria-hidden="true">
-                <span className="postcard-hint-icon">↻</span> tap to flip back
+                <span className="postcard-hint-icon">↻</span> flip back
               </span>
             </div>
           </div>

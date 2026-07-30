@@ -1,6 +1,5 @@
 import HeroPassport from '../components/HeroPassport'
 import FlightPath from '../components/FlightPath'
-import PlanningCards from '../components/PlanningCards'
 import Footer from '../components/Footer'
 
 function Home() {
@@ -9,7 +8,6 @@ function Home() {
       <main className="page-container">
         {/* <HeroPassport /> */}
         <FlightPath />
-        <PlanningCards />
       </main>
 
       <Footer />
