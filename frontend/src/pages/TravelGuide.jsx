@@ -68,7 +68,7 @@ function TravelGuide() {
                 </span> */}
               </div>
 
-              <h2>Before You Travel</h2>
+              <h2>✈️ Before You Travel</h2>
             </div>
 
             <div className="before-travel-columns">
@@ -116,17 +116,16 @@ function TravelGuide() {
               </span> */}
             </div>
 
-            <h2>Stay Connected</h2>
+            <h2>📶 Stay Connected</h2>
 
-            <p>
+            {/* <p>
               Consider purchasing a local SIM card at the airport
               from Viettel or Vinaphone. Affordable plans with
               generous mobile data are widely available.
-            </p>
+            </p> */}
 
             <p className="travel-tip">
-              “Pro tip: Download Grab before you land for easier
-              transportation and communication.”
+              <em>Pending - check back later when it get closer to your trip ^^</em>
             </p>
           </article>
 
@@ -137,30 +136,27 @@ function TravelGuide() {
               </span>
             </div> */}
 
-            <h2>Getting Around</h2>
+            <h2>🚗 Getting Around</h2>
 
             <p>
-              <strong>Grab</strong> is the most convenient way to
-              book cars and motorbikes in Vietnam. The price is
-              displayed before you confirm the ride, so there is no
-              need to negotiate.
+              <strong>Grab</strong> is basically Vietnam&apos;s
+              Uber/Lyft; download the app before you land, and take
+              a minute to get familiar with it. It&apos;ll be your
+              best friend for getting around.
             </p>
 
             <ul>
               <li>
-                {/* <span className="material-symbols-outlined">
-                  fiber_manual_record
-                </span> */}
-                Airport to the city typically costs around
-                150,000-200,000 VND.
+                <strong>Private hotel transfer</strong> - book
+                directly through your resort ahead of time for an
+                easy, seamless pickup right at the airport gate.
               </li>
 
               <li>
-                {/* <span className="material-symbols-outlined">
-                  fiber_manual_record
-                </span> */}
-                Mai Linh, recognizable by its green vehicles, is a
-                commonly used local taxi company.
+                <strong>Note:</strong> Public restrooms aren&apos;t
+                super common, so if you&apos;re traveling a longer
+                distance, expect to pay around 3,000–5,000 VND for a
+                bathroom break at pit stops along the way.
               </li>
             </ul>
           </article>
