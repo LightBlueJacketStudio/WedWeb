@@ -2,7 +2,7 @@
 // FONT IMPORTS
 // ============================================
 
-@import url('https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:wght@400;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&family=Libre+Caslon+Text:wght@400;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Sacramento&display=swap');
 
 // ============================================
 // COLOR PALETTE
@@ -417,26 +417,6 @@ body {
   box-shadow: 0 24px 64px $color-shadow-card;
   overflow: hidden;
 
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0.75rem;
-    left: 0.75rem;
-
-    width: 3rem;
-    height: 3rem;
-
-    border: 2px dashed rgba(132, 84, 0, 0.45);
-    border-radius: 999px;
-    opacity: 0.25;
-    pointer-events: none;
-
-    // Hide on small screens
-    @media (max-width: 480px) {
-      display: none;
-    }
-  }
-
   h1 {
     @include HeadingSerif;
 
@@ -465,20 +445,6 @@ body {
     padding: clamp(1.5rem, 4vw, 2.5rem);
     border-width: 4px;
     border-radius: 1.5rem;
-
-    &::before {
-      width: 4.25rem;
-      height: 4.25rem;
-      top: 1rem;
-      left: 1rem;
-      display: block;
-    }
-
-    &::after {
-      font-size: 2.5rem;
-      right: 1.25rem;
-      bottom: 1.25rem;
-    }
 
     > p {
       font-size: 1.05rem;
@@ -1096,8 +1062,6 @@ body {
   p {
     margin: 0;
     font-family: 'Indie Flower', $font-heading;
-    font-weight: 400;
-    font-style: italic;
     color: $color-text-dark;
     font-size: clamp(0.56rem, 1.6vw, 0.82rem);
     line-height: 1.45;
@@ -1108,7 +1072,6 @@ body {
     align-self: flex-end;
     text-align: right;
     font-family: 'Sacramento', $font-heading;
-    font-weight: 400;
     font-size: clamp(1rem, 3.1vw, 1.7rem);
     line-height: 1;
     color: $color-primary;
@@ -1137,20 +1100,67 @@ body {
   gap: clamp(0.4rem, 1.6vw, 0.9rem);
 }
 
+// The "franking" cluster in the top corner of the address side: a round
+// postmark on the left, wavy cancellation lines streaming across, and a
+// rectangular postage stamp tucked into the corner — like a real posted card.
 .pc-postage {
   position: relative;
-  height: clamp(3.4rem, 13vw, 6rem);
+  height: clamp(3.6rem, 13.5vw, 6.2rem);
 
+  // Round arrival stamp, kept as the postmark on the left of the cluster.
   .pc-stamp {
     position: absolute;
-    top: 0;
-    right: 0;
-    width: clamp(3rem, 10.5vw, 5.2rem);
-    height: clamp(3rem, 10.5vw, 5.2rem);
+    top: clamp(0.1rem, 0.8vw, 0.4rem);
+    left: clamp(1.4rem, 8vw, 4rem);
+    width: clamp(2.6rem, 9vw, 4.4rem);
+    height: clamp(2.6rem, 9vw, 4.4rem);
     object-fit: contain;
-    transform: rotate(4deg);
-    opacity: 0.92;
+    transform: rotate(-7deg);
+    opacity: 0.9;
+    z-index: 2;
   }
+}
+
+// Wavy cancellation bars, like the ink lines franked over a postmark. They
+// start under the round stamp and run all the way across to tuck just under
+// the postage stamp, tying the three pieces into one franking. The left/right
+// anchors size the width, and the 4:1 viewBox sets the height.
+.pc-cancel {
+  position: absolute;
+  top: 50%;
+  left: clamp(4.2rem, 14.6vw, 7.2rem);
+  right: clamp(2.1rem, 7vw, 3.5rem);
+  height: auto;
+  overflow: visible;
+  transform: translateY(-50%) rotate(-6deg);
+  pointer-events: none;
+  z-index: 1;
+
+  path {
+    fill: none;
+    stroke: rgba(108, 12, 32, 0.5);
+    stroke-width: 1.4;
+    stroke-linecap: round;
+  }
+}
+
+// Rectangular Việt Nam air-mail postage stamp in the corner. Blended with
+// multiply so the PNG's white ground drops into the paper and only the ink
+// shows through — as if it were stamped straight onto the postcard.
+.pc-stamp-frame {
+  position: absolute;
+  top: 0;
+  right: 0;
+  // Exact 3:4 stamp shape. The source art is drawn slightly taller (~5:8), so
+  // `fill` shortens it into a true 3:4 frame instead of letterboxing it long.
+  width: clamp(2.25rem, 7.5vw, 3.6rem);
+  height: clamp(3rem, 10vw, 4.8rem);
+  object-fit: fill;
+  transform: rotate(3deg);
+  z-index: 2;
+
+  mix-blend-mode: multiply;
+  opacity: 0.88;
 }
 
 // Sits right under the stamp now (flex-start), holding the "Plan your visit"

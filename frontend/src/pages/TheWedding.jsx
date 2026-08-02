@@ -163,7 +163,6 @@ function TheWedding() {
               <span className="material-symbols-outlined">
                 event_note
               </span>
-
               Agenda
             </h2>
           </div>

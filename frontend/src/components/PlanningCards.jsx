@@ -15,7 +15,7 @@ const cards = [
   },
   {
     icon: "hotel",
-    title: "The Wedding",
+    title: "The Wedidding",
     text: "Recommended resorts in Da Nang and booking codes.",
   },
 
