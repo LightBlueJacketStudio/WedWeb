@@ -1885,12 +1885,12 @@ body {
 .registry-video-box {
   position: relative;
   width: 100%;
-  min-height: 16rem;
   padding: 1.5rem;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 1.25rem;
   border: 1px solid rgba(132, 84, 0, 0.18);
   border-radius: 1.5rem;
   background: #ece8df;
@@ -1898,30 +1898,61 @@ body {
   overflow: hidden;
 }
 
-.registry-video-content {
-  text-align: center;
+.registry-video-frame {
+  position: relative;
+  width: 100%;
+  border-radius: 1rem;
+  overflow: hidden;
+  background: #000000;
+  box-shadow: 0 12px 28px rgba(49, 49, 43, 0.18);
 }
-.registry-video-content h2 {
+.registry-video-frame.is-playing {
+  aspect-ratio: 16 / 9;
+}
+.registry-video-frame iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.registry-video-cover {
+  position: relative;
+  width: 100%;
+  padding: 2.25rem 1.5rem 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border: none;
+  background: #ece8df;
+  cursor: pointer;
+}
+
+.registry-video-cover-title {
   font-family: "Libre Caslon Text", Georgia, serif;
   font-weight: 700;
   line-height: 1.1;
   letter-spacing: -0.02em;
-  margin: 0 0 0.35rem;
+  margin: 0.25rem 0 0.5rem;
   color: #6c0c20;
-  font-size: 1.15rem;
+  font-size: 1.5rem;
 }
-.registry-video-content p {
+.registry-video-cover-sub {
   margin: 0;
+  max-width: 32ch;
   color: #564242;
   font-family: "Libre Caslon Text", Georgia, serif;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   font-style: italic;
 }
 
 .registry-play-btn {
-  width: 3.25rem;
-  height: 3.25rem;
-  margin: 0 auto 1rem;
+  width: 4.5rem;
+  height: 4.5rem;
+  margin: 0 auto;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -1935,13 +1966,14 @@ body {
   transition: transform 0.15s ease, box-shadow 0.2s ease;
 }
 .registry-play-btn span {
-  font-size: 1.5rem;
+  font-size: 2rem;
+  margin-left: 0.15rem;
 }
-.registry-play-btn:hover {
+.registry-video-cover:hover .registry-play-btn {
   transform: scale(1.05);
   box-shadow: 0 16px 32px rgba(108, 12, 32, 0.25);
 }
-.registry-play-btn:active {
+.registry-video-cover:active .registry-play-btn {
   transform: scale(0.96);
 }
 
@@ -1952,6 +1984,62 @@ body {
   color: rgba(132, 84, 0, 0.35);
   font-size: 1.5rem;
   transform: rotate(-10deg);
+}
+
+.registry-stats {
+  width: 100%;
+  padding: 1.1rem 0.9rem;
+  border-radius: 1.25rem;
+  border: 1px solid rgba(108, 12, 32, 0.12);
+  background: #e9cbc6;
+  box-shadow: 0 16px 38px rgba(49, 49, 43, 0.1);
+}
+.registry-stats-title {
+  margin: 0 0 1rem;
+  text-align: center;
+  font-family: "Libre Caslon Text", Georgia, serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #6c0c20;
+  font-size: 1.05rem;
+}
+.registry-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.4rem;
+}
+.registry-stat-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 0.7rem 0.3rem;
+  border: 1px solid rgba(108, 12, 32, 0.1);
+  border-radius: 0.75rem;
+  background: #ffffff;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.registry-stat-tile:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(108, 12, 32, 0.12);
+}
+.registry-stat-icon {
+  color: #c6892f;
+  font-size: 1.15rem;
+}
+.registry-stat-value {
+  font-family: "Libre Caslon Text", Georgia, serif;
+  font-weight: 700;
+  line-height: 1;
+  color: #6c0c20;
+  font-size: 1.6rem;
+}
+.registry-stat-label {
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  line-height: 1.25;
+  text-align: center;
+  color: #6d5450;
+  font-size: 0.62rem;
 }
 
 .registry-gift-card {
@@ -2066,6 +2154,13 @@ body {
   color: #897172;
   font-size: 0.55rem;
 }
+.registry-qr-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 0.4rem;
+  padding: 0.25rem;
+}
 
 .registry-qr-caption {
   margin: 0;
@@ -2170,22 +2265,43 @@ body {
     font-size: 0.95rem;
   }
   .registry-video-box {
-    min-height: 22rem;
     padding: 2rem;
     border-radius: 1.75rem;
   }
-  .registry-video-content h2 {
-    font-size: 1.5rem;
+  .registry-video-cover-title {
+    font-size: 1.85rem;
   }
-  .registry-video-content p {
-    font-size: 0.9rem;
+  .registry-video-cover-sub {
+    font-size: 1rem;
   }
   .registry-play-btn {
-    width: 3.75rem;
-    height: 3.75rem;
+    width: 5rem;
+    height: 5rem;
   }
   .registry-play-btn span {
-    font-size: 1.75rem;
+    font-size: 2.25rem;
+  }
+  .registry-stats {
+    padding: 1.5rem 1.75rem;
+  }
+  .registry-stats-title {
+    font-size: 1.3rem;
+  }
+  .registry-stats-grid {
+    gap: 0.75rem;
+  }
+  .registry-stat-tile {
+    padding: 1rem 0.6rem;
+    gap: 0.3rem;
+  }
+  .registry-stat-icon {
+    font-size: 1.4rem;
+  }
+  .registry-stat-value {
+    font-size: 2.1rem;
+  }
+  .registry-stat-label {
+    font-size: 0.75rem;
   }
   .registry-gift-card {
     padding: 2rem;

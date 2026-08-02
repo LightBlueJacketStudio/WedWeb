@@ -1,4 +1,70 @@
+import { useEffect, useRef, useState } from "react"
+import venmoQr from "../assets/venmo.png"
+import zelleQr from "../assets/zelle.png"
+
 const REGISTRY_TITLE = "Skip the gift registry, save a cat!"
+
+const RESCUE_STATS = [
+  { icon: "pets", value: 16, suffix: "", label: "Cats & Kittens Rescued" },
+  { icon: "healing", value: 15, suffix: "+", label: "Community Cats TNR'd" },
+  { icon: "volunteer_activism", value: 8, suffix: "", label: "Foster Kittens Raised" },
+  { icon: "favorite", value: 5, suffix: "+", label: "Years of Rescue" },
+]
+
+function StatTile({ icon, value, suffix, label }) {
+  const prefersReducedMotion =
+    typeof window !== "undefined" &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches
+
+  const [count, setCount] = useState(prefersReducedMotion ? value : 0)
+  const tileRef = useRef(null)
+
+  useEffect(() => {
+    if (prefersReducedMotion) return
+    const node = tileRef.current
+    if (!node) return
+
+    let frame
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (!entries[0].isIntersecting) return
+        observer.disconnect()
+
+        const duration = 1200
+        const start = performance.now()
+        const tick = (now) => {
+          const progress = Math.min((now - start) / duration, 1)
+          const eased = 1 - Math.pow(1 - progress, 3)
+          setCount(Math.round(eased * value))
+          if (progress < 1) frame = requestAnimationFrame(tick)
+        }
+        frame = requestAnimationFrame(tick)
+      },
+      { threshold: 0.4 },
+    )
+    observer.observe(node)
+
+    return () => {
+      observer.disconnect()
+      if (frame) cancelAnimationFrame(frame)
+    }
+  }, [value, prefersReducedMotion])
+
+  return (
+    <div className="registry-stat-tile" ref={tileRef}>
+      <span className="registry-stat-icon material-symbols-outlined" aria-hidden="true">
+        {icon}
+      </span>
+
+      <span className="registry-stat-value">
+        {count}
+        {suffix}
+      </span>
+
+      <span className="registry-stat-label">{label}</span>
+    </div>
+  )
+}
 
 const REGISTRY_BODY =
   "Truthfully, we have everything we could ask for. But there's something we care about deeply: the feral cats in our community who don't have anyone looking out for them. If you're looking for a way to celebrate with us, a donation toward trap-neuter-spay efforts would mean the world."
@@ -8,11 +74,13 @@ const PAYMENT_METHODS = [
     name: "Zelle",
     icon: "account_balance",
     handle: "408 646 7175",
+    qr: zelleQr,
   },
   {
     name: "Venmo",
     icon: "alternate_email",
     handle: "@bnhuynh",
+    qr: venmoQr,
   },
 ]
 
@@ -40,6 +108,8 @@ const ORGANIZATIONS = [
 ]
 
 function GiftRegistry() {
+  const [videoPlaying, setVideoPlaying] = useState(false)
+
   return (
     <main className="registry-page">
       <div className="page-container">
@@ -49,26 +119,60 @@ function GiftRegistry() {
           <p className="registry-intro">{REGISTRY_BODY}</p>
         </section>
 
+        <section className="registry-stats">
+          <h2 className="registry-stats-title">Our Rescue, By the Numbers</h2>
+
+          <div className="registry-stats-grid">
+            {RESCUE_STATS.map((stat) => (
+              <StatTile key={stat.label} {...stat} />
+            ))}
+          </div>
+        </section>
+
         <section className="registry-video">
           <div className="registry-video-box">
-            {/* TODO: swap this placeholder for a YouTube embed (iframe) once the video is ready */}
-            <div className="registry-video-content">
-              <button
-                type="button"
-                className="registry-play-btn"
-                aria-label="Play our rescue journey video"
-              >
-                <span className="material-symbols-outlined">play_arrow</span>
-              </button>
+            <div
+              className={`registry-video-frame${
+                videoPlaying ? " is-playing" : ""
+              }`}
+            >
+              {videoPlaying ? (
+                <iframe
+                  src="https://www.youtube-nocookie.com/embed/K2NHhwJ8RSY?autoplay=1"
+                  title="Our Rescue Journey"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  allowFullScreen
+                ></iframe>
+              ) : (
+                <button
+                  type="button"
+                  className="registry-video-cover"
+                  onClick={() => setVideoPlaying(true)}
+                  aria-label="Play Our Rescue Journey video"
+                >
+                  <span className="registry-play-btn" aria-hidden="true">
+                    <span className="material-symbols-outlined">play_arrow</span>
+                  </span>
 
-              <h2>Our Rescue Journey</h2>
+                  <span className="registry-video-cover-title">
+                    Our Rescue Journey
+                  </span>
 
-              <p>A collection of moments with the kitties we've loved and helped.</p>
+                  <span className="registry-video-cover-sub">
+                    A collection of moments with the kitties we've loved and
+                    helped.
+                  </span>
+
+                  <span
+                    className="registry-video-paw material-symbols-outlined"
+                    aria-hidden="true"
+                  >
+                    pets
+                  </span>
+                </button>
+              )}
             </div>
-
-            <span className="registry-video-paw material-symbols-outlined" aria-hidden="true">
-              pets
-            </span>
           </div>
         </section>
 
@@ -100,7 +204,15 @@ function GiftRegistry() {
                 <p className="registry-payment-value">{method.handle}</p>
 
                 <div className="registry-qr-box">
-                  <span>{method.name} QR</span>
+                  {method.qr ? (
+                    <img
+                      src={method.qr}
+                      alt={`${method.name} QR code`}
+                      className="registry-qr-img"
+                    />
+                  ) : (
+                    <span>{method.name} QR</span>
+                  )}
                 </div>
 
                 <p className="registry-qr-caption">Scan to gift</p>
