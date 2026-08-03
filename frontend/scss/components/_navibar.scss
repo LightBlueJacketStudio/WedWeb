@@ -1,0 +1,208 @@
+@use '../abstracts' as *;
+// ============================================
+// NAVIBAR — MOBILE FIRST
+// ============================================
+
+.Navibar {
+  @include Flex(row, space-between, center);
+
+  position: sticky;
+  top: 0;
+  z-index: 50;
+
+  width: 100%;
+  padding: 0.75rem 1rem;
+  box-sizing: border-box;
+
+  background: rgba($color-surface, 0.92);
+  border-bottom: 1px solid rgba($color-border, 0.3);
+  backdrop-filter: blur(8px);
+
+  img {
+    display: block;
+    width: auto;
+    height: 3.75rem;
+  }
+
+  .navibar-menu-toggle {
+    position: relative;
+    z-index: 60;
+
+    display: block;
+    width: 3rem;
+    height: 3rem;
+    padding: 0.5rem;
+
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+
+    span {
+      position: absolute;
+      left: 50%;
+
+      display: block;
+      width: 1.75rem;
+      height: 3px;
+
+      border-radius: 999px;
+      background: $color-primary;
+      transform: translateX(-50%);
+      transition:
+        top 0.25s ease-in-out,
+        opacity 0.25s ease-in-out,
+        transform 0.25s ease-in-out;
+
+      &:nth-child(1) {
+        top: 14px;
+      }
+
+      &:nth-child(2) {
+        top: 22px;
+      }
+
+      &:nth-child(3) {
+        top: 30px;
+      }
+    }
+
+    &.is-open span {
+      top: 22px;
+
+      &:nth-child(1) {
+        transform: translateX(-50%) rotate(45deg);
+      }
+
+      &:nth-child(2) {
+        opacity: 0;
+        transform: translateX(-50%) scaleX(0);
+      }
+
+      &:nth-child(3) {
+        transform: translateX(-50%) rotate(-45deg);
+      }
+    }
+  }
+
+  .navibar-links {
+    @include Flex(column, flex-start, flex-start);
+
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+
+    display: none;
+    gap: 0.5rem;
+
+    margin: 0;
+    padding: 1rem 1.25rem;
+    list-style: none;
+
+    background: rgba($color-surface, 0.98);
+    border-bottom: 1px solid rgba($color-border, 0.3);
+    backdrop-filter: blur(8px);
+
+    &.is-open {
+      display: flex;
+    }
+
+    .nav-link,
+    .rsvp-link {
+      @include LabelCaps;
+
+      display: block;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .nav-link {
+      width: 100%;
+      padding: 0.6rem 0;
+
+      color: $color-text-medium;
+      transition:
+        color 0.25s ease,
+        opacity 0.25s ease;
+
+      &:hover,
+      &.is-active {
+        color: $color-primary;
+      }
+
+      &:active {
+        opacity: 0.6;
+      }
+
+      &.is-active {
+        font-weight: 700;
+        text-decoration: underline;
+        text-underline-offset: 0.3rem;
+      }
+    }
+
+    .rsvp-link {
+      width: auto;
+      padding: 0.6rem 1.5rem;
+
+      border-radius: 1rem;
+      background: $color-primary;
+      color: $color-text-on-primary;
+      text-align: center;
+
+      transition:
+        background-color 0.25s ease,
+        transform 0.15s ease;
+
+      &:hover {
+        background: $color-primary-hover;
+        color: $color-text-on-primary;
+      }
+
+      &:active {
+        transform: scale(0.96);
+      }
+    }
+  }
+}
+
+.navibar-inner {
+  width: 100%;
+  max-width: 1140px;
+  margin: 0 auto;
+
+  @include Flex(row, space-between, center);
+}
+
+// ============================================
+// TABLET AND UP
+// ============================================
+
+@media (min-width: 768px) {
+  .Navibar {
+    padding: 1rem clamp(1.25rem, 4vw, 1.5rem);
+
+    .navibar-menu-toggle {
+      display: none;
+    }
+
+    .navibar-links {
+      @include Flex(row, flex-start, center);
+
+      position: static;
+
+      display: flex !important;
+      gap: 2rem;
+      padding: 0;
+
+      background: transparent;
+      border-bottom: 0;
+      backdrop-filter: none;
+
+      .nav-link {
+        width: auto;
+        padding: 0;
+      }
+    }
+  }
+}

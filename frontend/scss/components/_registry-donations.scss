@@ -1,0 +1,87 @@
+@use '../abstracts' as *;
+// ============================================
+// REGISTRY DONATIONS
+// ============================================
+
+.registry-donations {
+  width: 100%;
+  text-align: center;
+
+  h2 {
+    @include HeadingSerif;
+
+    margin: 0 0 0.5rem;
+
+    color: $color-primary;
+    font-size: 1.25rem;
+  }
+
+  > p {
+    max-width: 34rem;
+    margin: 0 auto 1.25rem;
+
+    color: $color-text-medium;
+    font-size: 0.85rem;
+    line-height: 1.6;
+  }
+}
+
+.registry-org-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+}
+
+.registry-org-tile {
+  @include Flex(column, center, flex-start);
+
+  min-height: 7rem;
+  padding: 1.1rem 1rem;
+
+  border: 1px solid rgba(132, 84, 0, 0.18);
+  border-radius: 1rem;
+
+  background: $color-surface-container;
+  text-align: left;
+  text-decoration: none;
+
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease,
+    transform 0.15s ease;
+
+  &:hover {
+    border-color: $color-primary;
+    background: $color-bg-card-bright;
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 4px $color-primary-glow;
+  }
+}
+
+.registry-org-tile-name {
+  display: block;
+  margin-bottom: 0.4rem;
+
+  font-family: $font-heading;
+  font-weight: 700;
+  font-size: 0.9rem;
+  line-height: 1.35;
+  color: $color-primary;
+}
+
+.registry-org-tile-category {
+  display: block;
+
+  @include LabelCaps;
+
+  font-size: 0.6rem;
+  color: $color-text-light;
+}

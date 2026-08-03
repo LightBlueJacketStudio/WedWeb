@@ -1,0 +1,183 @@
+@use '../abstracts' as *;
+
+// // ============================================
+// // GIFT REGISTRY PAGE (MOBILE-FIRST)
+// // ============================================
+
+// .registry-page {
+//   position: relative;
+//   min-height: 100vh;
+//   padding: 1.25rem 0 3rem;
+
+//   @include PassportTexture;
+
+//   overflow: hidden;
+
+//   &::before {
+//     content: '';
+//     position: absolute;
+//     inset: 0;
+
+//     background-color: $color-bg-page-start;
+//     background-size: 28px 28px;
+//     pointer-events: none;
+//   }
+
+//   .page-container {
+//     position: relative;
+//     z-index: 1;
+//     max-width: 56rem;
+
+//     @include Flex(column, flex-start, stretch);
+
+//     gap: 1.75rem;
+//   }
+// }
+
+// ============================================
+// REGISTRY HERO
+// ============================================
+
+.registry-hero {
+  width: 100%;
+  padding: 0.5rem 0.5rem 0;
+
+  text-align: center;
+
+  h1 {
+    @include HeadingSerif;
+
+    margin: 0 0 1.5rem;
+
+    color: $color-primary;
+    font-size: clamp(1.5rem, 6vw, 2.25rem);
+  }
+}
+
+.registry-intro {
+  max-width: 34rem;
+  margin: 0 auto;
+
+  color: $color-text-medium;
+  font-family: $font-body;
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+
+
+
+
+// Tablet and up
+@media (min-width: 768px) {
+  .registry-page {
+    padding: 2.5rem 0 5rem;
+
+    .page-container {
+      max-width: 64rem;
+      gap: 2.25rem;
+    }
+  }
+
+  .registry-hero {
+    h1 {
+      font-size: clamp(2rem, 5vw, 2.75rem);
+    }
+  }
+
+  .registry-intro {
+    font-size: 0.95rem;
+  }
+
+  .registry-video-box {
+    min-height: 22rem;
+    padding: 2rem;
+    border-radius: 1.75rem;
+  }
+
+  .registry-video-content {
+    h2 {
+      font-size: 1.5rem;
+    }
+
+    p {
+      font-size: 0.9rem;
+    }
+  }
+
+  .registry-play-btn {
+    width: 3.75rem;
+    height: 3.75rem;
+
+    span {
+      font-size: 1.75rem;
+    }
+  }
+
+  .registry-gift-card {
+    padding: 2rem;
+    border-radius: 1.5rem;
+
+    h2 {
+      font-size: 1.5rem;
+    }
+  }
+
+  .registry-gift-desc {
+    font-size: 0.9rem;
+  }
+
+  .registry-payment-grid {
+    gap: 1.25rem;
+  }
+
+  .registry-payment-card {
+    padding: 1.5rem 1rem;
+  }
+
+  .registry-payment-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+
+    span {
+      font-size: 1.25rem;
+    }
+  }
+
+  .registry-payment-value {
+    font-size: 1.05rem;
+  }
+
+  .registry-qr-box {
+    max-width: 8rem;
+  }
+
+  .registry-donations {
+    h2 {
+      font-size: 1.5rem;
+    }
+
+    > p {
+      font-size: 0.95rem;
+    }
+  }
+
+  .registry-org-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
+  }
+
+  .registry-org-tile {
+    min-height: 9rem;
+    padding: 1.5rem 1.25rem;
+    border-radius: 1.25rem;
+  }
+
+  .registry-org-tile-name {
+    font-size: 1rem;
+  }
+
+  .registry-org-tile-category {
+    font-size: 0.65rem;
+  }
+}

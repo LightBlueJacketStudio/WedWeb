@@ -1,0 +1,41 @@
+@use 'variables' as *;
+// ============================================
+// MIXINS
+// ============================================
+
+@mixin LabelCaps {
+  font-family: $font-body;
+  font-size: 0.75rem;
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+@mixin HeadingSerif {
+  font-family: $font-heading;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+@mixin Flex($direction: row, $justify: flex-start, $align: stretch) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+@mixin PassportTexture {
+  background:
+    radial-gradient(circle at 20% 20%, rgba(108, 12, 32, 0.045), transparent 28%),
+    radial-gradient(circle at 80% 10%, rgba(132, 84, 0, 0.045), transparent 24%),
+    linear-gradient(135deg, $color-surface, $color-surface-low);
+}
+
+@mixin PaperCard {
+  border: 1px solid rgba(255, 174, 48, 0.2);
+  border-radius: 1.5rem;
+  background:
+    $color-bg-card-bright;
+}

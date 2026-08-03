@@ -1,0 +1,102 @@
+@use '../abstracts' as *;
+
+// ============================================
+// TRAVEL GUIDE PAGE
+// ============================================
+
+.travel-guide-page {
+  position: relative;
+  min-height: 100vh;
+  padding: 1.25rem 0 3rem;
+
+  @include PassportTexture;
+
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+
+    background-color: $color-bg-page-start;
+    background-size: 28px 28px;
+    pointer-events: none;
+  }
+
+  .page-container {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+// ============================================
+// TABLET AND DESKTOP
+// ============================================
+
+@media (min-width: 768px) {
+  .travel-guide-page {
+    padding: 2.5rem 0 5rem;
+  }
+
+  .travel-guide-hero {
+    margin-bottom: 1.75rem;
+    padding: 2rem;
+
+    border-width: 4px;
+    border-radius: 1.5rem;
+  }
+
+  .travel-guide-label {
+    font-size: 0.75rem;
+  }
+
+  .travel-guide-intro {
+    font-size: 1rem;
+  }
+
+  .travel-guide-stamp {
+    top: 1rem;
+    left: 1rem;
+
+    width: 3.5rem;
+    height: 3.5rem;
+
+    span {
+      font-size: 1.6rem;
+    }
+  }
+
+  .travel-map-card {
+    padding: 1.5rem;
+    border-radius: 1.5rem;
+  }
+
+  .travel-map-header {
+    @include Flex(row, space-between, center);
+
+    padding: 0.25rem 0.25rem 1.25rem;
+
+    h2 {
+      font-size: 1.75rem;
+    }
+
+    p {
+      font-size: 0.95rem;
+    }
+  }
+
+  .travel-map-icon {
+    width: 3.25rem;
+    height: 3.25rem;
+
+    span {
+      font-size: 1.6rem;
+    }
+  }
+
+  .travel-map-wrapper {
+    height: 520px;
+    min-height: 520px;
+    border-radius: 1.25rem;
+  }
+}

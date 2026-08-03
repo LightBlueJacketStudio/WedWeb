@@ -1,0 +1,86 @@
+@use '../abstracts' as *;
+
+// ============================================
+// FOOTER (MOBILE-FIRST)
+// ============================================
+
+.Footer {
+  margin-top: 1.5rem;
+  border-top: 1px solid rgba(255, 174, 48, 0.2);
+  background: $color-surface-low;
+}
+
+.footer-inner {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 1rem;
+
+  @include Flex(column, center, center);
+
+  gap: 0.5rem;
+  text-align: center;
+
+  p {
+    margin: 0.5rem 0 0;
+
+    @include LabelCaps;
+
+    color: $color-secondary;
+    font-size: 0.6rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .Footer {
+    margin-top: 2rem;
+  }
+
+  .footer-inner {
+    padding: 1rem 1.25rem;
+
+    p {
+      font-size: 0.75rem;
+    }
+  }
+}
+
+.footer-pets {
+  @include Flex(row, center, center);
+
+  gap: 0.75rem;
+  opacity: 0.6;
+
+  @media (min-width: 768px) {
+    gap: 1rem;
+  }
+}
+
+.footer-links {
+  @include Flex(row, center, center);
+
+  gap: 1rem;
+
+  a {
+    @include LabelCaps;
+
+    font-size: 0.6rem;
+    color: $color-text-medium;
+    text-decoration: none;
+
+    &:hover {
+      color: $color-secondary-container;
+    }
+
+    &:active {
+      opacity: 0.6;
+    }
+  }
+
+  @media (min-width: 768px) {
+    gap: 1.5rem;
+
+    a {
+      font-size: 0.625rem;
+    }
+  }
+}

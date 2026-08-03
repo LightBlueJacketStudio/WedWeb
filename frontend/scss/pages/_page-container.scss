@@ -1,0 +1,11 @@
+.page-container {
+  width: min(calc(100% - 2rem), 1140px);
+  max-width: 1140px;
+  margin: 0 auto;
+  margin-inline: auto;
+  padding: 0 1rem;
+
+  @media (min-width: 768px) {
+    padding: 0 1.25rem;
+  }
+}

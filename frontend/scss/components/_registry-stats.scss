@@ -1,0 +1,130 @@
+@use '../abstracts' as *;
+// ============================================
+// REGISTRY STATS — MOBILE FIRST
+// ============================================
+
+.registry-stats {
+  width: 100%;
+  padding: 1.5rem 1.75rem;
+  box-sizing: border-box;
+
+  color: $color-text-dark;
+  font-family: $font-body;
+
+  background: rgb(233, 203, 198);
+  border: 1px solid rgba($color-primary, 0.12);
+  border-radius: 1.25rem;
+
+  box-shadow: 0 16px 38px rgba(49, 49, 43, 0.1);
+}
+
+.registry-stats-title {
+  margin: 0 0 1rem;
+  box-sizing: border-box;
+
+  color: $color-primary;
+  font-family: $font-heading;
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  text-align: center;
+}
+
+.registry-stats-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+
+  box-sizing: border-box;
+
+  color: $color-text-dark;
+  font-family: $font-body;
+}
+
+// ============================================
+// INDIVIDUAL STAT TILE
+// ============================================
+
+.registry-stat-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+
+  padding: 1rem 0.6rem;
+  box-sizing: border-box;
+
+  color: $color-text-dark;
+  font-family: $font-body;
+
+  background: $color-bg-card-bright;
+  border: 1px solid rgba($color-primary, 0.1);
+  border-radius: 0.75rem;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+
+  &:hover {
+    transform: translateY(-0.25rem);
+    border-color: rgba($color-primary, 0.2);
+    box-shadow: 0 10px 24px rgba(49, 49, 43, 0.14);
+  }
+}
+
+.registry-stat-icon {
+  box-sizing: border-box;
+
+  color: rgb(198, 137, 47);
+  font-size: 1.4rem;
+  line-height: 1;
+}
+
+.registry-stat-icon.material-symbols-outlined {
+  display: inline-block;
+
+  font-family: 'Material Symbols Outlined';
+  font-size: 1.4rem;
+  font-style: normal;
+  font-weight: normal;
+  font-feature-settings: 'liga';
+  letter-spacing: normal;
+  line-height: 1;
+  text-transform: none;
+  white-space: nowrap;
+  word-wrap: normal;
+
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+}
+
+.registry-stat-value {
+  box-sizing: border-box;
+
+  color: $color-primary;
+  font-family: $font-heading;
+  font-size: 2.1rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.registry-stat-label {
+  box-sizing: border-box;
+
+  color: rgb(109, 84, 80);
+  font-family: $font-body;
+  font-size: 0.75rem;
+  line-height: 1.25;
+  text-align: center;
+}
+
+// ============================================
+// TABLET AND UP
+// ============================================
+
+@media (min-width: 768px) {
+  .registry-stats-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}

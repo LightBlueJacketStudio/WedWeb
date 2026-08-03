@@ -1,0 +1,125 @@
+@use '../abstracts' as *;
+
+// ============================================
+// PLANNING SECTION (MOBILE-FIRST)
+// ============================================
+
+.planning-section {
+  padding: 1.5rem 0 2.5rem;
+}
+
+.planning-header {
+  @include Flex(column, flex-start, flex-start);
+
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+
+  border-bottom: 2px solid rgba(132, 84, 0, 0.2);
+
+  h2 {
+    @include HeadingSerif;
+
+    margin: 0;
+    color: $color-primary;
+    font-size: 1.25rem;
+  }
+
+  p {
+    margin: 0.25rem 0 0;
+    color: $color-text-medium;
+    font-size: 0.9rem;
+  }
+}
+
+.planning-pets {
+  display: none;
+
+  span {
+    font-size: 2rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .planning-section {
+    padding: 2rem 0 4rem;
+  }
+
+  .planning-header {
+    @include Flex(row, space-between, flex-end);
+
+    h2 {
+      font-size: 1.5rem;
+    }
+
+    p {
+      font-size: 1rem;
+    }
+  }
+
+  .planning-pets {
+    display: block;
+    color: rgba(132, 84, 0, 0.2);
+    transform: rotate(12deg);
+
+    span {
+      font-size: 2.5rem;
+    }
+  }
+}
+
+.planning-grid {
+  display: grid;
+  grid-template-columns: 1fr; // Mobile: single column
+  gap: 0.75rem;
+}
+
+@media (min-width: 768px) {
+  .planning-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+}
+
+.paper-card-icon {
+  width: 2.25rem;
+  height: 2.25rem;
+  margin-bottom: 0.5rem;
+
+  @include Flex(row, center, center);
+
+  border-radius: 999px;
+  background: rgba(255, 174, 48, 0.1);
+
+  span {
+    color: $color-secondary;
+    font-size: 1.1rem;
+  }
+
+  @media (min-width: 768px) {
+    width: 2.5rem;
+    height: 2.5rem;
+
+    span {
+      font-size: 1.25rem;
+    }
+  }
+}
+
+.status-pill {
+  display: inline-block;
+  margin-top: 0.75rem;
+  padding: 0.3rem 0.65rem;
+
+  border-radius: 999px;
+  background: $color-surface-high;
+
+  @include LabelCaps;
+
+  font-size: 0.6rem;
+  color: $color-text-medium;
+
+  @media (min-width: 768px) {
+    padding: 0.35rem 0.75rem;
+    font-size: 0.625rem;
+  }
+}

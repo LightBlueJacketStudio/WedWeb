@@ -28,7 +28,7 @@ Do these before starting your development
 
 ### Activate SCSS watch
 
-1. In a separate terminal, navigate to the project root, and run ` sass --watch .\frontend\scss\index.scss:.\frontend\src\index.css`
+1. In a separate terminal, navigate to the project root, and run ` sass --watch .\frontend\scss\main.scss:.\frontend\src\index.css`
 
 2. This terminal will now watch for styling changes and automatically compile them to css
 
