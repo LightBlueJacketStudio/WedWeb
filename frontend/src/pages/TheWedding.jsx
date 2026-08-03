@@ -35,7 +35,7 @@ function TheWedding() {
             <h1>The Wedding</h1>
 
             <p className="travel-guide-intro">
-              Everything you need to know about our special day —
+              Everything you need to know about our special day - 
               where to find us, and how the celebration will unfold.
             </p>
           </div>
@@ -58,7 +58,7 @@ function TheWedding() {
             </div>
 
             <p className="venue-name">
-              Mikazuki Resort &amp; Spa
+              Mikazuki Da Nang Resort &amp; Spa
             </p>
           </div>
 

@@ -62,6 +62,8 @@ function Rsvp() {
   const [status, setStatus] = useState('idle') // idle | submitting | submitted | error
 
   const isNotAttending = formData.attending === 'No :('
+  const isNotSure = formData.attending === 'Not sure yet'
+  const showFullDetails = formData.attending === 'Yes, count me in!'
 
   function handleChange(event) {
     const { name, value } = event.target
@@ -71,20 +73,26 @@ function Rsvp() {
   async function handleSubmit(event) {
     event.preventDefault()
 
-    // sanitize: skip the "if you're coming" questions when declining.
-    // Dietary and accommodationHelp are required questions on the Google
+    // sanitize: skip questions the guest was never shown.
+    // "No" skips everything but name; "Not sure yet" skips everything but
+    // email/address. Several of these are required questions on the Google
     // Form itself, so they still need a value or Google silently rejects
-    // the whole response (the no-cors POST below can't surface that).
+    // the whole response (the no-cors POST below can't surface that failure).
     const submissionData = {
       ...formData,
-      plusOne: isNotAttending ? '' : formData.plusOne,
-      kids: isNotAttending ? '' : formData.kids,
-      dietary: isNotAttending ? 'N/A' : formData.dietary,
-      accommodationHelp: isNotAttending
-        ? "No, I've got it sorted"
-        : formData.accommodationHelp,
-      flyingIntoDAD: isNotAttending ? '' : formData.flyingIntoDAD,
-      flyingIntoDADOther: isNotAttending ? '' : formData.flyingIntoDADOther,
+      plusOne: showFullDetails ? formData.plusOne : '',
+      kids: showFullDetails ? formData.kids : '',
+      // Google's Email question enforces email-format validation, so a plain
+      // 'N/A' would make it silently reject the whole "No" response.
+      email: isNotAttending ? 'no-reply@na.example.com' : formData.email,
+      address: isNotAttending ? 'N/A' : formData.address,
+      phone: showFullDetails ? formData.phone : 'N/A',
+      dietary: showFullDetails ? formData.dietary : 'N/A',
+      accommodationHelp: showFullDetails
+        ? formData.accommodationHelp
+        : "No, I've got it sorted",
+      flyingIntoDAD: showFullDetails ? formData.flyingIntoDAD : '',
+      flyingIntoDADOther: showFullDetails ? formData.flyingIntoDADOther : '',
     }
 
     const body = new URLSearchParams()
@@ -120,8 +128,11 @@ function Rsvp() {
 
         {status === 'submitted' ? (
           <p>
-            Thank you, {formData.name}! We've received your RSVP and can't wait to
-            celebrate with you.
+            {isNotAttending
+              ? `We're so sorry you can't make it, ${formData.name}. But if you change your mind, feel free to resubmit the form by December 31st, 2026!`
+              : isNotSure
+              ? `Thank, ${formData.name}! No worries if you're unsure but please let us know by December 1st so we can finalize our headcount.`
+              : `Thank you, ${formData.name}! We've received your RSVP and can't wait to celebrate with you.`}
           </p>
         ) : (
           <>
@@ -138,8 +149,6 @@ function Rsvp() {
                   onChange={handleChange}
                 />
               </label>
-
-              
 
               <label>
                 Will you be able to attend?
@@ -160,7 +169,53 @@ function Rsvp() {
                 </select>
               </label>
 
+              <label>
+                How do you know the couple?
+                <select
+                  required
+                  name="howYouKnow"
+                  value={formData.howYouKnow}
+                  onChange={handleChange}
+                >
+                  <option value="" disabled>
+                    Select an option
+                  </option>
+                  {HOW_YOU_KNOW_OPTIONS.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </select>
+              </label>
+
               {!isNotAttending && (
+                <>
+                  <label>
+                    Email
+                    <input
+                      required
+                      type="email"
+                      maxLength={MAX_SHORT_LENGTH}
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                    />
+                  </label>
+
+                  <label>
+                    Address (for physical invitation tbd)
+                    <input
+                      required
+                      maxLength={MAX_SHORT_LENGTH}
+                      name="address"
+                      value={formData.address}
+                      onChange={handleChange}
+                    />
+                  </label>
+                </>
+              )}
+
+              {showFullDetails && (
                 <>
                   <label>
                     Your Spouse, Partner, +1 :)
@@ -185,46 +240,19 @@ function Rsvp() {
                       ))}
                     </select>
                   </label>
-                </>
-              )}
 
-              <label>
-                Email
-                <input
-                  required
-                  type="email"
-                  maxLength={MAX_SHORT_LENGTH}
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                />
-              </label>
+                  <label>
+                    Phone number
+                    <input
+                      required
+                      type="tel"
+                      maxLength={MAX_SHORT_LENGTH}
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleChange}
+                    />
+                  </label>
 
-              <label>
-                Address (for physical invitation tbd)
-                <input
-                  required
-                  maxLength={MAX_SHORT_LENGTH}
-                  name="address"
-                  value={formData.address}
-                  onChange={handleChange}
-                />
-              </label>
-
-              <label>
-                Phone number
-                <input
-                  required
-                  type="tel"
-                  maxLength={MAX_SHORT_LENGTH}
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleChange}
-                />
-              </label>
-
-              {!isNotAttending && (
-                <>
                   <label>
                     Dietary Restrictions?
                     <input
@@ -255,24 +283,6 @@ function Rsvp() {
                       ))}
                     </select>
                   </label>
-                  <label>
-                How do you know the couple?
-                <select
-                  required
-                  name="howYouKnow"
-                  value={formData.howYouKnow}
-                  onChange={handleChange}
-                >
-                  <option value="" disabled>
-                    Select an option
-                  </option>
-                  {HOW_YOU_KNOW_OPTIONS.map((option) => (
-                    <option key={option} value={option}>
-                      {option}
-                    </option>
-                  ))}
-                </select>
-              </label>
 
                   <label>
                     Do you plan to fly into Da Nang International Airport (DAD)?
@@ -289,7 +299,7 @@ function Rsvp() {
                           {option}
                         </option>
                       ))}
-                    </select>              
+                    </select>
                   </label>
 
                   {formData.flyingIntoDAD === 'Other' && (
