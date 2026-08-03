@@ -1,0 +1,54 @@
+@use '../abstracts' as *;
+
+.rsvp-page {
+  @include Flex(row, center, flex-start);
+  @include PassportTexture;
+
+  position: relative;
+
+  min-height: 100vh;
+  padding: 1.25rem;
+
+  &::before {
+    content: 'flight_takeoff';
+
+    position: absolute;
+    top: 5.5rem;
+    left: 1.5rem;
+
+    font-family: 'Material Symbols Outlined';
+    font-size: 2rem;
+    color: rgba($color-primary, 0.12);
+
+    pointer-events: none;
+  }
+
+  &::after {
+    content: '';
+
+    position: absolute;
+    inset: 0;
+
+    background-color: $color-bg-page-start;
+    background-size: 28px 28px;
+
+    pointer-events: none;
+  }
+}
+
+@media (max-width: 400px) {
+  .rsvp-page::before {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .rsvp-page {
+    padding: clamp(2rem, 6vw, 4rem) 1.25rem;
+
+    &::before {
+      left: clamp(1.5rem, 6vw, 5rem);
+      font-size: clamp(2rem, 5vw, 4rem);
+    }
+  }
+}

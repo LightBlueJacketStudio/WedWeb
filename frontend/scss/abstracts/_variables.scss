@@ -1,0 +1,61 @@
+// ============================================
+// COLOR PALETTE
+// ============================================
+
+// Primary colors
+$color-primary: rgb(108, 12, 32);
+$color-primary-hover: rgb(139, 38, 53);
+$color-primary-light: rgb(164, 57, 70);
+$color-primary-shadow: rgba(108, 12, 32, 0.22);
+$color-primary-glow: rgba(255, 178, 182, 0.28);
+
+// Secondary / travel accent colors
+$color-secondary: rgb(132, 84, 0);
+$color-secondary-hover: rgb(108, 68, 0);
+$color-secondary-container: rgb(255, 174, 48);
+$color-secondary-soft: rgba(255, 174, 48, 0.14);
+
+// Tertiary warm brown
+$color-tertiary: rgb(99, 28, 5);
+$color-tertiary-container: rgb(130, 50, 25);
+
+// Text colors
+$color-text-dark: rgb(28, 28, 23);
+$color-text-medium: rgb(86, 66, 66);
+$color-text-light: rgb(137, 113, 114);
+$color-text-placeholder: rgb(137, 113, 114);
+$color-text-disabled: rgb(137, 113, 114);
+$color-text-on-primary: rgb(255, 255, 255);
+
+// Background colors
+$color-bg-page-start: rgb(253, 249, 240);
+$color-bg-page-end: rgb(247, 243, 234);
+$color-bg-card: rgb(247, 243, 234);
+$color-bg-card-bright: rgb(255, 255, 255);
+$color-bg-input: rgb(255, 255, 255);
+$color-bg-input-focus: rgb(255, 255, 255);
+$color-bg-input-disabled: rgb(236, 232, 223);
+
+// Surface colors
+$color-surface: rgb(253, 249, 240);
+$color-surface-low: rgb(247, 243, 234);
+$color-surface-container: rgb(241, 238, 229);
+$color-surface-high: rgb(236, 232, 223);
+$color-surface-highest: rgb(230, 226, 217);
+
+// Border colors
+$color-border: rgb(221, 192, 192);
+$color-border-soft: rgba(137, 113, 114, 0.28);
+$color-border-focus: rgb(108, 12, 32);
+$color-border-dashed: rgba(137, 113, 114, 0.5);
+
+// Shadow colors
+$color-shadow-card: rgba(49, 49, 43, 0.16);
+$color-shadow-button: rgba(108, 12, 32, 0.25);
+
+// ============================================
+// TYPOGRAPHY
+// ============================================
+
+$font-heading: 'Libre Caslon Text', Georgia, serif;
+$font-body: 'Plus Jakarta Sans', system-ui, sans-serif;

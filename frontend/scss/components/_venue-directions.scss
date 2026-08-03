@@ -1,0 +1,206 @@
+@use '../abstracts' as *;
+
+// ============================================
+// VENUE DIRECTIONS
+// ============================================
+
+.venue-directions {
+  @include Flex(column, flex-start, stretch);
+
+  gap: 1rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+
+  border-top: 1px dashed $color-border-dashed;
+}
+
+.venue-address-group {
+  min-width: 0;
+}
+
+.venue-address-label {
+  margin: 0 0 0.4rem;
+
+  @include LabelCaps;
+
+  color: $color-secondary;
+  font-size: 0.625rem;
+}
+
+.venue-address-row {
+  @include Flex(row, flex-start, center);
+
+  gap: 0.6rem;
+  min-width: 0;
+  padding: 0.75rem;
+
+  border: 1px solid rgba(132, 84, 0, 0.2);
+  border-radius: 0.875rem;
+
+  background: $color-surface-low;
+
+  > .material-symbols-outlined {
+    flex-shrink: 0;
+
+    color: $color-secondary;
+    font-size: 1.25rem;
+  }
+
+  p {
+    min-width: 0;
+    flex: 1;
+
+    margin: 0;
+
+    color: $color-text-dark;
+    font-family: $font-body;
+    font-size: 0.8rem;
+    line-height: 1.5;
+
+    overflow-wrap: anywhere;
+  }
+}
+
+.copy-address-button {
+  @include Flex(row, center, center);
+
+  flex-shrink: 0;
+  gap: 0.35rem;
+
+  min-height: 40px;
+  padding: 0.5rem 0.7rem;
+
+  border: 1px solid rgba(108, 12, 32, 0.22);
+  border-radius: 0.75rem;
+
+  background: $color-bg-card-bright;
+  color: $color-primary;
+
+  @include LabelCaps;
+
+  font-size: 0.6rem;
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.15s ease,
+    border-color 0.2s ease;
+
+  .material-symbols-outlined {
+    font-size: 1rem;
+  }
+
+  &:hover {
+    border-color: $color-primary;
+    background: $color-primary;
+    color: $color-text-on-primary;
+  }
+
+  &:active {
+    transform: scale(0.96);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 4px $color-primary-glow;
+  }
+}
+
+.google-maps-button {
+  @include Flex(row, center, center);
+  @include LabelCaps;
+
+  gap: 0.55rem;
+
+  width: 100%;
+  min-height: 50px;
+  padding: 0.75rem 1rem;
+
+  border-radius: 1rem;
+
+  background: $color-primary;
+  color: $color-text-on-primary;
+
+  font-size: 0.7rem;
+  text-decoration: none;
+
+  box-shadow: 0 12px 28px $color-shadow-button;
+
+  transition:
+    background-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.15s ease;
+
+  .material-symbols-outlined {
+    font-size: 1.2rem;
+  }
+
+  .external-icon {
+    margin-left: 0.15rem;
+    font-size: 0.95rem;
+    opacity: 0.75;
+  }
+
+  &:hover {
+    background: $color-primary-hover;
+    transform: translateY(-2px);
+    box-shadow: 0 16px 32px $color-shadow-button;
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow:
+      0 0 0 4px $color-primary-glow,
+      0 12px 28px $color-shadow-button;
+  }
+}
+
+@media (max-width: 480px) {
+  .venue-address-row {
+    align-items: flex-start;
+    flex-wrap: wrap;
+
+    p {
+      flex-basis: calc(100% - 2rem);
+    }
+  }
+
+  .copy-address-button {
+    width: 100%;
+    margin-top: 0.25rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .venue-directions {
+    @include Flex(row, space-between, flex-end);
+
+    gap: 1.25rem;
+    margin-top: 1.25rem;
+    padding-top: 1.25rem;
+  }
+
+  .venue-address-group {
+    flex: 1;
+  }
+
+  .venue-address-row {
+    padding: 0.85rem 1rem;
+
+    p {
+      font-size: 0.9rem;
+    }
+  }
+
+  .google-maps-button {
+    width: auto;
+    min-width: 14rem;
+    min-height: 48px;
+    padding: 0.8rem 1.25rem;
+  }
+}

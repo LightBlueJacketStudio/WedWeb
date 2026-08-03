@@ -1,0 +1,14 @@
+@use '../abstracts' as *;
+
+.navibar-logo,
+.footer-logo {
+  font-family: $font-heading;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: $color-primary;
+  text-decoration: none;
+
+  @media (min-width: 768px) {
+    font-size: 1.5rem;
+  }
+}

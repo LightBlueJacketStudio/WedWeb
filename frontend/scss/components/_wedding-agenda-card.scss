@@ -1,0 +1,81 @@
+@use '../abstracts' as *;
+
+// ============================================
+// WEDDING AGENDA CARD
+// ============================================
+
+.wedding-agenda-card {
+  width: 100%;
+  max-width: 64rem;
+  margin: 1.5rem auto 0;
+  padding: 1.5rem;
+
+  border: 2px solid rgba(255, 174, 48, 0.3);
+  border-radius: 1.25rem;
+
+  background: $color-bg-card-bright;
+
+  box-shadow: 0 24px 56px rgba(49, 49, 43, 0.18);
+  position: relative;
+  z-index: 1;
+}
+
+.wedding-agenda-header {
+  padding: 0 0.25rem 1rem;
+  margin-bottom: 1.25rem;
+
+  border-bottom: 1px dashed $color-border-dashed;
+
+  h2 {
+    @include Flex(row, flex-start, center);
+    @include HeadingSerif;
+
+    gap: 0.5rem;
+    margin: 0.2rem 0 0;
+
+    color: $color-primary;
+    font-size: 1.4rem;
+
+    .material-symbols-outlined {
+      color: $color-secondary;
+      font-size: 1.5rem;
+    }
+  }
+}
+
+.wedding-agenda-pending {
+  @include Flex(column, center, center);
+
+  gap: 0.75rem;
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+
+  border: 1px dashed $color-border-dashed;
+  border-radius: 1rem;
+
+  background: $color-surface-low;
+
+  .material-symbols-outlined {
+    @include Flex(row, center, center);
+
+    width: 3.25rem;
+    height: 3.25rem;
+
+    border-radius: 999px;
+    background: $color-secondary-soft;
+
+    color: $color-secondary;
+    font-size: 1.75rem;
+  }
+
+  p {
+    max-width: 32rem;
+    margin: 0;
+
+    color: $color-text-medium;
+    font-family: $font-heading;
+    font-size: 0.95rem;
+    font-style: italic;
+    line-height: 1.65;
+  }
+}

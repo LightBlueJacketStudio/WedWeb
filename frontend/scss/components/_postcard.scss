@@ -1,0 +1,477 @@
+@use '../abstracts' as *;
+
+// ============================================
+// SAVE THE DATE POSTCARD (MOBILE-FIRST)
+// ============================================
+
+// The home main is a flex column so the postcard section can grow to fill the
+// space between the nav and footer...
+#root > main:has(.postcard-section) {
+  display: flex;
+  flex-direction: column;
+}
+
+.postcard-section {
+  padding: 2rem 1rem 2.5rem;
+
+  // ...and the card centres vertically inside that filled space. This keeps the
+  // footer anchored at the bottom of the page: flipping the card only resizes it
+  // in place (re-centred), so the footer never slides up/down with the flip.
+  flex: 1 0 auto;
+
+  @include Flex(column, center, center);
+}
+
+// Front is portrait (9:16 art); back is a landscape postcard. The flip layer
+// stays portrait-sized so it centres trivially; the landscape card lives
+// inside the back face, counter-rotated so it reads upright once landed.
+.postcard {
+  --cw: min(80vw, 330px); // portrait width
+  --ch: calc(var(--cw) * 16 / 9); // portrait height
+  --lw: min(94vw, 560px); // landscape width
+  // Taller (less wide) ratio on mobile so the note doesn't overflow the small
+  // card; desktop restores the roomier 3:2 landscape below.
+  --lh: calc(var(--lw) / 1.3); // landscape height
+
+  position: relative;
+  width: max(var(--cw), var(--lw));
+  height: max(var(--ch), var(--lh));
+
+  @include Flex(row, center, center);
+
+  cursor: pointer;
+  perspective: 1800px;
+  -webkit-tap-highlight-color: transparent;
+
+  // Entrance: pop the card in when it scrolls into view
+  opacity: 0;
+  transform: translateY(16px) scale(0.9);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1),
+    height 0.35s ease;
+
+  &.is-entered {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  // The front is portrait (tall); the back is landscape (short). The box
+  // reserves the taller portrait height by default so the front fits. Once
+  // flipped to the back, collapse to the landscape height so the shorter card
+  // doesn't float in a tall, empty box. The collapse is delayed until the flip
+  // is past edge-on (~0.45s) so the taller front never spills out mid-turn.
+  &.is-flipped {
+    // --card-h is measured from the note's real content height in JS (the card
+    // is rotated + absolutely positioned, so its natural height can't feed back
+    // into layout on its own). Falls back to the ratio height until measured.
+    height: var(--card-h, var(--lh));
+    transition:
+      opacity 0.7s ease,
+      transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1),
+      height 0.35s ease 0.5s;
+  }
+
+  &:focus-visible {
+    outline: 3px solid $color-primary;
+    outline-offset: 8px;
+    border-radius: 1rem;
+  }
+}
+
+// The flip layer — portrait sized, centred by the flex parent.
+.postcard-inner {
+  position: relative;
+  width: var(--cw);
+  height: var(--ch);
+
+  transform-style: preserve-3d;
+  transition: transform 0.85s cubic-bezier(0.45, 0.05, 0.2, 1);
+
+  // Flipped state — a single calm turn to the back, landscape orientation.
+  // Used for both the first auto-reveal and every manual tap.
+  .postcard.is-flipped & {
+    transform: rotateY(180deg) rotateZ(90deg);
+  }
+}
+
+.postcard-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+// FRONT — portrait Save the Date artwork
+.postcard-front {
+  overflow: hidden;
+  border-radius: 1rem;
+  box-shadow:
+    0 22px 50px rgba(49, 49, 43, 0.28),
+    0 2px 6px rgba(49, 49, 43, 0.12);
+  transform: rotateY(0deg);
+  background: $color-surface-low;
+
+  img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+  }
+}
+
+// BACK — a transparent flip layer; overflow visible so the wider landscape
+// card can extend past this portrait face.
+.postcard-back {
+  overflow: visible;
+  transform: rotateY(180deg);
+}
+
+// The visible landscape postcard. Centred in the back face and counter-rotated
+// (+90) so that once the card lands (rotateY 180 + rotateZ 90) it reads upright.
+.pc-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: var(--lw);
+  // Grow to fit the note instead of clipping it: the ratio height becomes a
+  // floor so short notes keep the roomy postcard shape, while a longer note (or
+  // a narrow screen that wraps the text into more lines) makes the card taller.
+  min-height: var(--lh);
+  height: auto;
+  transform: translate(-50%, -50%) rotateZ(90deg);
+
+  overflow: hidden;
+  border-radius: 1rem;
+  box-shadow:
+    0 22px 50px rgba(49, 49, 43, 0.28),
+    0 2px 6px rgba(49, 49, 43, 0.12);
+
+  padding: clamp(0.75rem, 2.4vw, 1.5rem);
+
+  @include Flex(row, flex-start, stretch);
+  @include PassportTexture;
+
+  border: 1px solid rgba(255, 174, 48, 0.35);
+  gap: clamp(0.6rem, 1.8vw, 1.25rem);
+}
+
+.pc-left {
+  flex: 1.15;
+  min-width: 0;
+
+  @include Flex(column, flex-start, stretch);
+
+  gap: clamp(0.3rem, 1.2vw, 0.6rem);
+}
+
+.pc-return {
+  .pc-return-name {
+    @include LabelCaps;
+
+    margin: 0;
+    font-size: clamp(0.5rem, 1.6vw, 0.78rem);
+    letter-spacing: 0.1em;
+    line-height: 1.4;
+    color: $color-text-dark;
+  }
+
+  .pc-return-addr {
+    margin: 0.35rem 0 0;
+    font-family: $font-body;
+    font-size: clamp(0.4rem, 1.1vw, 0.58rem);
+    line-height: 1.5;
+    color: $color-text-medium;
+  }
+}
+
+// Sits under the return address, right-aligned.
+.pc-savedate {
+  margin-top: clamp(0.35rem, 1.6vw, 0.75rem);
+  text-align: right;
+
+  p {
+    @include LabelCaps;
+
+    margin: 0;
+    font-size: clamp(0.5rem, 1.5vw, 0.76rem);
+    letter-spacing: 0.14em;
+    line-height: 1.4;
+    color: $color-primary;
+  }
+
+  .pc-savedate-date {
+    font-size: clamp(0.56rem, 1.7vw, 0.86rem);
+  }
+}
+
+.pc-message {
+  @include Flex(column, flex-start, stretch);
+
+  gap: clamp(0.35rem, 1.5vw, 0.7rem);
+
+  p {
+    margin: 0;
+    font-family: 'Indie Flower', $font-heading;
+    color: $color-text-dark;
+    font-size: clamp(0.56rem, 1.6vw, 0.82rem);
+    line-height: 1.45;
+  }
+
+  .pc-signoff {
+    margin-top: 0.25rem;
+    align-self: flex-end;
+    text-align: right;
+    font-family: 'Sacramento', $font-heading;
+    font-size: clamp(1rem, 3.1vw, 1.7rem);
+    line-height: 1;
+    color: $color-primary;
+  }
+}
+
+.pc-divider {
+  width: 1.5px;
+  align-self: stretch;
+  flex-shrink: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(108, 12, 32, 0.35) 0,
+    rgba(108, 12, 32, 0.35) 5px,
+    transparent 5px,
+    transparent 10px
+  );
+}
+
+.pc-right {
+  flex: 1;
+  min-width: 0;
+
+  @include Flex(column, flex-start, stretch);
+
+  gap: clamp(0.4rem, 1.6vw, 0.9rem);
+}
+
+// The "franking" cluster in the top corner of the address side: a round
+// postmark on the left, wavy cancellation lines streaming across, and a
+// rectangular postage stamp tucked into the corner — like a real posted card.
+.pc-postage {
+  position: relative;
+  height: clamp(3.6rem, 13.5vw, 6.2rem);
+
+  // Round arrival stamp, kept as the postmark on the left of the cluster.
+  .pc-stamp {
+    position: absolute;
+    top: clamp(0.1rem, 0.8vw, 0.4rem);
+    left: clamp(1.4rem, 8vw, 4rem);
+    width: clamp(2.6rem, 9vw, 4.4rem);
+    height: clamp(2.6rem, 9vw, 4.4rem);
+    object-fit: contain;
+    transform: rotate(-7deg);
+    opacity: 0.9;
+    z-index: 2;
+  }
+}
+
+// Wavy cancellation bars, like the ink lines franked over a postmark. They
+// start under the round stamp and run all the way across to tuck just under
+// the postage stamp, tying the three pieces into one franking. The left/right
+// anchors size the width, and the 4:1 viewBox sets the height.
+.pc-cancel {
+  position: absolute;
+  top: 50%;
+  left: clamp(4.2rem, 14.6vw, 7.2rem);
+  right: clamp(2.1rem, 7vw, 3.5rem);
+  height: auto;
+  overflow: visible;
+  transform: translateY(-50%) rotate(-6deg);
+  pointer-events: none;
+  z-index: 1;
+
+  path {
+    fill: none;
+    stroke: rgba(108, 12, 32, 0.5);
+    stroke-width: 1.4;
+    stroke-linecap: round;
+  }
+}
+
+// Rectangular Việt Nam air-mail postage stamp in the corner. Blended with
+// multiply so the PNG's white ground drops into the paper and only the ink
+// shows through — as if it were stamped straight onto the postcard.
+.pc-stamp-frame {
+  position: absolute;
+  top: 0;
+  right: 0;
+  // Exact 3:4 stamp shape. The source art is drawn slightly taller (~5:8), so
+  // `fill` shortens it into a true 3:4 frame instead of letterboxing it long.
+  width: clamp(2.25rem, 7.5vw, 3.6rem);
+  height: clamp(3rem, 10vw, 4.8rem);
+  object-fit: fill;
+  transform: rotate(3deg);
+  z-index: 2;
+
+  mix-blend-mode: multiply;
+  opacity: 0.88;
+}
+
+// Sits right under the stamp now (flex-start), holding the "Plan your visit"
+// heading and the grid of quick-link stamps below it.
+.pc-deliver {
+  @include Flex(column, flex-start, stretch);
+
+  gap: clamp(0.4rem, 1.6vw, 0.8rem);
+
+  .pc-deliver-label {
+    @include LabelCaps;
+
+    margin: 0;
+    font-size: clamp(0.5rem, 1.6vw, 0.78rem);
+    letter-spacing: 0.14em;
+    color: $color-text-dark;
+  }
+}
+
+// Vertical stack of little "ticket" buttons in place of the address lines.
+.pc-actions {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(0.3rem, 1.2vw, 0.55rem);
+}
+
+.pc-action {
+  @include Flex(row, flex-start, center);
+
+  gap: clamp(0.35rem, 1.4vw, 0.7rem);
+  padding: clamp(0.35rem, 1.5vw, 0.55rem) clamp(0.5rem, 2vw, 0.85rem);
+
+  text-align: left;
+  text-decoration: none;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(108, 12, 32, 0.28);
+  background: rgba(255, 255, 255, 0.4);
+  color: $color-primary;
+
+  cursor: pointer;
+  transition:
+    transform 0.18s ease,
+    background 0.18s ease,
+    border-color 0.18s ease,
+    box-shadow 0.18s ease;
+
+  .pc-action-icon {
+    font-size: clamp(0.85rem, 3vw, 1.25rem);
+    line-height: 1;
+  }
+
+  .pc-action-label {
+    @include LabelCaps;
+
+    font-size: clamp(0.4rem, 1.2vw, 0.6rem);
+    letter-spacing: 0.08em;
+    line-height: 1.15;
+    color: $color-text-dark;
+  }
+
+  &:hover,
+  &:focus-visible {
+    transform: translateY(-1px);
+    background: $color-primary;
+    border-color: $color-primary;
+    box-shadow: 0 4px 12px rgba(108, 12, 32, 0.24);
+
+    .pc-action-icon,
+    .pc-action-label {
+      color: $color-text-on-primary;
+    }
+  }
+
+  &:focus-visible {
+    outline: 2px solid $color-primary;
+    outline-offset: 2px;
+  }
+}
+
+.postcard-hint {
+  position: absolute;
+  left: 50%;
+  bottom: 0.7rem;
+  transform: translateX(-50%);
+  z-index: 2;
+
+  @include Flex(row, center, center);
+
+  gap: 0.3rem;
+  padding: 0.28rem 0.7rem;
+  border-radius: 999px;
+
+  background: rgba(253, 249, 240, 0.88);
+  backdrop-filter: blur(4px);
+  box-shadow: 0 2px 8px rgba(49, 49, 43, 0.18);
+
+  font-family: $font-body;
+  font-size: clamp(0.55rem, 1.6vw, 0.66rem);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: $color-primary;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.postcard-hint-icon {
+  font-size: 0.85em;
+  line-height: 1;
+}
+
+.postcard-front .postcard-hint {
+  animation: postcard-hint-pulse 2.4s ease-in-out infinite;
+}
+
+// On the back the bottom-centre is taken by the note; tuck the hint into the
+// now-empty bottom-left corner instead.
+.postcard-back .postcard-hint {
+  left: clamp(0.75rem, 2.4vw, 1.5rem);
+  bottom: clamp(0.5rem, 2vw, 1rem);
+  transform: none;
+}
+
+@keyframes postcard-hint-pulse {
+  0%,
+  100% {
+    opacity: 0.78;
+    transform: translateX(-50%) translateY(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-2px);
+  }
+}
+
+// Tumbling flip: a couple of spins around Y while tilting to the landscape
+// (rotateZ 90). 900deg == 2.5 turns, so it lands showing the back.
+@media (min-width: 768px) {
+  .postcard-section {
+    padding: 3rem 1rem 3.5rem;
+  }
+
+  .postcard {
+    --cw: min(34vw, 300px);
+    --lw: min(72vw, 700px);
+    --lh: calc(var(--lw) / 1.5); // roomier landscape on desktop
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .postcard {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .postcard-inner {
+    transition: none;
+  }
+
+  .postcard-front .postcard-hint {
+    animation: none;
+  }
+}

@@ -1,0 +1,243 @@
+@use '../abstracts' as *;
+
+// ============================================
+// TRAVEL MAP CARD
+// ============================================
+
+.travel-map-card {
+  width: 100%;
+  max-width: 64rem;
+  margin: 0 auto;
+  padding: 1rem;
+
+  border: 2px solid rgba(255, 174, 48, 0.3);
+  border-radius: 1.25rem;
+
+  background: $color-bg-card-bright;
+
+  box-shadow: 0 24px 56px rgba(49, 49, 43, 0.18);
+  position: relative;
+  z-index: 1;
+}
+
+.travel-info-grid,
+.local-gems-section,
+.passport-stamps {
+  position: relative;
+  z-index: 1;
+}
+
+.travel-map-header {
+  @include Flex(column, flex-start, flex-start);
+
+  gap: 0.75rem;
+  padding: 0.25rem 0.25rem 1rem;
+  margin-bottom: 1rem;
+
+  border-bottom: 1px dashed $color-border-dashed;
+
+  h2 {
+    @include HeadingSerif;
+
+    margin: 0.2rem 0 0.35rem;
+
+    color: $color-primary;
+    font-size: 1.4rem;
+  }
+
+  p {
+    margin: 0;
+
+    color: $color-text-medium;
+    font-size: 0.85rem;
+    line-height: 1.6;
+  }
+}
+
+.travel-map-label {
+  @include LabelCaps;
+
+  color: $color-secondary !important;
+  font-size: 0.625rem !important;
+}
+
+.travel-map-icon {
+  width: 2.75rem;
+  height: 2.75rem;
+
+  @include Flex(row, center, center);
+
+  flex-shrink: 0;
+
+  border-radius: 999px;
+  background: $color-secondary-soft;
+
+  color: $color-secondary;
+
+  span {
+    font-size: 1.4rem;
+  }
+}
+
+// ============================================
+// LEAFLET MAP
+// ============================================
+
+.travel-map-wrapper {
+  position: relative;
+  isolation: isolate;
+
+  width: 100%;
+  height: 360px;
+  min-height: 360px;
+
+  overflow: hidden;
+
+  border: 1px solid rgba(132, 84, 0, 0.25);
+  border-radius: 1rem;
+
+  background: $color-surface-container;
+
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.45),
+    0 12px 30px rgba(49, 49, 43, 0.12);
+}
+
+.travel-map-wrapper > .travel-map,
+.travel-map-wrapper .leaflet-container {
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+
+  z-index: 1;
+}
+
+.travel-map {
+  width: 100%;
+  height: 100%;
+
+  font-family: $font-body;
+}
+
+// Slightly soften the map colors so it blends with the page.
+.travel-map .leaflet-tile-pane {
+  filter:
+    sepia(0.12)
+    saturate(0.85)
+    contrast(0.96)
+    brightness(1.04);
+}
+
+// Leaflet zoom controls
+.travel-map .leaflet-control-zoom {
+  overflow: hidden;
+
+  border: 1px solid rgba(108, 12, 32, 0.2);
+  border-radius: 0.75rem;
+
+  box-shadow: 0 8px 20px rgba(49, 49, 43, 0.15);
+}
+
+.travel-map .leaflet-control-zoom a {
+  @include Flex(row, center, center);
+
+  width: 38px;
+  height: 38px;
+
+  border: none;
+  border-bottom: 1px solid rgba(221, 192, 192, 0.45);
+
+  background: rgba(253, 249, 240, 0.95);
+  color: $color-primary;
+
+  font-family: $font-body;
+  font-weight: 700;
+  line-height: 1;
+
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease;
+
+  &:hover {
+    background: $color-primary;
+    color: $color-text-on-primary;
+  }
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+// Leaflet attribution
+.travel-map .leaflet-control-attribution {
+  padding: 0.25rem 0.4rem;
+
+  border-radius: 0.4rem 0 0 0;
+
+  background: rgba(253, 249, 240, 0.9);
+  color: $color-text-light;
+
+  font-family: $font-body;
+  font-size: 0.55rem;
+
+  a {
+    color: $color-primary;
+  }
+}
+
+// ============================================
+// MAP POPUP
+// ============================================
+
+.travel-map .leaflet-popup-content-wrapper {
+  border: 1px solid rgba(255, 174, 48, 0.25);
+  border-radius: 1rem;
+
+  background: $color-surface;
+
+  box-shadow: 0 16px 36px rgba(49, 49, 43, 0.2);
+}
+
+.travel-map .leaflet-popup-content {
+  min-width: 180px;
+  margin: 1rem;
+}
+
+.travel-map .leaflet-popup-tip {
+  background: $color-surface;
+}
+
+.map-popup-content {
+  h3 {
+    margin: 0 0 0.35rem;
+
+    font-family: $font-heading;
+    font-size: 1rem;
+    line-height: 1.3;
+    color: $color-primary;
+  }
+
+  p {
+    margin: 0;
+
+    font-family: $font-body;
+    font-size: 0.75rem;
+    line-height: 1.5;
+    color: $color-text-medium;
+  }
+}
+
+// Leaflet popup close button
+.travel-map .leaflet-popup-close-button {
+  top: 0.25rem;
+  right: 0.35rem;
+
+  color: $color-primary !important;
+  font-size: 1.25rem !important;
+
+  &:hover {
+    color: $color-primary-hover !important;
+  }
+}

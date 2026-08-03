@@ -1,0 +1,89 @@
+@use '../abstracts' as *;
+
+// ============================================
+// REGISTRY VIDEO
+// ============================================
+
+.registry-video-box {
+  position: relative;
+
+  width: 100%;
+  min-height: 16rem;
+  padding: 1.5rem;
+
+  @include Flex(row, center, center);
+
+  border: 1px solid rgba(132, 84, 0, 0.18);
+  border-radius: 1.5rem;
+
+  background: $color-surface-high;
+  box-shadow: 0 20px 45px rgba(49, 49, 43, 0.12);
+
+  overflow: hidden;
+}
+
+.registry-video-content {
+  text-align: center;
+
+  h2 {
+    @include HeadingSerif;
+
+    margin: 0 0 0.35rem;
+
+    color: $color-primary;
+    font-size: 1.15rem;
+  }
+
+  p {
+    margin: 0;
+
+    color: $color-text-medium;
+    font-family: $font-heading;
+    font-size: 0.8rem;
+    font-style: italic;
+  }
+}
+
+.registry-play-btn {
+  width: 3.25rem;
+  height: 3.25rem;
+  margin: 0 auto 1rem;
+
+  @include Flex(row, center, center);
+
+  border: none;
+  border-radius: 999px;
+
+  background: $color-primary;
+  color: $color-text-on-primary;
+  cursor: pointer;
+
+  box-shadow: 0 12px 28px $color-shadow-button;
+
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.2s ease;
+
+  span {
+    font-size: 1.5rem;
+  }
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 16px 32px $color-shadow-button;
+  }
+
+  &:active {
+    transform: scale(0.96);
+  }
+}
+
+.registry-video-paw {
+  position: absolute;
+  right: 1rem;
+  bottom: 0.75rem;
+
+  color: rgba(132, 84, 0, 0.35);
+  font-size: 1.5rem;
+  transform: rotate(-10deg);
+}

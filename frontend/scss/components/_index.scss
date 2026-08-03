@@ -1,0 +1,20 @@
+// components/_index.scss
+// This file just re-exports everything
+
+@forward 'accomodation-card';
+@forward 'footer';
+@forward 'hero-passport';
+@forward 'logo';
+@forward 'navibar';
+@forward 'planning-section';
+@forward 'postcard';
+@forward 'registry-stats';
+@forward 'registry-donations';
+@forward 'registry-gift-card';
+@forward 'registry-video';
+@forward 'rsvp-card';
+@forward 'rsvp-form';
+@forward 'travel-guide-hero';
+@forward 'travel-map-card';
+@forward 'venue-directions';
+@forward 'wedding-agenda-card';

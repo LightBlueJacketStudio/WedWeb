@@ -1,0 +1,87 @@
+@use '../abstracts' as *;
+
+// Modern CSS Reset (inspired by Andy Bell & Josh Comeau)
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;  // This makes padding not add to width
+}
+
+// Sticky footer: keep the footer pinned to the bottom of the viewport even
+// when the page content is short (e.g. after the postcard flips to its shorter
+// back on mobile), instead of letting it ride up under the content.
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh; // account for mobile browser chrome
+
+  > main {
+    flex: 1 0 auto;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  width: 100%;
+  background: $color-surface;
+  color: $color-text-dark;
+  font-family: $font-body;
+  overflow-x: hidden;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
