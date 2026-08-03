@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import saveTheDate from '../assets/save-the-date.png'
-import arrivalStamp from '../assets/DAD-arrival-stamp.png'
 import vietnamStamp from '../assets/DN-stamp-burgundy.png'
 
 // Quick links that live on the postcard's right side, in place of the usual
@@ -171,27 +170,7 @@ function FlightPath() {
 
             <div className="pc-right">
               <div className="pc-postage">
-                {/* Round arrival stamp — the postmark on the left of the franking. */}
-                <img
-                  className="pc-stamp"
-                  src={arrivalStamp}
-                  alt="Da Nang arrival stamp, 03.13.2027"
-                />
-
-                {/* Wavy cancellation lines streaming toward the postage stamp. */}
-                <svg
-                  className="pc-cancel"
-                  viewBox="0 0 120 30"
-                  aria-hidden="true"
-                >
-                  <path d="M0 3 Q10 -2 20 3 T40 3 T60 3 T80 3 T100 3 T120 3" />
-                  <path d="M0 9 Q10 4 20 9 T40 9 T60 9 T80 9 T100 9 T120 9" />
-                  <path d="M0 15 Q10 10 20 15 T40 15 T60 15 T80 15 T100 15 T120 15" />
-                  <path d="M0 21 Q10 16 20 21 T40 21 T60 21 T80 21 T100 21 T120 21" />
-                  <path d="M0 27 Q10 22 20 27 T40 27 T60 27 T80 27 T100 27 T120 27" />
-                </svg>
-
-                {/* Rectangular postage stamp tucked into the corner. */}
+                {/* Postage stamp tucked into the corner. */}
                 <img
                   className="pc-stamp-frame"
                   src={vietnamStamp}

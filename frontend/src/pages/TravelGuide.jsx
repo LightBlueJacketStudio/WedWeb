@@ -7,7 +7,7 @@ const foodRecommendations = [
     //   "https://lh3.googleusercontent.com/aida-public/AB6AXuBOfkrF2qCobadRFPLVv9BvLSLzo1Ci6jQ5x-XOnA9y7kd5s3ZgAf3S4KW3pkgOp_0JQZVJJXbL4OKDH8ZKSgDqB3wpvvRJQYfrsKOyyroRBdoklfvWbSspEBADzK_tjAsIXzVJc3CWtlhAwmtlp60KlP8iNypS17AJhUDI7osl92rtUxTRcZRYollZJXz510ERXpJ8y1SJCqzhqlfvTfu_0RH2YTouued55W75oiyPqVSCK0QUwzUgVASeic_LPf7AV78ibANggOc",
   },
   {
-    name: "Option 2",
+    name: "Co Loi's Grill Pork In Hoi An",
     description:
       "Short Description and Address",
     // image:
@@ -19,7 +19,7 @@ const sightseeingRecommendations = [
   {
     name: "Hoi An",
     description:
-      "Description about Hoi An, Maybe how to get there. Also add some images",
+      "If you ever come to Hoi An, you don't want to miss this place. Co Loi grill-pork located in front of Phe L",
     // image:
     //   "https://lh3.googleusercontent.com/aida-public/AB6AXuAUq7PUZcBXeS1exeM5hPC9kOnV4peW4PFFARjqXk1ObBCHYydGkJyoWE0Ol-OxW81b8Q8FkTj8D5dtAA1hCCNeNrGrnJp222rSxPOWtKtwz3sidIVjXdZlTWrS4BKGWqq8BjL2MV9ynKFXf2OLYzk_KxepSIF3P6Xox7XvN4It3xVVaPEq0qgPBFcUtNwS41XARObIVR8BwTwwVHi4xeUzyn5c3oak3mw-JbV5yPnDOX1F9lL4oMS4FoUmGu5ABB45-bfrK1wE-r8",
   },
