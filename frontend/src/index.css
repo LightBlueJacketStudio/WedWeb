@@ -1001,7 +1001,8 @@ button {
 }
 .registry-stats {
   width: 100%;
-  padding: 1.5rem 1.75rem;
+  margin-top: 2.75rem;
+  padding: 1.25rem clamp(0.6rem, 4vw, 1.75rem);
   box-sizing: border-box;
   color: rgb(28, 28, 23);
   font-family: "Plus Jakarta Sans", system-ui, sans-serif;
@@ -1024,8 +1025,8 @@ button {
 
 .registry-stats-grid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 0.75rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.4rem;
   box-sizing: border-box;
   color: rgb(28, 28, 23);
   font-family: "Plus Jakarta Sans", system-ui, sans-serif;
@@ -1035,8 +1036,9 @@ button {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.3rem;
-  padding: 1rem 0.6rem;
+  gap: 0.2rem;
+  padding: 0.6rem 0.25rem;
+  min-width: 0;
   box-sizing: border-box;
   color: rgb(28, 28, 23);
   font-family: "Plus Jakarta Sans", system-ui, sans-serif;
@@ -1054,14 +1056,14 @@ button {
 .registry-stat-icon {
   box-sizing: border-box;
   color: rgb(198, 137, 47);
-  font-size: 1.4rem;
+  font-size: clamp(1.05rem, 4.5vw, 1.4rem);
   line-height: 1;
 }
 
 .registry-stat-icon.material-symbols-outlined {
   display: inline-block;
   font-family: "Material Symbols Outlined";
-  font-size: 1.4rem;
+  font-size: clamp(1.05rem, 4.5vw, 1.4rem);
   font-style: normal;
   font-weight: normal;
   font-feature-settings: "liga";
@@ -1078,7 +1080,7 @@ button {
   box-sizing: border-box;
   color: rgb(108, 12, 32);
   font-family: "Libre Caslon Text", Georgia, serif;
-  font-size: 2.1rem;
+  font-size: clamp(1.3rem, 6.5vw, 2.1rem);
   font-weight: 700;
   line-height: 1;
 }
@@ -1087,18 +1089,14 @@ button {
   box-sizing: border-box;
   color: rgb(109, 84, 80);
   font-family: "Plus Jakarta Sans", system-ui, sans-serif;
-  font-size: 0.75rem;
+  font-size: clamp(0.6rem, 2.4vw, 0.75rem);
   line-height: 1.25;
   text-align: center;
 }
 
-@media (min-width: 768px) {
-  .registry-stats-grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-}
 .registry-donations {
   width: 100%;
+  margin-top: 2.75rem;
   text-align: center;
 }
 .registry-donations h2 {
@@ -1301,12 +1299,12 @@ button {
 .registry-video-box {
   position: relative;
   width: 100%;
-  min-height: 16rem;
-  padding: 1.5rem;
+  margin: 2.75rem auto;
+  padding: 0.75rem;
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: center;
+  align-items: stretch;
   border: 1px solid rgba(132, 84, 0, 0.18);
   border-radius: 1.5rem;
   background: rgb(236, 232, 223);
@@ -1314,30 +1312,63 @@ button {
   overflow: hidden;
 }
 
-.registry-video-content {
-  text-align: center;
+.registry-video-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4/5;
+  border-radius: 1rem;
+  overflow: hidden;
 }
-.registry-video-content h2 {
+.registry-video-frame iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.registry-video-cover {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1.5rem;
+  box-sizing: border-box;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.registry-video-cover-title {
   font-family: "Libre Caslon Text", Georgia, serif;
   font-weight: 700;
   line-height: 1.1;
   letter-spacing: -0.02em;
-  margin: 0 0 0.35rem;
+  margin: 0;
   color: rgb(108, 12, 32);
   font-size: 1.15rem;
 }
-.registry-video-content p {
+
+.registry-video-cover-sub {
   margin: 0;
+  max-width: 22rem;
   color: rgb(86, 66, 66);
   font-family: "Libre Caslon Text", Georgia, serif;
   font-size: 0.8rem;
   font-style: italic;
+  line-height: 1.5;
 }
 
 .registry-play-btn {
   width: 3.25rem;
   height: 3.25rem;
-  margin: 0 auto 1rem;
+  margin: 0;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -2110,14 +2141,18 @@ button {
     font-size: 0.95rem;
   }
   .registry-video-box {
-    min-height: 22rem;
-    padding: 2rem;
+    max-width: 34rem;
+    padding: 1rem;
     border-radius: 1.75rem;
   }
-  .registry-video-content h2 {
+  .registry-video-frame {
+    aspect-ratio: 4/3;
+    border-radius: 1.25rem;
+  }
+  .registry-video-cover-title {
     font-size: 1.5rem;
   }
-  .registry-video-content p {
+  .registry-video-cover-sub {
     font-size: 0.9rem;
   }
   .registry-play-btn {
@@ -2241,6 +2276,330 @@ button {
   z-index: 1;
 }
 
+.travel-info-grid {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.travel-info-card {
+  padding: 1.5rem;
+  border: 1px solid rgba(255, 174, 48, 0.25);
+  border-radius: 1.25rem;
+  background: rgb(255, 255, 255);
+  box-shadow: 0 16px 36px rgba(49, 49, 43, 0.1);
+  position: relative;
+}
+
+.travel-card-heading {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.5rem;
+}
+
+.travel-info-card h2 {
+  font-family: "Libre Caslon Text", Georgia, serif;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin: 0 0 1rem;
+  color: rgb(108, 12, 32);
+  font-size: 1.3rem;
+}
+
+.travel-info-card > ul {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 0.65rem;
+  color: rgb(28, 28, 23);
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+.travel-info-card > ul > li {
+  position: relative;
+  padding-left: 1.1rem;
+}
+.travel-info-card > ul > li::before {
+  content: "";
+  position: absolute;
+  top: 0.55em;
+  left: 0;
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 999px;
+  background: rgb(132, 84, 0);
+}
+.travel-info-card > ul > li strong {
+  color: rgb(99, 28, 5);
+}
+
+.travel-card-hint {
+  margin: 0.35rem 0 1rem;
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  font-style: italic;
+  color: rgb(137, 113, 114);
+}
+
+.travel-accordion {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 1rem;
+}
+
+.travel-collapse {
+  overflow: hidden;
+  border: 1px solid rgba(132, 84, 0, 0.2);
+  border-radius: 0.875rem;
+  background: rgb(247, 243, 234);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+.travel-collapse:hover {
+  border-color: rgba(132, 84, 0, 0.45);
+}
+.travel-collapse[open] {
+  border-color: rgba(132, 84, 0, 0.35);
+  box-shadow: 0 12px 28px rgba(49, 49, 43, 0.1);
+}
+
+.travel-collapse-summary {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 1rem;
+  cursor: pointer;
+  list-style: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.travel-collapse-summary::-webkit-details-marker {
+  display: none;
+}
+.travel-collapse-summary:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 2px rgba(255, 178, 182, 0.55);
+  border-radius: 0.875rem;
+}
+
+.travel-collapse-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.55rem;
+  min-width: 0;
+  color: rgb(108, 12, 32);
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  font-size: 0.9rem;
+  line-height: 1.3;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.travel-collapse-chevron {
+  flex-shrink: 0;
+  color: rgb(132, 84, 0);
+  font-size: 1.35rem;
+  transition: transform 0.25s ease;
+}
+.travel-collapse[open] .travel-collapse-chevron {
+  transform: rotate(180deg);
+}
+
+.travel-collapse-body {
+  padding: 0 1rem 1rem;
+  color: rgb(28, 28, 23);
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  font-size: 0.85rem;
+  line-height: 1.65;
+}
+.travel-collapse-body > *:first-child {
+  margin-top: 0;
+}
+.travel-collapse-body > *:last-child {
+  margin-bottom: 0;
+}
+.travel-collapse-body p {
+  margin: 0 0 0.75rem;
+}
+.travel-collapse-body ul {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 0.4rem;
+  margin: 0.5rem 0 0.75rem;
+  padding-left: 1.15rem;
+}
+.travel-collapse-body li {
+  padding-left: 0.15rem;
+}
+.travel-collapse-body strong {
+  color: rgb(99, 28, 5);
+}
+
+@media (min-width: 768px) {
+  .travel-collapse-summary {
+    padding: 1rem 1.25rem;
+  }
+  .travel-collapse-title {
+    font-size: 0.95rem;
+  }
+  .travel-collapse-body {
+    padding: 0 1.25rem 1.15rem;
+    font-size: 0.9rem;
+  }
+}
+.local-gems-section {
+  margin-top: 2rem;
+}
+
+.local-gems-header {
+  margin-bottom: 1.25rem;
+  text-align: center;
+}
+.local-gems-header h2 {
+  font-family: "Libre Caslon Text", Georgia, serif;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.35rem;
+  color: rgb(108, 12, 32);
+  font-size: 1.5rem;
+}
+.local-gems-header p {
+  margin: 0;
+  color: rgb(86, 66, 66);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.local-gems-grid {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 1.5rem;
+}
+
+.recommendation-column {
+  padding: 1.5rem;
+  border: 1px solid rgba(255, 174, 48, 0.25);
+  border-radius: 1.25rem;
+  background: rgb(255, 255, 255);
+  box-shadow: 0 16px 36px rgba(49, 49, 43, 0.1);
+}
+
+.recommendation-heading {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.7rem;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px dashed rgba(137, 113, 114, 0.5);
+}
+.recommendation-heading h3 {
+  font-family: "Libre Caslon Text", Georgia, serif;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin: 0;
+  color: rgb(108, 12, 32);
+  font-size: 1.15rem;
+}
+
+.recommendation-icon {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 999px;
+  background: rgba(255, 174, 48, 0.14);
+  color: rgb(132, 84, 0);
+  font-size: 1.3rem;
+}
+
+.recommendation-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 0.85rem;
+}
+
+.recommendation-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 0.85rem;
+  padding: 0.85rem;
+  border: 1px solid rgba(132, 84, 0, 0.18);
+  border-radius: 0.875rem;
+  background: rgb(247, 243, 234);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+}
+.recommendation-item:hover {
+  border-color: rgba(132, 84, 0, 0.4);
+  box-shadow: 0 12px 24px rgba(49, 49, 43, 0.1);
+  transform: translateY(-2px);
+}
+
+.recommendation-thumb {
+  flex-shrink: 0;
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: 0.75rem;
+  object-fit: cover;
+}
+
+.recommendation-thumb-placeholder {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255, 174, 48, 0.14);
+  color: rgb(132, 84, 0);
+  font-size: 1.5rem;
+}
+
+.recommendation-item-content {
+  min-width: 0;
+}
+.recommendation-item-content h4 {
+  margin: 0 0 0.25rem;
+  color: rgb(28, 28, 23);
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+.recommendation-item-content p {
+  margin: 0;
+  color: rgb(86, 66, 66);
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  font-size: 0.83rem;
+  line-height: 1.55;
+}
+
 @media (min-width: 768px) {
   .travel-guide-page {
     padding: 2.5rem 0 5rem;
@@ -2250,6 +2609,9 @@ button {
     padding: 2rem;
     border-width: 4px;
     border-radius: 1.5rem;
+  }
+  .local-gems-header h2 {
+    font-size: 1.75rem;
   }
   .travel-guide-label {
     font-size: 0.75rem;

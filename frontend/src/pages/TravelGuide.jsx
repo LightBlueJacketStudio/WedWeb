@@ -19,7 +19,7 @@ const sightseeingRecommendations = [
   {
     name: "Hoi An",
     description:
-      "If you ever come to Hoi An, you don't want to miss this place. Co Loi grill-pork located in front of Phe L",
+      "If you ever come to Hoi An, you don't want to miss this place. Co Loi grill-pork, located at 3 Nguyen Hue, Hoi An",
     // image:
     //   "https://lh3.googleusercontent.com/aida-public/AB6AXuAUq7PUZcBXeS1exeM5hPC9kOnV4peW4PFFARjqXk1ObBCHYydGkJyoWE0Ol-OxW81b8Q8FkTj8D5dtAA1hCCNeNrGrnJp222rSxPOWtKtwz3sidIVjXdZlTWrS4BKGWqq8BjL2MV9ynKFXf2OLYzk_KxepSIF3P6Xox7XvN4It3xVVaPEq0qgPBFcUtNwS41XARObIVR8BwTwwVHi4xeUzyn5c3oak3mw-JbV5yPnDOX1F9lL4oMS4FoUmGu5ABB45-bfrK1wE-r8",
   },
@@ -68,34 +68,105 @@ function TravelGuide() {
                 </span> */}
               </div>
 
-              <h2>✈️ Before You Travel</h2>
+              <h2>Before You Travel</h2>
             </div>
 
-            <div className="before-travel-columns">
-              <div>
-                <p className="travel-card-label">
-                  Visa Requirements
+            {/* <p className="travel-card-hint">
+              Tap each section to expand the details.
+            </p> */}
+
+            <div className="travel-accordion">
+              <CollapsibleSection title="Passport &amp; Visa">
+                <p>
+                  Make sure your passport is valid for at least
+                  <strong> 6 months after your arrival date</strong>, with a
+                  couple of blank pages for stamps.
                 </p>
 
                 <p>
-                  Most international visitors require an E-Visa.
-                  Please apply at least two weeks in advance through
-                  the official government portal. Your passport
-                  should remain valid for at least six months.
+                  Most travelers will need a visa. Vietnam offers a convenient{" "}
+                  <strong>e-visa</strong> (valid up to 90 days, single or
+                  multiple entry) through the official government portal — apply
+                  online about 1-2 weeks before you fly. A handful of
+                  nationalities are exempt for short stays, so double-check the
+                  rules for your passport before booking.
                 </p>
-              </div>
+              </CollapsibleSection>
 
-              <div>
-                <p className="travel-card-label">
-                  Flight Booking
+              <CollapsibleSection title="Vaccines &amp; Health">
+                <p>
+                  No vaccines are <em>required</em> to enter Vietnam (unless
+                  you&apos;re arriving from a country with yellow fever), but a
+                  few are commonly recommended:
                 </p>
+
+                <ul>
+                  <li>Make sure your routine vaccines are up to date.</li>
+                  <li>
+                    <strong>Hepatitis A</strong> and <strong>Typhoid</strong>{" "}
+                    are usually recommended for travel to Vietnam.
+                  </li>
+                  <li>
+                    Depending on your plans, a doctor may also suggest{" "}
+                    <strong>Hepatitis B</strong>, <strong>Tetanus</strong>, or{" "}
+                    <strong>Japanese Encephalitis</strong> for longer or more
+                    rural stays.
+                  </li>
+                </ul>
 
                 <p>
-                  Da Nang International Airport, airport code DAD,
-                  is the closest hub. We recommend arriving early
-                  enough to settle in before the festivities.
+                  Everyone&apos;s health needs are different, so please check
+                  with your doctor or a travel clinic{" "}
+                  <strong>4-6 weeks before departure</strong>. This is just a
+                  friendly heads-up, not medical advice.
                 </p>
-              </div>
+              </CollapsibleSection>
+
+              <CollapsibleSection title="Currency">
+                <p>
+                  The official currency is the{" "}
+                  <strong>Vietnamese Dong (VND)</strong>. A few things to know:
+                </p>
+
+                <ul>
+                  <li>
+                    Cash is still king for markets, street food, and small
+                    shops, while hotels and larger restaurants usually take
+                    cards.
+                  </li>
+                  <li>
+                    ATMs are everywhere - withdrawing from a bank ATM after you
+                    land is often the easiest way to get local cash.
+                  </li>
+                  <li>
+                    Let your bank know you&apos;re traveling so your card
+                    isn&apos;t flagged, and carry small bills for taxis and
+                    tips.
+                  </li>
+                </ul>
+              </CollapsibleSection>
+
+              <CollapsibleSection title="Flight Booking">
+                <p>
+                  We recommend flying to Da Nang International Airport (DAD):
+                </p>
+
+                <ul>
+                  <li>
+                    From most places you&apos;ll connect through a major Asian
+                    hub such as Seoul (ICN), Tokyo, Taipei, Singapore, Bangkok,
+                    or Hong Kong.
+                  </li>
+                  <li>
+                    Fares are usually best when you book early, so keep an eye
+                    out and lock in your seats when you spot a good deal.
+                  </li>
+                  <li>
+                    We&apos;d suggest arriving a day or two before the wedding to
+                    settle in, beat the jet lag, and enjoy the city with us.
+                  </li>
+                </ul>
+              </CollapsibleSection>
             </div>
 
             <div className="paw-decoration">
@@ -116,17 +187,31 @@ function TravelGuide() {
               </span> */}
             </div>
 
-            <h2>📶 Stay Connected</h2>
+            <h2>Stay Connected</h2>
 
-            {/* <p>
-              Consider purchasing a local SIM card at the airport
-              from Viettel or Vinaphone. Affordable plans with
-              generous mobile data are widely available.
-            </p> */}
+            <div className="travel-accordion">
+              <CollapsibleSection title="Data &amp; Wi-Fi">
+                <ul>
+                  <li>
+                    Get an eSIM before you depart! We&apos;ve used{" "}
+                    <strong>Nomad</strong> as our eSIM provider before;
+                    here&apos;s our referral code:{" "}
+                    <strong>HUYNRVTSES</strong>
+                  </li>
 
-            <p className="travel-tip">
-              <em>Pending - check back later when it get closer to your trip ^^</em>
-            </p>
+                  <li>
+                    Local SIM card: Viettel, Mobifone, and Vinaphone
+                    all offer super affordable tourist data packages, and you
+                    can pick one up at the airport, convenience stores, or
+                    official carrier shops with quick activation.
+                  </li>
+
+                  <li>
+                    Free Wi-Fi in most places: cafes, restaurants, hotels.
+                  </li>
+                </ul>
+              </CollapsibleSection>
+            </div>
           </article>
 
           <article className="travel-info-card transport-card">
@@ -136,29 +221,33 @@ function TravelGuide() {
               </span>
             </div> */}
 
-            <h2>🚗 Getting Around</h2>
+            <h2>Getting Around</h2>
 
-            <p>
-              <strong>Grab</strong> is basically Vietnam&apos;s
-              Uber/Lyft; download the app before you land, and take
-              a minute to get familiar with it. It&apos;ll be your
-              best friend for getting around.
-            </p>
+            <div className="travel-accordion">
+              <CollapsibleSection title="Ride options &amp; good-to-knows">
+                <ul>
+                  <li>
+                    <strong>Grab: </strong> Vietnamese&apos;s
+                    Uber/Lyft; download the app before you land, and take a
+                    minute to get familiar with it. It&apos;ll be your best
+                    friend for getting around.
+                  </li>
 
-            <ul>
-              <li>
-                <strong>Private hotel transfer</strong> - book
-                directly through your resort ahead of time for an
-                easy, seamless pickup right at the airport gate.
-              </li>
+                  <li>
+                    <strong>Private hotel transfer:</strong>book
+                    directly through your resort ahead of time for an
+                    easy, seamless pickup right at the airport gate.
+                  </li>
 
-              <li>
-                <strong>Note:</strong> Public restrooms aren&apos;t
-                super common, so if you&apos;re traveling a longer
-                distance, expect to pay around 3,000–5,000 VND for a
-                bathroom break at pit stops along the way.
-              </li>
-            </ul>
+                  <li>
+                    <strong>Note:</strong> Public restrooms aren&apos;t
+                    super common, so if you&apos;re traveling a longer
+                    distance, expect to pay around 3,000–5,000 VND for a
+                    bathroom break at pit stops along the way.
+                  </li>
+                </ul>
+              </CollapsibleSection>
+            </div>
           </article>
 
           <article
@@ -169,9 +258,8 @@ function TravelGuide() {
               <h2>Where to Stay</h2>
 
               <p>
-                While the wedding is at Mikazuki Resort, we have
-                curated alternative stays ranging from beachfront
-                hotels to city-center escapes.
+                We're thrilled to share that Da Nang Mikazuki Japanese Resorts will be 
+                offering a discount code exclusively for our wedding guests - more details coming your way soon!
 
               </p>
 
@@ -242,11 +330,33 @@ function TravelGuide() {
   )
 }
 
+function CollapsibleSection({ title, defaultOpen = false, children }) {
+  return (
+    <details className="travel-collapse" open={defaultOpen}>
+      <summary className="travel-collapse-summary">
+        <span className="travel-collapse-title">{title}</span>
+
+        <span
+          className="travel-collapse-chevron material-symbols-outlined"
+          aria-hidden="true"
+        >
+          expand_more
+        </span>
+      </summary>
+
+      <div className="travel-collapse-body">{children}</div>
+    </details>
+  )
+}
+
 function RecommendationList({ icon, title, items }) {
   return (
     <div className="recommendation-column">
       <div className="recommendation-heading">
-        <span className="material-symbols-outlined">
+        <span
+          className="recommendation-icon material-symbols-outlined"
+          aria-hidden="true"
+        >
           {icon}
         </span>
 
@@ -259,11 +369,24 @@ function RecommendationList({ icon, title, items }) {
             className="recommendation-item"
             key={item.name}
           >
-            <img src={item.image} alt="" />
+            {item.image ? (
+              <img
+                className="recommendation-thumb"
+                src={item.image}
+                alt=""
+              />
+            ) : (
+              <span
+                className="recommendation-thumb recommendation-thumb-placeholder material-symbols-outlined"
+                aria-hidden="true"
+              >
+                {icon}
+              </span>
+            )}
 
-            <div>
+            <div className="recommendation-item-content">
               <h4>{item.name}</h4>
-              <p>{item.description}</p>
+              {item.description ? <p>{item.description}</p> : null}
             </div>
           </article>
         ))}

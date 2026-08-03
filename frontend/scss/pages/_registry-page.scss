@@ -90,19 +90,22 @@
   }
 
   .registry-video-box {
-    min-height: 22rem;
-    padding: 2rem;
+    max-width: 34rem;
+    padding: 1rem;
     border-radius: 1.75rem;
   }
 
-  .registry-video-content {
-    h2 {
-      font-size: 1.5rem;
-    }
+  .registry-video-frame {
+    aspect-ratio: 4 / 3;
+    border-radius: 1.25rem;
+  }
 
-    p {
-      font-size: 0.9rem;
-    }
+  .registry-video-cover-title {
+    font-size: 1.5rem;
+  }
+
+  .registry-video-cover-sub {
+    font-size: 0.9rem;
   }
 
   .registry-play-btn {

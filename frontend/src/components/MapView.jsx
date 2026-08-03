@@ -22,15 +22,6 @@ L.Icon.Default.mergeOptions({
 
 const VENUE_POSITION = [16.09353025994651, 108.14466603632266]
 
-const locations = [
-  {
-    id: 1,
-    name: "Wedding Venue",
-    description: "this upmarket resort on 13-hectare grounds with a Japanese garden is a 3-minute walk from a beach along the South China Sea.",
-    position: [16.09353025994651, 108.14466603632266],
-  },
-]
-
 function MapView() {
   return (
     <MapContainer

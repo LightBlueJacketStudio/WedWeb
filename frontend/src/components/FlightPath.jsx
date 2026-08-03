@@ -12,8 +12,14 @@ const PLAN_LINKS = [
   { label: 'Gift Registry', to: '/gift_registry', icon: 'redeem' },
 ]
 
+const prefersReducedMotion =
+  typeof window !== 'undefined' &&
+  window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
 function FlightPath() {
-  const [entered, setEntered] = useState(false)
+  // Reduced-motion visitors skip the entrance/flip animation and start on the
+  // fully-entered front, so seed the state instead of setting it in an effect.
+  const [entered, setEntered] = useState(prefersReducedMotion)
   const [flipped, setFlipped] = useState(false)
   const cardRef = useRef(null)
   const pcCardRef = useRef(null)
@@ -22,15 +28,7 @@ function FlightPath() {
   useEffect(() => {
     const node = cardRef.current
     if (!node) return
-
-    const reduceMotion = window.matchMedia(
-      '(prefers-reduced-motion: reduce)'
-    ).matches
-
-    if (reduceMotion) {
-      setEntered(true)
-      return
-    }
+    if (prefersReducedMotion) return
 
     const timers = []
     const observer = new IntersectionObserver(

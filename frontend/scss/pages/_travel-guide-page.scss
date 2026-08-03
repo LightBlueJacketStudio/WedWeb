@@ -30,6 +30,372 @@
 }
 
 // ============================================
+// INFO CARDS
+// ============================================
+
+.travel-info-grid {
+  @include Flex(column);
+
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.travel-info-card {
+  padding: 1.5rem;
+
+  border: 1px solid rgba(255, 174, 48, 0.25);
+  border-radius: 1.25rem;
+
+  background: $color-bg-card-bright;
+
+  box-shadow: 0 16px 36px rgba(49, 49, 43, 0.1);
+  position: relative;
+}
+
+.travel-card-heading {
+  @include Flex(row, flex-start, center);
+
+  gap: 0.6rem;
+  margin-bottom: 0.5rem;
+}
+
+.travel-info-card h2 {
+  @include HeadingSerif;
+
+  margin: 0 0 1rem;
+
+  color: $color-primary;
+  font-size: 1.3rem;
+}
+
+.travel-info-card > ul {
+  @include Flex(column);
+
+  gap: 0.65rem;
+
+  color: $color-text-dark;
+  font-family: $font-body;
+  font-size: 0.85rem;
+  line-height: 1.6;
+
+  > li {
+    position: relative;
+    padding-left: 1.1rem;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0.55em;
+      left: 0;
+
+      width: 0.4rem;
+      height: 0.4rem;
+      border-radius: 999px;
+
+      background: $color-secondary;
+    }
+
+    strong {
+      color: $color-tertiary;
+    }
+  }
+}
+
+// ============================================
+// COLLAPSIBLE SECTIONS
+// ============================================
+
+.travel-card-hint {
+  margin: 0.35rem 0 1rem;
+
+  font-family: $font-body;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  font-style: italic;
+  color: $color-text-light;
+}
+
+.travel-accordion {
+  @include Flex(column);
+
+  gap: 1rem;
+}
+
+.travel-collapse {
+  overflow: hidden;
+
+  border: 1px solid rgba(132, 84, 0, 0.2);
+  border-radius: 0.875rem;
+
+  background: $color-surface-low;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
+
+  &:hover {
+    border-color: rgba(132, 84, 0, 0.45);
+  }
+
+  &[open] {
+    border-color: rgba(132, 84, 0, 0.35);
+
+    box-shadow: 0 12px 28px rgba(49, 49, 43, 0.1);
+  }
+}
+
+.travel-collapse-summary {
+  @include Flex(row, space-between, center);
+
+  gap: 0.75rem;
+  padding: 0.85rem 1rem;
+
+  cursor: pointer;
+  list-style: none;
+  -webkit-tap-highlight-color: transparent;
+
+  &::-webkit-details-marker {
+    display: none;
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: inset 0 0 0 2px rgba(255, 178, 182, 0.55);
+    border-radius: 0.875rem;
+  }
+}
+
+.travel-collapse-title {
+  @include Flex(row, flex-start, center);
+
+  gap: 0.55rem;
+  min-width: 0;
+
+  color: $color-primary;
+  font-family: $font-body;
+  font-size: 0.9rem;
+  line-height: 1.3;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.travel-collapse-chevron {
+  flex-shrink: 0;
+
+  color: $color-secondary;
+  font-size: 1.35rem;
+
+  transition: transform 0.25s ease;
+
+  .travel-collapse[open] & {
+    transform: rotate(180deg);
+  }
+}
+
+.travel-collapse-body {
+  padding: 0 1rem 1rem;
+
+  color: $color-text-dark;
+  font-family: $font-body;
+  font-size: 0.85rem;
+  line-height: 1.65;
+
+  > *:first-child {
+    margin-top: 0;
+  }
+
+  > *:last-child {
+    margin-bottom: 0;
+  }
+
+  p {
+    margin: 0 0 0.75rem;
+  }
+
+  ul {
+    @include Flex(column);
+
+    gap: 0.4rem;
+    margin: 0.5rem 0 0.75rem;
+    padding-left: 1.15rem;
+  }
+
+  li {
+    padding-left: 0.15rem;
+  }
+
+  strong {
+    color: $color-tertiary;
+  }
+}
+
+@media (min-width: 768px) {
+  .travel-collapse-summary {
+    padding: 1rem 1.25rem;
+  }
+
+  .travel-collapse-title {
+    font-size: 0.95rem;
+  }
+
+  .travel-collapse-body {
+    padding: 0 1.25rem 1.15rem;
+    font-size: 0.9rem;
+  }
+}
+
+// ============================================
+// LOCAL GEMS
+// ============================================
+
+.local-gems-section {
+  margin-top: 2rem;
+}
+
+.local-gems-header {
+  margin-bottom: 1.25rem;
+  text-align: center;
+
+  h2 {
+    @include HeadingSerif;
+
+    margin: 0 0 0.35rem;
+
+    color: $color-primary;
+    font-size: 1.5rem;
+  }
+
+  p {
+    margin: 0;
+
+    color: $color-text-medium;
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+}
+
+.local-gems-grid {
+  @include Flex(column);
+
+  gap: 1.5rem;
+}
+
+.recommendation-column {
+  padding: 1.5rem;
+
+  border: 1px solid rgba(255, 174, 48, 0.25);
+  border-radius: 1.25rem;
+
+  background: $color-bg-card-bright;
+
+  box-shadow: 0 16px 36px rgba(49, 49, 43, 0.1);
+}
+
+.recommendation-heading {
+  @include Flex(row, flex-start, center);
+
+  gap: 0.7rem;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+
+  border-bottom: 1px dashed $color-border-dashed;
+
+  h3 {
+    @include HeadingSerif;
+
+    margin: 0;
+
+    color: $color-primary;
+    font-size: 1.15rem;
+  }
+}
+
+.recommendation-icon {
+  @include Flex(row, center, center);
+
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+
+  border-radius: 999px;
+  background: $color-secondary-soft;
+
+  color: $color-secondary;
+  font-size: 1.3rem;
+}
+
+.recommendation-list {
+  @include Flex(column);
+
+  gap: 0.85rem;
+}
+
+.recommendation-item {
+  @include Flex(row, flex-start, flex-start);
+
+  gap: 0.85rem;
+  padding: 0.85rem;
+
+  border: 1px solid rgba(132, 84, 0, 0.18);
+  border-radius: 0.875rem;
+
+  background: $color-surface-low;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.15s ease;
+
+  &:hover {
+    border-color: rgba(132, 84, 0, 0.4);
+
+    box-shadow: 0 12px 24px rgba(49, 49, 43, 0.1);
+    transform: translateY(-2px);
+  }
+}
+
+.recommendation-thumb {
+  flex-shrink: 0;
+  width: 3.25rem;
+  height: 3.25rem;
+
+  border-radius: 0.75rem;
+  object-fit: cover;
+}
+
+.recommendation-thumb-placeholder {
+  @include Flex(row, center, center);
+
+  background: $color-secondary-soft;
+  color: $color-secondary;
+  font-size: 1.5rem;
+}
+
+.recommendation-item-content {
+  min-width: 0;
+
+  h4 {
+    margin: 0 0 0.25rem;
+
+    color: $color-text-dark;
+    font-family: $font-body;
+    font-size: 0.95rem;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  p {
+    margin: 0;
+
+    color: $color-text-medium;
+    font-family: $font-body;
+    font-size: 0.83rem;
+    line-height: 1.55;
+  }
+}
+
+// ============================================
 // TABLET AND DESKTOP
 // ============================================
 
@@ -44,6 +410,10 @@
 
     border-width: 4px;
     border-radius: 1.5rem;
+  }
+
+  .local-gems-header h2 {
+    font-size: 1.75rem;
   }
 
   .travel-guide-label {

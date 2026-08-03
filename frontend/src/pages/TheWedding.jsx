@@ -155,9 +155,9 @@ function TheWedding() {
 
         <section className="wedding-agenda-card">
           <div className="wedding-agenda-header">
-            <p className="travel-map-label">
+            {/* <p className="travel-map-label">
               The Itinerary
-            </p>
+            </p> */}
 
             <h2>
               <span className="material-symbols-outlined">
