@@ -1507,6 +1507,12 @@ button {
   appearance: auto;
   cursor: pointer;
 }
+.rsvp-form select:has(option[value=""]:checked) {
+  color: rgb(137, 113, 114);
+}
+.rsvp-form select option {
+  color: rgb(28, 28, 23);
+}
 .rsvp-form textarea {
   min-height: 80px;
   resize: vertical;
@@ -2440,12 +2446,23 @@ button {
   flex-direction: column;
   justify-content: flex-start;
   align-items: stretch;
-  gap: 0.4rem;
+  gap: 0.5rem;
   margin: 0.5rem 0 0.75rem;
-  padding-left: 1.15rem;
+  padding-left: 0;
 }
 .travel-collapse-body li {
-  padding-left: 0.15rem;
+  position: relative;
+  padding-left: 1.1rem;
+}
+.travel-collapse-body li::before {
+  content: "";
+  position: absolute;
+  top: 0.6em;
+  left: 0;
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 999px;
+  background: rgb(132, 84, 0);
 }
 .travel-collapse-body strong {
   color: rgb(99, 28, 5);

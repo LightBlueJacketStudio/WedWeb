@@ -18,6 +18,7 @@ const GOOGLE_FORM_ENTRIES = {
   email: 'entry.1045781291',
   address: 'entry.1190885811',
   phone: 'entry.1166974658',
+  howYouKnow: 'entry.1410722321',
   dietary: 'entry.1739052576',
   accommodationHelp: 'entry.839337160',
   flyingIntoDAD: 'entry.1378856052',
@@ -29,7 +30,12 @@ const OTHER_OPTION_VALUE = '__other_option__'
 const FLYING_OTHER_ENTRY = 'entry.1378856052.other_option_response'
 
 const ATTENDING_OPTIONS = ['Yes, count me in!', "No :(", 'Not sure yet']
-const KID_OPTIONS = ['0', '1', '2', '3?!!! in this economy?']
+const KID_OPTIONS = ['0', '1', '2', '3?!!! in this economy?', 'more than 4??']
+const HOW_YOU_KNOW_OPTIONS = [
+  'Friend/Family of My',
+  'Friend/Family of Bao',
+  'Both',
+]
 const ACCOMMODATION_OPTIONS = [
   'Yes, please send recs',
   "No, I've got it sorted",
@@ -46,6 +52,7 @@ function Rsvp() {
     email: '',
     address: '',
     phone: '',
+    howYouKnow: '',
     dietary: '',
     accommodationHelp: '',
     flyingIntoDAD: '',
@@ -131,6 +138,8 @@ function Rsvp() {
                   onChange={handleChange}
                 />
               </label>
+
+              
 
               <label>
                 Will you be able to attend?
@@ -246,6 +255,24 @@ function Rsvp() {
                       ))}
                     </select>
                   </label>
+                  <label>
+                How do you know the couple?
+                <select
+                  required
+                  name="howYouKnow"
+                  value={formData.howYouKnow}
+                  onChange={handleChange}
+                >
+                  <option value="" disabled>
+                    Select an option
+                  </option>
+                  {HOW_YOU_KNOW_OPTIONS.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </select>
+              </label>
 
                   <label>
                     Do you plan to fly into Da Nang International Airport (DAD)?
@@ -262,7 +289,7 @@ function Rsvp() {
                           {option}
                         </option>
                       ))}
-                    </select>
+                    </select>              
                   </label>
 
                   {formData.flyingIntoDAD === 'Other' && (

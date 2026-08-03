@@ -60,6 +60,19 @@
   select {
     appearance: auto;
     cursor: pointer;
+
+    // While the disabled empty option is still selected, show the
+    // "Select an option" placeholder in the muted placeholder color
+    // (matching inputs) instead of the dark $color-text-dark above.
+    &:has(option[value='']:checked) {
+      color: $color-text-placeholder;
+    }
+
+    // Keep the real options dark in the open dropdown list, even while
+    // the select itself is showing the lighter placeholder color.
+    option {
+      color: $color-text-dark;
+    }
   }
 
   textarea {

@@ -77,20 +77,22 @@ function TravelGuide() {
 
             <div className="travel-accordion">
               <CollapsibleSection title="Passport &amp; Visa">
-                <p>
-                  Make sure your passport is valid for at least
-                  <strong> 6 months after your arrival date</strong>, with a
-                  couple of blank pages for stamps.
-                </p>
+                <ul>
+                  <li>
+                    Make sure your passport is valid for at least
+                    <strong> 6 months after your arrival date</strong>, with a
+                    couple of blank pages for stamps.
+                  </li>
 
-                <p>
-                  Most travelers will need a visa. Vietnam offers a convenient{" "}
-                  <strong>e-visa</strong> (valid up to 90 days, single or
-                  multiple entry) through the official government portal — apply
-                  online about 1-2 weeks before you fly. A handful of
-                  nationalities are exempt for short stays, so double-check the
-                  rules for your passport before booking.
-                </p>
+                  <li>
+                    Most travelers will need a visa. Vietnam offers a
+                    convenient <strong>e-visa</strong> (valid up to 90 days,
+                    single or multiple entry) through the official government
+                    portal — apply online about 1-2 weeks before you fly. A
+                    handful of nationalities are exempt for short stays, so
+                    double-check the rules for your passport before booking.
+                  </li>
+                </ul>
               </CollapsibleSection>
 
               <CollapsibleSection title="Vaccines &amp; Health">
