@@ -17,7 +17,7 @@ const PLAN_LINKS = [
   { label: 'Gift Registry', to: '/gift_registry', icon: 'redeem' },
 ]
 
-const AUTO_ENTER_DELAY = 2
+const AUTO_ENTER_DELAY = 120
 const AUTO_SHOW_BACK_DELAY = 1700
 
 const prefersReducedMotion =
