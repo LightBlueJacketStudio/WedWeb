@@ -55,8 +55,27 @@
 .travel-card-heading {
   @include Flex(row, flex-start, center);
 
-  gap: 0.6rem;
-  margin-bottom: 0.5rem;
+  gap: 0.7rem;
+  margin-bottom: 1.25rem;
+}
+
+.travel-card-icon {
+  @include Flex(row, center, center);
+
+  flex-shrink: 0;
+  width: 2.75rem;
+  height: 2.75rem;
+
+  border: 1.5px solid rgba(108, 12, 32, 0.22);
+  border-radius: 0.85rem;
+
+  background: rgba(108, 12, 32, 0.06);
+
+  color: $color-primary;
+
+  span {
+    font-size: 1.5rem;
+  }
 }
 
 .travel-info-card h2 {
@@ -66,6 +85,13 @@
 
   color: $color-primary;
   font-size: 1.3rem;
+}
+
+// Inside a heading row the title sits next to the icon, so drop the
+// bottom margin that would otherwise offset it from the icon's centre.
+.travel-card-heading h2 {
+  margin: 0;
+  line-height: 1;
 }
 
 .travel-info-card > ul {
@@ -295,6 +321,197 @@
   gap: 1.5rem;
 }
 
+.local-gems-sights {
+  margin-top: 1.5rem;
+}
+
+// --------------------------------------------
+// Dining cards
+// --------------------------------------------
+
+.dining-grid {
+  @include Flex(column);
+
+  gap: 1.5rem;
+}
+
+.dining-card {
+  padding: 1.5rem;
+
+  border: 1px solid rgba(255, 174, 48, 0.25);
+  border-radius: 1.25rem;
+
+  background: $color-bg-card-bright;
+
+  box-shadow: 0 16px 36px rgba(49, 49, 43, 0.1);
+}
+
+.dining-card-heading {
+  @include Flex(row, flex-start, center);
+
+  gap: 0.7rem;
+  padding-bottom: 1rem;
+  margin-bottom: 1.25rem;
+
+  border-bottom: 1px dashed $color-border-dashed;
+
+  h3 {
+    @include HeadingSerif;
+
+    margin: 0;
+
+    color: $color-primary;
+    font-size: 1.15rem;
+  }
+}
+
+.dining-card-icon {
+  @include Flex(row, center, center);
+
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+
+  border-radius: 999px;
+  background: $color-secondary-soft;
+
+  color: $color-secondary;
+  font-size: 1.3rem;
+}
+
+// Dining tips
+.dining-tips-photo {
+  position: relative;
+  margin: 0 0 1.25rem;
+
+  border-radius: 0.875rem;
+  overflow: hidden;
+
+  img {
+    display: block;
+    width: 100%;
+    height: 190px;
+
+    object-fit: cover;
+  }
+
+  figcaption {
+    position: absolute;
+    left: 0.75rem;
+    bottom: 0.75rem;
+
+    padding: 0.3rem 0.7rem;
+
+    border-radius: 999px;
+    background: rgba(108, 12, 32, 0.82);
+
+    color: $color-text-on-primary;
+    font-family: $font-body;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+}
+
+.dining-tips-list {
+  @include Flex(column);
+
+  gap: 1rem;
+
+  > li {
+    @include Flex(row, flex-start, flex-start);
+
+    gap: 0.75rem;
+
+    p {
+      margin: 0;
+
+      color: $color-text-dark;
+      font-family: $font-body;
+      font-size: 0.85rem;
+      line-height: 1.6;
+    }
+  }
+}
+
+.dining-tip-icon {
+  @include Flex(row, center, center);
+
+  flex-shrink: 0;
+  width: 2rem;
+  height: 2rem;
+  margin-top: 0.1rem;
+
+  border-radius: 0.6rem;
+  background: $color-secondary-soft;
+
+  color: $color-secondary;
+  font-size: 1.15rem;
+}
+
+// Favorite foods menu
+.favorite-foods-note {
+  margin: 0 0 1.25rem;
+
+  color: $color-text-light;
+  font-family: $font-body;
+  font-size: 0.82rem;
+  font-style: italic;
+  line-height: 1.5;
+}
+
+.favorite-foods-menu {
+  @include Flex(column);
+
+  > li {
+    @include Flex(row, flex-start, center);
+
+    gap: 0.55rem;
+    padding: 0.72rem 0;
+
+    border-bottom: 1px dashed rgba(137, 113, 114, 0.22);
+
+    &:last-child {
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+  }
+}
+
+.favorite-food-icon {
+  flex-shrink: 0;
+
+  color: $color-secondary;
+  font-size: 1.2rem;
+}
+
+.favorite-food-meal {
+  @include LabelCaps;
+
+  flex-shrink: 0;
+
+  color: $color-primary;
+}
+
+.favorite-food-leader {
+  flex: 1 1 1.25rem;
+  min-width: 1rem;
+  height: 0;
+
+  border-bottom: 1px dotted rgba(137, 113, 114, 0.55);
+}
+
+.favorite-food-dish {
+  flex-shrink: 1;
+  min-width: 0;
+
+  color: $color-text-dark;
+  font-family: $font-heading;
+  font-size: 0.95rem;
+  line-height: 1.35;
+  text-align: right;
+}
+
 .recommendation-column {
   padding: 1.5rem;
 
@@ -428,6 +645,16 @@
 
   .local-gems-header h2 {
     font-size: 1.75rem;
+  }
+
+  .dining-grid {
+    flex-direction: row;
+    align-items: stretch;
+  }
+
+  .dining-card {
+    flex: 1;
+    min-width: 0;
   }
 
   .travel-guide-label {

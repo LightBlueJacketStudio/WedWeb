@@ -1,18 +1,31 @@
-const foodRecommendations = [
+import conMarket from "../assets/con-market.jpg"
+
+const diningTips = [
   {
-    name: "Option 1",
-    description:
-      "Short Descriptiong and Address",
-    // image:
-    //   "https://lh3.googleusercontent.com/aida-public/AB6AXuBOfkrF2qCobadRFPLVv9BvLSLzo1Ci6jQ5x-XOnA9y7kd5s3ZgAf3S4KW3pkgOp_0JQZVJJXbL4OKDH8ZKSgDqB3wpvvRJQYfrsKOyyroRBdoklfvWbSspEBADzK_tjAsIXzVJc3CWtlhAwmtlp60KlP8iNypS17AJhUDI7osl92rtUxTRcZRYollZJXz510ERXpJ8y1SJCqzhqlfvTfu_0RH2YTouued55W75oiyPqVSCK0QUwzUgVASeic_LPf7AV78ibANggOc",
+    icon: "storefront",
+    text: "Hit the local markets, Con Market and Han Market are total food heavens and an unmissable part of the Da Nang experience. Amazing food, amazing prices.",
   },
   {
-    name: "Co Loi's Grill Pork In Hoi An",
-    description:
-      "Short Description and Address",
-    // image:
-    //   "https://lh3.googleusercontent.com/aida-public/AB6AXuAGfFekRini4HkInOjmMsKusQ171Dg0UnGxaIST8LYQCUtoAAuhpl2_YwijXOOC1Cmg3qRTMQRRTVCWZ9mZUiR1EneKV8T8FikPQE0DfiHLN3XGN6Lv2hbTTGsZGNDJhQdxYHPbjWX4IWOzNLfGmQRv9jvIGduTN-XzCAer7tQyO2nPez9pa0niQSkizPrpckZbUT1sqXHOCRZWGR7IlEvf1MnscSsAQeohrpP90rf1sNV5QaTPiqVBXaNLaPGDr3DpfmRYzB5cbSc",
+    icon: "groups",
+    text: "How to spot the good stuff: look for spots packed with locals — that's usually your sign the food's delicious and the hygiene checks out.",
   },
+  {
+    icon: "payments",
+    text: "Budget-friendly: most street food dishes run about 25,000–40,000 VND per plate.",
+  },
+  {
+    icon: "coffee",
+    text: "Heads up: we love our Vietnamese coffee with condensed milk! Most coffee shops will also have milk tea variations. Bring your Lactaid if you need it.",
+  },
+]
+
+const favoriteFoods = [
+  { meal: "Breakfast", icon: "breakfast_dining", dish: "Xôi gà / Xôi đậu xanh" },
+  { meal: "Appetizer", icon: "tapas", dish: "Bánh bèo" },
+  { meal: "Lunch", icon: "lunch_dining", dish: "Bánh canh" },
+  { meal: "Dinner", icon: "dinner_dining", dish: "Mì Quảng" },
+  { meal: "Drink", icon: "local_cafe", dish: "Salted Coffee" },
+  { meal: "Dessert", icon: "icecream", dish: "Kem bơ" },
 ]
 
 const sightseeingRecommendations = [
@@ -63,9 +76,9 @@ function TravelGuide() {
           <article className="travel-info-card before-travel-card">
             <div className="travel-card-heading">
               <div className="travel-card-icon">
-                {/* <span className="material-symbols-outlined">
-                  downloading
-                </span> */}
+                <span className="material-symbols-outlined" aria-hidden="true">
+                  luggage
+                </span>
               </div>
 
               <h2>Before You Travel</h2>
@@ -88,40 +101,24 @@ function TravelGuide() {
                     Most travelers will need a visa. Vietnam offers a
                     convenient <strong>e-visa</strong> (valid up to 90 days,
                     single or multiple entry) through the official government
-                    portal — apply online about 1-2 weeks before you fly. A
+                    portal - apply online about 1-2 weeks before you fly. A
                     handful of nationalities are exempt for short stays, so
-                    double-check the rules for your passport before booking.
+                    double check the rules for your passport before booking.
                   </li>
                 </ul>
               </CollapsibleSection>
 
-              <CollapsibleSection title="Vaccines &amp; Health">
-                <p>
-                  No vaccines are <em>required</em> to enter Vietnam (unless
-                  you&apos;re arriving from a country with yellow fever), but a
-                  few are commonly recommended:
-                </p>
-
+              <CollapsibleSection title="Vaccines">
                 <ul>
-                  <li>Make sure your routine vaccines are up to date.</li>
                   <li>
-                    <strong>Hepatitis A</strong> and <strong>Typhoid</strong>{" "}
-                    are usually recommended for travel to Vietnam.
+                    Double check you&apos;re up to date on recommended
+                    vaccinations before you go. (Highly recommended)
                   </li>
                   <li>
-                    Depending on your plans, a doctor may also suggest{" "}
-                    <strong>Hepatitis B</strong>, <strong>Tetanus</strong>, or{" "}
-                    <strong>Japanese Encephalitis</strong> for longer or more
-                    rural stays.
+                    Check with a travel clinic or the CDC website for guidance
+                    specific to you.
                   </li>
                 </ul>
-
-                <p>
-                  Everyone&apos;s health needs are different, so please check
-                  with your doctor or a travel clinic{" "}
-                  <strong>4-6 weeks before departure</strong>. This is just a
-                  friendly heads-up, not medical advice.
-                </p>
               </CollapsibleSection>
 
               <CollapsibleSection title="Currency">
@@ -132,18 +129,29 @@ function TravelGuide() {
 
                 <ul>
                   <li>
-                    Cash is still king for markets, street food, and small
-                    shops, while hotels and larger restaurants usually take
-                    cards.
+                    Cash is king — you&apos;ll want it for markets, street food,
+                    and taxis. Keep a good stash of small bills handy.
                   </li>
                   <li>
-                    ATMs are everywhere - withdrawing from a bank ATM after you
-                    land is often the easiest way to get local cash.
+                    Credit cards are widely accepted at hotels, upscale
+                    restaurants, and shopping centers, but expect a 2–3%
+                    transaction fee.
                   </li>
                   <li>
-                    Let your bank know you&apos;re traveling so your card
-                    isn&apos;t flagged, and carry small bills for taxis and
-                    tips.
+                    ATMs are easy to find at major banks like Vietcombank, ACB,
+                    and Techcombank — just watch for withdrawal limits and
+                    international fees.
+                  </li>
+                  <li>
+                    Best places to exchange money: the airport, major banks, or
+                    reputable gold shops (tiệm vàng).
+                  </li>
+                  <li>
+                    <strong>Quick caution:</strong> Vietnamese notes (20,000,
+                    50,000, 100,000, 200,000, and 500,000 VND) can look
+                    surprisingly similar. The 20,000 and 500,000 VND notes
+                    especially, same-ish color very different value, so
+                    give your cash a second glance before you hand it over!
                   </li>
                 </ul>
               </CollapsibleSection>
@@ -156,8 +164,8 @@ function TravelGuide() {
                 <ul>
                   <li>
                     From most places you&apos;ll connect through a major Asian
-                    hub such as Seoul (ICN), Tokyo, Taipei, Singapore, Bangkok,
-                    or Hong Kong.
+                    hub such as Seoul (ICN), Taipei (TPE), Singapore(SIN),
+                    or Hong Kong (HKG).
                   </li>
                   <li>
                     Fares are usually best when you book early, so keep an eye
@@ -183,13 +191,15 @@ function TravelGuide() {
           </article>
 
           <article className="travel-info-card connected-card">
-            <div className="travel-card-icon secondary-icon">
-              {/* <span className="material-symbols-outlined">
-                signal_cellular_alt
-              </span> */}
-            </div>
+            <div className="travel-card-heading">
+              <div className="travel-card-icon">
+                <span className="material-symbols-outlined" aria-hidden="true">
+                  wifi
+                </span>
+              </div>
 
-            <h2>Stay Connected</h2>
+              <h2>Stay Connected</h2>
+            </div>
 
             <div className="travel-accordion">
               <CollapsibleSection title="Data &amp; Wi-Fi">
@@ -217,13 +227,15 @@ function TravelGuide() {
           </article>
 
           <article className="travel-info-card transport-card">
-            {/* <div className="travel-card-icon">
-              <span className="material-symbols-outlined">
-                local_taxi
-              </span>
-            </div> */}
+            <div className="travel-card-heading">
+              <div className="travel-card-icon">
+                <span className="material-symbols-outlined" aria-hidden="true">
+                  local_taxi
+                </span>
+              </div>
 
-            <h2>Getting Around</h2>
+              <h2>Getting Around</h2>
+            </div>
 
             <div className="travel-accordion">
               <CollapsibleSection title="Ride options &amp; good-to-knows">
@@ -257,7 +269,15 @@ function TravelGuide() {
             className="travel-info-card accommodation-card"
           >
             <div className="accommodation-content">
-              <h2>Where to Stay</h2>
+              <div className="travel-card-heading">
+                <div className="travel-card-icon">
+                  <span className="material-symbols-outlined" aria-hidden="true">
+                    hotel
+                  </span>
+                </div>
+
+                <h2>Where to Stay</h2>
+              </div>
 
               <p>
                 We're thrilled to share that Da Nang Mikazuki Japanese Resorts will be 
@@ -286,19 +306,92 @@ function TravelGuide() {
             <p>Things we love in our favorite city</p>
           </div>
 
-          <div className="local-gems-grid">
-            <RecommendationList
-              icon="restaurant"
-              title="Must-Try Food"
-              items={foodRecommendations}
-            />
+          <div className="dining-grid">
+            <article className="dining-card dining-tips-card">
+              <div className="dining-card-heading">
+                <span
+                  className="dining-card-icon material-symbols-outlined"
+                  aria-hidden="true"
+                >
+                  ramen_dining
+                </span>
 
+                <h3>Dining Tips</h3>
+              </div>
+
+              <figure className="dining-tips-photo">
+                <img
+                  src={conMarket}
+                  alt="Con Market in Da Nang"
+                />
+
+                <figcaption>Con Market, Da Nang</figcaption>
+              </figure>
+
+              <ul className="dining-tips-list">
+                {diningTips.map((tip) => (
+                  <li key={tip.text}>
+                    <span
+                      className="dining-tip-icon material-symbols-outlined"
+                      aria-hidden="true"
+                    >
+                      {tip.icon}
+                    </span>
+
+                    <p>{tip.text}</p>
+                  </li>
+                ))}
+              </ul>
+            </article>
+
+            <article className="dining-card favorite-foods-card">
+              <div className="dining-card-heading">
+                <span
+                  className="dining-card-icon material-symbols-outlined"
+                  aria-hidden="true"
+                >
+                  restaurant_menu
+                </span>
+
+                <h3>Foods We Grew Up Eating</h3>
+              </div>
+
+              <p className="favorite-foods-note">
+                A little menu of our childhood favorites, we&apos;ll add
+                the restaurants soon.
+              </p>
+
+              <ul className="favorite-foods-menu">
+                {favoriteFoods.map((food) => (
+                  <li key={food.meal}>
+                    <span
+                      className="favorite-food-icon material-symbols-outlined"
+                      aria-hidden="true"
+                    >
+                      {food.icon}
+                    </span>
+
+                    <span className="favorite-food-meal">{food.meal}</span>
+
+                    <span
+                      className="favorite-food-leader"
+                      aria-hidden="true"
+                    ></span>
+
+                    <span className="favorite-food-dish">{food.dish}</span>
+                  </li>
+                ))}
+              </ul>
+            </article>
+          </div>
+
+          {/* <div className="local-gems-grid local-gems-sights">
             <RecommendationList
               icon="explore"
               title="Sights to See"
               items={sightseeingRecommendations}
             />
-          </div>
+          </div> */}
         </section>
 
         <section

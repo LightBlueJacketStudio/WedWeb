@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
-import saveTheDate from '../assets/save-the-date.png'
-import vietnamStamp from '../assets/DN-stamp-burgundy.png'
+import saveTheDate from '../assets/save-the-date.jpg'
+import vietnamStamp from '../assets/DN-stamp-burgundy.jpg'
 
 // Quick links that live on the postcard's right side, in place of the usual
 // address lines. Each keeps the "little stamp / ticket" look of a real postcard.
