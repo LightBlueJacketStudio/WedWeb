@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import saveTheDate from '../assets/save-the-date.jpg'
 import vietnamStamp from '../assets/DN-stamp-burgundy.jpg'
+import { ContactUs } from './ContactUs'
 
 // Quick links that live on the postcard's right side, in place of the usual
 // address lines. Each keeps the "little stamp / ticket" look of a real postcard.
@@ -194,6 +195,16 @@ function FlightPath() {
                       <span className="pc-action-label">{label}</span>
                     </Link>
                   ))}
+                </div>
+
+                {/* Tapping "Contact us" opens a modal; keep the click from
+                    bubbling up to the card's flip toggle. */}
+                <div
+                  className="pc-contact"
+                  onClick={(e) => e.stopPropagation()}
+                  onKeyDown={(e) => e.stopPropagation()}
+                >
+                  <ContactUs className="contact-us-flat pc-contact-link" />
                 </div>
               </div>
             </div>

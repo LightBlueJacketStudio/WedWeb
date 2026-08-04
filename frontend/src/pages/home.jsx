@@ -1,14 +1,10 @@
 import FlightPath from '../components/FlightPath'
-import Footer from '../components/Footer'
 
 function Home() {
   return (
-    <>
-      <main className="page-container">
-        <FlightPath />
-      </main>
-      <Footer />
-    </>
+    <main className="page-container">
+      <FlightPath />
+    </main>
   )
 }
 

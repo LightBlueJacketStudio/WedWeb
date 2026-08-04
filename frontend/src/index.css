@@ -111,6 +111,269 @@ button {
   }
 }
 
+.contact-card {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 0.85rem;
+}
+
+.contact-card-title {
+  margin: 0;
+  font-family: "Libre Caslon Text", Georgia, serif;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  text-align: center;
+  color: rgb(108, 12, 32);
+  font-size: clamp(1.15rem, 4vw, 1.5rem);
+}
+
+.contact-card-people {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+}
+@media (min-width: 480px) {
+  .contact-card-people {
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+}
+
+.contact-person {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 0.4rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid rgba(255, 174, 48, 0.35);
+  border-radius: 0.9rem;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.contact-person-name {
+  margin: 0 0 0.15rem;
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  font-size: 0.75rem;
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  color: rgb(108, 12, 32);
+}
+
+.contact-person-line {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  font-size: 0.82rem;
+  color: rgb(28, 28, 23);
+  text-decoration: none;
+  word-break: break-word;
+}
+.contact-person-line .material-symbols-outlined {
+  flex-shrink: 0;
+  font-size: 1.05rem;
+  color: rgb(132, 84, 0);
+}
+.contact-person-line:hover, .contact-person-line:focus-visible {
+  color: rgb(108, 12, 32);
+  text-decoration: underline;
+}
+
+.travel-hero-ask {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.4rem 0.75rem;
+  margin-top: 0.25rem;
+}
+.travel-hero-ask .travel-guide-intro {
+  margin: 0;
+}
+
+.contact-us-trigger {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid rgb(108, 12, 32);
+  border-radius: 999px;
+  background: transparent;
+  color: rgb(108, 12, 32);
+  cursor: pointer;
+  transition: transform 0.18s ease, background 0.18s ease, color 0.18s ease, box-shadow 0.18s ease;
+}
+.contact-us-trigger .contact-us-trigger-icon {
+  font-size: 1.15rem;
+  line-height: 1;
+}
+.contact-us-trigger .contact-us-trigger-label {
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  font-size: 0.75rem;
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+}
+.contact-us-trigger:hover, .contact-us-trigger:focus-visible {
+  transform: translateY(-1px);
+  background: rgb(108, 12, 32);
+  color: rgb(255, 255, 255);
+  box-shadow: 0 4px 12px rgba(108, 12, 32, 0.24);
+}
+.contact-us-trigger:focus-visible {
+  outline: 2px solid rgb(108, 12, 32);
+  outline-offset: 2px;
+}
+
+.contact-us-trigger.contact-us-flat {
+  gap: 0.3rem;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  color: rgb(108, 12, 32);
+}
+.contact-us-trigger.contact-us-flat .contact-us-trigger-icon {
+  font-size: 0.95rem;
+}
+.contact-us-trigger.contact-us-flat .contact-us-trigger-label {
+  font-size: 0.6rem;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+  text-decoration-thickness: 1px;
+  text-decoration-color: rgba(108, 12, 32, 0.45);
+}
+.contact-us-trigger.contact-us-flat:hover, .contact-us-trigger.contact-us-flat:focus-visible {
+  transform: none;
+  background: transparent;
+  color: rgb(139, 38, 53);
+  box-shadow: none;
+}
+.contact-us-trigger.contact-us-flat:hover .contact-us-trigger-label, .contact-us-trigger.contact-us-flat:focus-visible .contact-us-trigger-label {
+  text-decoration-color: currentColor;
+}
+.contact-us-trigger.contact-us-flat:focus-visible {
+  outline: 2px solid rgb(108, 12, 32);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.pc-contact {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: clamp(0.35rem, 1.4vw, 0.6rem);
+}
+
+.contact-us-trigger.pc-contact-link .contact-us-trigger-icon {
+  font-size: clamp(0.8rem, 2.6vw, 1.05rem);
+}
+.contact-us-trigger.pc-contact-link .contact-us-trigger-label {
+  font-size: clamp(0.42rem, 1.2vw, 0.6rem);
+  letter-spacing: 0.08em;
+}
+
+.contact-us-trigger.footer-contact-btn {
+  padding: 0.4rem 0.9rem;
+  border-color: rgba(108, 12, 32, 0.4);
+}
+.contact-us-trigger.footer-contact-btn .contact-us-trigger-label {
+  font-size: 0.58rem;
+}
+
+.contact-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 1.25rem;
+  background: rgba(28, 28, 23, 0.55);
+  backdrop-filter: blur(3px);
+  animation: contact-fade-in 0.2s ease;
+}
+
+.contact-modal {
+  position: relative;
+  width: 100%;
+  max-width: 30rem;
+  padding: clamp(1.75rem, 5vw, 2.25rem) clamp(1.25rem, 5vw, 2.25rem) clamp(1.5rem, 5vw, 2.25rem);
+  border: 1px solid rgba(255, 174, 48, 0.3);
+  border-radius: 1.25rem;
+  background: radial-gradient(circle at 20% 20%, rgba(108, 12, 32, 0.045), transparent 28%), radial-gradient(circle at 80% 10%, rgba(132, 84, 0, 0.045), transparent 24%), linear-gradient(135deg, rgb(253, 249, 240), rgb(247, 243, 234));
+  box-shadow: 0 24px 60px rgba(49, 49, 43, 0.35);
+  animation: contact-pop-in 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.contact-modal-close {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  color: rgb(86, 66, 66);
+  cursor: pointer;
+  transition: background 0.18s ease, color 0.18s ease;
+}
+.contact-modal-close .material-symbols-outlined {
+  font-size: 1.25rem;
+}
+.contact-modal-close:hover, .contact-modal-close:focus-visible {
+  background: rgba(108, 12, 32, 0.1);
+  color: rgb(108, 12, 32);
+}
+
+@keyframes contact-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes contact-pop-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .contact-modal-overlay,
+  .contact-modal {
+    animation: none;
+  }
+}
 .Footer {
   margin-top: 1.5rem;
   border-top: 1px solid rgba(255, 174, 48, 0.2);

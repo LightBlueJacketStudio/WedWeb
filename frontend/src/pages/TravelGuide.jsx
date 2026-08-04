@@ -1,4 +1,5 @@
 import conMarket from "../assets/con-market.jpg"
+import { ContactUs } from "../components/ContactUs"
 
 const diningTips = [
   {
@@ -69,6 +70,13 @@ function TravelGuide() {
               the sea and ancient history lives alongside modern
               charm.
             </p>
+            <div className="travel-hero-ask">
+              <p className="travel-guide-intro">
+                Ask us anything!
+              </p>
+
+              <ContactUs className="contact-us-flat" />
+            </div>
           </div>
         </section>
 

@@ -1,0 +1,305 @@
+@use '../abstracts' as *;
+
+// ============================================
+// CONTACT US — reusable card, trigger button & modal
+// ============================================
+
+// The plain contact card: title + the two of us with call / email links.
+// Used inline on the travel guide and inside the modal.
+.contact-card {
+  width: 100%;
+
+  @include Flex(column, flex-start, stretch);
+
+  gap: 0.85rem;
+}
+
+.contact-card-title {
+  margin: 0;
+
+  @include HeadingSerif;
+
+  text-align: center;
+  color: $color-primary;
+  font-size: clamp(1.15rem, 4vw, 1.5rem);
+}
+
+.contact-card-people {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+
+  @media (min-width: 480px) {
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+}
+
+.contact-person {
+  @include Flex(column, flex-start, flex-start);
+
+  gap: 0.4rem;
+  padding: 0.85rem 1rem;
+
+  border: 1px solid rgba(255, 174, 48, 0.35);
+  border-radius: 0.9rem;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.contact-person-name {
+  margin: 0 0 0.15rem;
+
+  @include LabelCaps;
+
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  color: $color-primary;
+}
+
+.contact-person-line {
+  @include Flex(row, flex-start, center);
+
+  gap: 0.5rem;
+
+  font-family: $font-body;
+  font-size: 0.82rem;
+  color: $color-text-dark;
+  text-decoration: none;
+  word-break: break-word;
+
+  .material-symbols-outlined {
+    flex-shrink: 0;
+    font-size: 1.05rem;
+    color: $color-secondary;
+  }
+
+  &:hover,
+  &:focus-visible {
+    color: $color-primary;
+    text-decoration: underline;
+  }
+}
+
+// On the travel guide the trigger sits inline next to "Ask us anything!";
+// the card itself only appears in the modal. Wraps to its own line if the
+// row runs out of room on narrow screens.
+.travel-hero-ask {
+  @include Flex(row, center, center);
+
+  flex-wrap: wrap;
+  gap: 0.4rem 0.75rem;
+  margin-top: 0.25rem;
+
+  .travel-guide-intro {
+    margin: 0;
+  }
+}
+
+// ---------------------------------------------
+// Trigger button (opens the modal)
+// ---------------------------------------------
+.contact-us-trigger {
+  @include Flex(row, center, center);
+
+  gap: 0.45rem;
+  padding: 0.5rem 1rem;
+
+  border: 1px solid $color-primary;
+  border-radius: 999px;
+  background: transparent;
+  color: $color-primary;
+  cursor: pointer;
+
+  transition:
+    transform 0.18s ease,
+    background 0.18s ease,
+    color 0.18s ease,
+    box-shadow 0.18s ease;
+
+  .contact-us-trigger-icon {
+    font-size: 1.15rem;
+    line-height: 1;
+  }
+
+  .contact-us-trigger-label {
+    @include LabelCaps;
+
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+  }
+
+  &:hover,
+  &:focus-visible {
+    transform: translateY(-1px);
+    background: $color-primary;
+    color: $color-text-on-primary;
+    box-shadow: 0 4px 12px rgba(108, 12, 32, 0.24);
+  }
+
+  &:focus-visible {
+    outline: 2px solid $color-primary;
+    outline-offset: 2px;
+  }
+}
+
+// Flat variant: no pill/border — just a small underlined text link that opens
+// the modal. Used on the postcard and the travel guide hero.
+.contact-us-trigger.contact-us-flat {
+  gap: 0.3rem;
+  padding: 0;
+
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  color: $color-primary;
+
+  .contact-us-trigger-icon {
+    font-size: 0.95rem;
+  }
+
+  .contact-us-trigger-label {
+    font-size: 0.6rem;
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+    text-decoration-thickness: 1px;
+    text-decoration-color: rgba(108, 12, 32, 0.45);
+  }
+
+  &:hover,
+  &:focus-visible {
+    transform: none;
+    background: transparent;
+    color: $color-primary-hover;
+    box-shadow: none;
+
+    .contact-us-trigger-label {
+      text-decoration-color: currentColor;
+    }
+  }
+
+  &:focus-visible {
+    outline: 2px solid $color-primary;
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+}
+
+// Postcard: sit the flat link in the bottom-right corner of the address side.
+.pc-contact {
+  @include Flex(row, flex-end, center);
+
+  margin-top: clamp(0.35rem, 1.4vw, 0.6rem);
+}
+
+.contact-us-trigger.pc-contact-link {
+  .contact-us-trigger-icon {
+    font-size: clamp(0.8rem, 2.6vw, 1.05rem);
+  }
+
+  .contact-us-trigger-label {
+    font-size: clamp(0.42rem, 1.2vw, 0.6rem);
+    letter-spacing: 0.08em;
+  }
+}
+
+// Footer variant: a small, quiet pill.
+.contact-us-trigger.footer-contact-btn {
+  padding: 0.4rem 0.9rem;
+  border-color: rgba(108, 12, 32, 0.4);
+
+  .contact-us-trigger-label {
+    font-size: 0.58rem;
+  }
+}
+
+// ---------------------------------------------
+// Modal (portalled to <body>)
+// ---------------------------------------------
+.contact-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+
+  @include Flex(row, center, center);
+
+  padding: 1.25rem;
+  background: rgba(28, 28, 23, 0.55);
+  backdrop-filter: blur(3px);
+
+  animation: contact-fade-in 0.2s ease;
+}
+
+.contact-modal {
+  position: relative;
+  width: 100%;
+  max-width: 30rem;
+  padding: clamp(1.75rem, 5vw, 2.25rem) clamp(1.25rem, 5vw, 2.25rem)
+    clamp(1.5rem, 5vw, 2.25rem);
+
+  border: 1px solid rgba(255, 174, 48, 0.3);
+  border-radius: 1.25rem;
+
+  @include PassportTexture;
+
+  box-shadow: 0 24px 60px rgba(49, 49, 43, 0.35);
+
+  animation: contact-pop-in 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.contact-modal-close {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+
+  @include Flex(row, center, center);
+
+  width: 2rem;
+  height: 2rem;
+
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  color: $color-text-medium;
+  cursor: pointer;
+
+  transition:
+    background 0.18s ease,
+    color 0.18s ease;
+
+  .material-symbols-outlined {
+    font-size: 1.25rem;
+  }
+
+  &:hover,
+  &:focus-visible {
+    background: rgba(108, 12, 32, 0.1);
+    color: $color-primary;
+  }
+}
+
+@keyframes contact-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes contact-pop-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact-modal-overlay,
+  .contact-modal {
+    animation: none;
+  }
+}

@@ -5,6 +5,7 @@ import TravelGuide from './pages/TravelGuide'
 import GiftRegistry from './pages/GiftRegistry'
 import TheWedding from './pages/TheWedding'
 import Navibar from './components/Navibar'
+import Footer from './components/Footer'
 import ScrollToTop from './components/ScrollToTop'
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
         <Route path="/travel_guide" element={<TravelGuide />} />
         <Route path="/gift_registry" element={<GiftRegistry />} />
       </Routes>
+      <Footer />
     </BrowserRouter>
   )
 }
