@@ -308,11 +308,11 @@ function TravelGuide() {
         </section>
 
         <section className="local-gems-section">
-          <div className="local-gems-header">
+          {/* <div className="local-gems-header">
             <h2>Local Gems</h2>
 
             <p>Things we love in our favorite city</p>
-          </div>
+          </div> */}
 
           <div className="dining-grid">
             <article className="dining-card dining-tips-card">
