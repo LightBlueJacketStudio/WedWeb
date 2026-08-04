@@ -199,13 +199,13 @@ function FlightPath() {
 
                 {/* Tapping "Contact us" opens a modal; keep the click from
                     bubbling up to the card's flip toggle. */}
-                <div
+                {/* <div
                   className="pc-contact"
                   onClick={(e) => e.stopPropagation()}
                   onKeyDown={(e) => e.stopPropagation()}
                 >
                   <ContactUs className="contact-us-flat pc-contact-link" />
-                </div>
+                </div> */}
               </div>
             </div>
 
