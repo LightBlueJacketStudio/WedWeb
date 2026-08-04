@@ -9,14 +9,23 @@
   box-sizing: border-box;  // This makes padding not add to width
 }
 
-// Sticky footer: keep the footer pinned to the bottom of the viewport even
-// when the page content is short (e.g. after the postcard flips to its shorter
-// back on mobile), instead of letting it ride up under the content.
+// Sticky footer: keep the footer pinned to the bottom of the viewport, 
+// like after the postcard flips to its shorter back on mobile,
+//  instead of letting it ride up under the content.
 #root {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   min-height: 100dvh; // account for mobile browser chrome
+
+  // Truly cut off sideways overflow (e.g. the home postcard's rotated flip
+  // layer, whose bounding box is wider than a phone screen) so it can't widen
+  // the document and let phones zoom out / pan sideways. This must live here,
+  // not on body - overflow on body is propagated to the viewport, where `clip`
+  // degrades to `hidden` and the page stays pannable. And not on
+  // .postcard-section — a clip directly on the flip's perspective ancestor
+  // makes Chrome mis-rasterise the card after the turn.
+  overflow-x: clip;
 
   > main {
     flex: 1 0 auto;

@@ -43,13 +43,17 @@
   perspective: 1800px;
   -webkit-tap-highlight-color: transparent;
 
-  // Entrance: pop the card in when it scrolls into view
+  // Entrance: pop the card in when it scrolls into view.
+  // The height tween shares the flip's duration + easing so the box glides
+  // between the portrait and landscape heights in one continuous motion with
+  // the turn — a shorter, delayed height transition here reads as a sudden
+  // lurch right as the flip lands (the card and footer jump mid-turn).
   opacity: 0;
   transform: translateY(16px) scale(0.9);
   transition:
     opacity 0.7s ease,
     transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1),
-    height 0.35s ease;
+    height 0.85s cubic-bezier(0.45, 0.05, 0.2, 1);
 
   &.is-entered {
     opacity: 1;
@@ -57,19 +61,13 @@
   }
 
   // The front is portrait (tall); the back is landscape (short). The box
-  // reserves the taller portrait height by default so the front fits. Once
-  // flipped to the back, collapse to the landscape height so the shorter card
-  // doesn't float in a tall, empty box. The collapse is delayed until the flip
-  // is past edge-on (~0.45s) so the taller front never spills out mid-turn.
+  // reserves the taller portrait height by default so the front fits; once
+  // flipped it eases down to the back's height in sync with the turn.
   &.is-flipped {
     // --card-h is measured from the note's real content height in JS (the card
     // is rotated + absolutely positioned, so its natural height can't feed back
     // into layout on its own). Falls back to the ratio height until measured.
     height: var(--card-h, var(--lh));
-    transition:
-      opacity 0.7s ease,
-      transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1),
-      height 0.35s ease 0.5s;
   }
 
   &:focus-visible {
