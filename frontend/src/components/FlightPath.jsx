@@ -9,85 +9,82 @@ import { ContactUs } from './ContactUs'
 const PLAN_LINKS = [
   { label: 'RSVP', to: '/rsvp', icon: 'edit_calendar' },
   { label: 'Travel Guide', to: '/travel_guide', icon: 'explore' },
-  {
-    label: 'Where to Stay',
-    to: '/travel_guide#where-to-stay',
-    icon: 'hotel',
-  },
+  { label: 'Where to Stay', to: '/travel_guide#where-to-stay', icon: 'hotel' },
   { label: 'Gift Registry', to: '/gift_registry', icon: 'redeem' },
 ]
-
-const AUTO_ENTER_DELAY = 120
-const AUTO_SHOW_BACK_DELAY = 1700
 
 const prefersReducedMotion =
   typeof window !== 'undefined' &&
   window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
 function FlightPath() {
-  // Reduced-motion visitors skip the entrance animation and begin with the
-  // postcard fully visible.
+  // Reduced-motion visitors skip the entrance/flip animation and start on the
+  // fully-entered front, so seed the state instead of setting it in an effect.
   const [entered, setEntered] = useState(prefersReducedMotion)
   const [flipped, setFlipped] = useState(false)
-
   const cardRef = useRef(null)
+  const pcCardRef = useRef(null)
   const hasAnimated = useRef(false)
 
-  // Reveal the postcard when it enters the viewport, then automatically
-  // transition from the front artwork to the note.
   useEffect(() => {
     const node = cardRef.current
-
-    if (!node || prefersReducedMotion) return
+    if (!node) return
+    if (prefersReducedMotion) return
 
     const timers = []
-
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (!entry.isIntersecting || hasAnimated.current) return
-
-          hasAnimated.current = true
-
-          timers.push(
-            window.setTimeout(() => {
-              setEntered(true)
-            }, AUTO_ENTER_DELAY)
-          )
-
-          timers.push(
-            window.setTimeout(() => {
-              setFlipped(true)
-            }, AUTO_SHOW_BACK_DELAY)
-          )
-
-          observer.disconnect()
+          if (entry.isIntersecting && !hasAnimated.current) {
+            hasAnimated.current = true
+            // Pop the postcard in, then flip it over to the note with a single
+            // calm turn (same motion as a manual tap).
+            timers.push(setTimeout(() => setEntered(true), 120))
+            timers.push(setTimeout(() => setFlipped(true), 1700))
+            observer.disconnect()
+          }
         })
       },
       { threshold: 0.4 }
     )
-
     observer.observe(node)
 
     return () => {
       observer.disconnect()
-      timers.forEach((timer) => window.clearTimeout(timer))
+      timers.forEach(clearTimeout)
     }
   }, [])
 
-  const toggle = () => {
-    setFlipped((current) => !current)
-  }
+  // Keep the flip container's height in sync with the note's real content height
+  // The landscape card is rotated + absolutely positioned, so its
+  // natural height can't feed back into the layout on its own, measure it and
+  // hand the container an explicit --card-h. This lets the note grow on narrow
+  // screens (more text wrapping = taller card) instead of being clipped.
+  useEffect(() => {
+    const card = pcCardRef.current
+    const container = cardRef.current
+    if (!card || !container) return
+
+    const sync = () =>
+      container.style.setProperty('--card-h', `${card.offsetHeight}px`)
+    sync()
+
+    const observer = new ResizeObserver(sync)
+    observer.observe(card)
+
+    // Re-measure once the handwritten web fonts load, since the note reflows.
+    if (document.fonts?.ready) document.fonts.ready.then(sync)
+
+    return () => observer.disconnect()
+  }, [])
+
+  const toggle = () => setFlipped((prev) => !prev)
 
   const handleKeyDown = (event) => {
-    if (event.key !== 'Enter' && event.key !== ' ') return
-
-    event.preventDefault()
-    toggle()
-  }
-
-  const stopCardToggle = (event) => {
-    event.stopPropagation()
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault()
+      toggle()
+    }
   }
 
   return (
@@ -112,39 +109,21 @@ function FlightPath() {
         onClick={toggle}
         onKeyDown={handleKeyDown}
       >
-        {/*
-          Both panels remain rendered and occupy the same fixed stage.
-
-          CSS controls which panel is visible:
-          - the front exits when .postcard has .is-flipped
-          - the back enters when .postcard has .is-flipped
-
-          This preserves the existing class names while removing the need to
-          rotate and measure a differently sized physical card.
-        */}
         <div className="postcard-inner">
-          {/* FRONT — Save the Date artwork */}
-          <div
-            className="postcard-face postcard-front"
-            aria-hidden={flipped}
-          >
+          {/* FRONT — the Save the Date*/}
+          <div className="postcard-face postcard-front">
             <img
               src={saveTheDate}
               alt="Save the Date — Hoàng My & Ngọc Bảo, Saturday 13 March 2027, Đà Nẵng, Việt Nam"
             />
-
             <span className="postcard-hint" aria-hidden="true">
-              <span className="postcard-hint-icon">↻</span>
-              Show note
+              <span className="postcard-hint-icon">↻</span> Flip me
             </span>
           </div>
 
-          {/* BACK — landscape postcard note */}
-          <div
-            className="postcard-face postcard-back"
-            aria-hidden={!flipped}
-          >
-            <div className="pc-card">
+          {/* BACK — the landscape postcard */}
+          <div className="postcard-face postcard-back">
+            <div className="pc-card" ref={pcCardRef}>
               <div className="pc-left">
                 <div className="pc-return">
                   <p className="pc-return-name">
@@ -152,11 +131,12 @@ function FlightPath() {
                     <br />
                     Japanese Resorts &amp; Spa
                   </p>
-
                   <p className="pc-return-addr">
+                    
                     Nguyen Tat Thanh Street
                     <br />
                     Hai Van Ward, Da Nang, Viet Nam
+                    <br />
                   </p>
                 </div>
 
@@ -165,64 +145,74 @@ function FlightPath() {
                   <p className="pc-savedate-date">13 March 2027</p>
                 </div>
 
-                <div className="pc-message">
-                  <p>Hi families and friends,</p>
-
-                  <p>
-                    Greetings from Da Nang, Viet Nam! We're getting married,
-                    and we'd love for you to be there with us.
-                  </p>
-
-                  <p>
-                    It's going to be a beautiful excuse for a trip to our home
-                    country, which has cool beaches, incredible food, and a
-                    celebration you won't forget.
-                  </p>
-
-                  <p className="pc-signoff">— Bao &amp; Amy</p>
-                </div>
-              </div>
-
-              <div className="pc-divider" aria-hidden="true" />
-
-              <div className="pc-right">
-                <div className="pc-postage">
-                  <img
-                    className="pc-stamp-frame"
-                    src={vietnamStamp}
-                    alt="Việt Nam 2027 air-mail postage stamp"
-                  />
-                </div>
-
-                <div className="pc-deliver">
-                  <p className="pc-deliver-label">Plan your visit:</p>
-
-                  <div
-                    className="pc-actions"
-                    onClick={stopCardToggle}
-                    onKeyDown={stopCardToggle}
-                  >
-                    {PLAN_LINKS.map(({ label, to, icon }) => (
-                      <Link key={label} to={to} className="pc-action">
-                        <span
-                          className="pc-action-icon material-symbols-outlined"
-                          aria-hidden="true"
-                        >
-                          {icon}
-                        </span>
-
-                        <span className="pc-action-label">{label}</span>
-                      </Link>
-                    ))}
-                  </div>
-                </div>
+              <div className="pc-message">
+                <p>Hi families and friends,</p>
+                <p>
+                  Greetings from Da Nang, Viet Nam! We're getting married, and we'd love for you to be there with
+                  us.
+                </p>
+                <p>
+                  It's going to be a beautiful excuse for a trip to our home
+                  country where is has cool beaches, incredible food, and a celebration you
+                  won't forget.
+                </p>
+                {/* <p>
+                  More details (RSVP, accommodation, travel tips) coming soon.
+                  For now, just mark your calendars and start looking into
+                  flights!
+                </p> */}
+                <p className="pc-signoff">— Bao &amp; Amy</p>
               </div>
             </div>
 
-            {/* <span className="postcard-hint" aria-hidden="true">
-              <span className="postcard-hint-icon">↻</span>
-              Show front
-            </span> */}
+            <div className="pc-divider" aria-hidden="true"></div>
+
+            <div className="pc-right">
+              <div className="pc-postage">
+                {/* Postage stamp tucked into the corner. */}
+                <img
+                  className="pc-stamp-frame"
+                  src={vietnamStamp}
+                  alt="Việt Nam 2027 air-mail postage stamp"
+                />
+              </div>
+
+              <div className="pc-deliver">
+                <p className="pc-deliver-label">Plan your visit:</p>
+                <div
+                  className="pc-actions"
+                  onClick={(e) => e.stopPropagation()}
+                  onKeyDown={(e) => e.stopPropagation()}
+                >
+                  {PLAN_LINKS.map(({ label, to, icon }) => (
+                    <Link key={label} to={to} className="pc-action">
+                      <span
+                        className="pc-action-icon material-symbols-outlined"
+                        aria-hidden="true"
+                      >
+                        {icon}
+                      </span>
+                      <span className="pc-action-label">{label}</span>
+                    </Link>
+                  ))}
+                </div>
+
+                {/* Tapping "Contact us" opens a modal; keep the click from
+                    bubbling up to the card's flip toggle. */}
+                {/* <div
+                  className="pc-contact"
+                  onClick={(e) => e.stopPropagation()}
+                  onKeyDown={(e) => e.stopPropagation()}
+                >
+                  <ContactUs className="contact-us-flat pc-contact-link" />
+                </div> */}
+              </div>
+            </div>
+
+              {/* <span className="postcard-hint" aria-hidden="true">
+                <span className="postcard-hint-icon">↻</span> flip back
+              </span> */}
+            </div>
           </div>
         </div>
       </div>
