@@ -75,7 +75,7 @@ function Rsvp() {
 
     // sanitize: skip questions the guest was never shown.
     // "No" skips everything but name; "Not sure yet" skips everything but
-    // email/address/phone. Several of these are required questions on the Google
+    // email/address. Several of these are required questions on the Google
     // Form itself, so they still need a value or Google silently rejects
     // the whole response (the no-cors POST below can't surface that failure).
     const submissionData = {
@@ -86,7 +86,7 @@ function Rsvp() {
       // 'N/A' would make it silently reject the whole "No" response.
       email: isNotAttending ? 'no-reply@na.example.com' : formData.email,
       address: isNotAttending ? 'N/A' : formData.address,
-      phone: isNotAttending ? 'N/A' : formData.phone,
+      phone: showFullDetails ? formData.phone : 'N/A',
       dietary: showFullDetails ? formData.dietary : 'N/A',
       accommodationHelp: showFullDetails
         ? formData.accommodationHelp
@@ -174,20 +174,27 @@ function Rsvp() {
                 </select>
               </label>
 
+              <label>
+                How do you know the couple?
+                <select
+                  required
+                  name="howYouKnow"
+                  value={formData.howYouKnow}
+                  onChange={handleChange}
+                >
+                  <option value="" disabled>
+                    Select an option
+                  </option>
+                  {HOW_YOU_KNOW_OPTIONS.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </select>
+              </label>
+
               {!isNotAttending && (
                 <>
-                  <label>
-                    Phone number
-                    <input
-                      required
-                      type="tel"
-                      maxLength={MAX_SHORT_LENGTH}
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleChange}
-                    />
-                  </label>
-
                   <label>
                     Email
                     <input
@@ -237,6 +244,18 @@ function Rsvp() {
                         </option>
                       ))}
                     </select>
+                  </label>
+
+                  <label>
+                    Phone number
+                    <input
+                      required
+                      type="tel"
+                      maxLength={MAX_SHORT_LENGTH}
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleChange}
+                    />
                   </label>
 
                   <label>
@@ -301,25 +320,6 @@ function Rsvp() {
                   )}
                 </>
               )}
-
-              <label>
-                How do you know the couple?
-                <select
-                  required
-                  name="howYouKnow"
-                  value={formData.howYouKnow}
-                  onChange={handleChange}
-                >
-                  <option value="" disabled>
-                    Select an option
-                  </option>
-                  {HOW_YOU_KNOW_OPTIONS.map((option) => (
-                    <option key={option} value={option}>
-                      {option}
-                    </option>
-                  ))}
-                </select>
-              </label>
 
               {status === 'error' && (
                 <p className="rsvp-error">
