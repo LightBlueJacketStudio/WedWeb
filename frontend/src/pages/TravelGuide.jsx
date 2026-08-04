@@ -25,7 +25,7 @@ const favoriteFoods = [
   { meal: "Appetizer", icon: "tapas", dish: "Bánh bèo" },
   { meal: "Lunch", icon: "lunch_dining", dish: "Bánh canh" },
   { meal: "Dinner", icon: "dinner_dining", dish: "Mì Quảng" },
-  { meal: "Drink", icon: "local_cafe", dish: "Salted Coffee" },
+  { meal: "Drink", icon: "local_cafe", dish: "Cà Phê Muối" },
   { meal: "Dessert", icon: "icecream", dish: "Kem bơ" },
 ]
 

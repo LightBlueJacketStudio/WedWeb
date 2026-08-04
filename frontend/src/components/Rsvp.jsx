@@ -115,6 +115,11 @@ function Rsvp() {
         body,
       })
       setStatus('submitted')
+      // Scroll to the very top of the page so the confirmation message is
+      // visible. At scroll 0 the sticky navbar sits in its natural spot with
+      // the message cleanly below it (scrolling the section into view instead
+      // would let the sticky navbar overlap the message).
+      window.scrollTo({ top: 0, behavior: 'smooth' })
     } catch (err) {
       console.error('RSVP submission failed', err)
       setStatus('error')
