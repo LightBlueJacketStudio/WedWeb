@@ -17,7 +17,7 @@ import { useState } from 'react'
 //      VITE_SITE_PWD_HASH=<the hash>
 
 const DEFAULT_PWD_HASH =
-  '6e7cc6b61cec5771e169c9d9af94c7b1233d2e167d22f104a4e54f4a9ef660be'
+  'e4a9024fc5b59e0c84eb79f6e7f67b1508032cbcdeb0a17dd365470b46d217ae'
 
 const SITE_PWD_HASH = import.meta.env.VITE_SITE_PWD_HASH || DEFAULT_PWD_HASH
 
