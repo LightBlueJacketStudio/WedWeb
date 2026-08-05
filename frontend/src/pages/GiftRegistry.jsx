@@ -67,7 +67,7 @@ function StatTile({ icon, value, suffix, label }) {
 }
 
 const REGISTRY_BODY =
-  "Truthfully, we have everything we could ask for. But there's something we care about deeply: the feral cats in our community who don't have anyone looking out for them. If you're looking for a way to celebrate with us, a donation toward our trap-neuter-spay effort would mean the world."
+  "Truthfully, we have everything we could ask for. But there's something we care about deeply: the feral cats in our community who don't have anyone looking out for them. If you're looking for a way to celebrate with us, a donation toward our trap-neuter-spay efforts would mean the world."
 
 const PAYMENT_METHODS = [
   {

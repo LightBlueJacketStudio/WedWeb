@@ -65,10 +65,7 @@ function TravelGuide() {
             <h1>Your Journey to Da Nang</h1>
 
             <p className="travel-guide-intro">
-              We are so excited to share our home country with you.
-              Da Nang is a city of magic, where the mountains meet
-              the sea and ancient history lives alongside modern
-              charm.
+              We're so excited to share our hometown with you - the food, the beaches, the people, the history, the culture. This isn't just a wedding, it's a homecoming.
             </p>
             <div className="travel-hero-ask">
               <p className="travel-guide-intro">

@@ -782,6 +782,146 @@ button {
     padding: 0;
   }
 }
+.password-gate {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(circle at 20% 20%, rgba(108, 12, 32, 0.045), transparent 28%), radial-gradient(circle at 80% 10%, rgba(132, 84, 0, 0.045), transparent 24%), linear-gradient(135deg, rgb(253, 249, 240), rgb(247, 243, 234));
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  padding: 1.5rem;
+  box-sizing: border-box;
+}
+.password-gate__card {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  border: 1px solid rgba(255, 174, 48, 0.2);
+  border-radius: 1.5rem;
+  background: rgb(255, 255, 255);
+  gap: 0.5rem;
+  width: 100%;
+  max-width: 26rem;
+  padding: 2.25rem 1.75rem;
+  box-sizing: border-box;
+  box-shadow: 0 24px 60px rgba(49, 49, 43, 0.16);
+  text-align: center;
+}
+.password-gate__eyebrow {
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  font-size: 0.75rem;
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin: 0;
+  color: rgb(132, 84, 0);
+}
+.password-gate__title {
+  font-family: "Libre Caslon Text", Georgia, serif;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin: 0.25rem 0 0;
+  color: rgb(108, 12, 32);
+  font-size: 1.9rem;
+}
+.password-gate__subtitle {
+  margin: 0.25rem 0 1rem;
+  color: rgb(86, 66, 66);
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+.password-gate__label {
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  font-size: 0.75rem;
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  align-self: flex-start;
+  margin-bottom: 0.35rem;
+  color: rgb(132, 84, 0);
+  font-size: 0.7rem;
+}
+.password-gate__input {
+  width: 100%;
+  min-height: 48px;
+  padding: 0.75rem 0.9rem;
+  box-sizing: border-box;
+  border: 1px solid rgb(221, 192, 192);
+  border-radius: 0.875rem;
+  background-color: rgba(255, 255, 255, 0.72);
+  color: rgb(28, 28, 23);
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+.password-gate__input:focus {
+  border-color: rgb(108, 12, 32);
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0 0 0 4px rgba(255, 178, 182, 0.28);
+}
+.password-gate__input::placeholder {
+  color: rgb(137, 113, 114);
+}
+.password-gate__error {
+  margin: 0.5rem 0 0;
+  color: rgb(108, 12, 32);
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+.password-gate__button {
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  font-size: 0.75rem;
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  align-self: stretch;
+  min-height: 52px;
+  margin-top: 1.25rem;
+  padding: 0.75rem 1.5rem;
+  border: 0;
+  border-radius: 1rem;
+  background: rgb(108, 12, 32);
+  color: rgb(255, 255, 255);
+  box-shadow: 0 12px 28px rgba(108, 12, 32, 0.25);
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.2s ease, background-color 0.2s ease, opacity 0.2s ease;
+}
+.password-gate__button:hover {
+  background: rgb(139, 38, 53);
+  transform: translateY(-2px);
+  box-shadow: 0 16px 32px rgba(108, 12, 32, 0.25);
+}
+.password-gate__button:active {
+  transform: scale(0.96);
+  box-shadow: 0 4px 12px rgba(108, 12, 32, 0.25);
+}
+.password-gate__button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+@media (min-width: 768px) {
+  .password-gate__card {
+    padding: 2.75rem 2.25rem;
+  }
+  .password-gate__title {
+    font-size: 2.15rem;
+  }
+}
 .planning-section {
   padding: 1.5rem 0 2.5rem;
 }
