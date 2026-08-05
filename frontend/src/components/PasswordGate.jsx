@@ -51,6 +51,11 @@ function PasswordGate({ children }) {
     const hash = await sha256Hex(value)
     if (hash === SITE_PWD_HASH) {
       sessionStorage.setItem(STORAGE_KEY, 'true')
+      // Dismiss the mobile keyboard/focus before the gate unmounts so iOS
+      // doesn't carry any focus-related viewport state into the site.
+      if (document.activeElement instanceof HTMLElement) {
+        document.activeElement.blur()
+      }
       // Always reveal the landing page ("/" Home) after unlocking, regardless
       // of which URL the visitor originally opened. The gate lives outside the
       // router, so we reset the URL here before <App /> mounts.
@@ -81,7 +86,6 @@ function PasswordGate({ children }) {
           type="password"
           value={value}
           onChange={(event) => setValue(event.target.value)}
-          autoFocus
           autoComplete="off"
           placeholder="Enter password"
         />

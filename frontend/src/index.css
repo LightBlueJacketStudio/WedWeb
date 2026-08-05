@@ -858,7 +858,7 @@ button {
   background-color: rgba(255, 255, 255, 0.72);
   color: rgb(28, 28, 23);
   font-family: "Plus Jakarta Sans", system-ui, sans-serif;
-  font-size: 0.95rem;
+  font-size: 16px;
   line-height: 1.5;
   outline: none;
   transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
