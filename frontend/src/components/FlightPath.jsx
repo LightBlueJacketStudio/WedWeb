@@ -55,11 +55,12 @@ function FlightPath() {
     }
   }, [])
 
-  // Keep the flip container's height in sync with the note's real content height
-  // The landscape card is rotated + absolutely positioned, so its
-  // natural height can't feed back into the layout on its own, measure it and
-  // hand the container an explicit --card-h. This lets the note grow on narrow
-  // screens (more text wrapping = taller card) instead of being clipped.
+  // The landscape card is rotated + absolutely positioned, so its natural
+  // height can't feed back into the layout on its own; measure it and hand the
+  // container an explicit --card-h. The container keeps one constant height
+  // (max of both faces) so the flip never shifts the footer — --card-h only
+  // matters when the note outgrows that reserved height (more text wrapping on
+  // narrow screens = taller card) instead of being clipped.
   useEffect(() => {
     const card = pcCardRef.current
     const container = cardRef.current
@@ -173,7 +174,7 @@ function FlightPath() {
                 <img
                   className="pc-stamp-frame"
                   src={vietnamStamp}
-                  alt="Việt Nam 2027 air-mail postage stamp"
+                  alt="Việt Nam 2027 postage stamp"
                 />
               </div>
 

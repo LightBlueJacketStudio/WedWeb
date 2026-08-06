@@ -15,8 +15,8 @@
   padding: 2rem 1rem 2.5rem;
 
   // ...and the card centres vertically inside that filled space. This keeps the
-  // footer anchored at the bottom of the page: flipping the card only resizes it
-  // in place (re-centred), so the footer never slides up/down with the flip.
+  // footer anchored at the bottom of the page: the card box never resizes with
+  // the flip, so the footer never slides up/down.
   flex: 1 0 auto;
 
   @include Flex(column, center, center);
@@ -35,7 +35,9 @@
 
   position: relative;
   width: max(var(--cw), var(--lw));
-  height: max(var(--ch), var(--lh));
+  // One constant height that fits whichever face is taller, in either state.
+  // The flip happens inside a box that never resizes, so nothing below the card (the footer) shifts on phones.
+  height: max(var(--ch), var(--lh), var(--card-h, 0px));
 
   @include Flex(row, center, center);
 
@@ -44,30 +46,15 @@
   -webkit-tap-highlight-color: transparent;
 
   // Entrance: pop the card in when it scrolls into view.
-  // The height tween shares the flip's duration + easing so the box glides
-  // between the portrait and landscape heights in one continuous motion with
-  // the turn — a shorter, delayed height transition here reads as a sudden
-  // lurch right as the flip lands (the card and footer jump mid-turn).
   opacity: 0;
   transform: translateY(16px) scale(0.9);
   transition:
     opacity 0.7s ease,
-    transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1),
-    height 0.85s cubic-bezier(0.45, 0.05, 0.2, 1);
+    transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
 
   &.is-entered {
     opacity: 1;
     transform: translateY(0) scale(1);
-  }
-
-  // The front is portrait (tall); the back is landscape (short). The box
-  // reserves the taller portrait height by default so the front fits; once
-  // flipped it eases down to the back's height in sync with the turn.
-  &.is-flipped {
-    // --card-h is measured from the note's real content height in JS (the card
-    // is rotated + absolutely positioned, so its natural height can't feed back
-    // into layout on its own). Falls back to the ratio height until measured.
-    height: var(--card-h, var(--lh));
   }
 
   &:focus-visible {
@@ -118,7 +105,7 @@
   }
 }
 
-// BACK — a transparent flip layer; overflow visible so the wider landscape
+// BACK - a transparent flip layer; overflow visible so the wider landscape
 // card can extend past this portrait face.
 .postcard-back {
   overflow: visible;
@@ -144,6 +131,13 @@
   box-shadow:
     0 22px 50px rgba(49, 49, 43, 0.28),
     0 2px 6px rgba(49, 49, 43, 0.12);
+
+  // Keep this layer permanently promoted and backface-hidden. The note lives
+  // inside a 3D-transformed stack (perspective + preserve-3d + rotateY/Z), so
+  // its text is rasterised to a texture and re-sampled onto the screen.
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 
   padding: clamp(0.75rem, 2.4vw, 1.5rem);
 
@@ -318,6 +312,9 @@
     background 0.18s ease,
     border-color 0.18s ease,
     box-shadow 0.18s ease;
+
+    
+  will-change: transform;
 
   .pc-action-icon {
     font-size: clamp(0.85rem, 3vw, 1.25rem);
