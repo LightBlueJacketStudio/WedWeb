@@ -142,6 +142,14 @@ function Rsvp() {
         ) : (
           <>
             <p>Come celebrate with us!</p>
+            <p>
+              <em>
+                Please RSVP or update your response by{' '}
+                <strong>December 1st, 2026</strong> so we can finalize
+                headcounts, accommodations, and travel plans.
+              </em>
+            </p>
+
 
             <form className="rsvp-form" onSubmit={handleSubmit}>
               <label>
