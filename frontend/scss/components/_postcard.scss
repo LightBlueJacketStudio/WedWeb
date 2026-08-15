@@ -204,9 +204,9 @@
 
   p {
     margin: 0;
-    font-family: 'Indie Flower', $font-heading;
+    font-family: $font-handwriting;
     color: $color-text-dark;
-    font-size: clamp(0.56rem, 1.6vw, 0.82rem);
+    font-size: clamp(0.64rem, 1.85vw, 0.95rem);
     line-height: 1.45;
   }
 

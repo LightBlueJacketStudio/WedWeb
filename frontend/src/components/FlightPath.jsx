@@ -149,13 +149,13 @@ function FlightPath() {
               <div className="pc-message">
                 <p>Hi families and friends,</p>
                 <p>
-                  Greetings from Da Nang, Viet Nam! We're getting married, and we'd love for you to be there with
-                  us.
+                  Greetings from Da Nang, Viet Nam! We're getting married, 
+                  and we'd love for you to be there with us.
                 </p>
                 <p>
                   It's going to be a beautiful excuse for a trip to our home
-                  country where is has cool beaches, incredible food, and a celebration you
-                  won't forget.
+                  country where it has cool beaches, incredible food, and a celebration you
+                  won't forget. 
                 </p>
                 {/* <p>
                   More details (RSVP, accommodation, travel tips) coming soon.

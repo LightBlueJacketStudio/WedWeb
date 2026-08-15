@@ -1206,9 +1206,9 @@ button {
 }
 .pc-message p {
   margin: 0;
-  font-family: "Indie Flower", "Libre Caslon Text", Georgia, serif;
+  font-family: "handsome-pro-nib", "Indie Flower", cursive;
   color: rgb(28, 28, 23);
-  font-size: clamp(0.56rem, 1.6vw, 0.82rem);
+  font-size: clamp(0.64rem, 1.85vw, 0.95rem);
   line-height: 1.45;
 }
 .pc-message .pc-signoff {
