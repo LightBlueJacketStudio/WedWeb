@@ -1208,7 +1208,7 @@ button {
   margin: 0;
   font-family: "handsome-pro-nib", "Indie Flower", cursive;
   color: rgb(28, 28, 23);
-  font-size: clamp(0.64rem, 1.85vw, 0.95rem);
+  font-size: clamp(0.75rem, 2.1vw, 1.1rem);
   line-height: 1.45;
 }
 .pc-message .pc-signoff {
