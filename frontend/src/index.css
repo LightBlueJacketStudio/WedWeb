@@ -1121,6 +1121,47 @@ button {
   transform: rotateY(180deg);
 }
 
+/* Resting state, applied once the flip animation has finished (see FlightPath).
+   A perspective/preserve-3d subtree keeps the note living on a GPU texture that
+   gets resampled instead of repainted, so the handwriting reads blurry on
+   displays with fractional OS scaling or browser zoom. Dropping out of 3D at
+   rest paints it as ordinary text at native resolution.
+
+   The transforms below are the flattened equivalent of the flipped 3D chain:
+   inner rotateY(180)·rotateZ(90) composed with the back face's rotateY(180) and
+   the card's own rotateZ(90) cancels out, and every rotation shares the same
+   centre point — so the card lands centred and upright either way. */
+.postcard.is-flipped.is-settled {
+  perspective: none;
+}
+.postcard.is-flipped.is-settled .postcard-inner,
+.postcard.is-restoring .postcard-inner {
+  /* Entering/leaving the settled state swaps the 3D transform chain for its
+     flattened equivalent — geometrically identical, so it must snap, not
+     animate. Without this the still-active 0.85s transition animates the
+     unwind and the card visibly flips a second time. */
+  transition: none;
+}
+.postcard.is-flipped.is-settled .postcard-inner {
+  transform: none;
+  transform-style: flat;
+}
+.postcard.is-flipped.is-settled .postcard-face {
+  backface-visibility: visible;
+  -webkit-backface-visibility: visible;
+}
+.postcard.is-flipped.is-settled .postcard-back {
+  transform: none;
+}
+.postcard.is-flipped.is-settled .pc-card {
+  transform: translate(-50%, -50%);
+}
+/* Without backface-visibility the front would otherwise show through around the
+   landscape card, which is narrower and shorter than the portrait face. */
+.postcard.is-flipped.is-settled .postcard-front {
+  visibility: hidden;
+}
+
 .pc-card {
   position: absolute;
   top: 50%;
@@ -1132,9 +1173,11 @@ button {
   overflow: hidden;
   border-radius: 1rem;
   box-shadow: 0 22px 50px rgba(49, 49, 43, 0.28), 0 2px 6px rgba(49, 49, 43, 0.12);
-  will-change: transform;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
+  /* No will-change/backface-visibility here: either one pins this card into its
+     own composited layer, so its text is rasterized once and then scaled by the
+     parent's flip transform — blurry on displays with fractional OS scaling or
+     browser zoom. The flip animates .postcard-inner, not this element, and
+     .postcard-face already hides the back face. */
   padding: clamp(0.75rem, 2.4vw, 1.5rem);
   display: flex;
   flex-direction: row;
@@ -1296,7 +1339,6 @@ button {
   color: rgb(108, 12, 32);
   cursor: pointer;
   transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
-  will-change: transform;
 }
 .pc-action .pc-action-icon {
   font-size: clamp(0.85rem, 3vw, 1.25rem);

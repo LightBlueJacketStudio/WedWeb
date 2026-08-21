@@ -13,6 +13,9 @@ const PLAN_LINKS = [
   { label: 'Gift Registry', to: '/gift_registry', icon: 'redeem' },
 ]
 
+// Matches the .postcard-inner flip transition in index.css.
+const FLIP_MS = 850
+
 const prefersReducedMotion =
   typeof window !== 'undefined' &&
   window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -22,6 +25,16 @@ function FlightPath() {
   // fully-entered front, so seed the state instead of setting it in an effect.
   const [entered, setEntered] = useState(prefersReducedMotion)
   const [flipped, setFlipped] = useState(false)
+  // Set once the flip has come to rest, so the CSS can drop the card out of its
+  // 3D context (see .is-settled). While a subtree is under perspective +
+  // preserve-3d the note is composited as a GPU texture and resampled rather
+  // than repainted, which reads as blurry text on displays with fractional OS
+  // scaling or browser zoom.
+  const [settled, setSettled] = useState(false)
+  // True for the one paint where the flattened card is swapped back to its 3D
+  // flipped state before animating home — keeps the transition off so the swap
+  // is invisible instead of a second phantom flip.
+  const [restoring, setRestoring] = useState(false)
   const cardRef = useRef(null)
   const pcCardRef = useRef(null)
   const hasAnimated = useRef(false)
@@ -79,7 +92,32 @@ function FlightPath() {
     return () => observer.disconnect()
   }, [])
 
-  const toggle = () => setFlipped((prev) => !prev)
+  // Wait out the flip (0.85s in CSS) before flattening. A timer rather than a
+  // transitionend listener, because reduced-motion visitors get no transition
+  // and so would never fire the event.
+  useEffect(() => {
+    if (!flipped) return
+    const timer = setTimeout(() => setSettled(true), FLIP_MS + 50)
+    return () => clearTimeout(timer)
+  }, [flipped])
+
+  const toggle = () => {
+    if (flipped && settled) {
+      // Flattened cards have no transform to animate away from, so restore the
+      // 3D flipped state (with the transition held off via is-restoring) and
+      // let it paint before starting the turn back.
+      setSettled(false)
+      setRestoring(true)
+      requestAnimationFrame(() =>
+        requestAnimationFrame(() => {
+          setRestoring(false)
+          setFlipped(false)
+        })
+      )
+      return
+    }
+    setFlipped((prev) => !prev)
+  }
 
   const handleKeyDown = (event) => {
     if (event.key === 'Enter' || event.key === ' ') {
@@ -96,6 +134,8 @@ function FlightPath() {
           'postcard',
           entered ? 'is-entered' : '',
           flipped ? 'is-flipped' : '',
+          settled ? 'is-settled' : '',
+          restoring ? 'is-restoring' : '',
         ]
           .filter(Boolean)
           .join(' ')}
