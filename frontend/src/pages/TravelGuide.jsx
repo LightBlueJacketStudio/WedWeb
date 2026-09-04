@@ -1,5 +1,7 @@
 import conMarket from "../assets/con-market.jpg"
+import hanRiverMap from "../assets/han-river-to-venue.png"
 import { ContactUs } from "../components/ContactUs"
+import { RoomRatesTable } from "../components/RoomRatesTable"
 
 const diningTips = [
   {
@@ -58,9 +60,6 @@ function TravelGuide() {
           </div>
 
           <div className="travel-hero-content">
-            {/* <p className="travel-guide-label">
-              The Adventure Begins
-            </p> */}
 
             <h1>Your Journey to Da Nang</h1>
 
@@ -139,12 +138,12 @@ function TravelGuide() {
                   </li>
                   <li>
                     Credit cards are widely accepted at hotels, upscale
-                    restaurants, and shopping centers, but expect a 2–3%
+                    restaurants, and shopping centers, but expect a 2-3%
                     transaction fee.
                   </li>
                   <li>
                     ATMs are easy to find at major banks like Vietcombank, ACB,
-                    and Techcombank — just watch for withdrawal limits and
+                    and Techcombank - just watch for withdrawal limits and
                     international fees.
                   </li>
                   <li>
@@ -185,13 +184,7 @@ function TravelGuide() {
             </div>
 
             <div className="paw-decoration">
-              {/* <span className="material-symbols-outlined">
-                pets
-              </span> */}
-
-              {/* <span className="material-symbols-outlined">
-                pets
-              </span> */}
+            
             </div>
           </article>
 
@@ -285,31 +278,97 @@ function TravelGuide() {
               </div>
 
               <p>
-                We're thrilled to share that Da Nang Mikazuki Japanese Resorts will be 
-                offering a discount code exclusively for our wedding guests - more details coming your way soon!
-
+                We understand it can feel daunting to look for a place to stay
+                in a foreign country, so here are our recommendations.
               </p>
 
-              {/* <button type="button">
-                View Recommendations
-              </button> */}
-            </div>
+              <div className="accommodation-image-wrapper">
+                <img
+                  src="https://www.myoverseaswedding.com/wp-content/gallery/163296-reception/da-nang-mikazuki-japanese-resorts-and-spa-wedding-dinner-reception-17.jpg"
+                  alt="A tropical resort in Da Nang"
+                />
+              </div>
 
-            <div className="accommodation-image-wrapper">
-              <img
-                src="https://www.myoverseaswedding.com/wp-content/gallery/163296-reception/da-nang-mikazuki-japanese-resorts-and-spa-wedding-dinner-reception-17.jpg"
-                alt="A tropical resort in Da Nang"
-              />
+              <h3 className="stay-subheading">
+                Our Venue: Da Nang Mikazuki Japanese Resorts
+              </h3>
+
+              <p>
+                Our venue will be offering a discount code exclusively for our
+                guests! Please review the quote by room type below. This rate
+                is locked in for our guests{" "}
+                <strong>up until 60 days prior to the wedding</strong>.
+              </p>
+
+              <div className="travel-accordion">
+                <CollapsibleSection title="Room Rates by Type">
+                  <RoomRatesTable />
+                </CollapsibleSection>
+
+                <CollapsibleSection title="How to Book">
+                  <p>
+                    Once you&apos;ve decided on your room and length of stay,
+                    here&apos;s how to book:
+                  </p>
+
+                  <ul>
+                    <li>
+                      Reach out to the hotel manager, Ms. Huong (Jasmine), at{" "}
+                      <a href="mailto:banquet.sm@mikazuki.com.vn">
+                        <strong>banquet.sm@mikazuki.com.vn</strong>
+                      </a>
+                    </li>
+                    <li>
+                      Reference our group code: <strong>1174097</strong>
+                    </li>
+                    <li>Feel free to cc us on the email!</li>
+                  </ul>
+
+                  <p>
+                    Roughly 2 months before your reservation date, Jasmine will
+                    reach out to collect payment. We&apos;re happy to help
+                    connect and walk you through this process if needed.
+                  </p>
+                </CollapsibleSection>
+              </div>
+
+              <h3 className="stay-subheading">
+                Looking for something a bit closer to downtown?
+              </h3>
+
+              <p>
+                We&apos;d also recommend hotels near the Han River, with views
+                overlooking the Dragon Bridge and city skyline. Just note
+                it&apos;s about a 20 to 30 minute cab/Grab ride to the venue
+                from that area.
+              </p>
+
+              <div className="travel-accordion">
+                <CollapsibleSection title="See Map: Han River to the Venue">
+                  <figure className="stay-map">
+                    <img
+                      src={hanRiverMap}
+                      alt="Map showing the 20-30 minute driving route from the Han River area to Da Nang Mikazuki Japanese Resorts"
+                    />
+                    <figcaption>
+                      Han River area to Da Nang Mikazuki Japanese Resorts
+                    </figcaption>
+                  </figure>
+                </CollapsibleSection>
+              </div>
+
+              <h3 className="stay-subheading">More options</h3>
+
+              <p>
+                There are also plenty of great hotels in the surrounding area
+                to fit any style or budget!
+              </p>
             </div>
           </article>
         </section>
 
         <section className="local-gems-section">
-          {/* <div className="local-gems-header">
-            <h2>Local Gems</h2>
-
-            <p>Things we love in our favorite city</p>
-          </div> */}
+      
 
           <div className="dining-grid">
             <article className="dining-card dining-tips-card">
@@ -390,40 +449,14 @@ function TravelGuide() {
             </article>
           </div>
 
-          {/* <div className="local-gems-grid local-gems-sights">
-            <RecommendationList
-              icon="explore"
-              title="Sights to See"
-              items={sightseeingRecommendations}
-            />
-          </div> */}
+     
         </section>
 
         <section
           className="passport-stamps"
           aria-hidden="true"
         >
-          {/* <div className="passport-stamp round-stamp">
-            <span>Da Nang Airport</span>
-            <strong>DAD</strong>
-            <span>13 MAR 2027</span>
-          </div> */}
 
-          {/* <div className="passport-stamp admitted-stamp">
-            <span>Vietnam</span>
-
-            <span className="material-symbols-outlined">
-              flight_land
-            </span>
-
-            <span>Admitted</span>
-          </div>
-
-          <div className="passport-stamp wedding-stamp">
-            <span>Wedding Journey</span>
-            <strong>M &amp; B</strong>
-            <span>Love Always</span>
-          </div> */}
         </section>
       </div>
     </main>
