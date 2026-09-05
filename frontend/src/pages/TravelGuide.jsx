@@ -282,17 +282,17 @@ function TravelGuide() {
                 in a foreign country, so here are our recommendations.
               </p>
 
-              <div className="accommodation-image-wrapper">
-                <img
-                  src="https://www.myoverseaswedding.com/wp-content/gallery/163296-reception/da-nang-mikazuki-japanese-resorts-and-spa-wedding-dinner-reception-17.jpg"
-                  alt="A tropical resort in Da Nang"
-                />
-              </div>
+
 
               <h3 className="stay-subheading">
                 Our Venue: Da Nang Mikazuki Japanese Resorts
               </h3>
-
+              <div className="accommodation-image-wrapper">
+                <img
+                  src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/33/e2/94/94/caption.jpg?w=900&h=500&s=1"
+                  alt="Mikazuki Japanese Resorts in Da Nang"
+                />
+              </div>
               <p>
                 Our venue will be offering a discount code exclusively for our
                 guests! Please review the quote by room type below. This rate
@@ -328,6 +328,14 @@ function TravelGuide() {
                     Roughly 2 months before your reservation date, Jasmine will
                     reach out to collect payment. We&apos;re happy to help
                     connect and walk you through this process if needed.
+                  </p>
+
+                  <p>
+                    <strong>Tip:</strong> March and April are peak travel
+                    season in Da Nang, so once your plans are set, we recommend
+                    securing your room as soon as possible. And don&apos;t
+                    worry, you won&apos;t need to pay until 60 days
+                    before your arrival!
                   </p>
                 </CollapsibleSection>
               </div>

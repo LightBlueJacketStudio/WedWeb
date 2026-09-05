@@ -162,11 +162,17 @@ export function RoomRatesTable() {
         </table>
       </div>
 
-      <p className="room-rates-note">
-        Prices are per night. <strong>BB</strong> = Bed + Breakfast ·{" "}
-        <strong>BBOW</strong> = Bed + Breakfast + Onsen + Waterpark. USD
-        amounts are approximate. A = adults, C = children.
-      </p>
+      <ul className="room-rates-note">
+        <li>
+          <strong>BB</strong> = Bed + Breakfast
+        </li>
+        <li>
+          <strong>BBOW</strong> = Bed + Breakfast + Onsen + Waterpark
+        </li>
+        <li>Prices are per night.</li>
+        <li>USD amounts are approximate.</li>
+        <li>A = adults, C = children.</li>
+      </ul>
     </>
   )
 }
