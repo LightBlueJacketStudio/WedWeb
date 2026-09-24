@@ -1812,6 +1812,132 @@ button {
   transform: rotate(-10deg);
 }
 
+.room-rates-table-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border: 1px solid rgba(132, 84, 0, 0.2);
+  border-radius: 0.75rem;
+  background: rgb(255, 255, 255);
+}
+
+.room-rates-table {
+  --room-name-col: 9.5rem;
+  width: 100%;
+  min-width: 48rem;
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+@media (max-width: 30rem) {
+  .room-rates-table {
+    --room-name-col: 8rem;
+  }
+}
+.room-rates-table th,
+.room-rates-table td {
+  padding: 0.5rem 0.65rem;
+  text-align: left;
+  vertical-align: top;
+}
+.room-rates-table thead th {
+  background: rgb(247, 243, 234);
+  color: rgb(108, 12, 32);
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.room-rates-table tbody tr.room-row-alt {
+  background: rgba(247, 243, 234, 0.6);
+}
+.room-rates-table tbody tr.room-group-start > * {
+  border-top: 1px solid rgba(132, 84, 0, 0.2);
+}
+.room-rates-table tbody th[scope=rowgroup] {
+  font-weight: 600;
+  color: rgb(99, 28, 5);
+}
+.room-rates-table tbody th[rowspan],
+.room-rates-table tbody td[rowspan] {
+  vertical-align: middle;
+}
+.room-rates-table td {
+  white-space: nowrap;
+}
+.room-rates-table th:first-child {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  width: var(--room-name-col);
+  min-width: var(--room-name-col);
+  background: rgb(255, 255, 255);
+}
+.room-rates-table .col-package {
+  position: sticky;
+  left: var(--room-name-col);
+  z-index: 1;
+  background: rgb(255, 255, 255);
+  box-shadow: 1px 0 0 rgba(132, 84, 0, 0.2);
+}
+.room-rates-table thead th:first-child,
+.room-rates-table thead th.col-package {
+  background: rgb(247, 243, 234);
+}
+.room-rates-table tbody tr.room-row-alt th:first-child,
+.room-rates-table tbody tr.room-row-alt .col-package {
+  background: rgb(250, 248, 242);
+}
+
+.room-link {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin-top: 0.15rem;
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: rgb(132, 84, 0);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-color: rgba(132, 84, 0, 0.5);
+  white-space: nowrap;
+}
+.room-link:hover {
+  color: rgb(108, 12, 32);
+  text-decoration-color: rgb(108, 12, 32);
+}
+
+.room-link-icon {
+  width: 0.7rem;
+  height: 0.7rem;
+  flex-shrink: 0;
+}
+
+.rate-plan {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: rgb(132, 84, 0);
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.rate-vnd {
+  display: block;
+}
+
+.rate-usd {
+  display: block;
+  font-size: 0.7rem;
+  color: rgb(132, 84, 0);
+}
+
+.room-rates-note {
+  margin: 0.6rem 0 0;
+  font-size: 0.75rem;
+  color: rgba(28, 28, 23, 0.75);
+}
+
 .rsvp-card {
   background: radial-gradient(circle at 20% 20%, rgba(108, 12, 32, 0.045), transparent 28%), radial-gradient(circle at 80% 10%, rgba(132, 84, 0, 0.045), transparent 24%), linear-gradient(135deg, rgb(253, 249, 240), rgb(247, 243, 234));
   position: relative;

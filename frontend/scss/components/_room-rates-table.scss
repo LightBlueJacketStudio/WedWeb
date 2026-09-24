@@ -1,0 +1,166 @@
+@use '../abstracts' as *;
+
+// ============================================
+// ROOM RATES TABLE (WHERE TO STAY)
+// ============================================
+// Each room spans two body rows — BB and BBOW — with the room name, size,
+// beds and capacity merged across them (rowspan), mirroring the hotel's
+// quote sheet. Striping is per room group, not per row, so the two rows of
+// one room always share a shade.
+
+.room-rates-table-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+
+  border: 1px solid rgba($color-secondary, 0.2);
+  border-radius: 0.75rem;
+
+  background: $color-bg-card-bright;
+}
+
+.room-rates-table {
+  // Width of the frozen room-name column. The package column sticks to its
+  // right edge, so both read from this one value — keep them in sync.
+  --room-name-col: 9.5rem;
+
+  width: 100%;
+  min-width: 48rem;
+
+  font-family: $font-body;
+  font-size: 0.8rem;
+  line-height: 1.4;
+
+  @media (max-width: 30rem) {
+    --room-name-col: 8rem;
+  }
+
+  th,
+  td {
+    padding: 0.5rem 0.65rem;
+
+    text-align: left;
+    vertical-align: top;
+  }
+
+  thead th {
+    background: $color-bg-card;
+
+    color: $color-primary;
+    font-weight: 700;
+    font-size: 0.75rem;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  tbody tr.room-row-alt {
+    background: rgba($color-bg-card, 0.6);
+  }
+
+  // Divider between rooms — drawn on the first row of each pair.
+  tbody tr.room-group-start > * {
+    border-top: 1px solid rgba($color-secondary, 0.2);
+  }
+
+  tbody th[scope='rowgroup'] {
+    font-weight: 600;
+    color: $color-tertiary;
+  }
+
+  // Merged cells sit centered against the two price rows they span.
+  tbody th[rowspan],
+  tbody td[rowspan] {
+    vertical-align: middle;
+  }
+
+  td {
+    white-space: nowrap;
+  }
+
+  // Frozen columns: the room name, then the package (BB / BBOW) pinned to its
+  // right edge, so both stay in view while the rates scroll sideways.
+  th:first-child {
+    position: sticky;
+    left: 0;
+    z-index: 1;
+
+    width: var(--room-name-col);
+    min-width: var(--room-name-col);
+
+    background: $color-bg-card-bright;
+  }
+
+  .col-package {
+    position: sticky;
+    left: var(--room-name-col);
+    z-index: 1;
+
+    background: $color-bg-card-bright;
+
+    box-shadow: 1px 0 0 rgba($color-secondary, 0.2);
+  }
+
+  thead th:first-child,
+  thead th.col-package {
+    background: $color-bg-card;
+  }
+
+  tbody tr.room-row-alt th:first-child,
+  tbody tr.room-row-alt .col-package {
+    background: rgb(250, 248, 242);
+  }
+}
+
+.room-link {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+
+  margin-top: 0.15rem;
+
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: $color-secondary;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-color: rgba($color-secondary, 0.5);
+  white-space: nowrap;
+
+  &:hover {
+    color: $color-primary;
+    text-decoration-color: $color-primary;
+  }
+}
+
+.room-link-icon {
+  width: 0.7rem;
+  height: 0.7rem;
+  flex-shrink: 0;
+}
+
+.rate-plan {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: $color-secondary;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.rate-vnd {
+  display: block;
+}
+
+.rate-usd {
+  display: block;
+
+  font-size: 0.7rem;
+  color: $color-secondary;
+}
+
+.room-rates-note {
+  margin: 0.6rem 0 0;
+
+  font-size: 0.75rem;
+  color: rgba($color-text-dark, 0.75);
+}

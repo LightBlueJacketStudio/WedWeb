@@ -2988,11 +2988,17 @@ button {
 }
 
 .room-rates-table {
+  --room-name-col: 9.5rem;
   width: 100%;
-  min-width: 34rem;
+  min-width: 48rem;
   font-family: "Plus Jakarta Sans", system-ui, sans-serif;
   font-size: 0.8rem;
   line-height: 1.4;
+}
+@media (max-width: 30rem) {
+  .room-rates-table {
+    --room-name-col: 8rem;
+  }
 }
 .room-rates-table th,
 .room-rates-table td {
@@ -3009,12 +3015,19 @@ button {
   text-transform: uppercase;
   white-space: nowrap;
 }
-.room-rates-table tbody tr:nth-child(even) {
+.room-rates-table tbody tr.room-row-alt {
   background: rgba(247, 243, 234, 0.6);
 }
-.room-rates-table tbody th[scope="row"] {
+.room-rates-table tbody tr.room-group-start > * {
+  border-top: 1px solid rgba(132, 84, 0, 0.2);
+}
+.room-rates-table tbody th[scope=rowgroup] {
   font-weight: 600;
   color: rgb(99, 28, 5);
+}
+.room-rates-table tbody th[rowspan],
+.room-rates-table tbody td[rowspan] {
+  vertical-align: middle;
 }
 .room-rates-table td {
   white-space: nowrap;
@@ -3023,13 +3036,23 @@ button {
   position: sticky;
   left: 0;
   z-index: 1;
+  width: var(--room-name-col);
+  min-width: var(--room-name-col);
+  background: rgb(255, 255, 255);
+}
+.room-rates-table .col-package {
+  position: sticky;
+  left: var(--room-name-col);
+  z-index: 1;
   background: rgb(255, 255, 255);
   box-shadow: 1px 0 0 rgba(132, 84, 0, 0.2);
 }
-.room-rates-table thead th:first-child {
+.room-rates-table thead th:first-child,
+.room-rates-table thead th.col-package {
   background: rgb(247, 243, 234);
 }
-.room-rates-table tbody tr:nth-child(even) th:first-child {
+.room-rates-table tbody tr.room-row-alt th:first-child,
+.room-rates-table tbody tr.room-row-alt .col-package {
   background: rgb(250, 248, 242);
 }
 
@@ -3050,15 +3073,26 @@ button {
   color: rgb(108, 12, 32);
   text-decoration-color: rgb(108, 12, 32);
 }
+
 .room-link-icon {
   width: 0.7rem;
   height: 0.7rem;
   flex-shrink: 0;
 }
 
+.rate-plan {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: rgb(132, 84, 0);
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
 .rate-vnd {
   display: block;
 }
+
 .rate-usd {
   display: block;
   font-size: 0.7rem;
