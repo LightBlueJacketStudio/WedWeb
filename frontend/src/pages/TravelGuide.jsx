@@ -18,6 +18,10 @@ const diningTips = [
     icon: "coffee",
     text: "Heads up: we love our Vietnamese coffee with condensed milk! Most coffee shops will also have milk tea variations. Bring your Lactaid if you need it.",
   },
+  {
+    icon: "receipt_long",
+    text: "Good to know: when you sit down at a restaurant, waiters will often bring out a large spread of drinks (beer, soda, water) and wet towels, but you only pay for what you actually consume, and yes, that includes the wet towels! If you'd rather skip the surprise charges, bring your own wet wipes.",
+  },
 ]
 
 const favoriteFoods = [
