@@ -212,11 +212,11 @@ export function RoomRatesTable() {
           <thead>
             <tr>
               <th>Room Type</th>
-              <th className="col-package">Package</th>
+              <th>Package</th>
               <th>Size</th>
               <th>Beds</th>
               <th>Sleeps</th>
-              <th>Rate / Night</th>
+              <th>Rate</th>
               <th>60-Day Early Bird</th>
               <th>5+ Nights</th>
             </tr>
@@ -261,7 +261,7 @@ export function RoomRatesTable() {
                           </a>
                         </th>
                       )}
-                      <td className="rate-plan col-package">{pkg.label}</td>
+                      <td className="rate-plan">{pkg.label}</td>
                       {pkgIndex === 0 && (
                         <>
                           <td rowSpan={room.packages.length}>{room.size} m²</td>

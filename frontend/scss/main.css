@@ -1821,17 +1821,11 @@ button {
 }
 
 .room-rates-table {
-  --room-name-col: 9.5rem;
   width: 100%;
   min-width: 48rem;
   font-family: "Plus Jakarta Sans", system-ui, sans-serif;
   font-size: 0.8rem;
   line-height: 1.4;
-}
-@media (max-width: 30rem) {
-  .room-rates-table {
-    --room-name-col: 8rem;
-  }
 }
 .room-rates-table th,
 .room-rates-table td {
@@ -1869,23 +1863,13 @@ button {
   position: sticky;
   left: 0;
   z-index: 1;
-  width: var(--room-name-col);
-  min-width: var(--room-name-col);
-  background: rgb(255, 255, 255);
-}
-.room-rates-table .col-package {
-  position: sticky;
-  left: var(--room-name-col);
-  z-index: 1;
   background: rgb(255, 255, 255);
   box-shadow: 1px 0 0 rgba(132, 84, 0, 0.2);
 }
-.room-rates-table thead th:first-child,
-.room-rates-table thead th.col-package {
+.room-rates-table thead th:first-child {
   background: rgb(247, 243, 234);
 }
-.room-rates-table tbody tr.room-row-alt th:first-child,
-.room-rates-table tbody tr.room-row-alt .col-package {
+.room-rates-table tbody tr.room-row-alt th:first-child {
   background: rgb(250, 248, 242);
 }
 
