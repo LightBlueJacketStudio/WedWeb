@@ -1,0 +1,647 @@
+@use '../abstracts' as *;
+
+// ============================================
+// VIETNAM EXPLORER
+// A map of Vietnam. 
+// Each marker opens that city's own page.
+// ============================================
+
+$vn-land: rgb(232, 173, 168);
+$vn-land-edge: rgba(108, 12, 32, 0.5);
+$vn-star: $color-tertiary;
+$vn-wedding: $color-primary;
+$vn-cream: rgba(253, 249, 240, 0.95);
+
+.vietnam-explorer {
+  margin-top: 2rem;
+  padding: 1.5rem;
+
+  border: 1px solid rgba(255, 51, 48, 0.25);
+  border-radius: 1.25rem;
+
+  background: $color-bg-card-bright;
+
+  box-shadow: 0 16px 36px rgba(49, 49, 43, 0.1);
+}
+
+.vietnam-explorer-header {
+  @include Flex(row, flex-start, center);
+
+  gap: 0.7rem;
+  padding-bottom: 1rem;
+  margin-bottom: 1.25rem;
+
+  border-bottom: 1px dashed $color-border-dashed;
+
+  h2 {
+    @include HeadingSerif;
+
+    margin: 0 0 0.25rem;
+
+    color: $color-primary;
+    font-size: 1.15rem;
+  }
+
+  p {
+    margin: 0;
+
+    color: $color-text-medium;
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+}
+
+.vietnam-explorer-icon {
+  @include Flex(row, center, center);
+
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+
+  border-radius: 999px;
+  background: $color-secondary-soft;
+
+  color: $color-secondary;
+  font-size: 1.3rem;
+}
+
+// --------------------------------------------
+// The map
+// --------------------------------------------
+
+.vn-map-stage {
+  @include Flex(row, center, flex-start);
+
+  padding: 1rem 0 0.5rem;
+}
+
+.vn-map-frame {
+  position: relative;
+
+  // Sized by height (aspect-ratio comes from the drawing's own viewBox, set
+  // inline) so the tall, narrow country never runs away with the layout.
+  height: clamp(360px, 58vh, 520px);
+}
+
+.vn-map-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.vn-map-land {
+  fill: $vn-land;
+  stroke: $vn-land-edge;
+  stroke-width: 2;
+  stroke-linejoin: round;
+
+  filter: drop-shadow(0 8px 16px rgba(49, 49, 43, 0.18));
+}
+
+// --------------------------------------------
+// City markers
+// --------------------------------------------
+
+.vn-pin {
+  position: absolute; // left / top come from the map projection
+  z-index: 2;
+
+  @include Flex(row, center, center);
+
+  // The button is exactly the size of the marker and is centred on the city's
+  // real coordinate. The label floats beside it (below) rather than sitting
+  // in the flow, so it can never drag that centre off the city.
+  width: 1.6rem;
+  height: 1.6rem;
+  padding: 0;
+
+  // --vn-pin-dx / dy shift a marker off its coordinate. Only Hội An uses them:
+  // it is 19km from Đà Nẵng, which at this scale is six pixels, so the two dots
+  // would print on top of each other. See pinNudge in the component.
+  transform: translate(
+    calc(-50% + var(--vn-pin-dx, 0rem)),
+    calc(-50% + var(--vn-pin-dy, 0rem))
+  );
+
+  border: none;
+  background: transparent;
+  cursor: pointer;
+
+  transition: transform 0.18s ease;
+
+  &::after {
+    content: '';
+
+    position: absolute;
+    inset: -0.5rem;
+
+    border-radius: 999px;
+  }
+
+  &:hover,
+  &:focus-visible {
+    transform: translate(
+        calc(-50% + var(--vn-pin-dx, 0rem)),
+        calc(-50% + var(--vn-pin-dy, 0rem))
+      )
+      scale(1.12);
+    z-index: 3;
+  }
+
+  &:focus-visible {
+    outline: none;
+
+    .vn-pin-marker {
+      border-radius: 999px;
+      outline: 2px solid $color-primary;
+      outline-offset: 3px;
+    }
+  }
+}
+
+// Every marker fills the button, so all three kinds share the same centre and
+// the same tap target whatever their drawn size.
+.vn-pin-marker {
+  @include Flex(row, center, center);
+
+  position: relative;
+  z-index: 1;
+
+  width: 100%;
+  height: 100%;
+}
+
+// Hà Nội's star. 
+
+.vn-pin-glyph {
+  color: $vn-star;
+  font-size: 1.25rem;
+  line-height: 1;
+
+  // The Material Symbols face is loaded with its FILL axis (see index.html),
+  // so this gives a solid glyph rather than an outline.
+  font-variation-settings: 'FILL' 1;
+
+  text-shadow:
+    0 0 3px $vn-cream,
+    0 1px 3px rgba(49, 49, 43, 0.35);
+}
+
+// a plain button for other cities
+.vn-pin-dot {
+
+  width: 0.5rem;
+  height: 0.5rem;
+
+  border-radius: 999px;
+  background: rgb(255, 255, 255);
+
+  box-shadow:
+    0 0 0 1.5px $vn-star,
+    0 1px 3px rgba(49, 49, 43, 0.35);
+}
+
+// Đà Nẵng, where the wedding is: bold, a size up, and in the crimson.
+.vn-pin-is-wedding {
+  z-index: 4;
+
+  .vn-pin-label {
+    color: $vn-wedding;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+}
+
+.vn-pin-halo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  width: 100%;
+  height: 100%;
+
+  transform: translate(-50%, -50%);
+
+  border-radius: 999px;
+  background: radial-gradient(
+    circle,
+    rgba($vn-star, 0.3) 0%,
+    rgba($vn-star, 0.12) 45%,
+    transparent 70%
+  );
+
+  animation: vn-pin-pulse 2.6s ease-out infinite;
+}
+
+.vn-pin-label {
+  position: absolute;
+  top: 50%;
+
+  transform: translateY(calc(-50% + var(--vn-label-nudge, 0rem)));
+
+  white-space: nowrap;
+
+ 
+  color: $color-text-dark;
+  font-family: $font-body;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+
+  // Nothing sits behind the text, so it carries the marker's cream glow to stay
+  // readable where it crosses the land.
+  text-shadow:
+    0 0 3px $vn-cream,
+    0 0 6px rgba(253, 249, 240, 0.8);
+}
+
+.vn-pin-right .vn-pin-label {
+  left: calc(100% + 0.4rem);
+}
+
+.vn-pin-left .vn-pin-label {
+  right: calc(100% + 0.4rem);
+}
+
+// A phone card is about 315px wide and the drawing takes 250 of it. Every name
+// is short enough to clear the card edge beside its marker now that Đà Nẵng and
+// Hội An are separate pins; the tightest, Hội An at 85% across, has about 70px
+// of room for a 35px name.
+@media (max-width: 479px) {
+  .vn-pin-label {
+    font-size: 0.6rem;
+  }
+
+  .vn-pin-is-wedding .vn-pin-label {
+    font-size: 0.72rem;
+  }
+
+  .vn-pin-right .vn-pin-label {
+    left: calc(100% + 0.25rem);
+  }
+
+  .vn-pin-left .vn-pin-label {
+    right: calc(100% + 0.25rem);
+  }
+}
+
+@keyframes vn-pin-pulse {
+  0% {
+    opacity: 0.85;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  70%,
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(2.1);
+  }
+}
+
+// --------------------------------------------
+// City page (portalled to <body>)
+// --------------------------------------------
+
+.city-page-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+
+  @include Flex(row, center, center);
+
+  padding: 1.25rem;
+  background: rgba(28, 28, 23, 0.55);
+  backdrop-filter: blur(3px);
+
+  animation: city-page-fade-in 0.2s ease;
+}
+
+.city-page {
+  position: relative;
+
+  @include Flex(column);
+
+  width: 100%;
+  max-width: 46rem;
+  max-height: 90vh;
+
+  border: 1px solid rgba(255, 174, 48, 0.3);
+  border-radius: 1.25rem;
+  overflow: hidden;
+
+  @include PassportTexture;
+
+  box-shadow: 0 24px 60px rgba(49, 49, 43, 0.35);
+
+  animation: city-page-pop-in 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.city-page-bar {
+  @include Flex(row, space-between, center);
+
+  flex-shrink: 0;
+  gap: 0.75rem;
+  padding: 0.75rem 0.85rem;
+
+  border-bottom: 1px dashed $color-border-dashed;
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.city-page-back {
+  @include Flex(row, center, center);
+
+  gap: 0.35rem;
+  padding: 0.4rem 0.8rem;
+
+  border: 1px solid rgba(108, 12, 32, 0.25);
+  border-radius: 999px;
+  background: transparent;
+
+  color: $color-primary;
+  font-family: $font-body;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+
+  transition:
+    background 0.18s ease,
+    border-color 0.18s ease;
+
+  .material-symbols-outlined {
+    font-size: 1.05rem;
+  }
+
+  &:hover,
+  &:focus-visible {
+    background: rgba(108, 12, 32, 0.08);
+    border-color: $color-primary;
+  }
+}
+
+.city-page-close {
+  @include Flex(row, center, center);
+
+  flex-shrink: 0;
+  width: 2rem;
+  height: 2rem;
+
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  color: $color-text-medium;
+  cursor: pointer;
+
+  transition:
+    background 0.18s ease,
+    color 0.18s ease;
+
+  .material-symbols-outlined {
+    font-size: 1.25rem;
+  }
+
+  &:hover,
+  &:focus-visible {
+    background: rgba(108, 12, 32, 0.1);
+    color: $color-primary;
+  }
+}
+
+.city-page-body {
+  // min-height: 0 lets this flex child shrink past its content so the overflow
+  // actually scrolls instead of being clipped by the card's overflow: hidden.
+  min-height: 0;
+  overflow-y: auto;
+
+  padding: clamp(1.25rem, 4vw, 1.75rem);
+}
+
+.city-page-photo {
+  margin: 0 0 1.25rem;
+
+  border-radius: 0.875rem;
+  overflow: hidden;
+
+  img {
+    display: block;
+    width: 100%;
+    height: clamp(180px, 30vh, 260px);
+    object-fit: cover;
+  }
+}
+
+// Stands in until a photo is dropped into the city's data.
+.city-page-photo-placeholder {
+  @include Flex(row, center, center);
+
+  height: clamp(140px, 22vh, 190px);
+  margin-bottom: 1.25rem;
+
+  border: 1px dashed $color-border-dashed;
+  border-radius: 0.875rem;
+  background: rgba(255, 255, 255, 0.45);
+
+  color: $color-text-light;
+
+  .material-symbols-outlined {
+    font-size: 2rem;
+  }
+}
+
+.city-page-heading {
+  margin-bottom: 1rem;
+
+  h2 {
+    @include HeadingSerif;
+
+    margin: 0;
+
+    color: $color-primary;
+    font-size: 1.5rem;
+  }
+}
+
+.city-page-region {
+  @include LabelCaps;
+
+  margin: 0.35rem 0 0;
+  color: $color-secondary;
+}
+
+.city-page-tagline {
+  margin: 0.4rem 0 0;
+
+  color: $color-text-medium;
+  font-family: $font-handwriting;
+  font-size: 1.05rem;
+}
+
+.city-page-blurb {
+  margin: 0 0 1.25rem;
+
+  color: $color-text-dark;
+  font-size: 0.92rem;
+  line-height: 1.65;
+}
+
+.city-page-section {
+  padding-top: 1rem;
+  margin-top: 1rem;
+
+  border-top: 1px dashed $color-border-dashed;
+
+  h3 {
+    @include HeadingSerif;
+
+    margin: 0 0 0.5rem;
+
+    color: $color-primary;
+    font-size: 1rem;
+  }
+
+  p {
+    margin: 0;
+
+    color: $color-text-dark;
+    font-size: 0.92rem;
+    line-height: 1.65;
+  }
+}
+
+// The global reset strips list markers, so draw our own.
+.city-page-list {
+  padding: 0;
+  margin: 0;
+
+  li {
+    position: relative;
+
+    padding-left: 1.1rem;
+    margin-bottom: 0.45rem;
+
+    color: $color-text-dark;
+    font-size: 0.92rem;
+    line-height: 1.6;
+
+    &::before {
+      content: '';
+
+      position: absolute;
+      top: 0.62rem;
+      left: 0;
+
+      width: 0.35rem;
+      height: 0.35rem;
+
+      border-radius: 999px;
+      background: $color-secondary-container;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.city-page-empty {
+  margin: 0;
+  padding: 1.25rem 0 0.5rem;
+
+  border-top: 1px dashed $color-border-dashed;
+
+  color: $color-text-light;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+@keyframes city-page-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes city-page-pop-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .city-page-overlay,
+  .city-page {
+    animation: none;
+  }
+
+  .vn-pin-halo {
+    animation: none;
+  }
+
+  .vn-pin {
+    transition: none;
+  }
+}
+
+// ============================================
+// TABLET AND DESKTOP
+// ============================================
+
+@media (min-width: 768px) {
+  .vietnam-explorer {
+    padding: 2rem;
+    border-radius: 1.5rem;
+  }
+
+  .vietnam-explorer-header {
+    h2 {
+      font-size: 1.75rem;
+    }
+
+    p {
+      font-size: 0.95rem;
+    }
+  }
+
+  .vietnam-explorer-icon {
+    width: 3.25rem;
+    height: 3.25rem;
+
+    font-size: 1.6rem;
+  }
+
+  .vn-map-frame {
+    height: clamp(520px, 70vh, 640px);
+  }
+
+  .vn-pin {
+    width: 1.8rem;
+    height: 1.8rem;
+  }
+
+  .vn-pin-glyph {
+    font-size: 1.45rem;
+  }
+
+  .vn-pin-dot {
+    width: 0.6rem;
+    height: 0.6rem;
+  }
+
+  .vn-pin-label {
+    font-size: 0.78rem;
+  }
+
+  .vn-pin-is-wedding .vn-pin-label {
+    font-size: 0.92rem;
+  }
+
+  .city-page-heading h2 {
+    font-size: 1.85rem;
+  }
+}

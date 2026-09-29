@@ -44,3 +44,61 @@
     }
   }
 }
+
+.accommodation-card .accommodation-image-wrapper {
+  margin: 0.25rem auto 0.5rem;
+}
+
+// Sub-headings inside the card ("Our Room Block", "How to Book"...).
+.stay-subheading {
+  margin: 1.5rem 0 0.6rem;
+
+  color: $color-primary;
+  font-family: $font-heading;
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.accommodation-content {
+  > p {
+    margin: 0 0 0.85rem;
+
+    color: $color-text-dark;
+    font-family: $font-body;
+    font-size: 0.85rem;
+    line-height: 1.65;
+
+    strong {
+      color: $color-tertiary;
+    }
+  }
+
+  .travel-accordion {
+    margin-bottom: 1rem;
+  }
+}
+
+// The "Han River to the Venue" map tucked inside a collapsible section.
+.stay-map {
+  margin: 0;
+
+  img {
+    display: block;
+
+    width: 100%;
+    height: auto;
+
+    border: 1px solid rgba(132, 84, 0, 0.25);
+    border-radius: 0.75rem;
+  }
+
+  figcaption {
+    margin-top: 0.5rem;
+
+    color: rgba(28, 28, 23, 0.75);
+    font-size: 0.75rem;
+    text-align: center;
+  }
+}

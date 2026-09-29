@@ -112,6 +112,55 @@
   transform: rotateY(180deg);
 }
 
+// Resting state, applied once the flip animation has finished (see FlightPath).
+// A perspective/preserve-3d subtree keeps the note living on a GPU texture that
+// gets resampled instead of repainted, so the handwriting reads blurry on
+// displays with fractional OS scaling or browser zoom. Dropping out of 3D at
+// rest paints it as ordinary text at native resolution.
+//
+// The transforms below are the flattened equivalent of the flipped 3D chain:
+// inner rotateY(180)·rotateZ(90) composed with the back face's rotateY(180) and
+// the card's own rotateZ(90) cancels out, and every rotation shares the same
+// centre point — so the card lands centred and upright either way.
+.postcard.is-flipped.is-settled {
+  perspective: none;
+}
+
+.postcard.is-flipped.is-settled .postcard-inner,
+.postcard.is-restoring .postcard-inner {
+  // Entering/leaving the settled state swaps the 3D transform chain for its
+  // flattened equivalent — geometrically identical, so it must snap, not
+  // animate. Without this the still-active 0.85s transition animates the
+  // unwind and the card visibly flips a second time.
+  transition: none;
+}
+
+.postcard.is-flipped.is-settled {
+  .postcard-inner {
+    transform: none;
+    transform-style: flat;
+  }
+
+  .postcard-face {
+    backface-visibility: visible;
+    -webkit-backface-visibility: visible;
+  }
+
+  .postcard-back {
+    transform: none;
+  }
+
+  .pc-card {
+    transform: translate(-50%, -50%);
+  }
+
+  // Without backface-visibility the front would otherwise show through around
+  // the landscape card, which is narrower and shorter than the portrait face.
+  .postcard-front {
+    visibility: hidden;
+  }
+}
+
 // The visible landscape postcard. Centred in the back face and counter-rotated
 // (+90) so that once the card lands (rotateY 180 + rotateZ 90) it reads upright.
 .pc-card {

@@ -2,6 +2,7 @@ import conMarket from "../assets/con-market.jpg"
 import hanRiverMap from "../assets/han-river-to-venue.png"
 import { ContactUs } from "../components/ContactUs"
 import { RoomRatesTable } from "../components/RoomRatesTable"
+import { VietnamExplorer } from "../components/VietnamExplorer"
 
 const diningTips = [
   {
@@ -14,7 +15,7 @@ const diningTips = [
   },
   {
     icon: "payments",
-    text: "Budget-friendly: most street food dishes run about 25,000–40,000 VND per plate.",
+    text: "Budget-friendly: most street food dishes run about 25,000 to 40,000 VND per plate.",
   },
   {
     icon: "coffee",
@@ -461,8 +462,10 @@ function TravelGuide() {
             </article>
           </div>
 
-     
+
         </section>
+
+        <VietnamExplorer />
 
         <section
           className="passport-stamps"
