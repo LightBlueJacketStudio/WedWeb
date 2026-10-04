@@ -3002,30 +3002,52 @@ button {
   line-height: 1.65;
 }
 
-.city-page-list {
+.city-page-places {
   padding: 0;
   margin: 0;
 }
-.city-page-list li {
+.city-page-places li {
   position: relative;
   padding-left: 1.1rem;
-  margin-bottom: 0.45rem;
-  color: rgb(28, 28, 23);
-  font-size: 0.92rem;
-  line-height: 1.6;
+  margin-bottom: 0.8rem;
 }
-.city-page-list li::before {
+.city-page-places li::before {
   content: "";
   position: absolute;
-  top: 0.62rem;
+  top: 0.45rem;
   left: 0;
   width: 0.35rem;
   height: 0.35rem;
   border-radius: 999px;
   background: rgb(255, 174, 48);
 }
-.city-page-list li:last-child {
+.city-page-places li:last-child {
   margin-bottom: 0;
+}
+.city-page-places h4 {
+  margin: 0 0 0.15rem;
+  color: rgb(28, 28, 23);
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  font-size: 0.92rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+.city-page-places p {
+  margin: 0;
+  color: rgb(86, 66, 66);
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+
+.city-place-photo {
+  margin: 0.55rem 0 0;
+  border-radius: 0.625rem;
+  overflow: hidden;
+}
+.city-place-photo img {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .city-page-empty {
@@ -3068,6 +3090,21 @@ button {
   }
 }
 @media (min-width: 768px) {
+  .city-page-places li.has-photo {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 0.9rem;
+    margin-bottom: 1.1rem;
+  }
+  .city-place-text {
+    flex: 1 1 auto;
+  }
+  .city-page-places li.has-photo .city-place-photo {
+    flex: 0 0 11rem;
+    margin-top: 0;
+  }
   .vietnam-explorer {
     padding: 2rem;
     border-radius: 1.5rem;

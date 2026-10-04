@@ -507,8 +507,9 @@ $vn-cream: rgba(253, 249, 240, 0.95);
   }
 }
 
+// Each entry is a name plus a line about it, and may carry its own photo.
 // The global reset strips list markers, so draw our own.
-.city-page-list {
+.city-page-places {
   padding: 0;
   margin: 0;
 
@@ -516,17 +517,13 @@ $vn-cream: rgba(253, 249, 240, 0.95);
     position: relative;
 
     padding-left: 1.1rem;
-    margin-bottom: 0.45rem;
-
-    color: $color-text-dark;
-    font-size: 0.92rem;
-    line-height: 1.6;
+    margin-bottom: 0.8rem;
 
     &::before {
       content: '';
 
       position: absolute;
-      top: 0.62rem;
+      top: 0.45rem;
       left: 0;
 
       width: 0.35rem;
@@ -539,6 +536,41 @@ $vn-cream: rgba(253, 249, 240, 0.95);
     &:last-child {
       margin-bottom: 0;
     }
+  }
+
+  h4 {
+    margin: 0 0 0.15rem;
+
+    color: $color-text-dark;
+    font-family: $font-body;
+    font-size: 0.92rem;
+    font-weight: 700;
+    line-height: 1.4;
+  }
+
+  p {
+    margin: 0;
+
+    color: $color-text-medium;
+    font-size: 0.88rem;
+    line-height: 1.6;
+  }
+}
+
+.city-place-photo {
+  margin: 0.55rem 0 0;
+
+  border-radius: 0.625rem;
+  overflow: hidden;
+
+  // These are photos of us, so they are never cropped: the image keeps its own
+  // aspect ratio and the box takes whatever height that comes to. A fixed
+  // height here would letterbox a 4:3 photo and cut faces off the top and
+  // bottom on a phone.
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
   }
 }
 
@@ -593,6 +625,23 @@ $vn-cream: rgba(253, 249, 240, 0.95);
 // ============================================
 
 @media (min-width: 768px) {
+  // Room enough to set a place's photo beside its description.
+  .city-page-places li.has-photo {
+    @include Flex(row, flex-start, flex-start);
+
+    gap: 0.9rem;
+    margin-bottom: 1.1rem;
+  }
+
+  .city-place-text {
+    flex: 1 1 auto;
+  }
+
+  .city-page-places li.has-photo .city-place-photo {
+    flex: 0 0 11rem;
+    margin-top: 0;
+  }
+
   .vietnam-explorer {
     padding: 2rem;
     border-radius: 1.5rem;

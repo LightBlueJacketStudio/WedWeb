@@ -1,6 +1,14 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 
+import benThanhMarket from '../assets/Saigon/ben-thanh-market.jpg'
+import notreDameSaigon from '../assets/Saigon/Notre-Dame-saigon.png'
+import saigonFront from '../assets/Saigon/saigon-front.png'
+import daNangFront from '../assets/da-nang/da-nang-front.png'
+import haNoiFront from '../assets/ha-noi/ha-noi-front.png'
+import hueFront from '../assets/hue/hue-front.png'
+import sapaFront from '../assets/sapa/sapa-front.png'
+import hoianFront from '../assets/hoi-an/hoi-an-front.png'
 import { VN_PATH, VN_VIEWBOX, projectToPercent } from '../data/vietnamOutline'
 
 // The five places we send guests to, in north-to-south order.
@@ -16,10 +24,11 @@ const CITIES = [
     lon: 103.8438,
     labelSide: 'right',
     tagline: '',
-    photo: null,
-    photoAlt: '',
+    photo: sapaFront,
+    photoAlt: 'Sunrise over the Fansipan',
     blurb: '',
     dontMiss: [],
+    eats: [],
     gettingThere: '',
     bestTime: '',
   },
@@ -32,10 +41,11 @@ const CITIES = [
     lon: 105.8342,
     labelSide: 'right',
     tagline: '',
-    photo: null,
-    photoAlt: '',
+    photo: haNoiFront,
+    photoAlt: 'Turtle Tower on Hoan Kiem Lake',
     blurb: '',
     dontMiss: [],
+    eats: [],
     gettingThere: '',
     bestTime: '',
   },
@@ -49,10 +59,11 @@ const CITIES = [
     labelSide: 'right',
     labelNudge: '-0.5rem',
     tagline: '',
-    photo: null,
-    photoAlt: '',
+    photo: hueFront,
+    photoAlt: 'The Imperial City gate in Huế',
     blurb: '',
     dontMiss: [],
+    eats: [],
     gettingThere: '',
     bestTime: '',
   },
@@ -69,10 +80,11 @@ const CITIES = [
     // Huế above and Hội An below are the ones moved out of its way.
     labelNudge: '0rem',
     tagline: '',
-    photo: null,
-    photoAlt: '',
+    photo: daNangFront,
+    photoAlt: 'The Golden Bridge',
     blurb: '',
     dontMiss: [],
+    eats: [],
     gettingThere: '',
     bestTime: '',
   },
@@ -85,14 +97,15 @@ const CITIES = [
     lon: 108.338,
     labelSide: 'right',
     labelNudge: '0.55rem',
-    // 19km from Đa Nang is six pixels on a map this size, so the dot is eased
+    // 19km from Đa Nang 
     // down and out to sit beside its neighbour rather than under it.
     pinNudge: { x: '0.35rem', y: '0.7rem' },
     tagline: '',
-    photo: null,
-    photoAlt: '',
+    photo: hoianFront,
+    photoAlt: 'Hoi An Acient Towm at Night',
     blurb: '',
     dontMiss: [],
+    eats: [],
     gettingThere: '',
     bestTime: '',
   },
@@ -104,11 +117,56 @@ const CITIES = [
     lat: 10.8231,
     lon: 106.6297,
     labelSide: 'right',
-    tagline: '',
-    photo: null,
-    photoAlt: '',
-    blurb: '',
-    dontMiss: [],
+    tagline: 'Where Amy grew up',
+    photo: saigonFront,
+    photoAlt: 'Sài Gòn at street level, motorbikes and shopfronts',
+    blurb:
+      'Sài Gòn is the city Amy grew up in, and she is always proud to call herself a Sài Gònian. As Vietnam\u2019s largest city and its economic heart, it never slows down: motorbikes flow like rivers, street vendors are up before the sun, and there is a coffee cart on every corner. But behind the hustle is a city rich with history, from French colonial landmarks to old temples tucked between skyscrapers. It is busy, loud, and full of life, and she cannot wait to show you her hometown.',
+    dontMiss: [
+      {
+        name: 'Ben Thanh Market',
+        note: 'Classic market for souvenirs, snacks, and people-watching. Bargain politely.',
+        photo: benThanhMarket,
+        photoAlt: 'Stalls packed with goods inside Ben Thanh Market',
+      },
+      {
+        name: 'Saigon Central Post Office & Notre-Dame Cathedral',
+        note: 'French-era landmarks right next to each other. Great photo stop and souvenir.',
+        photo: notreDameSaigon,
+        photoAlt: 'The red brick towers of Notre-Dame Cathedral in Sài Gòn',
+      },
+      {
+        name: 'Independence Palace',
+        note: 'The \u201cWhite House\u201d of the Vietnamese president back in the day - a time capsule of 1960s architecture and Vietnam\u2019s history.',
+      },
+      {
+        name: 'War Remnants Museum',
+        note: 'A good way to explore the Vietnam War through Vietnamese perspectives.',
+      },
+      {
+        name: 'Nguyen Hue Walking Street',
+        note: 'Stroll, grab a drink, and watch the city light up at night.',
+      },
+      {
+        name: 'Bui Vien Walking Street',
+        note: 'Loud, colorful, and the go-to spot for nightlife.',
+      },
+      {
+        name: 'Cholon (Chinatown)',
+        note: 'Old temples like Thien Hau, plus some of the best local eats.',
+      },
+      {
+        name: 'Cu Chi Tunnels',
+        note: 'A half-day trip outside the city if you want a deeper look at history.',
+      },
+      {
+        name: 'Bitexco Sky Deck or Landmark 81',
+        note: 'See the whole city from above.',
+      },
+    ],
+    // Adding food location later
+    // "What to Eat" section appears on its own.
+    eats: [],
     gettingThere: '',
     bestTime: '',
   },
@@ -262,7 +320,11 @@ export function VietnamExplorer() {
 function CityPage({ city, onClose, onBackToMap }) {
   const headingId = `city-page-${city.id}`
   const isEmpty =
-    !city.blurb && !city.gettingThere && !city.bestTime && !city.dontMiss.length
+    !city.blurb &&
+    !city.gettingThere &&
+    !city.bestTime &&
+    !city.dontMiss.length &&
+    !city.eats.length
 
   return (
     <div
@@ -325,9 +387,46 @@ function CityPage({ city, onClose, onBackToMap }) {
             <section className="city-page-section">
               <h3>Don&apos;t Miss</h3>
 
-              <ul className="city-page-list">
-                {city.dontMiss.map((item) => (
-                  <li key={item}>{item}</li>
+              <ul className="city-page-places">
+                {city.dontMiss.map((place) => (
+                  <li
+                    key={place.name}
+                    className={place.photo ? 'has-photo' : undefined}
+                  >
+                    <div className="city-place-text">
+                      <h4>{place.name}</h4>
+
+                      <p>{place.note}</p>
+                    </div>
+
+                    {place.photo && (
+                      <figure className="city-place-photo">
+                        <img
+                          src={place.photo}
+                          alt={place.photoAlt}
+                          loading="lazy"
+                        />
+                      </figure>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
+
+          {city.eats.length > 0 && (
+            <section className="city-page-section">
+              <h3>What to Eat</h3>
+
+              <ul className="city-page-places">
+                {city.eats.map((item) => (
+                  <li key={item.dish}>
+                    <div className="city-place-text">
+                      <h4>{item.dish}</h4>
+
+                      {item.note && <p>{item.note}</p>}
+                    </div>
+                  </li>
                 ))}
               </ul>
             </section>
