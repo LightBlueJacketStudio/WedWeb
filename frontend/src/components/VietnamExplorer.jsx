@@ -21,6 +21,10 @@ import hueTrain4 from '../assets/hue/train4.webp'
 import thienMuPagoda from '../assets/hue/thien-mu-pagoda.webp'
 import sapaFront from '../assets/sapa/sapa-front.png'
 import hoianFront from '../assets/hoi-an/hoi-an-front.png'
+import hoianTown1 from '../assets/hoi-an/hoi-an-town.webp'
+import hoianTown2 from '../assets/hoi-an/hoi-an-town2.webp'
+import hoianTown3 from '../assets/hoi-an/hoi-an-town3.webp'
+import basketBoat from '../assets/hoi-an/basket-boat.png'
 import { VN_PATH, VN_VIEWBOX, projectToPercent } from '../data/vietnamOutline'
 
 // The five places we send guests to, in north-to-south order.
@@ -70,7 +74,6 @@ const CITIES = [
     lon: 107.5909,
     labelSide: 'right',
     labelNudge: '-0.5rem',
-    tagline: 'Where Bao father’s side is from',
     photo: hueFront,
     photoAlt: 'The Imperial City gate in Hue',
     blurb:
@@ -78,10 +81,6 @@ const CITIES = [
     dontMiss: [
       {
         name: 'Heritage train from Da Nang to Hue',
-        note: [
-          'The ride over the Hải Vân Pass hugs the coast the whole way, one of the prettiest train rides in the country, and an easy way to get to us.',
-          'If you would like to take the train between Đà Nẵng and Hue, let Amy know and she will help you book the best seat.',
-        ],
         carousel: true,
         photos: [
           { src: hueTrain1, alt: 'On board the heritage train out of Hue' },
@@ -95,9 +94,8 @@ const CITIES = [
       },
       {
         name: 'Imperial City',
-        note: 'The walled citadel of the Nguyễn dynasty, and the reason Hue is on the UNESCO list. Go late in the afternoon: the brick turns gold on its own around sunset, no filter needed. Give yourself a few hours and comfortable shoes.',
         mapUrl:
-          'https://www.google.com/maps/place/?q=place_id:ChIJ-zZHO4GhQTER8_Eb9kDoaEE',
+          'https://maps.app.goo.gl/QGTjnB74obfhwd3LA',
         photos: [
           {
             src: imperialCity,
@@ -111,7 +109,6 @@ const CITIES = [
       },
       {
         name: 'Đong Ba Market',
-        note: 'Hue’s main market, and you do not want to miss eating here, this is the authentic taste, with local specialties you will not find anywhere else and plenty of lovely things to bring home as gifts.',
         mapUrl: 'https://maps.app.goo.gl/QaHDiGNvDk5c6C769',
         photo: dongBaMarket,
         photoAlt:
@@ -119,7 +116,6 @@ const CITIES = [
       },
       {
         name: 'Thien Mu Pagoda',
-        note: 'The oldest pagoda in Hue, sitting on a hill above the Perfume River with a seven tiered tower you can see from the water. Go in the morning while it is still cool and quiet, the garden behind the tower is where it gets peaceful. You can get here by boat along the river, which is the nicer way to arrive.',
         mapUrl:
           'https://www.google.com/maps/search/?api=1&query=Ch%C3%B9a%20Thi%C3%AAn%20M%E1%BB%A5%2C%20Hu%E1%BA%BF',
         photo: thienMuPagoda,
@@ -130,13 +126,12 @@ const CITIES = [
     eats: [
       {
         dish: 'Bun Bo Hue',
-        note: 'Remember the password to this website? It is actually the name of our most favourite Vietnamese dish, and it was born right here. A lemongrass and shrimp paste beef broth with thin vermicelli noodles, rare beef cooked in the hot soup, and a pile of herbs on the side. It carries rich, a little spicy, and nothing like the bún bò Hue you have had in the US. Every small shop we wander into in Hue tastes different from the last, in a way you will not find anywhere else. You definitely do not want to miss it here.',
+        note: 'Remember the password to this website? It is actually the name of our most favourite Vietnamese dish, and it was born right here',
         photo: bunBoHue,
-        photoAlt: 'A bowl of bún bò Hue at a market stall in Hue',
+        photoAlt: 'Bun Bo Hue',
       },
       {
         dish: 'Bánh ướt thịt nướng',
-        note: 'It is steamed rice sheets rolled around grilled pork, eaten with a pile of fresh herbs and dipped in a thick, savoury peanut sauce. Kim Long is the neighbourhood Hue people go to for it, and you eat these by the plateful without noticing.',
         meta: '50 Kim Long, Phú Xuân · 8am - 7pm',
         mapUrl:
           'https://www.google.com/maps/search/?api=1&query=B%C3%A1nh%20%C6%B0%E1%BB%9Bt%20Huy%E1%BB%81n%20Anh%2C%2050%20Kim%20Long%2C%20Ph%C3%BA%20Xu%C3%A2n%2C%20Hu%E1%BA%BF',
@@ -146,7 +141,6 @@ const CITIES = [
       },
       {
         dish: 'Cà phê muối (Salted coffee)',
-        note: 'Salted coffee was invented in Hue, and it has since made its way around the world. Strong Vietnamese drip coffee over condensed milk with a lightly salted cream on top — the salt takes the edge off the bitterness and makes the whole thing sweet and savoury at once. Hue is the city to drink it in.',
         meta: '142 Đặng Thái Thân, Phú Xuân · 7am - 10pm',
         mapUrl:
           'https://www.google.com/maps/search/?api=1&query=C%C3%A0%20ph%C3%AA%20mu%E1%BB%91i%20%C4%90%E1%BA%B7ng%20Th%C3%A1i%20Th%C3%A2n%2C%20142%20%C4%90%E1%BA%B7ng%20Th%C3%A1i%20Th%C3%A2n%2C%20Ph%C3%BA%20Xu%C3%A2n%2C%20Hu%E1%BA%BF',
@@ -189,12 +183,34 @@ const CITIES = [
     // 19km from Đa Nang 
     // down and out to sit beside its neighbour rather than under it.
     pinNudge: { x: '0.35rem', y: '0.7rem' },
-    tagline: 'Where Bao was born',
+    tagline: 'Where I was born',
     photo: hoianFront,
     photoAlt: 'Hoi An Acient Towm at Night',
     blurb:
       'Hội An is a UNESCO World Heritage site, and it’s where I was born. My grandparents’ old home sits by the riverside, where bamboo basket boats rise with the tide. At night, glowing lanterns light up the streets, and a cool river breeze drifts through the busy night market.',
-    dontMiss: [],
+    dontMiss: [
+      {
+        name: 'Ancient Town',
+        mapUrl:
+          'https://maps.app.goo.gl/q2iZKCZRYBV8i13b7',
+        // note: 'The old quarter is best on foot after sunset, when the lanterns come on and the streets close to traffic. Wander the riverside, cross the Japanese Covered Bridge, and float a paper lantern down the Thu Bồn.',
+        carousel: true,
+        photos: [
+          { src: hoianTown1, alt: 'Lanterns over the streets of the Ancient Town' },
+          { src: hoianTown2, alt: 'The riverside of the Ancient Town at night' },
+          { src: hoianTown3, alt: 'Old shopfronts along an Ancient Town lane' },
+        ],
+      },
+      {
+        name: 'Basket boat ride',
+        mapUrl:
+          'https://maps.app.goo.gl/VMz4GZznL6njdrcg6',
+        // note: 'Round bamboo basket boats (thuyền thúng) paddle through the Bảy Mẫu coconut palms in Cẩm Thanh, just outside town. Expect spinning boats, singing rowers, and a very wet, very fun hour on the water.',
+        photo: basketBoat,
+        photoAlt:
+          'Round bamboo basket boats crowding the water between the coconut palms',
+      },
+    ],
     eats: [],
     gettingThere: '',
     bestTime: '',
@@ -435,7 +451,7 @@ export function VietnamExplorer() {
           <h2>Make a Trip of It</h2>
 
           <p>
-            You have come all this way! Here are five cities we would recommend for your trip in Vietnam.
+            You have come all this way! Here are some cities we would recommend for your trip in Vietnam.
           </p>
         </div>
       </div>
