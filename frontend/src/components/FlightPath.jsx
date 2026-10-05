@@ -10,6 +10,7 @@ const PLAN_LINKS = [
   { label: 'RSVP', to: '/rsvp', icon: 'edit_calendar' },
   { label: 'Travel Guide', to: '/travel_guide', icon: 'explore' },
   { label: 'Where to Stay', to: '/travel_guide#where-to-stay', icon: 'hotel' },
+  { label: 'Make a Trip', to: '/travel_guide#make-a-trip', icon: 'travel_explore' },
   { label: 'Gift Registry', to: '/gift_registry', icon: 'redeem' },
 ]
 

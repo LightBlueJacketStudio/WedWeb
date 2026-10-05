@@ -484,8 +484,8 @@ $vn-cream: rgba(253, 249, 240, 0.95);
 }
 
 .city-page-section {
-  padding-top: 1rem;
-  margin-top: 1rem;
+  padding-top: 1.5rem;
+  margin-top: 1.5rem;
 
   border-top: 1px dashed $color-border-dashed;
 
@@ -517,7 +517,7 @@ $vn-cream: rgba(253, 249, 240, 0.95);
     position: relative;
 
     padding-left: 1.1rem;
-    margin-bottom: 0.8rem;
+    margin-bottom: 1.1rem;
 
     &::before {
       content: '';
@@ -535,6 +535,12 @@ $vn-cream: rgba(253, 249, 240, 0.95);
 
     &:last-child {
       margin-bottom: 0;
+    }
+
+    // On a phone the photo stacks under its own description, so the gap before
+    // the next name has to clear the photo, not just the text.
+    &.has-photo {
+      margin-bottom: 1.9rem;
     }
   }
 
@@ -557,8 +563,55 @@ $vn-cream: rgba(253, 249, 240, 0.95);
   }
 }
 
+// Place names that carry a map pin open Google Maps in a new tab. The pin sits
+// inline after the name so it wraps with it rather than stranding on its own
+// line when the name is long.
+.city-place-map-link {
+  color: inherit;
+  text-decoration: none;
+
+  border-bottom: 1px dashed rgba(108, 12, 32, 0.35);
+
+  transition: color 0.18s ease, border-color 0.18s ease;
+
+  .material-symbols-outlined {
+    margin-left: 0.2rem;
+
+    font-size: 0.95rem;
+    vertical-align: -0.15em;
+
+    color: $color-primary;
+  }
+
+  &:hover,
+  &:focus-visible {
+    color: $color-primary;
+    border-bottom-color: $color-primary;
+  }
+}
+
+// Street address and opening hours, sat right under the name and set quieter
+// than the description that follows it.
+.city-page-places .city-place-meta {
+  margin: 0.1rem 0 0.35rem;
+
+  color: $color-text-light;
+  font-size: 0.8rem;
+  letter-spacing: 0.01em;
+}
+
+// An entry may carry more than one photo (the Imperial City has two), so they
+// stack in a column and this wrapper is what the desktop layout sets beside the
+// text.
+.city-place-photos {
+  @include Flex(column, flex-start, stretch);
+
+  gap: 0.55rem;
+  margin-top: 0.55rem;
+}
+
 .city-place-photo {
-  margin: 0.55rem 0 0;
+  margin: 0;
 
   border-radius: 0.625rem;
   overflow: hidden;
@@ -571,6 +624,73 @@ $vn-cream: rgba(253, 249, 240, 0.95);
     display: block;
     width: 100%;
     height: auto;
+  }
+}
+
+// A slow self-advancing loop for entries with several photos (the heritage
+// train). The frame is square and the photos sit inside it untouched: these
+// run both portrait and landscape, and cropping them to a common shape would
+// throw away most of the wide ones.
+.city-place-carousel {
+  position: relative;
+
+  border-radius: 0.625rem;
+  overflow: hidden;
+
+  background: rgba(108, 12, 32, 0.06);
+}
+
+.city-place-carousel-track {
+  display: flex;
+
+  // Driven by an inline translateX of -100% per frame from the component.
+  transition: transform 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.city-place-carousel-slide {
+  flex: 0 0 100%;
+  margin: 0;
+
+  img {
+    display: block;
+
+    width: 100%;
+    aspect-ratio: 1 / 1;
+
+    object-fit: contain;
+  }
+}
+
+.city-place-carousel-dots {
+  @include Flex(row, center, center);
+
+  position: absolute;
+  right: 0;
+  bottom: 0.4rem;
+  left: 0;
+
+  gap: 0.3rem;
+
+  button {
+    width: 0.4rem;
+    height: 0.4rem;
+    padding: 0;
+
+    border: none;
+    border-radius: 999px;
+    background: rgba(49, 49, 43, 0.3);
+    cursor: pointer;
+
+    transition: background 0.18s ease;
+
+    &.is-active {
+      background: $color-primary;
+    }
+
+    &:hover,
+    &:focus-visible {
+      background: $color-primary;
+    }
   }
 }
 
@@ -606,6 +726,10 @@ $vn-cream: rgba(253, 249, 240, 0.95);
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .city-place-carousel-track {
+    transition: none;
+  }
+
   .city-page-overlay,
   .city-page {
     animation: none;
@@ -637,9 +761,18 @@ $vn-cream: rgba(253, 249, 240, 0.95);
     flex: 1 1 auto;
   }
 
-  .city-page-places li.has-photo .city-place-photo {
+  .city-page-places li.has-photo .city-place-photos {
     flex: 0 0 11rem;
     margin-top: 0;
+  }
+
+
+  .city-page-places li.has-carousel .city-place-photos {
+    flex-basis: 15rem;
+  }
+  .city-page-photo img {
+    height: auto;
+    max-height: 60vh;
   }
 
   .vietnam-explorer {

@@ -2,11 +2,23 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 
 import benThanhMarket from '../assets/Saigon/ben-thanh-market.jpg'
+import independencePalace from '../assets/Saigon/independent-palace.png'
 import notreDameSaigon from '../assets/Saigon/Notre-Dame-saigon.png'
 import saigonFront from '../assets/Saigon/saigon-front.png'
 import daNangFront from '../assets/da-nang/da-nang-front.png'
 import haNoiFront from '../assets/ha-noi/ha-noi-front.png'
-import hueFront from '../assets/hue/hue-front.png'
+import hueFront from '../assets/hue/hue-front.webp'
+import bunBoHue from '../assets/hue/bun-bo-hue.webp'
+import banhUot from '../assets/hue/banh-uot.webp'
+import saltedCoffee from '../assets/hue/salted-coffee.webp'
+import dongBaMarket from '../assets/hue/dong-ba-market.webp'
+import imperialCity from '../assets/hue/imperial-city.webp'
+import imperialCitySunset from '../assets/hue/imperial-city2.webp'
+import hueTrain1 from '../assets/hue/train1.webp'
+import hueTrain2 from '../assets/hue/train2.webp'
+import hueTrain3 from '../assets/hue/train3.webp'
+import hueTrain4 from '../assets/hue/train4.webp'
+import thienMuPagoda from '../assets/hue/thien-mu-pagoda.webp'
 import sapaFront from '../assets/sapa/sapa-front.png'
 import hoianFront from '../assets/hoi-an/hoi-an-front.png'
 import { VN_PATH, VN_VIEWBOX, projectToPercent } from '../data/vietnamOutline'
@@ -58,31 +70,108 @@ const CITIES = [
     lon: 107.5909,
     labelSide: 'right',
     labelNudge: '-0.5rem',
-    tagline: '',
+    tagline: 'Where Bao father’s side is from',
     photo: hueFront,
-    photoAlt: 'The Imperial City gate in Huế',
-    blurb: '',
-    dontMiss: [],
-    eats: [],
+    photoAlt: 'The Imperial City gate in Hue',
+    blurb:
+      'Hue is where my father’s side is from. It’s another UNESCO listed city and the imperial capital of Vietnam’s last dynasty. Every time I’m in Hue, I’m overwhelmed with emotion and admiration. To this day, I still can’t put the feeling into words. Maybe you can describe it for me when you visit.',
+    dontMiss: [
+      {
+        name: 'Heritage train from Da Nang to Hue',
+        note: [
+          'The ride over the Hải Vân Pass hugs the coast the whole way, one of the prettiest train rides in the country, and an easy way to get to us.',
+          'If you would like to take the train between Đà Nẵng and Hue, let Amy know and she will help you book the best seat.',
+        ],
+        carousel: true,
+        photos: [
+          { src: hueTrain1, alt: 'On board the heritage train out of Hue' },
+          { src: hueTrain2, alt: 'The carriage interior of the heritage train' },
+          { src: hueTrain3, alt: 'Looking out of the train window' },
+          {
+            src: hueTrain4,
+            alt: 'The coastline from the train on the Hải Vân Pass',
+          },
+        ],
+      },
+      {
+        name: 'Imperial City',
+        note: 'The walled citadel of the Nguyễn dynasty, and the reason Hue is on the UNESCO list. Go late in the afternoon: the brick turns gold on its own around sunset, no filter needed. Give yourself a few hours and comfortable shoes.',
+        mapUrl:
+          'https://www.google.com/maps/place/?q=place_id:ChIJ-zZHO4GhQTER8_Eb9kDoaEE',
+        photos: [
+          {
+            src: imperialCity,
+            alt: 'The Meridian Gate and courtyard of the Imperial City in Hue',
+          },
+          {
+            src: imperialCitySunset,
+            alt: 'Bao outside the citadel wall as the sun sets over Hue',
+          },
+        ],
+      },
+      {
+        name: 'Đong Ba Market',
+        note: 'Hue’s main market, and you do not want to miss eating here, this is the authentic taste, with local specialties you will not find anywhere else and plenty of lovely things to bring home as gifts.',
+        mapUrl: 'https://maps.app.goo.gl/QaHDiGNvDk5c6C769',
+        photo: dongBaMarket,
+        photoAlt:
+          'A bún bò Hue stall inside Đong Ba Market, with its price board overhead',
+      },
+      {
+        name: 'Thien Mu Pagoda',
+        note: 'The oldest pagoda in Hue, sitting on a hill above the Perfume River with a seven tiered tower you can see from the water. Go in the morning while it is still cool and quiet, the garden behind the tower is where it gets peaceful. You can get here by boat along the river, which is the nicer way to arrive.',
+        mapUrl:
+          'https://www.google.com/maps/search/?api=1&query=Ch%C3%B9a%20Thi%C3%AAn%20M%E1%BB%A5%2C%20Hu%E1%BA%BF',
+        photo: thienMuPagoda,
+        photoAlt:
+          'The seven tiered tower of Thiên Mụ Pagoda above the Perfume River',
+      },
+    ],
+    eats: [
+      {
+        dish: 'Bun Bo Hue',
+        note: 'Remember the password to this website? It is actually the name of our most favourite Vietnamese dish, and it was born right here. A lemongrass and shrimp paste beef broth with thin vermicelli noodles, rare beef cooked in the hot soup, and a pile of herbs on the side. It carries rich, a little spicy, and nothing like the bún bò Hue you have had in the US. Every small shop we wander into in Hue tastes different from the last, in a way you will not find anywhere else. You definitely do not want to miss it here.',
+        photo: bunBoHue,
+        photoAlt: 'A bowl of bún bò Hue at a market stall in Hue',
+      },
+      {
+        dish: 'Bánh ướt thịt nướng',
+        note: 'It is steamed rice sheets rolled around grilled pork, eaten with a pile of fresh herbs and dipped in a thick, savoury peanut sauce. Kim Long is the neighbourhood Hue people go to for it, and you eat these by the plateful without noticing.',
+        meta: '50 Kim Long, Phú Xuân · 8am - 7pm',
+        mapUrl:
+          'https://www.google.com/maps/search/?api=1&query=B%C3%A1nh%20%C6%B0%E1%BB%9Bt%20Huy%E1%BB%81n%20Anh%2C%2050%20Kim%20Long%2C%20Ph%C3%BA%20Xu%C3%A2n%2C%20Hu%E1%BA%BF',
+        photo: banhUot,
+        photoAlt:
+          'A table spread of bánh ướt thịt nướng with herbs and dipping sauces',
+      },
+      {
+        dish: 'Cà phê muối (Salted coffee)',
+        note: 'Salted coffee was invented in Hue, and it has since made its way around the world. Strong Vietnamese drip coffee over condensed milk with a lightly salted cream on top — the salt takes the edge off the bitterness and makes the whole thing sweet and savoury at once. Hue is the city to drink it in.',
+        meta: '142 Đặng Thái Thân, Phú Xuân · 7am - 10pm',
+        mapUrl:
+          'https://www.google.com/maps/search/?api=1&query=C%C3%A0%20ph%C3%AA%20mu%E1%BB%91i%20%C4%90%E1%BA%B7ng%20Th%C3%A1i%20Th%C3%A2n%2C%20142%20%C4%90%E1%BA%B7ng%20Th%C3%A1i%20Th%C3%A2n%2C%20Ph%C3%BA%20Xu%C3%A2n%2C%20Hu%E1%BA%BF',
+        photo: saltedCoffee,
+        photoAlt: 'A glass cup of cà phê muối on a wooden table in Hue',
+      },
+    ],
     gettingThere: '',
     bestTime: '',
   },
   {
     id: 'danang',
     name: 'Đà Nẵng',
-    region: 'Central coast - where we are getting married',
+    region: 'Where we are getting married',
     marker: 'dot',
     wedding: true,
     lat: 16.0544,
     lon: 108.2022,
     labelSide: 'right',
-    // No nudge: this name is the one that has to sit dead centre on its dot.
-    // Huế above and Hội An below are the ones moved out of its way.
     labelNudge: '0rem',
-    tagline: '',
+    tagline: 'Where my heart is',
     photo: daNangFront,
     photoAlt: 'The Golden Bridge',
-    blurb: '',
+    blurb:
+      'Đà Nẵng is where my heart is, and it’s where Amy’s family is from too. I grew up behind the Da Nang Train Station and spent my childhood playing soccer on the street, and walking along the sandy shore, which has since grown into a modern skyline. The city, the people, and the hospitality are second to none, and we can’t wait to welcome you to our home.',
     dontMiss: [],
     eats: [],
     gettingThere: '',
@@ -100,10 +189,11 @@ const CITIES = [
     // 19km from Đa Nang 
     // down and out to sit beside its neighbour rather than under it.
     pinNudge: { x: '0.35rem', y: '0.7rem' },
-    tagline: '',
+    tagline: 'Where Bao was born',
     photo: hoianFront,
     photoAlt: 'Hoi An Acient Towm at Night',
-    blurb: '',
+    blurb:
+      'Hội An is a UNESCO World Heritage site, and it’s where I was born. My grandparents’ old home sits by the riverside, where bamboo basket boats rise with the tide. At night, glowing lanterns light up the streets, and a cool river breeze drifts through the busy night market.',
     dontMiss: [],
     eats: [],
     gettingThere: '',
@@ -138,18 +228,16 @@ const CITIES = [
       {
         name: 'Independence Palace',
         note: 'The \u201cWhite House\u201d of the Vietnamese president back in the day - a time capsule of 1960s architecture and Vietnam\u2019s history.',
+        photo: independencePalace,
+        photoAlt: 'The front facade and lawn of Independence Palace in S\u00e0i G\u00f2n',
       },
       {
         name: 'War Remnants Museum',
         note: 'A good way to explore the Vietnam War through Vietnamese perspectives.',
       },
       {
-        name: 'Nguyen Hue Walking Street',
+        name: 'Nguyen Hue Walking Street/ Bui Viet Street',
         note: 'Stroll, grab a drink, and watch the city light up at night.',
-      },
-      {
-        name: 'Bui Vien Walking Street',
-        note: 'Loud, colorful, and the go-to spot for nightlife.',
       },
       {
         name: 'Cholon (Chinatown)',
@@ -157,7 +245,7 @@ const CITIES = [
       },
       {
         name: 'Cu Chi Tunnels',
-        note: 'A half-day trip outside the city if you want a deeper look at history.',
+        note: 'A remarkable underground network that reveals how Vietnamese soldiers lived, fought, and survived during the Vietnam War. Take a half-day trip beyond the city to explore the tunnels and gain a deeper, more immersive look into Vietnam’s wartime history.',
       },
       {
         name: 'Bitexco Sky Deck or Landmark 81',
@@ -171,6 +259,123 @@ const CITIES = [
     bestTime: '',
   },
 ]
+
+
+function placePhotos(entry) {
+  if (entry.photos) return entry.photos
+  if (entry.photo) return [{ src: entry.photo, alt: entry.photoAlt }]
+
+  return []
+}
+
+// How long each frame of a photo carousel holds before the track slides on.
+const CAROUSEL_MS = 4000
+
+// Auto-advancing strip for entries carrying a handful of photos. The track
+// slides one frame to the left every CAROUSEL_MS and wraps back to the first
+function PhotoCarousel({ photos }) {
+  const [index, setIndex] = useState(0)
+  const [paused, setPaused] = useState(false)
+
+  useEffect(() => {
+    if (paused) return
+
+    const id = setInterval(
+      () => setIndex((current) => (current + 1) % photos.length),
+      CAROUSEL_MS,
+    )
+
+    return () => clearInterval(id)
+  }, [paused, photos.length])
+
+  return (
+    <div
+      className="city-place-carousel"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+      onFocus={() => setPaused(true)}
+      onBlur={() => setPaused(false)}
+    >
+      <div
+        className="city-place-carousel-track"
+        style={{ transform: `translateX(-${index * 100}%)` }}
+      >
+        {photos.map((photo) => (
+          <figure key={photo.src} className="city-place-carousel-slide">
+            <img src={photo.src} alt={photo.alt} loading="lazy" />
+          </figure>
+        ))}
+      </div>
+
+      <div className="city-place-carousel-dots">
+        {photos.map((photo, dot) => (
+          <button
+            key={photo.src}
+            type="button"
+            className={dot === index ? 'is-active' : undefined}
+            aria-label={`Show photo ${dot + 1} of ${photos.length}`}
+            aria-current={dot === index}
+            onClick={() => setIndex(dot)}
+          />
+        ))}
+      </div>
+    </div>
+  )
+}
+
+function PlaceItem({ entry, name }) {
+  const photos = placePhotos(entry)
+  const notes = [entry.note].flat().filter(Boolean)
+  const classes = [
+    photos.length > 0 && 'has-photo',
+    entry.carousel && 'has-carousel',
+  ].filter(Boolean)
+
+  return (
+    <li className={classes.length > 0 ? classes.join(' ') : undefined}>
+      <div className="city-place-text">
+        <h4>
+          {entry.mapUrl ? (
+            <a
+              className="city-place-map-link"
+              href={entry.mapUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {name}
+
+              <span className="material-symbols-outlined" aria-hidden="true">
+                location_on
+              </span>
+            </a>
+          ) : (
+            name
+          )}
+        </h4>
+
+        {entry.meta && <p className="city-place-meta">{entry.meta}</p>}
+
+        {notes.map((note, paragraph) => (
+          <p key={paragraph}>{note}</p>
+        ))}
+      </div>
+
+      {photos.length > 0 && (
+        <div className="city-place-photos">
+          {entry.carousel && photos.length > 1 ? (
+            <PhotoCarousel photos={photos} />
+          ) : (
+            photos.map((photo) => (
+              <figure key={photo.src} className="city-place-photo">
+                <img src={photo.src} alt={photo.alt} loading="lazy" />
+              </figure>
+            ))
+          )}
+        </div>
+      )}
+    </li>
+  )
+}
 
 // Tapping a marker opens that city's own page over the top of the site.
 export function VietnamExplorer() {
@@ -217,7 +422,7 @@ export function VietnamExplorer() {
   }, [openId, closeCity])
 
   return (
-    <section className="vietnam-explorer" ref={sectionRef}>
+    <section className="vietnam-explorer" id="make-a-trip" ref={sectionRef}>
       <div className="vietnam-explorer-header">
         <span
           className="vietnam-explorer-icon material-symbols-outlined"
@@ -269,9 +474,6 @@ export function VietnamExplorer() {
                 .join(' ')}
               style={{
                 ...projectToPercent(city.lat, city.lon),
-                // Huế, Đà Nẵng and Hội An are within four percent of each other
-                // top to bottom; labelNudge fans their names apart vertically
-                // while the markers stay on their real coordinates.
                 '--vn-label-nudge': city.labelNudge ?? '0rem',
                 '--vn-pin-dx': city.pinNudge?.x ?? '0rem',
                 '--vn-pin-dy': city.pinNudge?.y ?? '0rem',
@@ -389,26 +591,7 @@ function CityPage({ city, onClose, onBackToMap }) {
 
               <ul className="city-page-places">
                 {city.dontMiss.map((place) => (
-                  <li
-                    key={place.name}
-                    className={place.photo ? 'has-photo' : undefined}
-                  >
-                    <div className="city-place-text">
-                      <h4>{place.name}</h4>
-
-                      <p>{place.note}</p>
-                    </div>
-
-                    {place.photo && (
-                      <figure className="city-place-photo">
-                        <img
-                          src={place.photo}
-                          alt={place.photoAlt}
-                          loading="lazy"
-                        />
-                      </figure>
-                    )}
-                  </li>
+                  <PlaceItem key={place.name} entry={place} name={place.name} />
                 ))}
               </ul>
             </section>
@@ -420,13 +603,7 @@ function CityPage({ city, onClose, onBackToMap }) {
 
               <ul className="city-page-places">
                 {city.eats.map((item) => (
-                  <li key={item.dish}>
-                    <div className="city-place-text">
-                      <h4>{item.dish}</h4>
-
-                      {item.note && <p>{item.note}</p>}
-                    </div>
-                  </li>
+                  <PlaceItem key={item.dish} entry={item} name={item.dish} />
                 ))}
               </ul>
             </section>
