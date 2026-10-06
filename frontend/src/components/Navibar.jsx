@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import monogramLogo from '../assets/monogram_logo_transparent.png';
+import monogramLogo from '../assets/monogram_logo_transparent.webp';
 
 
 const SECTION_LINKS = [

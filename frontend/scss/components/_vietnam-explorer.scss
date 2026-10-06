@@ -116,7 +116,7 @@ $vn-cream: rgba(253, 249, 240, 0.95);
   padding: 0;
 
   // --vn-pin-dx / dy shift a marker off its coordinate. Only Hội An uses them:
-  // it is 19km from Đà Nẵng, which at this scale is six pixels, so the two dots
+  // it is 19km from Da Nang, which at this scale is six pixels, so the two dots
   // would print on top of each other. See pinNudge in the component.
   transform: translate(
     calc(-50% + var(--vn-pin-dx, 0rem)),
@@ -507,7 +507,7 @@ $vn-cream: rgba(253, 249, 240, 0.95);
   }
 }
 
-// Each entry is a name plus a line about it, and may carry its own photo.
+// Each entry is a name plus a line about it.
 // The global reset strips list markers, so draw our own.
 .city-page-places {
   padding: 0;
@@ -590,8 +590,7 @@ $vn-cream: rgba(253, 249, 240, 0.95);
   }
 }
 
-// Street address and opening hours, sat right under the name and set quieter
-// than the description that follows it.
+// Street address and opening hours, sat right under the name and set quieter than the description that follows it.
 .city-page-places .city-place-meta {
   margin: 0.1rem 0 0.35rem;
 
@@ -600,9 +599,7 @@ $vn-cream: rgba(253, 249, 240, 0.95);
   letter-spacing: 0.01em;
 }
 
-// An entry may carry more than one photo (the Imperial City has two), so they
-// stack in a column and this wrapper is what the desktop layout sets beside the
-// text.
+
 .city-place-photos {
   @include Flex(column, flex-start, stretch);
 
@@ -638,6 +635,25 @@ $vn-cream: rgba(253, 249, 240, 0.95);
   overflow: hidden;
 
   background: rgba(108, 12, 32, 0.06);
+
+  // The frame is draggable left and right, so claim the horizontal gesture but
+  // leave the vertical one to the page: without this a swipe on a phone would
+  // scroll the city page instead of turning the photo.
+  touch-action: pan-y;
+  cursor: grab;
+  -webkit-user-select: none;
+  user-select: none;
+
+  &:active {
+    cursor: grabbing;
+  }
+
+  // The frame itself takes focus so the arrow keys reach it, which means it
+  // needs its own ring: without one a keyboard user lands on an unmarked box.
+  &:focus-visible {
+    outline: 2px solid $color-primary;
+    outline-offset: 2px;
+  }
 }
 
 .city-place-carousel-track {
@@ -645,6 +661,12 @@ $vn-cream: rgba(253, 249, 240, 0.95);
 
   // Driven by an inline translateX of -100% per frame from the component.
   transition: transform 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+
+  // While a finger is down the track has to track it exactly, so the easing
+  // that makes the auto-advance glide would read as lag.
+  &.is-dragging {
+    transition: none;
+  }
 }
 
 .city-place-carousel-slide {
@@ -658,6 +680,56 @@ $vn-cream: rgba(253, 249, 240, 0.95);
     aspect-ratio: 1 / 1;
 
     object-fit: contain;
+  }
+}
+
+// Dragging the frame is the natural gesture on a phone but an awkward one with
+// a mouse, so each side carries a button as well. They sit over the photo
+// rather than beside it: the frame is already capped narrow on a desktop and
+// gutters would eat into the picture.
+.city-place-carousel-arrow {
+  @include Flex(row, center, center);
+
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+
+  width: 1.85rem;
+  height: 1.85rem;
+  padding: 0;
+
+  border: none;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.78);
+  color: $color-primary;
+  cursor: pointer;
+
+  // Dark photos and pale skies both run under these, so the glyph keeps a
+  // shadow to sit on whichever it lands over.
+  box-shadow: 0 1px 4px rgba(49, 49, 43, 0.25);
+
+  transition: background 0.18s ease;
+
+  &.is-prev {
+    left: 0.4rem;
+  }
+
+  &.is-next {
+    right: 0.4rem;
+  }
+
+  .material-symbols-outlined {
+    font-size: 1.25rem;
+  }
+
+  &:hover,
+  &:focus-visible {
+    background: rgba(255, 255, 255, 0.95);
+  }
+
+  &:focus-visible {
+    outline: 2px solid $color-primary;
+    outline-offset: 2px;
   }
 }
 
@@ -749,26 +821,25 @@ $vn-cream: rgba(253, 249, 240, 0.95);
 // ============================================
 
 @media (min-width: 768px) {
-  // Room enough to set a place's photo beside its description.
+  // The photo stays under its own name at every width: setting it beside the
+  // text left a tall column of white space next to short descriptions, and it
+  // read as belonging to no entry in particular.
   .city-page-places li.has-photo {
-    @include Flex(row, flex-start, flex-start);
-
-    gap: 0.9rem;
-    margin-bottom: 1.1rem;
+    margin-bottom: 1.6rem;
   }
 
   .city-place-text {
     flex: 1 1 auto;
   }
 
+  // Capped rather than full-bleed — the places column is wide on a desktop and
+  // an uncropped photo stretched across it would dwarf the list it belongs to.
   .city-page-places li.has-photo .city-place-photos {
-    flex: 0 0 11rem;
-    margin-top: 0;
+    max-width: 20rem;
   }
 
-
   .city-page-places li.has-carousel .city-place-photos {
-    flex-basis: 15rem;
+    max-width: 22rem;
   }
   .city-page-photo img {
     height: auto;

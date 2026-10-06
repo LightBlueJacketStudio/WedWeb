@@ -3091,11 +3091,25 @@ button {
   border-radius: 0.625rem;
   overflow: hidden;
   background: rgba(108, 12, 32, 0.06);
+  touch-action: pan-y;
+  cursor: grab;
+  -webkit-user-select: none;
+  user-select: none;
+}
+.city-place-carousel:active {
+  cursor: grabbing;
+}
+.city-place-carousel:focus-visible {
+  outline: 2px solid rgb(108, 12, 32);
+  outline-offset: 2px;
 }
 
 .city-place-carousel-track {
   display: flex;
   transition: transform 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.city-place-carousel-track.is-dragging {
+  transition: none;
 }
 
 .city-place-carousel-slide {
@@ -3107,6 +3121,42 @@ button {
   width: 100%;
   aspect-ratio: 1/1;
   object-fit: contain;
+}
+
+.city-place-carousel-arrow {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1.85rem;
+  height: 1.85rem;
+  padding: 0;
+  border: none;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.78);
+  color: rgb(108, 12, 32);
+  cursor: pointer;
+  box-shadow: 0 1px 4px rgba(49, 49, 43, 0.25);
+  transition: background 0.18s ease;
+}
+.city-place-carousel-arrow.is-prev {
+  left: 0.4rem;
+}
+.city-place-carousel-arrow.is-next {
+  right: 0.4rem;
+}
+.city-place-carousel-arrow .material-symbols-outlined {
+  font-size: 1.25rem;
+}
+.city-place-carousel-arrow:hover, .city-place-carousel-arrow:focus-visible {
+  background: rgba(255, 255, 255, 0.95);
+}
+.city-place-carousel-arrow:focus-visible {
+  outline: 2px solid rgb(108, 12, 32);
+  outline-offset: 2px;
 }
 
 .city-place-carousel-dots {
@@ -3181,22 +3231,16 @@ button {
 }
 @media (min-width: 768px) {
   .city-page-places li.has-photo {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: flex-start;
-    gap: 0.9rem;
-    margin-bottom: 1.1rem;
+    margin-bottom: 1.6rem;
   }
   .city-place-text {
     flex: 1 1 auto;
   }
   .city-page-places li.has-photo .city-place-photos {
-    flex: 0 0 11rem;
-    margin-top: 0;
+    max-width: 20rem;
   }
   .city-page-places li.has-carousel .city-place-photos {
-    flex-basis: 15rem;
+    max-width: 22rem;
   }
   .city-page-photo img {
     height: auto;
@@ -3644,7 +3688,8 @@ button {
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  gap: 0.55rem;
+  flex-wrap: wrap;
+  gap: 0.45rem 0.55rem;
   min-width: 0;
   color: rgb(108, 12, 32);
   font-family: "Plus Jakarta Sans", system-ui, sans-serif;
@@ -3652,6 +3697,21 @@ button {
   line-height: 1.3;
   font-weight: 700;
   letter-spacing: 0.01em;
+}
+
+.travel-collapse-badge {
+  flex-shrink: 0;
+  padding: 0.2rem 0.5rem;
+  border-radius: 999px;
+  background: rgb(108, 12, 32);
+  color: rgb(255, 255, 255);
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  font-size: 0.6rem;
+  line-height: 1.4;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .travel-collapse-chevron {

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react"
-import venmoQr from "../assets/venmo.png"
-import zelleQr from "../assets/zelle.png"
+import venmoQr from "../assets/venmo.webp"
+import zelleQr from "../assets/zelle.webp"
 
 const REGISTRY_TITLE = "Skip the gift registry, save a cat!"
 
@@ -208,6 +208,8 @@ function GiftRegistry() {
                     <img
                       src={method.qr}
                       alt={`${method.name} QR code`}
+                      loading="lazy"
+                      decoding="async"
                       className="registry-qr-img"
                     />
                   ) : (

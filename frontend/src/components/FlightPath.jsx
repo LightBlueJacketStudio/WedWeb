@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
-import saveTheDate from '../assets/save-the-date.jpg'
-import vietnamStamp from '../assets/DN-stamp-burgundy.jpg'
+import saveTheDate from '../assets/save-the-date.webp'
+import vietnamStamp from '../assets/DN-stamp-burgundy.webp'
 import { ContactUs } from './ContactUs'
 
 // Quick links that live on the postcard's right side, in place of the usual
@@ -157,6 +157,7 @@ function FlightPath() {
             <img
               src={saveTheDate}
               alt="Save the Date — Hoàng My & Ngọc Bảo, Saturday 13 March 2027, Đà Nẵng, Việt Nam"
+              fetchPriority="high"
             />
             <span className="postcard-hint" aria-hidden="true">
               <span className="postcard-hint-icon">↻</span> Flip me
@@ -216,6 +217,8 @@ function FlightPath() {
                   className="pc-stamp-frame"
                   src={vietnamStamp}
                   alt="Việt Nam 2027 postage stamp"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
 

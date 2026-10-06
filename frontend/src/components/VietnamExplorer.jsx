@@ -1,30 +1,53 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 
-import benThanhMarket from '../assets/Saigon/ben-thanh-market.jpg'
-import independencePalace from '../assets/Saigon/independent-palace.png'
-import notreDameSaigon from '../assets/Saigon/Notre-Dame-saigon.png'
-import saigonFront from '../assets/Saigon/saigon-front.png'
-import daNangFront from '../assets/da-nang/da-nang-front.png'
-import haNoiFront from '../assets/ha-noi/ha-noi-front.png'
+import benThanhMarket from '../assets/Saigon/ben-thanh-market.webp'
+import independencePalace from '../assets/Saigon/independent-palace.webp'
+import notreDameSaigon from '../assets/Saigon/Notre-Dame-saigon.webp'
+import saigonFront from '../assets/Saigon/saigon-front.webp'
+import daNangFront from '../assets/da-nang/da-nang-front.webp'
+import haNoiFront from '../assets/ha-noi/ha-noi-front.webp'
+import templeLiterature1 from '../assets/ha-noi/temple-literature.webp'
+import templeLiterature2 from '../assets/ha-noi/temple-literature2.webp'
+import templeLiterature3 from '../assets/ha-noi/temple-literature3.webp'
+import trainStreet1 from '../assets/ha-noi/train-street.webp'
+import trainStreet2 from '../assets/ha-noi/train-street2.webp'
+import onePillarPagoda from '../assets/ha-noi/one-pillar-pagoda.webp'
+import hoanKiem1 from '../assets/ha-noi/hoan-kiem-lake1.webp'
+import hoanKiem2 from '../assets/ha-noi/hoan-kiem-lake3.webp'
+import hoanKiem3 from '../assets/ha-noi/hoan-kiem-lake2.webp'
 import hueFront from '../assets/hue/hue-front.webp'
 import bunBoHue from '../assets/hue/bun-bo-hue.webp'
 import banhUot from '../assets/hue/banh-uot.webp'
 import saltedCoffee from '../assets/hue/salted-coffee.webp'
 import dongBaMarket from '../assets/hue/dong-ba-market.webp'
+import dongBaMarketGate from '../assets/hue/dong-ba-market4.webp'
+import dongBaMarketAisle from '../assets/hue/dong-ba-market2.webp'
+import dongBaMarketFood from '../assets/hue/dong-ba-market3.webp'
 import imperialCity from '../assets/hue/imperial-city.webp'
 import imperialCitySunset from '../assets/hue/imperial-city2.webp'
+import imperialCityFlagTower from '../assets/hue/imperial-city3.webp'
 import hueTrain1 from '../assets/hue/train1.webp'
 import hueTrain2 from '../assets/hue/train2.webp'
 import hueTrain3 from '../assets/hue/train3.webp'
 import hueTrain4 from '../assets/hue/train4.webp'
 import thienMuPagoda from '../assets/hue/thien-mu-pagoda.webp'
-import sapaFront from '../assets/sapa/sapa-front.png'
-import hoianFront from '../assets/hoi-an/hoi-an-front.png'
+import sapaFront from '../assets/sapa/sapa-front.webp'
+// Named for the order they run in, which is the way up the mountain rather
+// than the order they were dropped in the folder.
+import fansipanCableCar from '../assets/sapa/fansipan3.webp'
+import fansipanFunicular from '../assets/sapa/fansipan2.webp'
+import fansipanSummit from '../assets/sapa/fansipan.webp'
+import catCatVillage from '../assets/sapa/cat-cat-village2.webp'
+import catCatWaterfall from '../assets/sapa/cat-cat-village.webp'
+import catCatBridge from '../assets/sapa/cat-cat-village3.webp'
+import catCatFalls from '../assets/sapa/cat-cat-village4.webp'
+import muongHoaValley from '../assets/sapa/muong-hoa-valley.webp'
+import hoianFront from '../assets/hoi-an/hoi-an-front.webp'
 import hoianTown1 from '../assets/hoi-an/hoi-an-town.webp'
 import hoianTown2 from '../assets/hoi-an/hoi-an-town2.webp'
 import hoianTown3 from '../assets/hoi-an/hoi-an-town3.webp'
-import basketBoat from '../assets/hoi-an/basket-boat.png'
+import basketBoat from '../assets/hoi-an/basket-boat.webp'
 import { VN_PATH, VN_VIEWBOX, projectToPercent } from '../data/vietnamOutline'
 
 // The five places we send guests to, in north-to-south order.
@@ -42,8 +65,55 @@ const CITIES = [
     tagline: '',
     photo: sapaFront,
     photoAlt: 'Sunrise over the Fansipan',
-    blurb: '',
-    dontMiss: [],
+    blurb:
+      'Tucked into the mountains of northwest Vietnam, Sa Pa is a scenic escape from the city, about a 6-hour trip from Hà Nội by train or bus. If you love hiking, this is home to Fansipan, the highest peak in Vietnam and all of Indochina. Prefer to skip the climb? A cable car (plus a short funicular) brings you close to the summit. Nearby, Cát Cát Village is a traditional settlement of the H’Mông ethnic minority, where you can walk past terraced hillsides, waterfalls, and handwoven textiles, and get a glimpse of local mountain life.',
+    dontMiss: [
+      {
+        name: 'Fansipan',
+        carousel: true,
+        photos: [
+          {
+            src: fansipanCableCar,
+            alt: 'The Fansipan cable car crossing the valley above the forest',
+          },
+          {
+            src: fansipanFunicular,
+            alt: 'The red funicular climbing past the Buddha statue near the summit',
+          },
+          {
+            src: fansipanSummit,
+            alt: 'Sunrise over a sea of cloud from the summit deck',
+          },
+        ],
+      },
+      {
+        name: 'Cát Cát Village',
+        carousel: true,
+        photos: [
+          {
+            src: catCatVillage,
+            alt: 'The stilt houses and walkways of Cát Cát Village above the stream',
+          },
+          {
+            src: catCatWaterfall,
+            alt: 'The two of us in H’Mông dress by the waterfall at Cát Cát',
+          },
+          {
+            src: catCatBridge,
+            alt: 'In H’Mông dress on the bridge over the Cát Cát waterfall',
+          },
+          {
+            src: catCatFalls,
+            alt: 'By the falls at Cát Cát Village',
+          },
+        ],
+      },
+      {
+        name: 'Mường Hoa Valley',
+        photo: muongHoaValley,
+        photoAlt: 'Walkers on a path through the terraced rice fields of the valley',
+      },
+    ],
     eats: [],
     gettingThere: '',
     bestTime: '',
@@ -59,8 +129,68 @@ const CITIES = [
     tagline: '',
     photo: haNoiFront,
     photoAlt: 'Turtle Tower on Hoan Kiem Lake',
-    blurb: '',
-    dontMiss: [],
+    blurb:
+      'Hà Nội is the capital of Vietnam and one of Asia’s oldest capitals, with over a thousand years of history. In 2010, the city celebrated the 1,000th anniversary of Thăng Long – Hà Nội, which began in 1010 under the Lý Dynasty. Each era since has left its mark, and you can still see those layers today as you wander through the Old Quarter, where centuries-old streets, temples, and shophouses sit side by side with the energy of modern life.',
+    dontMiss: [
+      {
+        name: 'Temple of Literature',
+        mapUrl: 'https://maps.app.goo.gl/MmjCTqGq68w96V9B8',
+        note: 'Known as the first university in Vietnam.',
+        carousel: true,
+        photos: [
+          {
+            src: templeLiterature1,
+            alt: 'The main gate of the Temple of Literature, with its bell tower over the archway',
+          },
+          {
+            src: templeLiterature2,
+            alt: 'The Khue Van Cac pavilion, with conical lanterns strung along the path up to it',
+          },
+          {
+            src: templeLiterature3,
+            alt: 'The bronze urn in the inner courtyard, with the ceremonial hall behind it',
+          },
+        ],
+      },
+      {
+        name: 'One Pillar Pagoda',
+        mapUrl: 'https://maps.app.goo.gl/BttYkaeeYinqTx7d6',
+        note: 'Another thousand-year-old piece of architecture.',
+        photo: onePillarPagoda,
+        photoAlt: 'The One Pillar Pagoda on its stone pillar above a lotus pond',
+      },
+      {
+        name: 'Hoan Kiem Lake',
+        mapUrl: 'https://maps.app.goo.gl/pExCaSSfbvD6QrZu5',
+        carousel: true,
+        photos: [
+          {
+            src: hoanKiem1,
+            alt: 'The two of us by the lake, with Thê Húc Bridge behind',
+          },
+          {
+            src: hoanKiem2,
+            alt: 'A coffee on the lake path in the afternoon sun',
+          },
+          {
+            src: hoanKiem3,
+            alt: 'The two of us at the lake at night, Turtle Tower lit up across the water',
+          },
+        ],
+      },
+      {
+        name: 'Train Street',
+        mapUrl: 'https://maps.app.goo.gl/mod2N8toWrYZTEUT9',
+        carousel: true,
+        photos: [
+          { src: trainStreet1, alt: 'A train squeezing past the cafes on Train Street' },
+          {
+            src: trainStreet2,
+            alt: 'Walking the tracks between the lantern-strung cafes on Train Street',
+          },
+        ],
+      },
+    ],
     eats: [],
     gettingThere: '',
     bestTime: '',
@@ -96,6 +226,7 @@ const CITIES = [
         name: 'Imperial City',
         mapUrl:
           'https://maps.app.goo.gl/QGTjnB74obfhwd3LA',
+        carousel: true,
         photos: [
           {
             src: imperialCity,
@@ -105,14 +236,34 @@ const CITIES = [
             src: imperialCitySunset,
             alt: 'Bao outside the citadel wall as the sun sets over Hue',
           },
+          {
+            src: imperialCityFlagTower,
+            alt: 'The Flag Tower of the citadel at dusk, from the lawn outside the walls',
+          },
         ],
       },
       {
         name: 'Đong Ba Market',
         mapUrl: 'https://maps.app.goo.gl/QaHDiGNvDk5c6C769',
-        photo: dongBaMarket,
-        photoAlt:
-          'A bún bò Hue stall inside Đong Ba Market, with its price board overhead',
+        carousel: true,
+        photos: [
+          {
+            src: dongBaMarketGate,
+            alt: 'The entrance to Đong Ba Market under its sign',
+          },
+          {
+            src: dongBaMarketAisle,
+            alt: 'An aisle of stalls running through the middle of the market',
+          },
+          {
+            src: dongBaMarket,
+            alt: 'A bún bò Hue stall inside Đong Ba Market, with its price board overhead',
+          },
+          {
+            src: dongBaMarketFood,
+            alt: 'A food stall spread with skewers, bánh bèo and bowls of noodles',
+          },
+        ],
       },
       {
         name: 'Thien Mu Pagoda',
@@ -161,7 +312,6 @@ const CITIES = [
     lon: 108.2022,
     labelSide: 'right',
     labelNudge: '0rem',
-    tagline: 'Where my heart is',
     photo: daNangFront,
     photoAlt: 'The Golden Bridge',
     blurb:
@@ -287,41 +437,145 @@ function placePhotos(entry) {
 // How long each frame of a photo carousel holds before the track slides on.
 const CAROUSEL_MS = 4000
 
+// How far a finger (or a held mouse) has to travel across the frame before the release counts as "next photo" rather than a tap that missed the dots.
+
+const SWIPE_RATIO = 0.18
+const SWIPE_MIN_PX = 40
+
 // Auto-advancing strip for entries carrying a handful of photos. The track
-// slides one frame to the left every CAROUSEL_MS and wraps back to the first
+// slides one frame to the left every CAROUSEL_MS and wraps back to the first,
+// and the photo can also be picked by hand four ways: the arrow buttons, the
+// left/right arrow keys once the frame has focus, the dots, or a drag across
+// the frame. Dragging alone was only really usable on a phone.
 function PhotoCarousel({ photos }) {
   const [index, setIndex] = useState(0)
-  const [paused, setPaused] = useState(false)
+  const [hovered, setHovered] = useState(false)
+  // How far the current drag has travelled, in px. Null while nothing is being
+  // dragged, which is also what tells the track to keep its slide transition.
+  const [drag, setDrag] = useState(null)
+  const frameRef = useRef(null)
+  const startX = useRef(0)
+
+  // Hovering and dragging each hold the loop still on their own, so letting go
+  // mid-hover must not start it advancing under the cursor.
+  const paused = hovered || drag !== null
+
+  const step = useCallback(
+    (delta) =>
+      setIndex(
+        (current) => (current + delta + photos.length) % photos.length,
+      ),
+    [photos.length],
+  )
 
   useEffect(() => {
     if (paused) return
 
-    const id = setInterval(
-      () => setIndex((current) => (current + 1) % photos.length),
-      CAROUSEL_MS,
-    )
+    const id = setInterval(() => step(1), CAROUSEL_MS)
 
     return () => clearInterval(id)
-  }, [paused, photos.length])
+  }, [paused, step])
+
+  const onPointerDown = (event) => {
+    // Ignore right/middle clicks, and let the dots keep their own clicks.
+    if (event.button !== 0) return
+
+    startX.current = event.clientX
+    setDrag(0)
+    event.currentTarget.setPointerCapture(event.pointerId)
+  }
+
+  const onPointerMove = (event) => {
+    if (drag === null) return
+
+    setDrag(event.clientX - startX.current)
+  }
+
+  const onPointerUp = (event) => {
+    if (drag === null) return
+
+    const width = frameRef.current?.offsetWidth ?? 0
+    const threshold = Math.max(SWIPE_MIN_PX, width * SWIPE_RATIO)
+
+    if (Math.abs(drag) > threshold) step(drag < 0 ? 1 : -1)
+
+    setDrag(null)
+
+    if (event.currentTarget.hasPointerCapture?.(event.pointerId)) {
+      event.currentTarget.releasePointerCapture(event.pointerId)
+    }
+  }
+
+  const onKeyDown = (event) => {
+    if (event.key === 'ArrowRight') step(1)
+    else if (event.key === 'ArrowLeft') step(-1)
+    else return
+
+    // Once the carousel holds focus the arrows are its own: stop them scrolling
+    // the city page sideways underneath it.
+    event.preventDefault()
+  }
 
   return (
     <div
+      ref={frameRef}
       className="city-place-carousel"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-      onFocus={() => setPaused(true)}
-      onBlur={() => setPaused(false)}
+      // Focusable in its own right so the arrow keys work without having to
+      // tab onto one of the buttons first.
+      tabIndex={0}
+      role="group"
+      aria-roledescription="carousel"
+      aria-label="Photos — use the left and right arrow keys to change photo"
+      onKeyDown={onKeyDown}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      onFocus={() => setHovered(true)}
+      onBlur={() => setHovered(false)}
+      onPointerDown={onPointerDown}
+      onPointerMove={onPointerMove}
+      onPointerUp={onPointerUp}
+      onPointerCancel={onPointerUp}
     >
       <div
-        className="city-place-carousel-track"
-        style={{ transform: `translateX(-${index * 100}%)` }}
+        className={
+          drag === null
+            ? 'city-place-carousel-track'
+            : 'city-place-carousel-track is-dragging'
+        }
+        style={{
+          transform: `translateX(calc(${-index * 100}% + ${drag ?? 0}px))`,
+        }}
       >
         {photos.map((photo) => (
           <figure key={photo.src} className="city-place-carousel-slide">
-            <img src={photo.src} alt={photo.alt} loading="lazy" />
+            <img src={photo.src} alt={photo.alt} loading="lazy" draggable={false} />
           </figure>
         ))}
       </div>
+
+      <button
+        type="button"
+        className="city-place-carousel-arrow is-prev"
+        aria-label="Previous photo"
+        onPointerDown={(event) => event.stopPropagation()}
+        onClick={() => step(-1)}
+      >
+        <span className="material-symbols-outlined" aria-hidden="true">
+          chevron_left
+        </span>
+      </button>
+
+      <button
+        type="button"
+        className="city-place-carousel-arrow is-next"
+        aria-label="Next photo"
+        onPointerDown={(event) => event.stopPropagation()}
+        onClick={() => step(1)}
+      >
+        <span className="material-symbols-outlined" aria-hidden="true">
+          chevron_right
+        </span>
+      </button>
 
       <div className="city-place-carousel-dots">
         {photos.map((photo, dot) => (
@@ -331,6 +585,7 @@ function PhotoCarousel({ photos }) {
             className={dot === index ? 'is-active' : undefined}
             aria-label={`Show photo ${dot + 1} of ${photos.length}`}
             aria-current={dot === index}
+            onPointerDown={(event) => event.stopPropagation()}
             onClick={() => setIndex(dot)}
           />
         ))}

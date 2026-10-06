@@ -1,5 +1,5 @@
-import conMarket from "../assets/con-market.jpg"
-import hanRiverMap from "../assets/han-river-to-venue.png"
+import conMarket from "../assets/con-market.webp"
+import hanRiverMap from "../assets/han-river-to-venue.webp"
 import { ContactUs } from "../components/ContactUs"
 import { RoomRatesTable } from "../components/RoomRatesTable"
 import { VietnamExplorer } from "../components/VietnamExplorer"
@@ -186,6 +186,44 @@ function TravelGuide() {
                   </li>
                 </ul>
               </CollapsibleSection>
+
+              <CollapsibleSection
+                title="Vietnam Arrival Card"
+                badge="Must do"
+                defaultOpen
+              >
+                <p>
+                  Launched April 15, 2026, and required for select major
+                  airports such as{" "}
+                  <strong>Tan Son Nhat International Airport (SGN)</strong> in
+                  Ho Chi Minh City and{" "}
+                  <strong>Noi Bai International Airport (HAN)</strong> in Hanoi.
+                  If your trip routes through either one, you&apos;ll need it.
+                </p>
+
+                <ul>
+                  <li>
+                    <strong>Where to apply:</strong> the official immigration
+                    portal -{" "}
+                    <a
+                      href="https://prearrival.immigration.gov.vn/"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      prearrival.immigration.gov.vn
+                    </a>
+                  </li>
+                  <li>
+                    <strong>When to apply:</strong> submit within{" "}
+                    <strong>72 hours</strong> before your scheduled arrival.
+                  </li>
+                  <li>
+                    <strong>What you get:</strong> a confirmation QR code to
+                    present at immigration - save a screenshot and a printed
+                    copy, just in case.
+                  </li>
+                </ul>
+              </CollapsibleSection>
             </div>
 
             <div className="paw-decoration">
@@ -296,6 +334,8 @@ function TravelGuide() {
                 <img
                   src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/33/e2/94/94/caption.jpg?w=900&h=500&s=1"
                   alt="Mikazuki Japanese Resorts in Da Nang"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
               <p>
@@ -362,6 +402,8 @@ function TravelGuide() {
                     <img
                       src={hanRiverMap}
                       alt="Map showing the 20-30 minute driving route from the Han River area to Da Nang Mikazuki Japanese Resorts"
+                      loading="lazy"
+                      decoding="async"
                     />
                     <figcaption>
                       Han River area to Da Nang Mikazuki Japanese Resorts
@@ -400,6 +442,8 @@ function TravelGuide() {
                 <img
                   src={conMarket}
                   alt="Con Market in Da Nang"
+                  loading="lazy"
+                  decoding="async"
                 />
 
                 <figcaption>Con Market, Da Nang</figcaption>
@@ -478,11 +522,17 @@ function TravelGuide() {
   )
 }
 
-function CollapsibleSection({ title, defaultOpen = false, children }) {
+function CollapsibleSection({ title, badge, defaultOpen = false, children }) {
   return (
     <details className="travel-collapse" open={defaultOpen}>
       <summary className="travel-collapse-summary">
-        <span className="travel-collapse-title">{title}</span>
+        <span className="travel-collapse-title">
+          {badge ? (
+            <span className="travel-collapse-badge">{badge}</span>
+          ) : null}
+
+          {title}
+        </span>
 
         <span
           className="travel-collapse-chevron material-symbols-outlined"
