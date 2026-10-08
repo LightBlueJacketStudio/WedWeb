@@ -1,5 +1,16 @@
 import conMarket from "../assets/con-market.webp"
 import hanRiverMap from "../assets/han-river-to-venue.webp"
+import banhBeo from "../assets/food-in-menu/banh-beo.webp"
+import banhCanh from "../assets/food-in-menu/banh-canh.webp"
+import banhXeo from "../assets/food-in-menu/banh-xeo.webp"
+import caPheMuoi from "../assets/food-in-menu/ca-phe-muoi.webp"
+import kemBo from "../assets/food-in-menu/kem-bo.webp"
+import kemBo2 from "../assets/food-in-menu/kem-bo2.webp"
+import miQuang from "../assets/food-in-menu/mi-quang.webp"
+import pizza4p from "../assets/food-in-menu/pizza-4p.webp"
+import pizza4p2 from "../assets/food-in-menu/pizza-4p2.webp"
+import xoiDauXanh from "../assets/food-in-menu/xoi-dau-xanh.webp"
+import xoiGa from "../assets/food-in-menu/xoi-ga.webp"
 import { ContactUs } from "../components/ContactUs"
 import { RoomRatesTable } from "../components/RoomRatesTable"
 import { VietnamExplorer } from "../components/VietnamExplorer"
@@ -27,13 +38,154 @@ const diningTips = [
   },
 ]
 
+// Each dish can list a few `spots` — the places we actually send people to.
+// Shape: { name, mapUrl, note }; `mapUrl` turns the name into a Google Maps
+// link. Leave `spots` empty and the card shows a placeholder instead.
 const favoriteFoods = [
-  { meal: "Breakfast", icon: "breakfast_dining", dish: "Xôi gà / Xôi đậu xanh" },
-  { meal: "Appetizer", icon: "tapas", dish: "Bánh bèo" },
-  { meal: "Lunch", icon: "lunch_dining", dish: "Bánh canh" },
-  { meal: "Dinner", icon: "dinner_dining", dish: "Mì Quảng" },
-  { meal: "Drink", icon: "local_cafe", dish: "Cà Phê Muối" },
-  { meal: "Dessert", icon: "icecream", dish: "Kem bơ" },
+  {
+    meal: "Breakfast",
+    icon: "breakfast_dining",
+    dish: "Xôi gà / Xôi đậu xanh",
+    description:
+      "Sticky rice steamed until it's glossy, piled with shredded chicken or sweet mung bean — the breakfast we both grew up eating out of a banana leaf on the way to school.",
+    photos: [
+      { src: xoiGa, alt: "Xôi gà, sticky rice with shredded chicken" },
+      { src: xoiDauXanh, alt: "Xôi đậu xanh, sticky rice with mung bean" },
+    ],
+    spots: [
+      {
+        name: "Xôi gà Bà Bé",
+        mapUrl: "https://maps.app.goo.gl/Gc3h2gzjQvePnqrP8",
+      },
+    ],
+  },
+  {
+    meal: "Appetizer",
+    icon: "tapas",
+    dish: "Bánh bèo",
+    description:
+      "Tiny steamed rice cakes served in their own little dishes, topped with dried shrimp and crispy pork and eaten by the dozen with sweet fish sauce.",
+    photos: [
+      { src: banhBeo, alt: "Bánh bèo, steamed rice cakes in small dishes" },
+    ],
+    spots: [
+      {
+        name: "Bánh bèo Tâm",
+        mapUrl: "https://maps.app.goo.gl/qsJgS5BDD6bBmiJA6",
+      },
+    ],
+  },
+  {
+    meal: "Snack",
+    icon: "skillet",
+    dish: "Bánh xèo",
+    description:
+      "Crispy turmeric-yellow rice crepes filled with shrimp and bean sprouts, wrapped in rice paper with a fistful of herbs and dunked in peanut sauce.",
+    photos: [{ src: banhXeo, alt: "Bánh xèo, crispy Vietnamese rice crepe" }],
+    spots: [
+      {
+        name: "Bánh xèo Bà Dưỡng",
+        mapUrl: "https://maps.app.goo.gl/XG2MkWSvRCH6G1vu8",
+      },
+    ],
+  },
+  {
+    meal: "Lunch",
+    icon: "lunch_dining",
+    dish: "Bánh canh",
+    description:
+      "Thick, chewy tapioca noodles in a rich broth — the Da Nang version comes with fish cake, a lot of pepper and a squeeze of lime.",
+    photos: [{ src: banhCanh, alt: "Bánh canh, thick tapioca noodle soup" }],
+    spots: [
+      {
+        name: "Bánh canh ruộng",
+        mapUrl: "https://maps.app.goo.gl/x7RZRVi3khKSNFQE8",
+      },
+    ],
+  },
+  {
+    meal: "Dinner",
+    icon: "dinner_dining",
+    dish: "Mì Quảng",
+    description:
+      "The pride of our region: turmeric noodles with just a splash of intense broth, peanuts, herbs and a sesame rice cracker to crumble over the top.",
+    photos: [{ src: miQuang, alt: "Mì Quảng, turmeric noodles with herbs" }],
+    spots: [
+      {
+        name: "Mì Quảng Bà Mua",
+        mapUrl: "https://maps.app.goo.gl/D9he4GaaEKmBpW3J9",
+      },
+      {
+        name: "Mì Quảng Ếch",
+        mapUrl: "https://maps.app.goo.gl/ZaXZMpEUBdtmeXbi7",
+      },
+    ],
+  },
+  {
+    meal: "Drink",
+    icon: "local_cafe",
+    dish: "Cà Phê Muối",
+    description:
+      "Salted coffee: strong Vietnamese drip poured over a salted cream foam, which somehow turns the bitterness into caramel.",
+    photos: [{ src: caPheMuoi, alt: "Cà phê muối, Vietnamese salted coffee" }],
+    spots: [
+      {
+        name: "Cà Phê Trinh",
+        mapUrl: "https://maps.app.goo.gl/QUD5zDoyHf7V8NEBA",
+      },
+      {
+        name: "Cà Phê Tan",
+        mapUrl: "https://maps.app.goo.gl/RDPmichHDTdZcMMR9",
+      },
+    ],
+  },
+  {
+    meal: "Dessert",
+    icon: "icecream",
+    dish: "Kem bơ",
+    description:
+      "Da Nang's famous avocado ice cream — blended avocado and coconut milk with a scoop of ice cream melting on top.",
+    photos: [
+      { src: kemBo, alt: "Kem bơ, Vietnamese avocado ice cream" },
+      { src: kemBo2, alt: "Kem bơ served in a cup with coconut" },
+    ],
+    spots: [
+      {
+        name: "Kem bơ Kim Thoa",
+        note: "Inside Con Market (chợ Cồn).",
+        mapUrl: "https://maps.app.goo.gl/acymzMpFN2Uozgcb8",
+      },
+      {
+        name: "Kem bơ cô Vân",
+        note: "Inside Bac My An Market (chợ Bắc Mỹ An).",
+        mapUrl: "https://maps.app.goo.gl/VYub5v4GnWBH6YAv9",
+      },
+    ],
+  },
+  {
+    meal: "Bonus",
+    icon: "local_pizza",
+    dish: "Pizza 4P's",
+    description:
+      "A Vietnam-born Japanese-Italian pizzeria with its own burrata — worth a detour if you love fusion food, especially pizza and pasta.",
+    photos: [
+      {
+        src: pizza4p,
+        alt: "Pizza 4P's burrata and parma ham pizza",
+      },
+      {
+        src: pizza4p2,
+        alt: "Pizza 4P's crab cream spaghetti",
+      },
+    ],
+    spots: [
+      {
+        name: "Pizza 4P's Da Nang",
+        note: "They also have locations in Hanoi and Saigon if you're travelling on.",
+        mapUrl: "https://maps.app.goo.gl/tdvga2sBUezJHQRd7",
+      },
+    ],
+  },
 ]
 
 const sightseeingRecommendations = [
@@ -484,22 +636,8 @@ function TravelGuide() {
 
               <ul className="favorite-foods-menu">
                 {favoriteFoods.map((food) => (
-                  <li key={food.meal}>
-                    <span
-                      className="favorite-food-icon material-symbols-outlined"
-                      aria-hidden="true"
-                    >
-                      {food.icon}
-                    </span>
-
-                    <span className="favorite-food-meal">{food.meal}</span>
-
-                    <span
-                      className="favorite-food-leader"
-                      aria-hidden="true"
-                    ></span>
-
-                    <span className="favorite-food-dish">{food.dish}</span>
+                  <li key={food.dish}>
+                    <FavoriteFoodItem food={food} />
                   </li>
                 ))}
               </ul>
@@ -543,6 +681,103 @@ function CollapsibleSection({ title, badge, defaultOpen = false, children }) {
       </summary>
 
       <div className="travel-collapse-body">{children}</div>
+    </details>
+  )
+}
+
+function FavoriteFoodItem({ food }) {
+  return (
+    <details className="favorite-food">
+      <summary className="favorite-food-summary">
+        <span
+          className="favorite-food-icon material-symbols-outlined"
+          aria-hidden="true"
+        >
+          {food.icon}
+        </span>
+
+        <span className="favorite-food-meal">{food.meal}</span>
+
+        <span
+          className="favorite-food-leader"
+          aria-hidden="true"
+        ></span>
+
+        <span className="favorite-food-dish">{food.dish}</span>
+
+        <span
+          className="favorite-food-chevron material-symbols-outlined"
+          aria-hidden="true"
+        >
+          expand_more
+        </span>
+      </summary>
+
+      <div className="favorite-food-body">
+        {food.photos?.length ? (
+          <div
+            className={
+              food.photos.length > 1
+                ? "favorite-food-photos favorite-food-photos-pair"
+                : "favorite-food-photos"
+            }
+          >
+            {food.photos.map((photo) => (
+              <img
+                key={photo.src}
+                src={photo.src}
+                alt={photo.alt}
+                loading="lazy"
+                decoding="async"
+              />
+            ))}
+          </div>
+        ) : null}
+
+        {food.description ? (
+          <p className="favorite-food-description">{food.description}</p>
+        ) : null}
+
+        <div className="favorite-food-spots">
+          <h4>Where we'd go</h4>
+
+          {food.spots?.length ? (
+            <ul>
+              {food.spots.map((spot) => (
+                <li key={spot.name}>
+                  {spot.mapUrl ? (
+                    <a
+                      className="favorite-food-spot-name favorite-food-spot-link"
+                      href={spot.mapUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      {spot.name}
+
+                      <span
+                        className="favorite-food-spot-pin material-symbols-outlined"
+                        aria-hidden="true"
+                      >
+                        location_on
+                      </span>
+                    </a>
+                  ) : (
+                    <span className="favorite-food-spot-name">{spot.name}</span>
+                  )}
+
+                  {spot.note ? (
+                    <span className="favorite-food-spot-note">{spot.note}</span>
+                  ) : null}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="favorite-food-spots-empty">
+              Still picking our favorites, we'll add them here soon.
+            </p>
+          )}
+        </div>
+      </div>
     </details>
   )
 }

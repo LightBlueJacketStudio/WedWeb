@@ -12,6 +12,7 @@ import templeLiterature2 from '../assets/ha-noi/temple-literature2.webp'
 import templeLiterature3 from '../assets/ha-noi/temple-literature3.webp'
 import trainStreet1 from '../assets/ha-noi/train-street.webp'
 import trainStreet2 from '../assets/ha-noi/train-street2.webp'
+import trainStreet3 from '../assets/ha-noi/train-street3.webp'
 import onePillarPagoda from '../assets/ha-noi/one-pillar-pagoda.webp'
 import hoanKiem1 from '../assets/ha-noi/hoan-kiem-lake1.webp'
 import hoanKiem2 from '../assets/ha-noi/hoan-kiem-lake3.webp'
@@ -31,6 +32,7 @@ import hueTrain1 from '../assets/hue/train1.webp'
 import hueTrain2 from '../assets/hue/train2.webp'
 import hueTrain3 from '../assets/hue/train3.webp'
 import hueTrain4 from '../assets/hue/train4.webp'
+import hueTrain5 from '../assets/hue/train5.webp'
 import thienMuPagoda from '../assets/hue/thien-mu-pagoda.webp'
 import sapaFront from '../assets/sapa/sapa-front.webp'
 // Named for the order they run in, which is the way up the mountain rather
@@ -42,7 +44,10 @@ import catCatVillage from '../assets/sapa/cat-cat-village2.webp'
 import catCatWaterfall from '../assets/sapa/cat-cat-village.webp'
 import catCatBridge from '../assets/sapa/cat-cat-village3.webp'
 import catCatFalls from '../assets/sapa/cat-cat-village4.webp'
+import catCatFalls2 from '../assets/sapa/cat-cat-village5.webp'
+import catCatFalls3 from '../assets/sapa/cat-cat-village6.webp'
 import muongHoaValley from '../assets/sapa/muong-hoa-valley.webp'
+import sapaFood from '../assets/sapa/food.webp'
 import hoianFront from '../assets/hoi-an/hoi-an-front.webp'
 import hoianTown1 from '../assets/hoi-an/hoi-an-town.webp'
 import hoianTown2 from '../assets/hoi-an/hoi-an-town2.webp'
@@ -95,6 +100,10 @@ const CITIES = [
             alt: 'The stilt houses and walkways of Cát Cát Village above the stream',
           },
           {
+            src: catCatFalls2,
+            alt: 'By the falls at Cát Cát Village',
+          },
+          {
             src: catCatWaterfall,
             alt: 'The two of us in H’Mông dress by the waterfall at Cát Cát',
           },
@@ -106,6 +115,11 @@ const CITIES = [
             src: catCatFalls,
             alt: 'By the falls at Cát Cát Village',
           },
+          {
+            src: catCatFalls3,
+            alt: 'By the falls at Cát Cát Village',
+          },
+
         ],
       },
       {
@@ -114,7 +128,14 @@ const CITIES = [
         photoAlt: 'Walkers on a path through the terraced rice fields of the valley',
       },
     ],
-    eats: [],
+    eats: [
+      {
+        dish: 'Sa Pa mountain specialties',
+        note: 'Horse meat, wild edible vegetables, and sticky rice cooked inside bamboo are the specialties up here.',
+        photo: sapaFood,
+        photoAlt: 'A spread of Sa Pa mountain specialties',
+      },
+    ],
     gettingThere: '',
     bestTime: '',
   },
@@ -185,9 +206,14 @@ const CITIES = [
         photos: [
           { src: trainStreet1, alt: 'A train squeezing past the cafes on Train Street' },
           {
-            src: trainStreet2,
-            alt: 'Walking the tracks between the lantern-strung cafes on Train Street',
+            src: trainStreet3,
+            alt: 'Walking the tracks ',
           },
+          {
+            src: trainStreet2,
+            alt: 'Walking the tracks ',
+          },
+
         ],
       },
     ],
@@ -220,6 +246,7 @@ const CITIES = [
             src: hueTrain4,
             alt: 'The coastline from the train on the Hải Vân Pass',
           },
+          { src: hueTrain5, alt: 'Amy and Bao' },
         ],
       },
       {
@@ -314,8 +341,11 @@ const CITIES = [
     labelNudge: '0rem',
     photo: daNangFront,
     photoAlt: 'The Golden Bridge',
-    blurb:
-      'Đà Nẵng is where my heart is, and it’s where Amy’s family is from too. I grew up behind the Da Nang Train Station and spent my childhood playing soccer on the street, and walking along the sandy shore, which has since grown into a modern skyline. The city, the people, and the hospitality are second to none, and we can’t wait to welcome you to our home.',
+    blurb: [
+      'Đà Nẵng is where my heart is, and it’s also where Amy’s family is from. I grew up just behind the Đà Nẵng Train Station, spending my childhood playing soccer in the streets and walking along the sandy shores; places that have since transformed into the modern skyline you see today.',
+      'Sometimes it’s hard to reconcile the Đà Nẵng I remember with the city that stands here today. The streets I ran through, the shorelines I wandered, and the places that shaped my childhood have all grown and changed alongside the city. It’s all I think of, yet somehow nothing I can quite remember. So when you’re here, take plenty of pictures as the city is ever-evolving, and tomorrow may look different from today.',
+      'We’re incredibly lucky to share it with you: the city, the people, and their warmth and hospitality are truly second to none. We can’t wait to welcome you to our home.',
+    ],
     dontMiss: [],
     eats: [],
     gettingThere: '',
@@ -336,8 +366,10 @@ const CITIES = [
     tagline: 'Where I was born',
     photo: hoianFront,
     photoAlt: 'Hoi An Acient Towm at Night',
-    blurb:
-      'Hội An is a UNESCO World Heritage site, and it’s where I was born. My grandparents’ old home sits by the riverside, where bamboo basket boats rise with the tide. At night, glowing lanterns light up the streets, and a cool river breeze drifts through the busy night market.',
+    blurb: [
+      'Hội An is a UNESCO World Heritage site, and it’s where I was born. My grandparents’ old home sits by the riverside, where bamboo basket boats rise and fall with the tide. At night, glowing lanterns light up the streets, and a cool river breeze drifts through the busy night market.',
+      'I remember the street outside my grandparents’ home being wide enough for us to run and play. Today, it feels smaller, packed with visitors and bustling with tourists. It’s still surreal to think that I got to call this place home for a time. If you have the chance, you should definitely explore Hội An. There’s something truly special about its architecture, old buildings, and colorful facades, you won’t find another town quite like it.',
+    ],
     dontMiss: [
       {
         name: 'Ancient Town',
@@ -376,33 +408,41 @@ const CITIES = [
     tagline: 'Where Amy grew up',
     photo: saigonFront,
     photoAlt: 'Sài Gòn at street level, motorbikes and shopfronts',
-    blurb:
-      'Sài Gòn is the city Amy grew up in, and she is always proud to call herself a Sài Gònian. As Vietnam\u2019s largest city and its economic heart, it never slows down: motorbikes flow like rivers, street vendors are up before the sun, and there is a coffee cart on every corner. But behind the hustle is a city rich with history, from French colonial landmarks to old temples tucked between skyscrapers. It is busy, loud, and full of life, and she cannot wait to show you her hometown.',
+    blurb: [
+      'Sài Gòn is the city Amy grew up in, and she has always been proud to call herself a Sài Gònian. Vietnam’s largest city and its economic heart, it never seems to slow down. Motorbikes flow through the streets like rivers, street vendors are up before the sun, and there’s a coffee cart around every corner.',
+      'But behind the hustle and noise is a city rich with history, from French colonial landmarks to old temples tucked between towering skyscrapers. It’s busy, loud, and full of life, and Amy can’t wait to show you her hometown.',
+      'There’s always something to do if you seek it out, and if you’re curious enough, you’ll find it. Visit the War Remnants Museum or Independence Palace, wander through the markets, or take in the city from one of its modern landmarks. When the sun goes down, settle into an acoustic bar, explore the nightlife, or simply find a corner to sit, drink, and watch the city go by. Sài Gòn has something for everyone.',
+    ],
     dontMiss: [
       {
         name: 'Ben Thanh Market',
+        mapUrl: 'https://maps.app.goo.gl/AxsX8rv7Qpana9Le8',
         note: 'Classic market for souvenirs, snacks, and people-watching. Bargain politely.',
         photo: benThanhMarket,
         photoAlt: 'Stalls packed with goods inside Ben Thanh Market',
       },
       {
         name: 'Saigon Central Post Office & Notre-Dame Cathedral',
+        mapUrl: 'https://maps.app.goo.gl/FqKnHNzLw2SaTic26',
         note: 'French-era landmarks right next to each other. Great photo stop and souvenir.',
         photo: notreDameSaigon,
         photoAlt: 'The red brick towers of Notre-Dame Cathedral in Sài Gòn',
       },
       {
         name: 'Independence Palace',
+        mapUrl: 'https://maps.app.goo.gl/JNW6STBkEAUvoF647',
         note: 'The \u201cWhite House\u201d of the Vietnamese president back in the day - a time capsule of 1960s architecture and Vietnam\u2019s history.',
         photo: independencePalace,
         photoAlt: 'The front facade and lawn of Independence Palace in S\u00e0i G\u00f2n',
       },
       {
         name: 'War Remnants Museum',
+        mapUrl: 'https://maps.app.goo.gl/BivgB6CZbBCfBnAQ9',
         note: 'A good way to explore the Vietnam War through Vietnamese perspectives.',
       },
       {
         name: 'Nguyen Hue Walking Street/ Bui Viet Street',
+        mapUrl:'https://maps.app.goo.gl/vAmbExtDmS4k8kJx8',
         note: 'Stroll, grab a drink, and watch the city light up at night.',
       },
       {
@@ -706,7 +746,7 @@ export function VietnamExplorer() {
           <h2>Make a Trip of It</h2>
 
           <p>
-            You have come all this way! Here are some cities we would recommend for your trip in Vietnam.
+            You’ve come all this way! If you have the time to explore beyond the wedding, here are some of our favorite cities in Vietnam that we’ve visited and would recommend adding to your trip.
           </p>
         </div>
       </div>
@@ -854,7 +894,12 @@ function CityPage({ city, onClose, onBackToMap }) {
             {city.tagline && <p className="city-page-tagline">{city.tagline}</p>}
           </header>
 
-          {city.blurb && <p className="city-page-blurb">{city.blurb}</p>}
+          {city.blurb &&
+            (Array.isArray(city.blurb) ? city.blurb : [city.blurb]).map((paragraph, i) => (
+              <p key={i} className="city-page-blurb">
+                {paragraph}
+              </p>
+            ))}
 
           {city.dontMiss.length > 0 && (
             <section className="city-page-section">

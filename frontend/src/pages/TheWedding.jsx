@@ -7,6 +7,40 @@ const GOOGLE_MAPS_URL =
 const VENUE_ADDRESS =
   "Nguyễn Tất Thành, Hải Vân, Đà Nẵng 55000, Vietnam"
 
+const AGENDA_ITEMS = [
+  {
+    time: "16:00",
+    title: "First Look & Vows",
+    icon: "diamond",
+    side: "left",
+  },
+  {
+    time: "17:30",
+    title: "Welcome - Cocktail",
+    icon: "local_bar",
+    side: "right",
+  },
+  {
+    time: "18:00",
+    title: "Ceremony",
+    icon: "church",
+    side: "left",
+  },
+  {
+    time: "18:30",
+    title: "Reception",
+    icon: "restaurant",
+    side: "right",
+  },
+]
+
+const DRESSCODE_COLORS = [
+  { name: "Blush Pink", hex: "#F58BA9" },
+  { name: "Dusty Rose", hex: "#C25A74" },
+  { name: "Olive Green", hex: "#A2B566" },
+  { name: "Lavender", hex: "#C7A4DD" },
+]
+
 function TheWedding() {
   const [copied, setCopied] = useState(false)
 
@@ -165,17 +199,64 @@ function TheWedding() {
               </span>
               Agenda
             </h2>
+
+            <p className="wedding-agenda-note">
+              A proposed timeline for the day. The times may still shift a little,
+              so please check back closer to the date.
+            </p>
           </div>
 
-          <div className="wedding-agenda-pending">
-            <span className="material-symbols-outlined" aria-hidden="true">
-              schedule
-            </span>
+          <ol className="wedding-timeline">
+            {AGENDA_ITEMS.map((item) => (
+              <li
+                key={item.time}
+                className={`wedding-timeline-item is-${item.side}`}
+              >
+                <div className="timeline-content">
+                  <p className="timeline-time">
+                    {item.time}
+                  </p>
 
-            <p>
-              TBD - please check again later when it comes closer to the date
-              for more information.
-            </p>
+                  <div className="timeline-event">
+                    <span
+                      className="material-symbols-outlined"
+                      aria-hidden="true"
+                    >
+                      {item.icon}
+                    </span>
+
+                    <p className="timeline-title">
+                      {item.title}
+                    </p>
+                  </div>
+                </div>
+              </li>
+            ))}
+          </ol>
+
+          <div className="wedding-dresscode">
+            <h3>Dresscode</h3>
+
+            {/* <p className="dresscode-hint">
+              Join us in these colours - soft garden tones that will look
+              lovely against the sea and the sunset.
+            </p> */}
+
+            <ul className="dresscode-swatches">
+              {DRESSCODE_COLORS.map((color) => (
+                <li key={color.hex}>
+                  <span
+                    className="dresscode-dot"
+                    style={{ background: color.hex }}
+                    aria-hidden="true"
+                  />
+
+                  <span className="dresscode-name">
+                    {color.name}
+                  </span>
+                </li>
+              ))}
+            </ul>
           </div>
         </section>
       </div>

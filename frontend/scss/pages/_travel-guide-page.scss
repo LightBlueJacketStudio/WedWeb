@@ -493,17 +493,43 @@
   @include Flex(column);
 
   > li {
-    @include Flex(row, flex-start, center);
-
-    gap: 0.55rem;
-    padding: 0.72rem 0;
-
     border-bottom: 1px dashed rgba(137, 113, 114, 0.22);
 
     &:last-child {
-      padding-bottom: 0;
       border-bottom: none;
     }
+  }
+}
+
+.favorite-food {
+  border-radius: 0.75rem;
+
+  transition: background-color 0.2s ease;
+
+  &[open] {
+    background: rgba(255, 174, 48, 0.07);
+  }
+}
+
+.favorite-food-summary {
+  @include Flex(row, flex-start, center);
+
+  gap: 0.55rem;
+  padding: 0.72rem 0.6rem;
+
+  cursor: pointer;
+  list-style: none;
+  -webkit-tap-highlight-color: transparent;
+
+  &::-webkit-details-marker {
+    display: none;
+  }
+
+  &:focus-visible {
+    outline: none;
+
+    border-radius: 0.75rem;
+    box-shadow: inset 0 0 0 2px rgba(255, 178, 182, 0.55);
   }
 }
 
@@ -539,6 +565,142 @@
   font-size: 0.95rem;
   line-height: 1.35;
   text-align: right;
+}
+
+.favorite-food-chevron {
+  flex-shrink: 0;
+
+  color: $color-secondary;
+  font-size: 1.15rem;
+
+  transition: transform 0.25s ease;
+
+  .favorite-food[open] & {
+    transform: rotate(180deg);
+  }
+}
+
+.favorite-food-body {
+  padding: 0 0.6rem 0.9rem;
+}
+
+.favorite-food-photos {
+  @include Flex(row, flex-start, stretch);
+
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+
+  border-radius: 0.75rem;
+  overflow: hidden;
+
+  img {
+    display: block;
+    flex: 1 1 0;
+    min-width: 0;
+    width: 100%;
+    height: 170px;
+
+    object-fit: cover;
+  }
+
+  &.favorite-food-photos-pair img {
+    height: 140px;
+  }
+}
+
+.favorite-food-description {
+  margin: 0 0 0.85rem;
+
+  color: $color-text-medium;
+  font-family: $font-body;
+  font-size: 0.82rem;
+  line-height: 1.6;
+}
+
+.favorite-food-spots {
+  padding: 0.7rem 0.8rem;
+
+  border: 1px dashed rgba(132, 84, 0, 0.28);
+  border-radius: 0.75rem;
+
+  background: $color-bg-card-bright;
+
+  h4 {
+    @include LabelCaps;
+
+    margin: 0 0 0.5rem;
+
+    color: $color-secondary;
+  }
+
+  ul {
+    @include Flex(column);
+
+    gap: 0.6rem;
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+  }
+
+  li {
+    @include Flex(column);
+
+    gap: 0.1rem;
+  }
+}
+
+.favorite-food-spot-name {
+  color: $color-text-dark;
+  font-family: $font-heading;
+  font-size: 0.88rem;
+  line-height: 1.35;
+}
+
+.favorite-food-spot-link {
+  @include Flex(row, flex-start, center);
+
+  gap: 0.3rem;
+  width: fit-content;
+
+  color: $color-primary;
+  text-decoration: none;
+
+  border-bottom: 1px solid rgba(108, 12, 32, 0.25);
+
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease;
+
+  &:hover,
+  &:focus-visible {
+    color: $color-primary-hover;
+    border-bottom-color: $color-primary-hover;
+  }
+}
+
+.favorite-food-spot-pin {
+  flex-shrink: 0;
+
+  color: $color-secondary;
+  font-size: 1rem;
+}
+
+.favorite-food-spot-note {
+  color: $color-text-medium;
+  font-family: $font-body;
+  font-size: 0.78rem;
+  line-height: 1.55;
+}
+
+.favorite-food-spots-empty {
+  margin: 0;
+
+  color: $color-text-light;
+  font-family: $font-body;
+  font-size: 0.78rem;
+  font-style: italic;
+  line-height: 1.5;
 }
 
 .recommendation-column {
