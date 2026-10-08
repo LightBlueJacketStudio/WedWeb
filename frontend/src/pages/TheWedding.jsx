@@ -35,10 +35,10 @@ const AGENDA_ITEMS = [
 ]
 
 const DRESSCODE_COLORS = [
-  { name: "Blush Pink", hex: "#F58BA9" },
-  { name: "Dusty Rose", hex: "#C25A74" },
-  { name: "Olive Green", hex: "#A2B566" },
-  { name: "Lavender", hex: "#C7A4DD" },
+  { name: "Dusty Rose", hex: "#C48793" },
+  { name: "Mauve", hex: "#B18A9E" },
+  { name: "Sage Green", hex: "#9CAF88" },
+  { name: "Soft Lilac", hex: "#C9B6DE" },
 ]
 
 function TheWedding() {
