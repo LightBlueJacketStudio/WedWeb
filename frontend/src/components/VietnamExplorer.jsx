@@ -52,7 +52,19 @@ import hoianFront from '../assets/hoi-an/hoi-an-front.webp'
 import hoianTown1 from '../assets/hoi-an/hoi-an-town.webp'
 import hoianTown2 from '../assets/hoi-an/hoi-an-town2.webp'
 import hoianTown3 from '../assets/hoi-an/hoi-an-town3.webp'
+import hoianTown4 from '../assets/hoi-an/hoi-an-town4.webp'
 import basketBoat from '../assets/hoi-an/basket-boat.webp'
+import banahill from '../assets/da-nang/bana-hills.webp'
+import banahill2 from '../assets/da-nang/bana-hills2.webp'
+import banahill3 from '../assets/da-nang/bana-hills3.webp'
+import myKhe from '../assets/da-nang/mykhe.webp'
+import myKhe2 from '../assets/da-nang/mykhe2.webp'
+import marbleMountain from '../assets/da-nang/marbel-mountain.webp'
+import marbleMountain2 from '../assets/da-nang/marbel-mountain2.webp'
+import marbleMountain3 from '../assets/da-nang/marbel-mountain3.webp'
+import dragonBridge from '../assets/da-nang/dragon-bridge.webp'
+import dragonBridge2 from '../assets/da-nang/dragon-bridge2.webp'
+import dragonBridge3 from '../assets/da-nang/dragon-bridge3.webp'
 import { VN_PATH, VN_VIEWBOX, projectToPercent } from '../data/vietnamOutline'
 
 // The five places we send guests to, in north-to-south order.
@@ -346,7 +358,51 @@ const CITIES = [
       'Sometimes it’s hard to reconcile the Đà Nẵng I remember with the city that stands here today. The streets I ran through, the shorelines I wandered, and the places that shaped my childhood have all grown and changed alongside the city. It’s all I think of, yet somehow nothing I can quite remember. So when you’re here, take plenty of pictures as the city is ever-evolving, and tomorrow may look different from today.',
       'We’re incredibly lucky to share it with you: the city, the people, and their warmth and hospitality are truly second to none. We can’t wait to welcome you to our home.',
     ],
-    dontMiss: [],
+    dontMiss: [
+      {
+        name: 'Ba Na Hills and Golden Bridge',
+        mapUrl:
+          'https://maps.app.goo.gl/xN9U3aCG2sCh7MxD8',
+        carousel: true,
+        photos: [
+          { src: banahill2, alt: 'Ba Na Hills' },
+          { src: banahill , alt: 'Ba Na Hills' },
+          { src: banahill3, alt: 'Ba Na Hills' },
+        ],
+      },
+      {
+        name: 'My Khe Beach',
+        mapUrl:
+          'https://maps.app.goo.gl/kreHn1cWnngT36FX7',
+        carousel: true,
+        photos: [
+          { src: myKhe, alt: 'My Khe Beach' },
+          { src: myKhe2, alt: 'My Khe Beach' },
+        ],
+      },
+      {
+        name: 'Marble Mountains',
+        mapUrl:
+          'https://maps.app.goo.gl/5DQhJUbU1SSubQTs7',
+        carousel: true,
+        photos: [
+          { src: marbleMountain, alt: 'Marble Mountains' },
+          { src: marbleMountain2, alt: 'Marble Mountains' },
+          { src: marbleMountain3, alt: 'Marble Mountains' },
+        ],
+      },
+      {
+        name: 'Dragon Bridge',
+        mapUrl:
+          'https://maps.app.goo.gl/5XApgvrgQMchxKbTA',
+        carousel: true,
+        photos: [
+          { src: dragonBridge, alt: 'Dragon Bridge' },
+          { src: dragonBridge2, alt: 'Dragon Bridge' },
+          { src: dragonBridge3, alt: 'Dragon Bridge' },
+        ],
+      },
+    ],
     eats: [],
     gettingThere: '',
     bestTime: '',
@@ -378,6 +434,7 @@ const CITIES = [
         // note: 'The old quarter is best on foot after sunset, when the lanterns come on and the streets close to traffic. Wander the riverside, cross the Japanese Covered Bridge, and float a paper lantern down the Thu Bồn.',
         carousel: true,
         photos: [
+          { src: hoianTown4, alt: 'Hoi An in a raining day' },
           { src: hoianTown1, alt: 'Lanterns over the streets of the Ancient Town' },
           { src: hoianTown2, alt: 'The riverside of the Ancient Town at night' },
           { src: hoianTown3, alt: 'Old shopfronts along an Ancient Town lane' },
