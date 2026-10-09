@@ -7,7 +7,7 @@ const REGISTRY_TITLE = "Skip the gift registry, save a cat!"
 const RESCUE_STATS = [
   { icon: "pets", value: 16, suffix: "", label: "Cats & Kittens Rescued" },
   { icon: "healing", value: 15, suffix: "+", label: "Community Cats TNR'd" },
-  { icon: "volunteer_activism", value: 8, suffix: "", label: "Foster Kittens Raised" },
+  { icon: "volunteer_activism", value: 9, suffix: "", label: "Foster Kittens Raised" },
   { icon: "favorite", value: 5, suffix: "+", label: "Years of Rescue" },
 ]
 
