@@ -167,7 +167,7 @@ const CITIES = [
     dontMiss: [
       {
         name: 'Temple of Literature',
-        mapUrl: 'https://maps.app.goo.gl/MmjCTqGq68w96V9B8',
+        mapUrl: 'https://www.google.com/maps/search/?api=1&query=Temple%20of%20Literature%2C%20H%C3%A0%20N%E1%BB%99i',
         note: 'Known as the first university in Vietnam.',
         carousel: true,
         photos: [
@@ -187,14 +187,14 @@ const CITIES = [
       },
       {
         name: 'One Pillar Pagoda',
-        mapUrl: 'https://maps.app.goo.gl/BttYkaeeYinqTx7d6',
+        mapUrl: 'https://www.google.com/maps/search/?api=1&query=One%20Pillar%20Pagoda%2C%20H%C3%A0%20N%E1%BB%99i',
         note: 'Another thousand-year-old piece of architecture.',
         photo: onePillarPagoda,
         photoAlt: 'The One Pillar Pagoda on its stone pillar above a lotus pond',
       },
       {
         name: 'Hoan Kiem Lake',
-        mapUrl: 'https://maps.app.goo.gl/pExCaSSfbvD6QrZu5',
+        mapUrl: 'https://www.google.com/maps/search/?api=1&query=Ho%C3%A0n%20Ki%E1%BA%BFm%20Lake%2C%20H%C3%A0%20N%E1%BB%99i',
         carousel: true,
         photos: [
           {
@@ -213,7 +213,7 @@ const CITIES = [
       },
       {
         name: 'Train Street',
-        mapUrl: 'https://maps.app.goo.gl/mod2N8toWrYZTEUT9',
+        mapUrl: 'https://www.google.com/maps/search/?api=1&query=Hanoi%20Train%20Street%2C%20H%C3%A0%20N%E1%BB%99i',
         carousel: true,
         photos: [
           { src: trainStreet1, alt: 'A train squeezing past the cafes on Train Street' },
@@ -264,7 +264,7 @@ const CITIES = [
       {
         name: 'Imperial City',
         mapUrl:
-          'https://maps.app.goo.gl/QGTjnB74obfhwd3LA',
+          'https://www.google.com/maps/search/?api=1&query=Hue%20Imperial%20City%2C%20Hu%E1%BA%BF',
         carousel: true,
         photos: [
           {
@@ -283,7 +283,7 @@ const CITIES = [
       },
       {
         name: 'Đong Ba Market',
-        mapUrl: 'https://maps.app.goo.gl/QaHDiGNvDk5c6C769',
+        mapUrl: 'https://www.google.com/maps/search/?api=1&query=Dong%20Ba%20Market%2C%20Hu%E1%BA%BF',
         carousel: true,
         photos: [
           {
@@ -362,7 +362,7 @@ const CITIES = [
       {
         name: 'Ba Na Hills and Golden Bridge',
         mapUrl:
-          'https://maps.app.goo.gl/xN9U3aCG2sCh7MxD8',
+          'https://www.google.com/maps/search/?api=1&query=Golden%20Bridge%2C%20Ba%20Na%20Hills%2C%20%C4%90%C3%A0%20N%E1%BA%B5ng',
         carousel: true,
         photos: [
           { src: banahill2, alt: 'Ba Na Hills' },
@@ -373,7 +373,7 @@ const CITIES = [
       {
         name: 'My Khe Beach',
         mapUrl:
-          'https://maps.app.goo.gl/kreHn1cWnngT36FX7',
+          'https://www.google.com/maps/search/?api=1&query=My%20Khe%20Beach%2C%20%C4%90%C3%A0%20N%E1%BA%B5ng',
         carousel: true,
         photos: [
           { src: myKhe, alt: 'My Khe Beach' },
@@ -383,7 +383,7 @@ const CITIES = [
       {
         name: 'Marble Mountains',
         mapUrl:
-          'https://maps.app.goo.gl/5DQhJUbU1SSubQTs7',
+          'https://www.google.com/maps/search/?api=1&query=The%20Marble%20Mountains%2C%20%C4%90%C3%A0%20N%E1%BA%B5ng',
         carousel: true,
         photos: [
           { src: marbleMountain, alt: 'Marble Mountains' },
@@ -394,7 +394,7 @@ const CITIES = [
       {
         name: 'Dragon Bridge',
         mapUrl:
-          'https://maps.app.goo.gl/5XApgvrgQMchxKbTA',
+          'https://www.google.com/maps/search/?api=1&query=Dragon%20Bridge%2C%20%C4%90%C3%A0%20N%E1%BA%B5ng',
         carousel: true,
         photos: [
           { src: dragonBridge, alt: 'Dragon Bridge' },
@@ -430,7 +430,7 @@ const CITIES = [
       {
         name: 'Ancient Town',
         mapUrl:
-          'https://maps.app.goo.gl/q2iZKCZRYBV8i13b7',
+          'https://www.google.com/maps/search/?api=1&query=Ph%E1%BB%91%20C%E1%BB%95%20H%E1%BB%99i%20An%2C%20H%E1%BB%99i%20An',
         // note: 'The old quarter is best on foot after sunset, when the lanterns come on and the streets close to traffic. Wander the riverside, cross the Japanese Covered Bridge, and float a paper lantern down the Thu Bồn.',
         carousel: true,
         photos: [
@@ -443,7 +443,7 @@ const CITIES = [
       {
         name: 'Basket boat ride',
         mapUrl:
-          'https://maps.app.goo.gl/VMz4GZznL6njdrcg6',
+          'https://www.google.com/maps/search/?api=1&query=R%E1%BB%ABng%20D%E1%BB%ABa%20B%E1%BA%A3y%20M%E1%BA%ABu%2C%20H%E1%BB%99i%20An',
         // note: 'Round bamboo basket boats (thuyền thúng) paddle through the Bảy Mẫu coconut palms in Cẩm Thanh, just outside town. Expect spinning boats, singing rowers, and a very wet, very fun hour on the water.',
         photo: basketBoat,
         photoAlt:
@@ -473,33 +473,33 @@ const CITIES = [
     dontMiss: [
       {
         name: 'Ben Thanh Market',
-        mapUrl: 'https://maps.app.goo.gl/AxsX8rv7Qpana9Le8',
+        mapUrl: 'https://www.google.com/maps/search/?api=1&query=Ben%20Thanh%20Market%2C%20H%E1%BB%93%20Ch%C3%AD%20Minh',
         note: 'Classic market for souvenirs, snacks, and people-watching. Bargain politely.',
         photo: benThanhMarket,
         photoAlt: 'Stalls packed with goods inside Ben Thanh Market',
       },
       {
         name: 'Saigon Central Post Office & Notre-Dame Cathedral',
-        mapUrl: 'https://maps.app.goo.gl/FqKnHNzLw2SaTic26',
+        mapUrl: 'https://www.google.com/maps/search/?api=1&query=Saigon%20Central%20Post%20Office%2C%20H%E1%BB%93%20Ch%C3%AD%20Minh',
         note: 'French-era landmarks right next to each other. Great photo stop and souvenir.',
         photo: notreDameSaigon,
         photoAlt: 'The red brick towers of Notre-Dame Cathedral in Sài Gòn',
       },
       {
         name: 'Independence Palace',
-        mapUrl: 'https://maps.app.goo.gl/JNW6STBkEAUvoF647',
+        mapUrl: 'https://www.google.com/maps/search/?api=1&query=Independence%20Palace%2C%20H%E1%BB%93%20Ch%C3%AD%20Minh',
         note: 'The \u201cWhite House\u201d of the Vietnamese president back in the day - a time capsule of 1960s architecture and Vietnam\u2019s history.',
         photo: independencePalace,
         photoAlt: 'The front facade and lawn of Independence Palace in S\u00e0i G\u00f2n',
       },
       {
         name: 'War Remnants Museum',
-        mapUrl: 'https://maps.app.goo.gl/BivgB6CZbBCfBnAQ9',
+        mapUrl: 'https://www.google.com/maps/search/?api=1&query=War%20Remnants%20Museum%2C%20H%E1%BB%93%20Ch%C3%AD%20Minh',
         note: 'A good way to explore the Vietnam War through Vietnamese perspectives.',
       },
       {
         name: 'Nguyen Hue Walking Street/ Bui Viet Street',
-        mapUrl:'https://maps.app.goo.gl/vAmbExtDmS4k8kJx8',
+        mapUrl: 'https://www.google.com/maps/search/?api=1&query=Nguyen%20Hue%20Walking%20Street%2C%20H%E1%BB%93%20Ch%C3%AD%20Minh',
         note: 'Stroll, grab a drink, and watch the city light up at night.',
       },
       {
@@ -800,7 +800,7 @@ export function VietnamExplorer() {
         </span>
 
         <div>
-          <h2>Make a Trip of It</h2>
+          <h2>Plan Your Trip</h2>
 
           <p>
             You’ve come all this way! If you have the time to explore beyond the wedding, here are some of our favorite cities in Vietnam that we’ve visited and would recommend adding to your trip.

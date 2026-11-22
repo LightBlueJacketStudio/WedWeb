@@ -2,7 +2,7 @@ import { useState } from "react"
 import MapView from "../components/MapView.jsx"
 
 const GOOGLE_MAPS_URL =
-  "https://maps.app.goo.gl/rLKvbn2fDBApr7oh7"
+  "https://www.google.com/maps/search/?api=1&query=Da%20Nang%20Mikazuki%20Japanese%20Resorts%20%26%20Spa"
 
 const VENUE_ADDRESS =
   "Nguyễn Tất Thành, Hải Vân, Đà Nẵng 55000, Vietnam"
@@ -38,7 +38,10 @@ const DRESSCODE_COLORS = [
   { name: "Dusty Rose", hex: "#C48793" },
   { name: "Mauve", hex: "#B18A9E" },
   { name: "Sage Green", hex: "#9CAF88" },
+  { name: "Olive Green", hex: "#8D9A68" },
   { name: "Soft Lilac", hex: "#C9B6DE" },
+  { name: "Champagne Beige", hex: "#D8C7AE" },
+  { name: "Warm Brown", hex: "#8A6755" },
 ]
 
 function TheWedding() {
@@ -235,7 +238,7 @@ function TheWedding() {
           </ol>
 
           <div className="wedding-dresscode">
-            <h3>Dresscode</h3>
+            <h3>Dresscode (Optional)</h3>
 
             {/* <p className="dresscode-hint">
               Join us in these colours - soft garden tones that will look

@@ -7,8 +7,6 @@ import caPheMuoi from "../assets/food-in-menu/ca-phe-muoi.webp"
 import kemBo from "../assets/food-in-menu/kem-bo.webp"
 import kemBo2 from "../assets/food-in-menu/kem-bo2.webp"
 import miQuang from "../assets/food-in-menu/mi-quang.webp"
-import pizza4p from "../assets/food-in-menu/pizza-4p.webp"
-import pizza4p2 from "../assets/food-in-menu/pizza-4p2.webp"
 import xoiDauXanh from "../assets/food-in-menu/xoi-dau-xanh.webp"
 import xoiGa from "../assets/food-in-menu/xoi-ga.webp"
 import { ContactUs } from "../components/ContactUs"
@@ -55,7 +53,7 @@ const favoriteFoods = [
     spots: [
       {
         name: "Xôi gà Bà Bé",
-        mapUrl: "https://maps.app.goo.gl/Gc3h2gzjQvePnqrP8",
+        mapUrl: "https://www.google.com/maps/search/?api=1&query=Ms.%20Ba%20Be%27s%20Sticky%20Rice%2C%20%C4%90%C3%A0%20N%E1%BA%B5ng",
       },
     ],
   },
@@ -71,7 +69,7 @@ const favoriteFoods = [
     spots: [
       {
         name: "Bánh bèo Tâm",
-        mapUrl: "https://maps.app.goo.gl/qsJgS5BDD6bBmiJA6",
+        mapUrl: "https://www.google.com/maps/search/?api=1&query=B%C3%A1nh%20b%C3%A8o%20T%C3%A2m%2C%20%C4%90%C3%A0%20N%E1%BA%B5ng",
       },
     ],
   },
@@ -85,7 +83,7 @@ const favoriteFoods = [
     spots: [
       {
         name: "Bánh xèo Bà Dưỡng",
-        mapUrl: "https://maps.app.goo.gl/XG2MkWSvRCH6G1vu8",
+        mapUrl: "https://www.google.com/maps/search/?api=1&query=B%C3%A1nh%20X%C3%A8o%20B%C3%A0%20D%C6%B0%E1%BB%A1ng%2C%20%C4%90%C3%A0%20N%E1%BA%B5ng",
       },
     ],
   },
@@ -99,7 +97,7 @@ const favoriteFoods = [
     spots: [
       {
         name: "Bánh canh ruộng",
-        mapUrl: "https://maps.app.goo.gl/x7RZRVi3khKSNFQE8",
+        mapUrl: "https://www.google.com/maps/search/?api=1&query=B%C3%A1nh%20Canh%20Ru%E1%BB%99ng%2C%20%C4%90%C3%A0%20N%E1%BA%B5ng",
       },
     ],
   },
@@ -113,11 +111,11 @@ const favoriteFoods = [
     spots: [
       {
         name: "Mì Quảng Bà Mua",
-        mapUrl: "https://maps.app.goo.gl/D9he4GaaEKmBpW3J9",
+        mapUrl: "https://www.google.com/maps/search/?api=1&query=M%C3%AC%20Qu%E1%BA%A3ng%20B%C3%A0%20Mua%2C%20%C4%90%C3%A0%20N%E1%BA%B5ng",
       },
       {
         name: "Mì Quảng Ếch",
-        mapUrl: "https://maps.app.goo.gl/ZaXZMpEUBdtmeXbi7",
+        mapUrl: "https://www.google.com/maps/search/?api=1&query=M%C3%AC%20Qu%E1%BA%A3ng%20%E1%BA%BEch%20B%E1%BA%BFp%20Trang%2C%20441%20%C3%94ng%20%C3%8Dch%20Khi%C3%AAm%2C%20%C4%90%C3%A0%20N%E1%BA%B5ng",
       },
     ],
   },
@@ -131,11 +129,11 @@ const favoriteFoods = [
     spots: [
       {
         name: "Cà Phê Trinh",
-        mapUrl: "https://maps.app.goo.gl/QUD5zDoyHf7V8NEBA",
+        mapUrl: "https://www.google.com/maps/search/?api=1&query=Tr%C3%ACnh%20c%C3%A0%20ph%C3%AA%2C%20%C4%90%C3%A0%20N%E1%BA%B5ng",
       },
       {
         name: "Cà Phê Tan",
-        mapUrl: "https://maps.app.goo.gl/RDPmichHDTdZcMMR9",
+        mapUrl: "https://www.google.com/maps/search/?api=1&query=T%C3%A2n%20Coffee%2C%20%C4%90%C3%A0%20N%E1%BA%B5ng",
       },
     ],
   },
@@ -153,40 +151,41 @@ const favoriteFoods = [
       {
         name: "Kem bơ Kim Thoa",
         note: "Inside Con Market (chợ Cồn).",
-        mapUrl: "https://maps.app.goo.gl/acymzMpFN2Uozgcb8",
+        mapUrl: "https://www.google.com/maps/search/?api=1&query=Con%20Market%2C%20%C4%90%C3%A0%20N%E1%BA%B5ng",
       },
       {
         name: "Kem bơ cô Vân",
         note: "Inside Bac My An Market (chợ Bắc Mỹ An).",
-        mapUrl: "https://maps.app.goo.gl/VYub5v4GnWBH6YAv9",
-      },
-    ],
-  },
-  {
-    meal: "Bonus",
-    icon: "local_pizza",
-    dish: "Pizza 4P's",
-    description:
-      "A Vietnam-born Japanese-Italian pizzeria with its own burrata — worth a detour if you love fusion food, especially pizza and pasta.",
-    photos: [
-      {
-        src: pizza4p,
-        alt: "Pizza 4P's burrata and parma ham pizza",
-      },
-      {
-        src: pizza4p2,
-        alt: "Pizza 4P's crab cream spaghetti",
-      },
-    ],
-    spots: [
-      {
-        name: "Pizza 4P's Da Nang",
-        note: "They also have locations in Hanoi and Saigon if you're travelling on.",
-        mapUrl: "https://maps.app.goo.gl/tdvga2sBUezJHQRd7",
+        mapUrl: "https://www.google.com/maps/search/?api=1&query=Ch%E1%BB%A3%20B%E1%BA%AFc%20M%E1%BB%B9%20An%2C%20%C4%90%C3%A0%20N%E1%BA%B5ng",
       },
     ],
   },
 ]
+
+// Places we've personally tried around Da Nang. Shape: { name, mapUrl, note, tag }
+// — leave out `mapUrl` for chains with many branches and use `note` instead.
+const localFavorites = {
+  food: [
+    { name: "Phở Thìn Đà Nẵng", mapUrl: "https://maps.app.goo.gl/f9jGdGGc4XBYRKdV7" },
+    { name: "Cơm Tấm Ốp Lết 1940", mapUrl: "https://maps.app.goo.gl/6QVWXSyAx2AxzNdP6" },
+    { name: "Cơm tấm Bà Lang", mapUrl: "https://maps.app.goo.gl/rgT3gTPZmwRq46Wz9" },
+    { name: "Bò né Chín đen", mapUrl: "https://maps.app.goo.gl/FcE3Psp8oKBH4yUC7" },
+    { name: "Bò Né Lan Hương", mapUrl: "https://maps.app.goo.gl/Qn8jSAuHFNeBNM18A" },
+    { name: "Bánh mì chảo pepper Đà Nẵng", mapUrl: "https://maps.app.goo.gl/9KDEF19wk7yhzifFA" },
+    { name: "Bún Bò Huế - Lê Gia Khang", mapUrl: "https://maps.app.goo.gl/hxt4hkiBdXxGULzt7", tag: "Michelin" },
+    { name: "Bánh mì Bà Lan", mapUrl: "https://maps.app.goo.gl/nX2irkCKZWLmzGct7" },
+    { name: "Gỏi cá Thanh Vân", mapUrl: "https://maps.app.goo.gl/Kmdofqu5qes1ipdn9" },
+    { name: "Mrs. Toải's Fish Ball Noodle Soup", mapUrl: "https://maps.app.goo.gl/B4DGweEjB3XVsRMH8" },
+  ],
+  drink: [
+    { name: "Hichi Cafe", mapUrl: "https://maps.app.goo.gl/wnHQhnh4a4V77K6B7" },
+    { name: "Katinat Coffee Shop", note: "Various locations" },
+    { name: "Phê La", note: "Various locations" },
+    { name: "Phuc Long Coffee & Tea", note: "Various locations" },
+    { name: "Ú Milk Tea", mapUrl: "https://maps.app.goo.gl/538euv5D9RAiBYTL6" },
+    { name: "Tab Tea", note: "Various locations" },
+  ],
+}
 
 const sightseeingRecommendations = [
   {
@@ -641,6 +640,22 @@ function TravelGuide() {
                   </li>
                 ))}
               </ul>
+
+              <div className="local-favorites">
+                <h4 className="local-favorites-title">
+                  Other local favorites we have tried and love
+                </h4>
+
+                <div className="travel-accordion">
+                  <CollapsibleSection title="Food">
+                    <LocalFavoritesList places={localFavorites.food} />
+                  </CollapsibleSection>
+
+                  <CollapsibleSection title="Drink">
+                    <LocalFavoritesList places={localFavorites.drink} />
+                  </CollapsibleSection>
+                </div>
+              </div>
             </article>
           </div>
 
@@ -750,7 +765,7 @@ function FavoriteFoodItem({ food }) {
                       className="favorite-food-spot-name favorite-food-spot-link"
                       href={spot.mapUrl}
                       target="_blank"
-                      rel="noreferrer"
+                      rel="noopener noreferrer"
                     >
                       {spot.name}
 
@@ -779,6 +794,44 @@ function FavoriteFoodItem({ food }) {
         </div>
       </div>
     </details>
+  )
+}
+
+function LocalFavoritesList({ places }) {
+  return (
+    <ul className="local-favorites-list">
+      {places.map((place) => (
+        <li key={place.name}>
+          {place.mapUrl ? (
+            <a
+              className="favorite-food-spot-name favorite-food-spot-link"
+              href={place.mapUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {place.name}
+
+              <span
+                className="favorite-food-spot-pin material-symbols-outlined"
+                aria-hidden="true"
+              >
+                location_on
+              </span>
+            </a>
+          ) : (
+            <span className="favorite-food-spot-name">{place.name}</span>
+          )}
+
+          {place.tag ? (
+            <span className="local-favorites-tag">{place.tag}</span>
+          ) : null}
+
+          {place.note ? (
+            <span className="favorite-food-spot-note">{place.note}</span>
+          ) : null}
+        </li>
+      ))}
+    </ul>
   )
 }
 
