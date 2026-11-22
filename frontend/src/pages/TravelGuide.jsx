@@ -338,11 +338,7 @@ function TravelGuide() {
                 </ul>
               </CollapsibleSection>
 
-              <CollapsibleSection
-                title="Vietnam Arrival Card"
-                badge="Must do"
-                defaultOpen
-              >
+              <CollapsibleSection title="Vietnam Arrival Card" badge="Must do">
                 <p>
                   Launched April 15, 2026, and required for select major
                   airports such as{" "}
@@ -374,6 +370,10 @@ function TravelGuide() {
                     copy, just in case.
                   </li>
                 </ul>
+              </CollapsibleSection>
+
+              <CollapsibleSection title="Check List">
+                <p>TBD</p>
               </CollapsibleSection>
             </div>
 
